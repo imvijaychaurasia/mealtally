@@ -31,7 +31,7 @@ dependencies = [
   "hiredis==3.5.0",
   "markdown==3.9",
   "packaging",
-  "phonenumbers==9.0.16",
+  "phonenumbers==9.0.43",
   "psycopg[c]==3.3.9",
   "redis==8.1.0",
   "segno",

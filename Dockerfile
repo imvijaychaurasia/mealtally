@@ -56,7 +56,7 @@ RUN chmod +x /docker/*
 ENTRYPOINT ["/docker/entrypoint"]
 
 # --- runtime: the production image ----------------------------------------------------------------------------------
-FROM python:3.14-slim-bookworm AS runtime
+FROM python:3.15-slim-bookworm AS runtime
 LABEL org.opencontainers.image.title="Mealtally" \
       org.opencontainers.image.description="Prepaid meal passes and meal subscriptions for restaurants, messes and tiffin services" \
       org.opencontainers.image.licenses="AGPL-3.0-only"

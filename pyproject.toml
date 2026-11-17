@@ -32,7 +32,7 @@ dependencies = [
   "markdown==3.9",
   "packaging",
   "phonenumbers==9.0.16",
-  "psycopg[c]==3.3.8",
+  "psycopg[c]==3.3.9",
   "redis==8.1.0",
   "segno",
   "sentry-sdk==2.74.0",

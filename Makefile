@@ -3,8 +3,9 @@
 SHELL := /bin/bash
 COMPOSE ?= docker compose
 PROD := $(COMPOSE) -f compose.prod.yml
+PLAYWRIGHT_IMAGE ?= mcr.microsoft.com/playwright/python:v1.55.0-noble
 
-.PHONY: help init up down logs demo test lint migrate backup restore upgrade screenshots shell messages
+.PHONY: help init up down logs demo smoke test lint migrate backup restore upgrade screenshots shell messages
 
 help: ## List the targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-12s %s\n", $$1, $$2}'
@@ -25,6 +26,12 @@ demo: ## Development only: seed two demo restaurants and write their logins to .
 	@umask 077; $(COMPOSE) exec -T web python manage.py mealtally_demo > .demo-credentials.tmp \
 	  && mv .demo-credentials.tmp .demo-credentials && chmod 600 .demo-credentials \
 	  && cat .demo-credentials || { rm -f .demo-credentials.tmp; exit 1; }
+
+smoke: ## Playwright smoke suite against the running stack (after `make demo`); E2E_BASE_URL overrides the address
+	docker run --rm --network host --user "$$(id -u):$$(id -g)" -e HOME=/tmp -v "$(CURDIR):/w:ro" -w /w \
+	  -e E2E_BASE_URL="$${E2E_BASE_URL:-http://localhost:$$(grep -E '^MEALTALLY_PORT=' .env | cut -d= -f2 | grep . || echo 8000)}" \
+	  -e E2E_ADMIN_LOGIN -e E2E_ADMIN_PASSWORD $(PLAYWRIGHT_IMAGE) \
+	  sh -c "pip install -q --user --no-warn-script-location pytest==8.4.2 playwright==1.55.0 && python -m pytest -c e2e/pytest.ini e2e"
 
 test: ## Run the test suite with coverage (fails under 95%)
 	$(COMPOSE) --profile test run --rm --build test pytest --cov=mealtally --cov-report=term-missing:skip-covered --cov-fail-under=95 $(ARGS)

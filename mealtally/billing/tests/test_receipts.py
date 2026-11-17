@@ -46,7 +46,7 @@ def test_receipt_html_and_pdf_content_and_void_watermark():
     w = World()
     with w.ctx():
         row = tenancy.get_settings(w.tenant.id)
-        row.address, row.contact_phone, row.gstin, row.receipt_footer, row.display_name = (
+        row.address, row.contact_phone, row.tax_id, row.receipt_footer, row.display_name = (
             "12 MG Road",
             "+911234567890",
             "29ABCDE1234F1Z5",

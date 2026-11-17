@@ -100,14 +100,14 @@ def test_plans_staff_settings_endpoints(w, base, owner_client, manager_client):
     assert (
         manager_client.post(
             f"{base}/plans/manage",
-            {"name": "Weekly", "price_rupees": "700", "meals_per_cycle": 7, "validity_days": 7},
+            {"name": "Weekly", "price_major": "700", "meals_per_cycle": 7, "validity_days": 7},
             format="json",
         ).status_code
         == 201
     )
     allp = manager_client.get(f"{base}/plans/manage", {"all": "1"}).json()["results"]
     weekly = next(p for p in allp if p["name"] == "Weekly")
-    assert weekly["price_paise"] == 70000
+    assert weekly["price_minor"] == 70000
     assert (
         manager_client.patch(
             f"{base}/plans/{weekly['id']}", {"is_active": False, "max_meals_per_day": 1}, format="json"
@@ -166,7 +166,7 @@ def test_sale_preview_and_receipts(w, base, owner_client, staff_client):
         f"{base}/plans/manage",
         {
             "name": "Cal",
-            "price_rupees": "1000",
+            "price_major": "1000",
             "meals_per_cycle": 30,
             "validity_mode": "CALENDAR_MONTH",
             "validity_days": 30,
@@ -180,7 +180,7 @@ def test_sale_preview_and_receipts(w, base, owner_client, staff_client):
         pv["status"] == "QUEUED"
         and pv["no_proration"] is True
         and pv["gap"]["from"] < pv["gap"]["to"]
-        and pv["amount_paise"] == 100000
+        and pv["amount_minor"] == 100000
     )
     fresh = staff_client.post(f"{base}/sales/preview", {"plan": cal["id"]}, format="json").json()
     assert fresh["status"] == "ACTIVE" and fresh["gap"] is None

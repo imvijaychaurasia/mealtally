@@ -6,7 +6,6 @@ import json
 import uuid
 from datetime import date
 from datetime import timedelta
-from decimal import Decimal
 
 from django.contrib.auth import update_session_auth_hash
 from django.core.exceptions import PermissionDenied
@@ -26,8 +25,10 @@ from django.views.decorators.http import require_POST
 from mealtally.accounts import services as accounts
 from mealtally.accounts.models import Role
 from mealtally.billing import services as billing
+from mealtally.common import country as country_mod
+from mealtally.common import money as money_mod
 from mealtally.common.errors import DomainError
-from mealtally.common.utils import format_inr
+from mealtally.common.money import format_money
 from mealtally.common.utils import local_date
 from mealtally.customers import services as customers
 from mealtally.ledger import services as ledger
@@ -51,7 +52,7 @@ ADMIN = {"roles": (Role.OWNER, Role.MANAGER)}
 OWNER = {"roles": (Role.OWNER,)}
 
 
-rupees = format_inr  # one formatter for screens, CSV and PDF (ADR 0015)
+money = format_money
 
 
 # --- staff password (forced first-login change, also voluntary) --------------------------------------
@@ -89,7 +90,7 @@ def dashboard(request):
     return render(
         request,
         "web/admin_dashboard.html",
-        {"d": d, "revenue": rupees(d["revenue_month_paise"]), "fee": rupees(d["platform_fee_month_paise"])},
+        {"d": d, "revenue": money(d["revenue_month_minor"]), "fee": money(d["platform_fee_month_minor"])},
     )
 
 
@@ -243,7 +244,7 @@ def _plan_data(d) -> dict:
             "allowed_slots": slot_ids,
             "max_meals_per_slot": int(d.get("max_meals_per_slot", "1") or 1),
             "name": d.get("name", ""),
-            "price_paise": int(Decimal(d.get("price_rupees", "0") or 0) * 100),
+            "price_minor": money_mod.to_minor(d.get("price_major", "0") or 0),
             "meals_per_cycle": int(d.get("meals_per_cycle", "0") or 0),
             "validity_mode": d.get("validity_mode", "ROLLING_DAYS"),
             "validity_days": int(d.get("validity_days", "30") or 30),
@@ -251,7 +252,7 @@ def _plan_data(d) -> dict:
             "is_active": d.get("is_active") == "on",
         }
     except (ValueError, ArithmeticError) as exc:
-        raise DomainError(_("Check the numbers: whole numbers only (price may have paise).")) from exc
+        raise DomainError(_("Check the numbers: whole numbers only (price may have minor).")) from exc
 
 
 @tenant_view(**ADMIN)
@@ -271,7 +272,7 @@ def plan_form(request, plan_id=None):
     if plan:
         v = {
             "name": plan.name,
-            "price_rupees": f"{plan.price_paise / 100:.2f}",
+            "price_major": f"{money_mod.to_major(plan.price_minor)}",
             "meals_per_cycle": plan.meals_per_cycle,
             "validity_mode": plan.validity_mode,
             "validity_days": plan.validity_days,
@@ -283,7 +284,7 @@ def plan_form(request, plan_id=None):
     else:
         v = {
             "name": "",
-            "price_rupees": "1500",
+            "price_major": "1500",
             "meals_per_cycle": 30,
             "validity_mode": "ROLLING_DAYS",
             "validity_days": 30,
@@ -304,7 +305,7 @@ def plan_form(request, plan_id=None):
         v = {
             **v,
             "name": d.get("name", ""),
-            "price_rupees": d.get("price_rupees", ""),
+            "price_major": d.get("price_major", ""),
             "meals_per_cycle": d.get("meals_per_cycle", ""),
             "validity_mode": d.get("validity_mode", ""),
             "validity_days": d.get("validity_days", ""),
@@ -446,6 +447,24 @@ def staff_action(request, user_id, action):
 
 
 # --- settings (OWNER) ----------------------------------------------------------------------------------------
+def _country_choices():
+    from babel import Locale  # noqa: PLC0415
+
+    names = Locale.parse(money_mod.locale_for()).territories
+    from mealtally.tenancy.models import NOT_COUNTRIES  # noqa: PLC0415
+
+    countries = ((c, n) for c, n in names.items() if len(c) == 2 and c.isalpha() and c not in NOT_COUNTRIES)  # noqa: PLR2004
+    return sorted(countries, key=lambda x: x[1])
+
+
+def _currency_choices():
+    from babel.numbers import get_currency_name  # noqa: PLC0415
+    from babel.numbers import list_currencies  # noqa: PLC0415
+
+    loc = money_mod.locale_for()
+    return sorted(((c, f"{c} · {get_currency_name(c, locale=loc)}") for c in list_currencies()), key=lambda x: x[0])
+
+
 @tenant_view(**OWNER)
 @require_http_methods(["GET", "POST"])
 def settings_view(request):
@@ -456,19 +475,21 @@ def settings_view(request):
             tenancy.update_settings(
                 actor=request.actor,
                 timezone_name=d.get("timezone") or None,
+                country=d.get("country") or None,
+                currency=d.get("currency") or None,
                 display_name=d.get("display_name", ""),
                 address=d.get("address", ""),
                 contact_phone=d.get("contact_phone", ""),
                 brand_color=d.get("brand_color", ""),
                 receipt_footer=d.get("receipt_footer", ""),
-                gstin=d.get("gstin", "").strip(),
-                fssai_no=d.get("fssai_no", "").strip(),
+                tax_id=d.get("tax_id", "").strip(),
+                food_licence_no=d.get("food_licence_no", "").strip(),
                 tagline=d.get("tagline", "").strip()[:120],
                 redeem_cooldown_seconds=int(d.get("redeem_cooldown_seconds") or 0),
                 staff_reversal_window_hours=int(d.get("staff_reversal_window_hours") or 0),
                 counter_can_reverse_others=d.get("counter_can_reverse_others") == "on",
-                topup_min_paise=int(d.get("topup_min_rupees") or 100) * 100,
-                topup_max_paise=int(d.get("topup_max_rupees") or 50000) * 100,
+                topup_min_minor=money_mod.to_minor(d.get("topup_min_major") or 100),
+                topup_max_minor=money_mod.to_minor(d.get("topup_max_major") or 50000),
                 max_queued_passes=int(d.get("max_queued_passes") or 0),
                 allow_self_signup=d.get("allow_self_signup") == "on",
             )
@@ -487,8 +508,12 @@ def settings_view(request):
             **ctx,
             "cfg": request.cfg,
             "theme_choices": choices,
-            "topup_min_rupees": request.cfg.topup_min_paise // 100,
-            "topup_max_rupees": request.cfg.topup_max_paise // 100,
+            "tax_label": country_mod.tax_id_label(request.tenant.country),
+            "licence_label": country_mod.food_licence_label(request.tenant.country),
+            "countries": _country_choices(),
+            "currencies": _currency_choices(),
+            "topup_min_major": money_mod.to_major(request.cfg.topup_min_minor).normalize(),
+            "topup_max_major": money_mod.to_major(request.cfg.topup_max_minor).normalize(),
         },
     )
 
@@ -688,11 +713,11 @@ def report_monthly(request):
     today = local_date(timezone.now(), request.tenant.timezone)
     year, month = _parse_month(request.GET.get("month"), today)
     r = reports.monthly_subscriptions(actor=request.actor, year=year, month=month)
-    rows = [[p["plan"], p["passes"], rupees(p["revenue_paise"])] for p in r["by_plan"]]
+    rows = [[p["plan"], p["passes"], money(p["revenue_minor"])] for p in r["by_plan"]]
     extra = [
         (_("Passes sold"), r["passes_sold"]),
-        (_("Revenue"), rupees(r["revenue_paise"])),
-        (_("Voids"), f"{r['voids']} ({rupees(r['void_amount_paise'])})"),
+        (_("Revenue"), money(r["revenue_minor"])),
+        (_("Voids"), f"{r['voids']} ({money(r['void_amount_minor'])})"),
     ]
     return _render_report(
         request,
@@ -755,7 +780,7 @@ def report_statement(request, customer_id):
             for p in r["passes"]
         ]
         + [
-            ["PAYMENT", p["receipt"], p["status"], p["date"], p["method"], rupees(p["amount_paise"])]
+            ["PAYMENT", p["receipt"], p["status"], p["date"], p["method"], money(p["amount_minor"])]
             for p in r["payments"]
         ]
         + [["LEDGER", e["type"], "", e["at"], e["quantity"], e["balance"]] for e in r["ledger"]]
@@ -789,20 +814,20 @@ def report_fees(request):
             ln["date"][:10],
             ln["customer"],
             ln["status"],
-            rupees(ln["base_paise"]),
+            money(ln["base_minor"]),
             f"{ln['platform_pct']}%",
-            rupees(ln["fee_paise"]),
-            rupees(ln["reversed_paise"]),
-            rupees(ln["net_paise"]),
+            money(ln["fee_minor"]),
+            money(ln["reversed_minor"]),
+            money(ln["net_minor"]),
         ]
         for ln in s["lines"]
     ]
     extra = [
-        (_("Gross payments"), rupees(s["gross_paise"])),
-        (_("Platform fee"), rupees(s["platform_fee_paise"])),
-        (_("Gateway fee"), rupees(s["gateway_fee_paise"])),
+        (_("Gross payments"), money(s["gross_minor"])),
+        (_("Platform fee"), money(s["platform_fee_minor"])),
+        (_("Gateway fee"), money(s["gateway_fee_minor"])),
         (_("Voids in month"), s["voided_count"]),
-        (_("Net payable to platform"), rupees(s["total_fee_paise"])),
+        (_("Net payable to platform"), money(s["total_fee_minor"])),
     ]
     return _render_report(
         request,

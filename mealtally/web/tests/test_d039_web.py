@@ -15,8 +15,8 @@ import time_machine
 from django.utils import timezone
 
 from mealtally.audit.models import AuditEvent
+from mealtally.common.country import format_phone
 from mealtally.common.errors import NotAllowed
-from mealtally.common.utils import format_phone
 from mealtally.customers import services as customers
 from mealtally.ledger import services as ledger
 from mealtally.plans import services as plans
@@ -77,7 +77,7 @@ def test_plan_form_sets_the_meal_time_rule_and_the_list_says_it_in_words(w, owne
         f"{u}/admin/plans/{w.plan.public_id}",
         {
             "name": w.plan.name,
-            "price_rupees": "1500",
+            "price_major": "1500",
             "meals_per_cycle": "30",
             "validity_mode": "ROLLING_DAYS",
             "validity_days": "30",
@@ -203,14 +203,14 @@ def test_policies_section_saves_reversal_policy_and_topup_bounds(w, owner_c, u):
         "redeem_cooldown_seconds": "120",
         "staff_reversal_window_hours": "12",
         "max_queued_passes": "1",
-        "topup_min_rupees": "200",
-        "topup_max_rupees": "20000",
+        "topup_min_major": "200",
+        "topup_max_major": "20000",
     }
     owner_c.post(u + "/admin/settings", base)
     with platform_context():
         row = TenantSettings.objects.get(tenant_id=w.tenant.id)
-    assert row.counter_can_reverse_others is False and (row.topup_min_paise, row.topup_max_paise) == (20000, 2000000)
-    bad = owner_c.post(u + "/admin/settings", {**base, "topup_min_rupees": "500", "topup_max_rupees": "100"})
+    assert row.counter_can_reverse_others is False and (row.topup_min_minor, row.topup_max_minor) == (20000, 2000000)
+    bad = owner_c.post(u + "/admin/settings", {**base, "topup_min_major": "500", "topup_max_major": "100"})
     assert "largest top-up" in bad.content.decode()
 
 
@@ -268,7 +268,7 @@ def test_the_service_worker_never_turns_a_server_response_into_offline(client):
 def test_receipt_reads_upi_hides_a_placeholder_fssai_and_formats_phones(w, owner_c, u):
     with platform_context():
         TenantSettings.objects.filter(tenant_id=w.tenant.id).update(
-            fssai_no="00000000000000", contact_phone="+912040001101"
+            food_licence_no="00000000000000", contact_phone="+912040001101"
         )
     from mealtally.testing import buy
 
@@ -315,7 +315,7 @@ def test_audit_log_reads_as_sentences_with_raw_data_behind_details(w, owner_c, u
     html = owner_c.get(u + "/admin/audit").content.decode()
     who = w.manager.user.name or w.manager.user.email
     assert f"{who} reversed {w.customer.full_name}&#x27;s" in html and "reason: wrong customer" in html
-    assert "₹1,500.00" in html  # the sale, in rupees (never 150000 paise)
+    assert "₹1,500.00" in html  # the sale, in rupees (never 150000 minor)
     assert 'data-testid="audit-raw"' in html and "<details" in html
 
 
@@ -351,9 +351,9 @@ def test_no_chart_series_uses_the_danger_colour():
 @pytest.mark.parametrize(
     ("raw", "shown"),
     [
-        ("+919000030002", "+91 90000 30002"),
-        ("+447911123456", "+44 79111 23456"),
-        ("+12025550123", "+1 20255 50123"),
+        ("+919000030002", "090000 30002"),
+        ("+447911123456", "+44 7911 123456"),
+        ("+12025550123", "+1 202-555-0123"),
         ("", ""),
     ],
 )

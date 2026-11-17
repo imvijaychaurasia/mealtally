@@ -172,13 +172,13 @@ def test_dataset_is_deterministic_and_complete():
 
     a, b = pvdata.build(date(2026, 11, 14)), pvdata.build(date(2026, 11, 14))
     assert [o["no"] for o in a["orders"]] == [o["no"] for o in b["orders"]]
-    assert [s["balance_paise"] for s in a["subscribers"]] == [s["balance_paise"] for s in b["subscribers"]]
+    assert [s["balance_minor"] for s in a["subscribers"]] == [s["balance_minor"] for s in b["subscribers"]]
     assert (
         len(a["subscribers"]) == 30 and len(a["dishes"]) >= 18 and len(a["branches"]) == 2 and len(a["expenses"]) == 40
     )
     assert len(a["topups"]) == 6 and len(a["ck_items"]) == 10 and len(a["ck_orders"]) == 8 and len(a["bell"]) == 15
-    assert sum(1 for s in a["subscribers"] if s["balance_paise"] < 0) >= 2  # two negative, within trust limit
-    assert all(s["balance_paise"] >= -s["trust_limit_paise"] for s in a["subscribers"])
+    assert sum(1 for s in a["subscribers"] if s["balance_minor"] < 0) >= 2  # two negative, within trust limit
+    assert all(s["balance_minor"] >= -s["trust_limit_minor"] for s in a["subscribers"])
     assert (
         sum(1 for s in a["subscribers"] if s["hold"]) == 2
         and sum(1 for s in a["subscribers"] if s["status"] == "PAUSED") == 1
@@ -365,18 +365,18 @@ def test_expenses_run_at_62_to_70_percent_of_revenue_and_every_screen_agrees():
     D = pvdata.build(date(2026, 11, 14))
     for passes in (0, 20_000_00, 40_000_00, 60_000_00):
         months, last, exps, recurring = pvutil.money_series(D, passes)
-        ratio = last["expense_paise"] / last["revenue_paise"]
+        ratio = last["expense_minor"] / last["revenue_minor"]
         assert 0.62 <= ratio <= 0.70, (passes, ratio)
         listed = sum(
-            e["amount_paise"] for e in exps if e["date"] > D["today"] - __import__("datetime").timedelta(days=30)
+            e["amount_minor"] for e in exps if e["date"] > D["today"] - __import__("datetime").timedelta(days=30)
         )
-        assert listed == last["expense_paise"]  # the Expenses page lists exactly what Today / profit / the chart use
-        assert all(0.60 <= m["expense_paise"] / m["revenue_paise"] <= 0.72 for m in months)
-        assert months[-1]["profit_paise"] > months[0]["profit_paise"] * 1.5  # visibly rising profit line
+        assert listed == last["expense_minor"]  # the Expenses page lists exactly what Today / profit / the chart use
+        assert all(0.60 <= m["expense_minor"] / m["revenue_minor"] <= 0.72 for m in months)
+        assert months[-1]["profit_minor"] > months[0]["profit_minor"] * 1.5  # visibly rising profit line
         assert all(
-            b["revenue_paise"] >= a["revenue_paise"] * 0.97 for a, b in itertools.pairwise(months)
+            b["revenue_minor"] >= a["revenue_minor"] * 0.97 for a, b in itertools.pairwise(months)
         )  # growth kept
-        assert recurring and all(r["amount_paise"] > 0 for r in recurring)
+        assert recurring and all(r["amount_minor"] > 0 for r in recurring)
 
 
 def test_chart_axis_uses_nice_round_ticks_in_one_unit_style():
@@ -414,7 +414,7 @@ def test_fssai_is_obviously_fake_everywhere(demo, clients):
     from mealtally.tenancy.models import TenantSettings
 
     with platform_context():
-        assert TenantSettings.objects.get(tenant__slug=SLUG).fssai_no == "00000000000000"
+        assert TenantSettings.objects.get(tenant__slug=SLUG).food_licence_no == "00000000000000"
     for url in (f"/t/{SLUG}/site", f"/t/{SLUG}/admin/settings", f"/t/{SLUG}/admin/invoices"):
         resp = clients["OWNER"].get(url)
         assert "11523999000123" not in resp.content.decode()
@@ -425,7 +425,7 @@ def test_fssai_is_obviously_fake_everywhere(demo, clients):
             "D": pvdata.get(__import__("django").utils.timezone.localdate()),
             "i": pvdata.get(__import__("django").utils.timezone.localdate())["invoices"][0],
             "cfg": type(
-                "C", (), {"display_name": "x", "address": "", "contact_phone": "", "fssai_no": "00000000000000"}
+                "C", (), {"display_name": "x", "address": "", "contact_phone": "", "food_licence_no": "00000000000000"}
             )(),
             "tenant": type("T", (), {"name": "x"})(),
         },

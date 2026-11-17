@@ -3,10 +3,10 @@
 {% if tenant.has_demo_dataset %}{% include "preview/_plans_tabs.html" with here="pass" %}{% endif %}
 <h1 class="text-2xl font-bold">{% if plan %}{% trans "Edit plan" %}{% else %}{% trans "New plan" %}{% endif %}</h1>
 <p class="mt-1 text-sm text-ink-soft">{% trans "Editing a plan never changes passes that were already sold — they keep the price, meals and dates they were sold with." %}</p>
-<form method="post" class="card mt-3 grid max-w-xl gap-3" x-data="planForm" data-price="{{ v.price_rupees }}" data-meals="{{ v.meals_per_cycle }}" data-mode="{{ v.validity_mode }}">{% csrf_token %}
+<form method="post" class="card mt-3 grid max-w-xl gap-3" x-data="planForm" data-price="{{ v.price_major }}" data-meals="{{ v.meals_per_cycle }}" data-mode="{{ v.validity_mode }}">{% csrf_token %}
   {% if error %}<p class="rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
   <div><label class="label" for="name">{% trans "Name" %}</label><input class="input" id="name" name="name" required value="{{ v.name }}"></div>
-  <div><label class="label" for="price_rupees">{% trans "Price (₹)" %}</label><input class="input" id="price_rupees" name="price_rupees" inputmode="decimal" required value="{{ v.price_rupees }}" x-model="price"></div>
+  <div><label class="label" for="price_major">{% trans "Price (₹)" %}</label><input class="input" id="price_major" name="price_major" inputmode="decimal" required value="{{ v.price_major }}" x-model="price"></div>
   <div><label class="label" for="meals_per_cycle">{% trans "Meals" %}</label><input class="input" id="meals_per_cycle" name="meals_per_cycle" type="number" min="1" required value="{{ v.meals_per_cycle }}" x-model="meals">
     <p class="mt-1 text-sm font-medium text-ink" data-testid="plan-per-meal"><span x-text="perMeal"></span></p></div>
   <div><label class="label" for="validity_mode">{% trans "Validity" %}</label>

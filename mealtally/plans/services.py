@@ -15,7 +15,7 @@ def get_plan(public_id) -> Plan:
 
 
 def list_plans(*, active_only: bool = True):
-    qs = Plan.objects.order_by("price_paise", "id")
+    qs = Plan.objects.order_by("price_minor", "id")
     return qs.filter(is_active=True) if active_only else qs
 
 
@@ -23,7 +23,7 @@ def create_plan(
     *,
     tenant_id: int,
     name: str,
-    price_paise: int,
+    price_minor: int,
     meals_per_cycle: int = 30,
     validity_mode: str = Plan.ValidityMode.ROLLING_DAYS,
     validity_days: int = 30,
@@ -34,7 +34,7 @@ def create_plan(
     plan = Plan.objects.create(
         tenant_id=tenant_id,
         name=name,
-        price_paise=price_paise,
+        price_minor=price_minor,
         meals_per_cycle=meals_per_cycle,
         validity_mode=validity_mode,
         validity_days=validity_days,
@@ -81,7 +81,7 @@ from mealtally.common.errors import ValidationFailed  # noqa: E402
 
 _FIELDS = (
     "name",
-    "price_paise",
+    "price_minor",
     "meals_per_cycle",
     "validity_mode",
     "validity_days",
@@ -95,7 +95,7 @@ def _validate(data: dict) -> dict:
     out = dict(data)
     if "name" in out and not str(out["name"]).strip():
         raise ValidationFailed("Plan name is required.", details={"field": "name"})
-    for key in ("price_paise", "meals_per_cycle", "validity_days", "max_meals_per_slot"):
+    for key in ("price_minor", "meals_per_cycle", "validity_days", "max_meals_per_slot"):
         if key in out and (not isinstance(out[key], int) or out[key] <= 0):
             raise ValidationFailed("Must be a positive whole number.", details={"field": key})
     if (

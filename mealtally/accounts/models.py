@@ -6,7 +6,7 @@ from django.db import models
 from django.db.models import Q
 from django.utils import timezone
 
-from mealtally.common.utils import normalize_phone
+from mealtally.common.country import normalize_phone
 from mealtally.tenancy.models import TenantOwnedModel
 
 from .managers import UserManager

@@ -20,7 +20,7 @@ from mealtally.accounts import services as accounts
 from mealtally.accounts.models import Role
 from mealtally.accounts.models import User
 from mealtally.accounts.policy import Actor
-from mealtally.common.utils import normalize_phone
+from mealtally.common.country import normalize_phone
 from mealtally.customers import services as customers
 from mealtally.customers.models import Customer
 from mealtally.tenancy.context import platform_context

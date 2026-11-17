@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import contextlib
 
+from mealtally.common.country import normalize_phone
 from mealtally.common.errors import ValidationFailed
-from mealtally.common.utils import normalize_phone
 
 
 def get_username(request, credentials) -> str:

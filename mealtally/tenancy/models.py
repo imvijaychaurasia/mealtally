@@ -18,6 +18,42 @@ def validate_timezone(value: str) -> None:
         raise ValidationError(f"{value!r} is not a valid IANA timezone.") from exc
 
 
+def default_timezone() -> str:
+    from django.conf import settings  # noqa: PLC0415
+
+    return settings.MEALTALLY_DEFAULT_TIMEZONE
+
+
+def default_currency() -> str:
+    from django.conf import settings  # noqa: PLC0415
+
+    return settings.MEALTALLY_DEFAULT_CURRENCY
+
+
+def default_country() -> str:
+    from django.conf import settings  # noqa: PLC0415
+
+    return settings.MEALTALLY_DEFAULT_COUNTRY
+
+
+def validate_currency(value: str) -> None:
+    from babel.numbers import list_currencies  # noqa: PLC0415
+
+    if value not in list_currencies():
+        raise ValidationError(f"{value!r} is not an ISO 4217 currency code.")
+
+
+NOT_COUNTRIES = frozenset({"ZZ", "EU", "EZ", "UN", "QO", "XA", "XB"})
+
+
+def validate_country(value: str) -> None:
+    from babel import Locale  # noqa: PLC0415
+
+    # CLDR also lists pseudo-regions (ZZ unknown, EU, UN, QO, pseudo-locales XA/XB): not countries
+    if value not in Locale("en").territories or not value.isalpha() or value in NOT_COUNTRIES:
+        raise ValidationError(f"{value!r} is not an ISO 3166 country code.")
+
+
 class Tenant(models.Model):
     """A business (e.g. a tiffin restaurant). Row visible only to itself (RLS on ``id``)."""
 
@@ -34,8 +70,11 @@ class Tenant(models.Model):
         validators=[RegexValidator(r"^[a-z0-9]+(?:-[a-z0-9]+)*$", "Lowercase letters, digits and hyphens only.")],
     )
     status = models.CharField(max_length=12, choices=Status, default=Status.ACTIVE)
-    timezone = models.CharField(max_length=64, default="Asia/Kolkata", validators=[validate_timezone])
-    currency = models.CharField(max_length=3, default="INR")
+    timezone = models.CharField(max_length=64, default=default_timezone, validators=[validate_timezone])
+    # ISO 4217; amounts are stored as integer minor units of this currency (mealtally.common.money)
+    currency = models.CharField(max_length=3, default=default_currency, validators=[validate_currency])
+    # ISO 3166-1 alpha-2: phone region, tax-ID and food-licence labels, payment methods (mealtally.common.country)
+    country = models.CharField(max_length=2, default=default_country, validators=[validate_country])
     is_test = models.BooleanField(
         default=False, help_text="e2e/perf tenants: hidden from platform lists and metrics by default."
     )
@@ -129,13 +168,13 @@ class TenantSettings(TenantOwnedModel):
     contact_phone = models.CharField(max_length=32, blank=True)
     brand_color = models.CharField(max_length=7, default="#0f766e")  # deep teal
     receipt_footer = models.CharField(max_length=300, blank=True)
-    gstin = models.CharField("GSTIN", max_length=15, blank=True)
-    fssai_no = models.CharField("FSSAI licence no.", max_length=20, blank=True)
+    tax_id = models.CharField("Tax ID", max_length=32, blank=True, help_text="GSTIN in India, VAT number in the EU/UK.")
+    food_licence_no = models.CharField("Food business licence", max_length=40, blank=True, help_text="FSSAI in India.")
     allow_self_signup = models.BooleanField(default=False)
     tagline = models.CharField(max_length=120, blank=True, help_text="D03.6: one line shown on the sign-in screens.")
     # D03.9 (QA-01 P1-6): wallet top-up bounds.
-    topup_min_paise = models.PositiveBigIntegerField(default=10_000)  # Rs 100
-    topup_max_paise = models.PositiveBigIntegerField(default=5_000_000)  # Rs 50,000
+    topup_min_minor = models.PositiveBigIntegerField(default=10_000)  # Rs 100
+    topup_max_minor = models.PositiveBigIntegerField(default=5_000_000)  # Rs 50,000
     # D03.9 §B6: the one-time "Set meal times and daily limits for your plans" banner was dismissed.
     meal_rules_banner_dismissed = models.BooleanField(default=False)
 

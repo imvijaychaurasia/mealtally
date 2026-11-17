@@ -20,7 +20,7 @@ from mealtally.common.errors import NotAllowed
 from mealtally.common.errors import NotFound
 from mealtally.common.errors import StateConflict
 from mealtally.common.errors import ValidationFailed
-from mealtally.common.utils import percent_of_paise
+from mealtally.common.utils import percent_of_minor
 from mealtally.customers import services as customers
 from mealtally.ledger import services as ledger
 from mealtally.passes import services as passes
@@ -105,7 +105,7 @@ def policy_for(received_at: datetime) -> tuple[Decimal, Decimal]:
 
 def _write_fee_entries(payment: Payment) -> list[PlatformFeeEntry]:
     platform_pct, gateway_pct = policy_for(payment.received_at)
-    base = payment.amount_paise
+    base = payment.amount_minor
     rows = [(PlatformFeeEntry.Kind.PLATFORM, platform_pct)]
     if payment.method == Payment.Method.GATEWAY:  # never in v1, but the path exists
         rows.append((PlatformFeeEntry.Kind.GATEWAY, gateway_pct))
@@ -114,9 +114,9 @@ def _write_fee_entries(payment: Payment) -> list[PlatformFeeEntry]:
             tenant_id=payment.tenant_id,
             payment=payment,
             kind=kind,
-            base_paise=base,
+            base_minor=base,
             pct=pct,
-            amount_paise=percent_of_paise(base, pct),
+            amount_minor=percent_of_minor(base, pct),
             sign=1,
         )
         for kind, pct in rows
@@ -131,7 +131,7 @@ def record_payment(
     actor: Actor,
     customer_public_id,
     plan_public_id,
-    amount_paise: int,
+    amount_minor: int,
     method: str,
     reference: str = "",
     received_at: datetime | None = None,
@@ -145,12 +145,15 @@ def record_payment(
         raise ValidationFailed("Unknown payment method.", details={"field": "method"})
     if method != Payment.Method.CASH and not reference:
         raise ValidationFailed(
-            "A reference (e.g. UPI UTR) is required for non-cash payments.", details={"field": "reference"}
+            "A reference (the UPI UTR or the bank transfer ID) is required for non-cash payments.",
+            details={"field": "reference"},
         )
     with transaction.atomic():
         tenant = Tenant.objects.get(pk=actor.tenant_id)
         if tenant.status != Tenant.Status.ACTIVE:
             raise NotAllowed("This tenant is not active.")
+        if method == Payment.Method.UPI_MANUAL and tenant.country != "IN":
+            raise ValidationFailed("UPI is only offered for restaurants in India.", details={"field": "method"})
         # Lock the customer: serialises concurrent purchases (queue limit, one ACTIVE pass).
         customer = customers.get_customer(customer_public_id, lock=True)
         if customer.status != customer.Status.ACTIVE:
@@ -158,17 +161,17 @@ def record_payment(
         plan = plans.get_plan(plan_public_id)
         if not plan.is_active:
             raise ValidationFailed("This plan is not active.", code="PLAN_INACTIVE", details={"field": "plan"})
-        if amount_paise != plan.price_paise:
+        if amount_minor != plan.price_minor:
             raise ValidationFailed(
                 "Amount must equal the plan price (no discounts in v1).",
                 code="AMOUNT_MISMATCH",
-                details={"expected_paise": plan.price_paise, "got_paise": amount_paise},
+                details={"expected_minor": plan.price_minor, "got_minor": amount_minor},
             )
         payment = Payment.objects.create(
             tenant_id=tenant.id,
             customer=customer,
             plan=plan,
-            amount_paise=amount_paise,
+            amount_minor=amount_minor,
             method=method,
             reference=reference,
             received_at=received_at or now,
@@ -193,7 +196,7 @@ def record_payment(
             object_type="payment",
             object_public_id=payment.public_id,
             after={
-                "amount_paise": amount_paise,
+                "amount_minor": amount_minor,
                 "method": method,
                 "customer": str(customer.public_id),
                 "pass": str(pass_.public_id),
@@ -236,9 +239,9 @@ def void_payment(*, actor: Actor, payment_public_id, reason: str, now: datetime 
                 tenant_id=fee.tenant_id,
                 payment=payment,
                 kind=fee.kind,
-                base_paise=fee.base_paise,
+                base_minor=fee.base_minor,
                 pct=fee.pct,
-                amount_paise=fee.amount_paise,
+                amount_minor=fee.amount_minor,
                 sign=-1,
             )
         audit.record(
@@ -278,12 +281,12 @@ def fee_statement(*, actor: Actor, year: int, month: int) -> dict:
         "month": m["month"],
         "currency": tenant.currency,
         "payments_count": m["payments_count"],
-        "gross_paise": m["gross_paise"],
+        "gross_minor": m["gross_minor"],
         "voided_count": m["voided_count"],
-        "platform_fee_paise": m["platform_fee_paise"],
-        "gateway_fee_paise": m["gateway_fee_paise"],
-        "total_fee_paise": m["total_paise"],
-        "net_to_tenant_paise": m["gross_paise"] - m["total_paise"],
+        "platform_fee_minor": m["platform_fee_minor"],
+        "gateway_fee_minor": m["gateway_fee_minor"],
+        "total_fee_minor": m["total_minor"],
+        "net_to_tenant_minor": m["gross_minor"] - m["total_minor"],
         "lines": m["lines"],
         "entries": [
             {
@@ -291,9 +294,9 @@ def fee_statement(*, actor: Actor, year: int, month: int) -> dict:
                 "payment": str(e.payment.public_id),
                 "kind": e.kind,
                 "sign": e.sign,
-                "base_paise": e.base_paise,
+                "base_minor": e.base_minor,
                 "pct": str(e.pct),
-                "amount_paise": e.amount_paise,
+                "amount_minor": e.amount_minor,
                 "created_at": e.created_at.isoformat(),
             }
             for e in m["entries"]

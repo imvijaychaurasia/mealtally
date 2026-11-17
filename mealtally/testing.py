@@ -48,7 +48,7 @@ def make_actor(tenant, role=Role.OWNER, **kwargs) -> Actor:
 
 
 def make_plan(tenant, **kwargs) -> Plan:
-    defaults = {"name": "Monthly Meal Pass", "price_paise": 150000, "meals_per_cycle": 30, "validity_days": 30}
+    defaults = {"name": "Monthly Meal Pass", "price_minor": 150000, "meals_per_cycle": 30, "validity_days": 30}
     defaults.update(kwargs)
     with tenant_context(tenant.id):
         return plans.create_plan(tenant_id=tenant.id, **defaults)
@@ -71,7 +71,7 @@ def buy(
             actor=actor,
             customer_public_id=customer.public_id,
             plan_public_id=plan.public_id,
-            amount_paise=plan.price_paise,
+            amount_minor=plan.price_minor,
             method=method,
             reference=reference,
             now=now or timezone.now(),

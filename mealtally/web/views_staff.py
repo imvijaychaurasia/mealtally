@@ -15,9 +15,10 @@ from django.views.decorators.http import require_POST
 
 from mealtally.accounts.models import STAFF_ROLES
 from mealtally.billing import services as billing
+from mealtally.common import country
+from mealtally.common.country import mask_phone
 from mealtally.common.errors import DomainError
 from mealtally.common.utils import local_date
-from mealtally.common.utils import mask_phone
 from mealtally.customers import qr
 from mealtally.customers import services as customers
 from mealtally.ledger import services as ledger
@@ -81,7 +82,7 @@ def _today_ctx(request):
         "undone": undone,
         "show_undone": show_undone,
         "passes_sold": len(paid),
-        "cash_paise": sum(p.amount_paise for p in paid if p.method == Payment.Method.CASH),
+        "cash_minor": sum(p.amount_minor for p in paid if p.method == Payment.Method.CASH),
     }
 
 
@@ -274,12 +275,7 @@ def customers_lookup(request):
 def _sell_ctx(request, **extra):
     return {
         "plans": plans.list_plans(),
-        "methods": [
-            ("CASH", _("Cash")),
-            ("UPI_MANUAL", _("UPI")),
-            ("CARD_MANUAL", _("Card")),
-            ("BANK_TRANSFER", _("Bank transfer")),
-        ],
+        "methods": country.payment_methods(request.tenant.country),
         "pin_len": request.cfg.customer_pin_length,
         **extra,
     }
@@ -389,7 +385,7 @@ def sell_confirm(request):
                 actor=request.actor,
                 customer_public_id=customer.public_id,
                 plan_public_id=plan.public_id,
-                amount_paise=plan.price_paise,
+                amount_minor=plan.price_minor,
                 method=data.get("method", ""),
                 reference=data.get("reference", ""),
             )

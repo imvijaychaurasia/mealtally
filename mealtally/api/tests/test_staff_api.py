@@ -53,13 +53,13 @@ def test_payment_to_pass_and_redeem_flow(w, base, staff_client):
         f"{base}/customers", {"full_name": "Meena", "phone": "+919000000001"}, format="json"
     ).json()
     plan = staff_client.get(f"{base}/plans").json()["results"][0]
-    assert plan["price_paise"] == 150000
+    assert plan["price_minor"] == 150000
     pay = staff_client.post(
         f"{base}/payments",
         {
             "customer": cust["id"],
             "plan": plan["id"],
-            "amount_paise": 150000,
+            "amount_minor": 150000,
             "method": "UPI_MANUAL",
             "reference": "UTR1",
         },
@@ -112,14 +112,14 @@ def test_error_codes_over_http(w, base, owner_client):
     plan = owner_client.get(f"{base}/plans").json()["results"][0]
     resp = owner_client.post(
         f"{base}/payments",
-        {"customer": nobody["id"], "plan": plan["id"], "amount_paise": 1, "method": "CASH"},
+        {"customer": nobody["id"], "plan": plan["id"], "amount_minor": 1, "method": "CASH"},
         format="json",
     )
     assert resp.status_code == 400 and error(resp)["code"] == "AMOUNT_MISMATCH"
-    assert error(resp)["details"]["expected_paise"] == 150000
+    assert error(resp)["details"]["expected_minor"] == 150000
     resp = owner_client.post(
         f"{base}/payments",
-        {"customer": nobody["id"], "plan": plan["id"], "amount_paise": 150000, "method": "GATEWAY", "reference": "x"},
+        {"customer": nobody["id"], "plan": plan["id"], "amount_minor": 150000, "method": "GATEWAY", "reference": "x"},
         format="json",
     )
     assert resp.status_code == 400  # GATEWAY is reserved: not accepted over the v1 API
@@ -240,7 +240,7 @@ def test_fee_report_shape(w, base, owner_client):
     assert resp.status_code == 200
     body = resp.json()
     assert (
-        body["platform_fee_paise"] == 18000 and body["gross_paise"] == 150000 and body["net_to_tenant_paise"] == 132000
+        body["platform_fee_minor"] == 18000 and body["gross_minor"] == 150000 and body["net_to_tenant_minor"] == 132000
     )
     assert owner_client.get(f"{base}/reports/fees", {"month": "garbage"}).status_code == 400
     assert owner_client.get(f"{base}/reports/daily", {"date": "nope"}).status_code == 400

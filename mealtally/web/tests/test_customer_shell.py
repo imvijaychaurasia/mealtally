@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from mealtally.web.templatetags.mealtally_extras import inr_consumer
+from mealtally.web.templatetags.mealtally_extras import money_consumer
 from mealtally.web.templatetags.mealtally_extras import role_label
 
 from .conftest import client_for  # noqa: F401
@@ -12,12 +12,12 @@ from .conftest import client_for  # noqa: F401
 pytestmark = pytest.mark.django_db
 
 
-def test_inr_consumer_drops_zero_paise_but_keeps_real_ones():
-    assert inr_consumer(17000) == "₹170" and inr_consumer(17050) == "₹170.50" and inr_consumer(0) == "₹0"
-    assert inr_consumer(-32000) == "-₹320" and inr_consumer(150000) == "₹1,500"
-    from mealtally.web.templatetags.mealtally_extras import inr
+def test_money_consumer_drops_zero_minor_but_keeps_real_ones():
+    assert money_consumer(17000) == "₹170" and money_consumer(17050) == "₹170.50" and money_consumer(0) == "₹0"
+    assert money_consumer(-32000) == "-₹320" and money_consumer(150000) == "₹1,500"
+    from mealtally.web.templatetags.mealtally_extras import money
 
-    assert inr(17000) == "₹170.00"  # ledgers, receipts and invoices keep full paise
+    assert money(17000) == "₹170.00"  # ledgers, receipts and invoices keep full minor
 
 
 def test_one_set_of_role_names():

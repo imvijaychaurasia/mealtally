@@ -10,6 +10,8 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.http import require_GET
 
+from mealtally.common import money
+
 from . import data
 from . import util
 from .access import preview_view
@@ -19,7 +21,7 @@ def _me(D, request=None):
     """The logged-in customer's wallet subscription, or None when they are not a wallet subscriber."""
     if not D.get("real") or request is None:
         return D["sub"].get(D["featured_sub_id"])
-    from mealtally.common.utils import format_phone  # noqa: PLC0415
+    from mealtally.common.country import format_phone  # noqa: PLC0415
     from mealtally.customers.models import Customer  # noqa: PLC0415
 
     customer = Customer.objects.filter(user=request.user).first()
@@ -126,8 +128,8 @@ def wallet(request, D):
             "vpa": D["website"]["domain"].split(".")[0] + "@upi",
             "upi": _upi(request, D),
             "topups": [t for t in D["topups"] if t["sub_id"] == s["id"]],
-            "topup_min": request.cfg.topup_min_paise // 100,
-            "topup_max": request.cfg.topup_max_paise // 100,
+            "topup_min": int(money.to_major(request.cfg.topup_min_minor)),
+            "topup_max": int(money.to_major(request.cfg.topup_max_minor)),
         },
     )
 

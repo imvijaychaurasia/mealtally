@@ -32,7 +32,7 @@ from mealtally.testing import World
     [
         ("ledger_mealledgerentry", "UPDATE ledger_mealledgerentry SET quantity = quantity"),
         ("audit_auditevent", "UPDATE audit_auditevent SET action = 'x'"),
-        ("billing_platformfeeentry", "UPDATE billing_platformfeeentry SET amount_paise = 1"),
+        ("billing_platformfeeentry", "UPDATE billing_platformfeeentry SET amount_minor = 1"),
     ],
 )
 def test_update_and_delete_are_rejected_by_the_database(table, update_sql):
@@ -80,7 +80,7 @@ def test_only_one_active_pass_per_customer_at_the_database_level():
             payment=_fresh_payment(w),
             plan=w.plan,
             plan_name="x",
-            price_paise=1,
+            price_minor=1,
             meals_total=1,
             validity_mode="ROLLING_DAYS",
             validity_days=1,
@@ -95,7 +95,7 @@ def _fresh_payment(w):
     from mealtally.billing.models import Payment
 
     return Payment.objects.create(
-        tenant_id=w.tenant.id, customer=w.customer, plan=w.plan, amount_paise=1, method="CASH", recorded_by=w.owner.user
+        tenant_id=w.tenant.id, customer=w.customer, plan=w.plan, amount_minor=1, method="CASH", recorded_by=w.owner.user
     )
 
 

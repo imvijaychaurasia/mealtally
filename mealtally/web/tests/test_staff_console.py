@@ -173,7 +173,7 @@ def test_sell_existing_customer_queue_gap_requires_acknowledgement(w, staff_c, u
         cal = plans.save_plan(
             actor=w.owner,
             name="Calendar",
-            price_paise=100000,
+            price_minor=100000,
             meals_per_cycle=30,
             validity_mode="CALENDAR_MONTH",
             validity_days=30,

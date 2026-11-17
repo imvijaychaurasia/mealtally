@@ -15,10 +15,10 @@ from mealtally.accounts.policy import Action
 from mealtally.accounts.policy import Actor
 from mealtally.accounts.policy import require
 from mealtally.audit import services as audit
+from mealtally.common.country import normalize_phone
 from mealtally.common.errors import NotAllowed
 from mealtally.common.errors import NotFound
 from mealtally.common.errors import ValidationFailed
-from mealtally.common.utils import normalize_phone
 from mealtally.tenancy import services as tenancy
 from mealtally.tenancy.context import platform_context
 from mealtally.tenancy.context import tenant_context

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django.contrib.auth.base_user import BaseUserManager
 
-from mealtally.common.utils import normalize_phone
+from mealtally.common.country import normalize_phone
 
 
 class UserManager(BaseUserManager):

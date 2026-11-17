@@ -31,7 +31,7 @@ class OwnProfileIn(serializers.Serializer):
 class PaymentCreateIn(serializers.Serializer):
     customer = serializers.UUIDField()
     plan = serializers.UUIDField()
-    amount_paise = serializers.IntegerField(min_value=1)
+    amount_minor = serializers.IntegerField(min_value=1)
     method = serializers.ChoiceField(choices=[m for m in Payment.Method.values if m != Payment.Method.GATEWAY])
     reference = serializers.CharField(required=False, allow_blank=True, default="", max_length=120)
     received_at = serializers.DateTimeField(required=False)
@@ -102,7 +102,7 @@ def pass_out(p, *, consumed: int | None = None) -> dict:
         "id": str(p.public_id),
         "status": p.status,
         "plan_name": p.plan_name,
-        "price_paise": p.price_paise,
+        "price_minor": p.price_minor,
         "validity_mode": p.validity_mode,
         "max_meals_per_day": p.max_meals_per_day,
         "meals_total": p.meals_total,
@@ -118,7 +118,7 @@ def pass_out(p, *, consumed: int | None = None) -> dict:
 def payment_out(p) -> dict:
     return {
         "id": str(p.public_id),
-        "amount_paise": p.amount_paise,
+        "amount_minor": p.amount_minor,
         "method": p.method,
         "reference": p.reference,
         "status": p.status,
@@ -146,7 +146,7 @@ def plan_out(p) -> dict:
     return {
         "id": str(p.public_id),
         "name": p.name,
-        "price_paise": p.price_paise,
+        "price_minor": p.price_minor,
         "meals_per_cycle": p.meals_per_cycle,
         "validity_mode": p.validity_mode,
         "validity_days": p.validity_days,

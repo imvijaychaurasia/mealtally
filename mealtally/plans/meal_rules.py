@@ -20,12 +20,27 @@ from django.utils.translation import ngettext
 
 from .models import MealSlot
 
-# Seeded for every tenant; the owner edits them in Business profile -> Meal times.
-DEFAULT_SLOTS = (
-    {"name": "Breakfast", "name_hi": "नाश्ता", "start_time": time(7, 0), "end_time": time(10, 30), "sort_order": 1},
-    {"name": "Lunch", "name_hi": "दोपहर का खाना", "start_time": time(12, 0), "end_time": time(15, 0), "sort_order": 2},
-    {"name": "Dinner", "name_hi": "रात का खाना", "start_time": time(19, 0), "end_time": time(22, 30), "sort_order": 3},
-)
+
+def default_slots() -> list[dict]:
+    """The meal times every new restaurant starts with: seed data in plans/seed/meal_slots.json (or the file in
+    MEALTALLY_MEAL_SLOTS_FILE), not code."""
+    import json  # noqa: PLC0415
+    import os  # noqa: PLC0415
+    from pathlib import Path  # noqa: PLC0415
+
+    path = os.environ.get("MEALTALLY_MEAL_SLOTS_FILE") or Path(__file__).with_name("seed") / "meal_slots.json"
+    rows = json.loads(Path(path).read_text(encoding="utf-8"))["slots"]
+    return [
+        {
+            "name": r["name"],
+            "name_hi": r.get("name_hi", ""),
+            "start_time": time.fromisoformat(r["start"]),
+            "end_time": time.fromisoformat(r["end"]),
+            "grace_minutes": int(r.get("grace_minutes", 0)),
+            "sort_order": n,
+        }
+        for n, r in enumerate(rows, start=1)
+    ]
 
 
 def ensure_default_slots(tenant_id: int) -> list[MealSlot]:
@@ -33,7 +48,7 @@ def ensure_default_slots(tenant_id: int) -> list[MealSlot]:
     existing = list(MealSlot.objects.filter(tenant_id=tenant_id))
     if existing:
         return existing
-    return [MealSlot.objects.create(tenant_id=tenant_id, **row) for row in DEFAULT_SLOTS]
+    return [MealSlot.objects.create(tenant_id=tenant_id, **row) for row in default_slots()]
 
 
 def slot_label(slot: MealSlot) -> str:

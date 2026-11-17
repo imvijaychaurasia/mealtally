@@ -17,6 +17,7 @@ from django.views.decorators.http import require_POST
 
 from mealtally.billing import receipts
 from mealtally.billing import services as billing
+from mealtally.common import money
 from mealtally.common.errors import DomainError
 from mealtally.common.utils import local_date
 from mealtally.customers import qr
@@ -255,7 +256,7 @@ def _activity_items(request, customer, kind):
                     "icon": "payments",
                     "title": p.plan.name,
                     "detail": f"{p.receipt_number} · {at.strftime('%-I:%M %p')}",
-                    "amount": p.amount_paise,
+                    "amount": p.amount_minor,
                     "chip": "void" if p.status == "VOIDED" else "",
                     "pdf": reverse("web:receipt-pdf", args=[request.tenant.slug, p.public_id]),
                 }
@@ -295,7 +296,7 @@ def _activity_items(request, customer, kind):
                         "icon": "invoice",
                         "title": inv["month"],
                         "detail": inv["id"],
-                        "amount": inv["total_paise"],
+                        "amount": inv["total_minor"],
                         "chip": "",
                         "pdf": reverse("preview:me-invoices-pdf", args=[request.tenant.slug, inv["id"]]),
                     }
@@ -354,11 +355,11 @@ def me_topup_check(request):
     restaurant's bounds). The wallet itself is still a preview, so nothing is stored."""
     require_customer(request)
     cfg = request.cfg
-    lo, hi = cfg.topup_min_paise // 100, cfg.topup_max_paise // 100
+    lo, hi = int(money.to_major(cfg.topup_min_minor)), int(money.to_major(cfg.topup_max_minor))
     errors = []
     raw_amount = (request.POST.get("amount") or "").strip()
     if not raw_amount.isdigit():
-        errors.append(_("Enter the amount in whole rupees."))
+        errors.append(_("Enter the amount in whole units."))
     elif not lo <= int(raw_amount) <= hi:
         errors.append(_("The amount must be between ₹%(lo)s and ₹%(hi)s.") % {"lo": f"{lo:,}", "hi": f"{hi:,}"})
     utr = (request.POST.get("utr") or "").strip().replace(" ", "")

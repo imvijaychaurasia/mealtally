@@ -19,7 +19,7 @@ from django.views.decorators.http import require_POST
 
 from mealtally.accounts.models import Membership
 from mealtally.accounts.models import Role
-from mealtally.common.utils import normalize_phone
+from mealtally.common.country import normalize_phone
 from mealtally.tenancy.context import platform_context
 from mealtally.tenancy.models import DemoRequest
 

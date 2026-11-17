@@ -49,8 +49,8 @@ def test_dashboard_numbers():
         assert d["meals_today"] == 1 and d["active_passes"] == 2 and d["expiring_3_days"] == 0
         assert (
             d["passes_sold_month"] == 2
-            and d["revenue_month_paise"] == 300000
-            and d["platform_fee_month_paise"] == 36000
+            and d["revenue_month_minor"] == 300000
+            and d["platform_fee_month_minor"] == 36000
         )
         with pytest.raises(NotAllowed):
             reports.dashboard(actor=w.staff)
@@ -77,11 +77,11 @@ def test_monthly_subscriptions_by_plan_and_voids():
         r = reports.monthly_subscriptions(actor=w.owner, year=t.year, month=t.month)
         assert (
             r["passes_sold"] == 1
-            and r["revenue_paise"] == 150000
+            and r["revenue_minor"] == 150000
             and r["voids"] == 1
-            and r["void_amount_paise"] == 150000
+            and r["void_amount_minor"] == 150000
         )
-        assert r["by_plan"] == [{"plan": "Monthly Meal Pass", "passes": 1, "revenue_paise": 150000}]
+        assert r["by_plan"] == [{"plan": "Monthly Meal Pass", "passes": 1, "revenue_minor": 150000}]
         with pytest.raises(ValidationFailed):
             reports.monthly_subscriptions(actor=w.owner, year=2026, month=13)
 
@@ -121,7 +121,7 @@ def test_platform_dashboard_lists_every_tenant():
     assert (
         rows["pd-a"]["active_passes"] == 1
         and rows["pd-a"]["meals_month"] == 1
-        and rows["pd-a"]["fees_month_paise"] == 18000
+        and rows["pd-a"]["fees_month_minor"] == 18000
     )
     assert rows["pd-b"]["customers"] == 1 and rows["pd-b"]["active_passes"] == 0
 

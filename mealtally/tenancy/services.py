@@ -115,27 +115,50 @@ _SETTINGS_FIELDS = {
     "contact_phone": str,
     "brand_color": str,
     "receipt_footer": str,
-    "gstin": str,
-    "fssai_no": str,
+    "tax_id": str,
+    "food_licence_no": str,
     "tagline": str,
     "redeem_cooldown_seconds": int,
     "staff_reversal_window_hours": int,
     "max_queued_passes": int,
     "allow_self_signup": bool,
     "counter_can_reverse_others": bool,  # D03.9 §A1
-    "topup_min_paise": int,  # D03.9 QA-01 P1-6
-    "topup_max_paise": int,
+    "topup_min_minor": int,  # D03.9 QA-01 P1-6
+    "topup_max_minor": int,
     "meal_rules_banner_dismissed": bool,  # D03.9 §B6
 }
 
 
-def update_settings(*, actor: Actor, timezone_name: str | None = None, **data) -> TenantSettings:
-    """OWNER only. Validates and audits; also changes the tenant timezone when given."""
+def update_settings(
+    *,
+    actor: Actor,
+    timezone_name: str | None = None,
+    country: str | None = None,
+    currency: str | None = None,
+    **data,
+) -> TenantSettings:
+    """OWNER only. Validates and audits; also changes the restaurant's timezone, country and currency when given.
+
+    Changing the currency does not convert existing amounts: they keep their minor units, so do it before selling.
+    """
     from zoneinfo import ZoneInfo  # noqa: PLC0415
     from zoneinfo import ZoneInfoNotFoundError  # noqa: PLC0415
 
+    from .models import validate_country  # noqa: PLC0415
+    from .models import validate_currency  # noqa: PLC0415
+
     require(actor, Action.MANAGE_SETTINGS)
     row = TenantSettings.objects.select_for_update().get(tenant_id=actor.tenant_id)
+    tenant = Tenant.objects.get(pk=actor.tenant_id)
+    tenant_before = {"timezone": tenant.timezone, "country": tenant.country, "currency": tenant.currency}
+    for field, value, check in (("country", country, validate_country), ("currency", currency, validate_currency)):
+        if value:
+            try:
+                check(value.upper())
+            except Exception as exc:  # noqa: BLE001  (django ValidationError)
+                raise ValidationFailed("Unknown code.", details={"field": field}) from exc
+            setattr(tenant, field, value.upper())
+    tenant_country = tenant.country
     before = {k: getattr(row, k) for k in _SETTINGS_FIELDS}
     for key, value in data.items():
         if key not in _SETTINGS_FIELDS:
@@ -149,12 +172,12 @@ def update_settings(*, actor: Actor, timezone_name: str | None = None, **data) -
             raise ValidationFailed("Between 0 and 5.", details={"field": key})
         if key == "redeem_cooldown_seconds" and value > 3600:  # noqa: PLR2004
             raise ValidationFailed("At most 3600 seconds.", details={"field": key})
-        if key == "gstin" and value and not re.fullmatch(r"[0-9A-Za-z]{15}", str(value)):
-            raise ValidationFailed("GSTIN must be 15 characters.", details={"field": key})
+        if key == "tax_id" and value and tenant_country == "IN" and not re.fullmatch(r"[0-9A-Za-z]{15}", str(value)):
+            raise ValidationFailed("A GSTIN has 15 letters and digits.", details={"field": key})
         setattr(row, key, value)
-    if row.topup_min_paise < 100 or row.topup_max_paise <= row.topup_min_paise:  # noqa: PLR2004
+    if row.topup_min_minor < 1 or row.topup_max_minor <= row.topup_min_minor:
         raise ValidationFailed(
-            "The largest top-up must be above the smallest (at least ₹1).", details={"field": "topup_max_paise"}
+            "The largest top-up must be above the smallest (at least ₹1).", details={"field": "topup_max_minor"}
         )
     row.save()
     if timezone_name:
@@ -162,17 +185,21 @@ def update_settings(*, actor: Actor, timezone_name: str | None = None, **data) -
             ZoneInfo(timezone_name)
         except (ZoneInfoNotFoundError, ValueError) as exc:
             raise ValidationFailed("Unknown timezone.", details={"field": "timezone"}) from exc
-        tenant = Tenant.objects.get(pk=actor.tenant_id)
         tenant.timezone = timezone_name
-        tenant.save(update_fields=["timezone", "updated_at"])
+    tenant.save(update_fields=["timezone", "country", "currency", "updated_at"])
     audit.record(
         action="settings.update",
         tenant_id=actor.tenant_id,
         actor=actor.user,
         object_type="settings",
         object_public_id=row.public_id,
-        before=before,
-        after={k: getattr(row, k) for k in _SETTINGS_FIELDS},
+        before={**before, **tenant_before},
+        after={
+            **{k: getattr(row, k) for k in _SETTINGS_FIELDS},
+            "timezone": tenant.timezone,
+            "country": tenant.country,
+            "currency": tenant.currency,
+        },
     )
     return row
 
@@ -240,7 +267,7 @@ def onboard_tenant(
         Plan.objects.create(  # the reference plan every new restaurant starts from
             tenant_id=tenant.id,
             name="Monthly Meal Pass",
-            price_paise=150000,
+            price_minor=150000,
             meals_per_cycle=30,
             validity_mode=Plan.ValidityMode.ROLLING_DAYS,
             validity_days=30,

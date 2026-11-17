@@ -67,7 +67,7 @@ def split_by_option(orders):
 EXPENSE_RATIO = 0.66  # D03.1: a healthy tiffin business runs expenses at 62-70% of revenue (30-38% margin)
 
 
-def money_series(D, passes_paise: int):
+def money_series(D, passes_minor: int):
     """12 monthly points whose last point is the REAL last-30-days revenue (pass sales + wallet debits).
 
     Expenses are the demo expense entries scaled so the last 30 days land at ~66 % of revenue; history trends from ~70 % to
@@ -76,21 +76,21 @@ def money_series(D, passes_paise: int):
     """
     cutoff = D["today"] - timedelta(days=30)
     wallet = sum(
-        e["amount_paise"]
+        e["amount_minor"]
         for es in D["ledgers"].values()
         for e in es
         if e["type"] == "DEBIT" and e["dt"].date() > cutoff
     )
-    rev = passes_paise + wallet
-    raw = sum(e["amount_paise"] for e in D["expenses"] if e["date"] > cutoff) or 1
+    rev = passes_minor + wallet
+    raw = sum(e["amount_minor"] for e in D["expenses"] if e["date"] > cutoff) or 1
     factor = EXPENSE_RATIO * rev / raw
     expenses = [
-        {**e, "amount_paise": max(1000, round(e["amount_paise"] * factor / 1000) * 1000)} for e in D["expenses"]
+        {**e, "amount_minor": max(1000, round(e["amount_minor"] * factor / 1000) * 1000)} for e in D["expenses"]
     ]
     recurring = [
-        {**r, "amount_paise": max(1000, round(r["amount_paise"] * factor / 10000) * 10000)} for r in D["recurring"]
+        {**r, "amount_minor": max(1000, round(r["amount_minor"] * factor / 10000) * 10000)} for r in D["recurring"]
     ]
-    expense = sum(e["amount_paise"] for e in expenses if e["date"] > cutoff)
+    expense = sum(e["amount_minor"] for e in expenses if e["date"] > cutoff)
     n = len(D["months"])
     months = []
     for i, m in enumerate(D["months"]):
@@ -101,5 +101,5 @@ def money_series(D, passes_paise: int):
             ratio = 0.70 - 0.05 * i / 11 + ((i * 3) % 3 - 1) / 400
             r = int(rev * f) // 100 * 100
             x = int(r * ratio) // 100 * 100
-        months.append({"label": m["label"], "revenue_paise": r, "expense_paise": x, "profit_paise": r - x})
-    return months, {"passes": passes_paise, "wallet": wallet, **months[-1]}, expenses, recurring
+        months.append({"label": m["label"], "revenue_minor": r, "expense_minor": x, "profit_minor": r - x})
+    return months, {"passes": passes_minor, "wallet": wallet, **months[-1]}, expenses, recurring

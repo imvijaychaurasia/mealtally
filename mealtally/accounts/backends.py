@@ -5,8 +5,8 @@ from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.hashers import make_password
 
+from mealtally.common.country import normalize_phone
 from mealtally.common.errors import ValidationFailed
-from mealtally.common.utils import normalize_phone
 
 _DUMMY_HASH = make_password("dummy-password-for-constant-time-checks")
 

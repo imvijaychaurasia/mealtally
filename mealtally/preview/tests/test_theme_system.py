@@ -9,8 +9,8 @@ import pytest
 from django.urls import reverse
 from django.utils import timezone
 
-from mealtally.common.utils import format_inr
-from mealtally.common.utils import inr_compact
+from mealtally.common.money import format_money
+from mealtally.common.money import format_money_compact as money_compact
 from mealtally.preview import data as pvdata
 from mealtally.preview.tests.test_preview import SLUG
 from mealtally.preview.tests.test_preview import check
@@ -122,7 +122,7 @@ def test_no_raw_colours_in_templates_scripts_or_template_tags():
 
 # --- compact money ----------------------------------------------------------------------------------------------------------
 @pytest.mark.parametrize(
-    ("paise", "text"),
+    ("minor", "text"),
     [
         (0, "₹0"),
         (95_000, "₹950"),
@@ -145,13 +145,13 @@ def test_no_raw_colours_in_templates_scripts_or_template_tags():
         (-50_000, "-₹500"),
     ],
 )
-def test_inr_compact_boundaries_and_negatives(paise, text):
-    assert inr_compact(paise) == text
+def test_money_compact_boundaries_and_negatives(minor, text):
+    assert money_compact(minor) == text
 
 
 def test_compact_never_replaces_the_full_value_it_only_abbreviates():
-    assert format_inr(12_432_500) == "₹1,24,325.00" and inr_compact(12_432_500) == "₹1.24L"
-    assert inr_compact(None) == "₹0"
+    assert format_money(12_432_500) == "₹1,24,325.00" and money_compact(12_432_500) == "₹1.24L"
+    assert money_compact(None) == "₹0"
 
 
 # --- applying a theme -------------------------------------------------------------------------------------------------------------
@@ -285,7 +285,7 @@ def test_pdfs_use_the_tenant_theme_for_headings_and_black_body_text(demo, client
         {
             "D": pvdata.get(timezone.localdate()),
             "i": pvdata.get(timezone.localdate())["invoice"][inv],
-            "cfg": type("C", (), {"display_name": "x", "address": "", "contact_phone": "", "fssai_no": ""})(),
+            "cfg": type("C", (), {"display_name": "x", "address": "", "contact_phone": "", "food_licence_no": ""})(),
             "tenant": tenant,
         },
     )

@@ -25,7 +25,7 @@ class Payment(TenantOwnedModel):
 
     customer = models.ForeignKey("customers.Customer", on_delete=models.PROTECT, related_name="payments")
     plan = models.ForeignKey("plans.Plan", on_delete=models.PROTECT, related_name="+")
-    amount_paise = models.PositiveBigIntegerField()
+    amount_minor = models.PositiveBigIntegerField()
     method = models.CharField(max_length=14, choices=Method)
     reference = models.CharField(max_length=120, blank=True, help_text="UPI UTR etc.; required unless CASH.")
     received_at = models.DateTimeField(default=timezone.now)
@@ -44,7 +44,7 @@ class Payment(TenantOwnedModel):
             models.Index(fields=["tenant", "customer"]),
         ]
         constraints = [
-            models.CheckConstraint(condition=Q(amount_paise__gt=0), name="payment_amount_positive"),
+            models.CheckConstraint(condition=Q(amount_minor__gt=0), name="payment_amount_positive"),
             models.UniqueConstraint(
                 fields=["tenant", "receipt_number"],
                 condition=~Q(receipt_number=""),
@@ -72,9 +72,9 @@ class PlatformFeeEntry(TenantAppendOnlyModel):
 
     payment = models.ForeignKey(Payment, on_delete=models.PROTECT, related_name="fee_entries")
     kind = models.CharField(max_length=8, choices=Kind)
-    base_paise = models.PositiveBigIntegerField()
+    base_minor = models.PositiveBigIntegerField()
     pct = models.DecimalField(max_digits=5, decimal_places=2)
-    amount_paise = models.PositiveBigIntegerField()
+    amount_minor = models.PositiveBigIntegerField()
     sign = models.SmallIntegerField(help_text="+1 charge, -1 reversal (void).")
 
     class Meta:

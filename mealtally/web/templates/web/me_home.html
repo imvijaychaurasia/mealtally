@@ -5,7 +5,7 @@
   {% if pv_badge %}<p class="-mt-2"><span class="chip-preview" data-testid="preview-badge" title="{% trans 'Rolling out next — shown with demo data' %}">{% trans "Preview" %}</span></p>{% endif %}
   {% for al in alerts %}<p class="rounded-xl p-3 text-sm font-semibold {% if al.tone == 'danger' %}bg-danger text-danger-ink{% else %}bg-warn text-warn-ink{% endif %}" role="status" data-testid="home-alert">
     {% if al.text == "low_balance" %}{% blocktrans with n=al.days %}Your wallet is running low: about {{ n }} days of meals left.{% endblocktrans %} <a class="link" href="{% url 'preview:me-wallet' tenant.slug %}">{% trans "Top up" %}</a>
-    {% else %}{% blocktrans with a=al.amount|inr_consumer %}Your top-up of {{ a }} is waiting for approval.{% endblocktrans %}{% endif %}</p>{% endfor %}
+    {% else %}{% blocktrans with a=al.amount|money_consumer %}Your top-up of {{ a }} is waiting for approval.{% endblocktrans %}{% endif %}</p>{% endfor %}
   {% if card %}{% with p=card.obj %}
   <div class="card text-center {% if card.warn %}border-accent bg-warn{% endif %}">
     <div class="flex justify-center">
@@ -43,7 +43,7 @@
     <span class="chip-green" data-countdown="{{ nxt.cutoff_iso }}">{% trans "Choose before cutoff" %}</span></div>
     <a class="btn-secondary mt-3 w-full" href="{% url 'preview:me-meals' tenant.slug %}">{% trans "Choose, skip or hold" %}</a></div>{% endif %}
   <div class="card" data-testid="home-wallet"><div class="flex items-center justify-between gap-3"><div><p class="text-sm font-semibold text-muted">{% trans "Wallet" %}</p>
-    <p class="text-4xl font-bold {{ s.balance_paise|money_class }}">{{ s.balance_paise|inr_consumer }}</p>
+    <p class="text-4xl font-bold {{ s.balance_minor|money_class }}">{{ s.balance_minor|money_consumer }}</p>
     <p class="text-sm text-ink-soft">{% blocktrans with n=s.days_left %}About {{ n }} days of meals left{% endblocktrans %}</p></div>
     <a class="btn-primary" href="{% url 'preview:me-wallet' tenant.slug %}">{% trans "Top up" %}</a></div></div>
   {% if upcoming %}<div class="card" data-testid="home-coming-up"><h2 class="font-semibold">{% trans "Coming up" %}</h2><ul class="mt-1 divide-y divide-subtle">{% for o in upcoming %}<li class="flex items-center justify-between gap-2 py-3 text-sm"><span>{{ o.date|date:"D j M" }} · {{ D.slot|getitem:o.slot|getitem:"name" }}</span>{% chip o.status %}</li>{% endfor %}</ul></div>{% endif %}

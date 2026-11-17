@@ -8,6 +8,7 @@ from mealtally.accounts import services as accounts
 from mealtally.accounts.models import STAFF_ROLES
 from mealtally.accounts.models import Role
 from mealtally.accounts.policy import Actor
+from mealtally.common import money
 from mealtally.common.errors import NotAllowed
 from mealtally.common.errors import NotFound
 from mealtally.tenancy.context import TenancyState
@@ -45,13 +46,17 @@ class TenantAPIView(APIView):
     allowed_roles: tuple[str, ...] = STAFF_ROLES
     credential_exempt = False  # set on `me` and change-PIN so a customer can see/fix the requirement
     _ctx_token = None
+    _money_token = None
 
     def dispatch(self, request, *args, **kwargs):
-        self._ctx_token = None
+        self._ctx_token = self._money_token = None
         self.tenant_slug = kwargs.pop("tenant_slug")  # consumed here; handlers never see it
         try:
             return super().dispatch(request, *args, **kwargs)
         finally:
+            if self._money_token is not None:
+                money.reset(self._money_token)
+                self._money_token = None
             if self._ctx_token is not None:
                 end(self._ctx_token)
                 self._ctx_token = None
@@ -77,6 +82,7 @@ class TenantAPIView(APIView):
             raise NotAllowed("This tenant is not active.")
         self._ctx_token = begin(TenancyState(tenant_id=tenant.id))
         request.tenant = tenant
+        self._money_token = money.use(tenant.currency, tenant.country)
         request.actor = Actor(user=user, role=role, tenant_id=tenant.id)
         if not self.credential_exempt:
             enforce_credential_change(user, role, tenant.id)

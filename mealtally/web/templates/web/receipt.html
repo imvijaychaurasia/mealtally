@@ -5,7 +5,7 @@
 <body><div class="wrap">
   {% if voided %}<div class="void">VOID</div>{% endif %}
   <h1>{{ business_name }}</h1>
-  <div class="sub">{% if cfg.address %}{{ cfg.address }}<br>{% endif %}{% if contact_phone %}Phone: {{ contact_phone }}{% endif %}{% if cfg.gstin %} · GSTIN: {{ cfg.gstin }}{% endif %}{% if fssai %} · FSSAI: {{ fssai }}{% endif %}</div>
+  <div class="sub">{% if cfg.address %}{{ cfg.address }}<br>{% endif %}{% if contact_phone %}Phone: {{ contact_phone }}{% endif %}{% if cfg.tax_id %} · {{ tax_label }}: {{ cfg.tax_id }}{% endif %}{% if licence %} · {{ licence_label }}: {{ licence }}{% endif %}</div>
   <hr>
   {% if voided %}<div class="voidnote">VOID{% if payment.void_reason %} — {{ payment.void_reason }}{% endif %}</div>{% endif %}
   <table>
@@ -18,7 +18,7 @@
     <tr><td class="k">Paid by</td><td class="v">{{ method_label }}{% if payment.reference %}<br>Ref: {{ payment.reference }}{% endif %}</td></tr>
   </table>
   <hr>
-  <table><tr><td class="k total">Amount</td><td class="v total">{{ payment.amount_paise|inr }}</td></tr></table>
+  <table><tr><td class="k total">Amount</td><td class="v total">{{ payment.amount_minor|money }}</td></tr></table>
   <hr>
   <div class="foot">Prepaid meal pass · No refund or carry-forward of unused meals{% if cfg.receipt_footer %}<br>{{ cfg.receipt_footer }}{% endif %}</div>
   {% if print_view %}<div class="actions"><button type="button" data-back>← Back</button> <a href="{% url 'web:receipt-pdf' tenant.slug payment.public_id %}">Download PDF</a> <button type="button" data-print>Print</button></div><script src="{% static 'js/app.js' %}"></script>{% endif %}

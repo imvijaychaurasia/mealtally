@@ -6,8 +6,8 @@ from django import template
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from mealtally.common.utils import format_inr
-from mealtally.common.utils import inr_compact
+from mealtally.common.money import format_money
+from mealtally.common.money import format_money_compact as money_compact
 
 register = template.Library()
 
@@ -49,15 +49,15 @@ def chip(status):
 
 
 @register.filter
-def signed_inr(paise):
-    paise = paise or 0
-    return ("−" if paise < 0 else "+") + format_inr(abs(paise))
+def signed_inr(minor):
+    minor = minor or 0
+    return ("−" if minor < 0 else "+") + format_money(abs(minor))
 
 
 @register.filter
-def raw_amount(paise):
-    """Machine-readable integer paise for JS data attributes. Never shown to people."""
-    return str(int(paise or 0))
+def raw_amount(minor):
+    """Machine-readable integer minor units for JS data attributes. Never shown to people."""
+    return str(int(minor or 0))
 
 
 @register.filter
@@ -69,8 +69,8 @@ def getitem(mapping, key):
 
 
 @register.filter
-def money_class(paise):
-    return "text-danger-ink" if (paise or 0) < 0 else "text-ink"
+def money_class(minor):
+    return "text-danger-ink" if (minor or 0) < 0 else "text-ink"
 
 
 @register.filter
@@ -84,24 +84,24 @@ def phone_last4(phone):
 
 
 @register.filter
-def lakh(paise):
+def lakh(minor):
     """Axis label, one unit style: under a lakh in k, from a lakh in L (1.2L). 0 -> ₹0."""
-    return inr_compact(paise)
+    return money_compact(minor)
 
 
-def nice_ticks(top_rupees: float, n: int = 4):
+def nice_ticks(top_major: float, n: int = 4):
     """Round tick values 0..N*step where step is a 'nice' number (10k, 20k, 25k, 40k, 50k, 1L ...)."""
     for step in (10000, 20000, 25000, 40000, 50000, 100000, 200000, 250000, 400000, 500000, 1000000):
-        if step * n >= top_rupees:
+        if step * n >= top_major:
             return [step * i for i in range(n + 1)]
-    return [int(top_rupees / n) * i for i in range(n + 1)]
+    return [int(top_major / n) * i for i in range(n + 1)]
 
 
 @register.simple_tag
 def bar_chart(months):
     """Revenue / expense bars + profit line, as inline SVG with a text alternative."""
     w, h, pad = 640, 220, 34
-    ticks = nice_ticks(max(m["revenue_paise"] for m in months) / 100 * 1.02)
+    ticks = nice_ticks(max(m["revenue_minor"] for m in months) / 100 * 1.02)
     top = ticks[-1] * 100
     n = len(months)
     step = (w - 2 * pad) / n
@@ -116,14 +116,14 @@ def bar_chart(months):
     for i, m in enumerate(months):
         x = pad + i * step + step * 0.12
         bw = step * 0.34
-        rh, eh = h * m["revenue_paise"] / top, h * m["expense_paise"] / top
+        rh, eh = h * m["revenue_minor"] / top, h * m["expense_minor"] / top
         parts.append(
             f'<rect x="{x:.0f}" y="{h - rh:.0f}" width="{bw:.0f}" height="{rh:.0f}" rx="2" class="fill-primary"/>'
         )
         parts.append(
             f'<rect x="{x + bw + 2:.0f}" y="{h - eh:.0f}" width="{bw:.0f}" height="{eh:.0f}" rx="2" class="fill-accent"/>'
         )
-        ph = h * m["profit_paise"] / top
+        ph = h * m["profit_minor"] / top
         pts.append(f"{x + bw:.0f},{h - ph:.0f}")
         parts.append(
             f'<text x="{x + bw:.0f}" y="{h + 16}" font-size="10" text-anchor="middle" class="fill-muted">{m["label"]}</text>'
@@ -163,7 +163,7 @@ def donut(values, labels):
 def line_chart(months):
     """D03.4 dashboard: revenue / expenses / profit as three lines with L/K ticks. Colours come from theme tokens (classes)."""
     w, h, left, bottom = 640, 230, 46, 26
-    ticks = nice_ticks(max(m["revenue_paise"] for m in months) / 100 * 1.02)
+    ticks = nice_ticks(max(m["revenue_minor"] for m in months) / 100 * 1.02)
     top = ticks[-1] * 100
     n = len(months)
     step = (w - left - 10) / (n - 1)
@@ -180,9 +180,9 @@ def line_chart(months):
             f'<text x="{left - 6}" y="{y + 4:.0f}" font-size="11" text-anchor="end" class="fill-muted">{lakh(t * 100)}</text>'
         )
     series = (
-        ("revenue_paise", "stroke-primary", "fill-primary"),
-        ("expense_paise", "stroke-tile-4", "fill-tile-4"),
-        ("profit_paise", "stroke-chart-3", "fill-chart-3"),
+        ("revenue_minor", "stroke-primary", "fill-primary"),
+        ("expense_minor", "stroke-tile-4", "fill-tile-4"),
+        ("profit_minor", "stroke-chart-3", "fill-chart-3"),
     )
     for key, stroke, fill in series:
         pts = [(left + i * step, 8 + (h - 8) * (1 - m[key] / top)) for i, m in enumerate(months)]

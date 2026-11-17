@@ -1,0 +1,8 @@
+{
+  "_comment": "Default meal times for a new restaurant (restaurant-local time). Owners change them in Business profile > Meal times; operators can point MEALTALLY_MEAL_SLOTS_FILE at their own copy of this file.",
+  "slots": [
+    {"name": "Breakfast", "name_hi": "नाश्ता", "start": "07:00", "end": "10:30", "grace_minutes": 0},
+    {"name": "Lunch", "name_hi": "दोपहर का खाना", "start": "12:00", "end": "15:00", "grace_minutes": 0},
+    {"name": "Dinner", "name_hi": "रात का खाना", "start": "19:00", "end": "22:30", "grace_minutes": 0}
+  ]
+}

@@ -1,5 +1,5 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
 {% include "preview/_head.html" with title=_("My invoices") %}
-<ul class="mt-3 grid gap-3">{% for i in invoices %}<li class="card flex flex-wrap items-center justify-between gap-3"><div><p class="font-semibold">{{ i.month }}</p><p class="text-sm text-ink-soft">{{ i.id }} · {{ i.total_paise|inr_consumer }}</p></div><div class="flex items-center gap-2">{% chip i.status %}<a class="btn-secondary" href="{% url 'preview:me-invoices-pdf' tenant.slug i.id %}" data-testid="me-pdf">PDF</a></div></li>{% empty %}<li class="card text-ink-soft">{% trans "No invoices yet." %}</li>{% endfor %}</ul>
+<ul class="mt-3 grid gap-3">{% for i in invoices %}<li class="card flex flex-wrap items-center justify-between gap-3"><div><p class="font-semibold">{{ i.month }}</p><p class="text-sm text-ink-soft">{{ i.id }} · {{ i.total_minor|money_consumer }}</p></div><div class="flex items-center gap-2">{% chip i.status %}<a class="btn-secondary" href="{% url 'preview:me-invoices-pdf' tenant.slug i.id %}" data-testid="me-pdf">PDF</a></div></li>{% empty %}<li class="card text-ink-soft">{% trans "No invoices yet." %}</li>{% endfor %}</ul>
 {% endblock %}

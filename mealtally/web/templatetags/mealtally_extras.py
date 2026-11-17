@@ -3,11 +3,11 @@
 from django import template
 from django.utils.translation import gettext_lazy as _
 
-from mealtally.common.utils import format_inr
-from mealtally.common.utils import format_phone
-from mealtally.common.utils import inr_compact as _inr_compact
-from mealtally.common.utils import mask_phone
-from mealtally.common.utils import per_meal_inr
+from mealtally.common.country import format_phone
+from mealtally.common.country import mask_phone
+from mealtally.common.money import format_money
+from mealtally.common.money import format_money_compact as _money_compact
+from mealtally.common.money import per_meal as per_meal_price
 
 register = template.Library()
 
@@ -31,9 +31,10 @@ def theme_token(name, theme="tally"):
 
 
 @register.filter
-def inr(paise):
-    """Integer paise -> ``\u20b91,500.00``. The ONLY way a ``*_paise`` value may be rendered."""
-    return format_inr(paise or 0)
+def money(minor):
+    """Integer minor units -> ``₹1,500.00`` / ``$1,500.00`` in the restaurant's currency. The ONLY way a ``*_minor``
+    value may be rendered."""
+    return format_money(minor or 0)
 
 
 @register.filter
@@ -44,10 +45,11 @@ def phone_pretty(phone):
 
 
 @register.filter
-def inr_consumer(paise):
-    """Customer screens: ``₹170`` when paise are zero, else ``₹170.50``. Receipts and ledgers keep ``|inr``."""
-    text = format_inr(paise or 0)
-    return text[:-3] if text.endswith(".00") else text
+def money_consumer(minor):
+    """Customer screens: ``₹170`` for whole amounts, else ``₹170.50``. Receipts and ledgers keep ``|money``."""
+    from mealtally.common.money import format_money_consumer  # noqa: PLC0415
+
+    return format_money_consumer(minor or 0)
 
 
 ROLE_LABELS = {
@@ -74,9 +76,9 @@ def source_label(source):
 
 
 @register.filter
-def inr_compact(paise):
-    """``₹1.24L`` / ``₹82.1K`` / ``₹1.2Cr`` for tiles and axes; always pair it with a ``title`` showing ``|inr``."""
-    return _inr_compact(paise)
+def money_compact(minor):
+    """``₹1.24L`` / ``₹82.1K`` / ``₹1.2Cr`` for tiles and axes; always pair it with a ``title`` showing ``|money``."""
+    return _money_compact(minor)
 
 
 @register.filter
@@ -86,7 +88,7 @@ def masked(phone):
 
 @register.filter
 def per_meal(plan):
-    return per_meal_inr(plan.price_paise, plan.meals_per_cycle)
+    return per_meal_price(plan.price_minor, plan.meals_per_cycle)
 
 
 @register.filter

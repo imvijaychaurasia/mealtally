@@ -28,7 +28,7 @@ from mealtally.accounts.models import Role
 from mealtally.accounts.models import User
 from mealtally.accounts.policy import Actor
 from mealtally.billing import services as billing
-from mealtally.common.utils import normalize_phone
+from mealtally.common.country import normalize_phone
 from mealtally.customers import services as customers
 from mealtally.customers.models import Customer
 from mealtally.ledger import services as ledger
@@ -116,7 +116,7 @@ class Command(BaseCommand):
             self.stdout.write("demo-tiffin already exists; making sure the flags are set.")
             self._flags(tenant, opts)
             with platform_context():  # D03.1: refresh demo-only data fixes (no schema change)
-                TenantSettings.objects.filter(tenant_id=tenant.id).update(fssai_no=FAKE_FSSAI)
+                TenantSettings.objects.filter(tenant_id=tenant.id).update(food_licence_no=FAKE_FSSAI)
                 for (
                     _label,
                     _role,
@@ -167,7 +167,7 @@ class Command(BaseCommand):
                 address=personas.GREEN_ADDRESS if self.persona == "green" else personas.OLD_ADDRESS,
                 contact_phone=personas.GREEN_PHONE if self.persona == "green" else "+91 20 4000 1101",
                 receipt_footer="Thank you — see you tomorrow!",
-                fssai_no=FAKE_FSSAI,
+                food_licence_no=FAKE_FSSAI,
             )
             lunch = self._plans(tenant)
             creds += self._customers(tenant, owner, owner_actor, lunch)
@@ -293,12 +293,12 @@ class Command(BaseCommand):
         green = self.persona == "green"
         base.name = "Monthly Bowl Pass — Lunch" if green else "Monthly Meal Pass — Lunch"
         if green:
-            base.price_paise = 220000
-        base.save(update_fields=["name", "price_paise", "updated_at"] if green else ["name", "updated_at"])
+            base.price_minor = 220000
+        base.save(update_fields=["name", "price_minor", "updated_at"] if green else ["name", "updated_at"])
         ld = Plan.objects.create(
             tenant_id=tenant.id,
             name="Monthly Bowl Pass — Lunch + Dinner" if green else "Monthly Meal Pass — Lunch + Dinner",
-            price_paise=340000 if green else 280000,
+            price_minor=340000 if green else 280000,
             meals_per_cycle=60,
             validity_mode=Plan.ValidityMode.ROLLING_DAYS,
             validity_days=30,
@@ -307,7 +307,7 @@ class Command(BaseCommand):
         trial = Plan.objects.create(
             tenant_id=tenant.id,
             name="Weekly Bowl Trial" if green else "Weekly Trial Pass",
-            price_paise=52000 if green else 40000,
+            price_minor=52000 if green else 40000,
             meals_per_cycle=7,
             validity_mode=Plan.ValidityMode.ROLLING_DAYS,
             validity_days=7,
@@ -349,7 +349,7 @@ class Command(BaseCommand):
             actor=actor,
             customer_public_id=customer.public_id,
             plan_public_id=plan.public_id,
-            amount_paise=plan.price_paise,
+            amount_minor=plan.price_minor,
             method="UPI_MANUAL" if upi else "CASH",
             reference=f"{random.Random(n * 31 + k + self.salt).randrange(10**11, 10**12)}" if upi else "",
             now=when,

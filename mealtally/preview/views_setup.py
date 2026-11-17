@@ -104,7 +104,7 @@ def subscription_detail(request, D, sub_id):
             "weekday_qty": [(D["weekdays"][wd], s["qty"].get(wd, 0)) for wd in range(7)],
             "holds": [h for h in D["holds"] if h["sub_id"] == sub_id],
             "recent": data.sub_orders(D, sub_id, limit=6),
-            "cycle_paise": plan["monthly_paise"] if s["billing"] == "MONTHLY" else plan["weekly_paise"],
+            "cycle_minor": plan["monthly_minor"] if s["billing"] == "MONTHLY" else plan["weekly_minor"],
             "today": D["today"].isoformat(),
         },
     )

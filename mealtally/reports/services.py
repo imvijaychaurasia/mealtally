@@ -58,14 +58,14 @@ def dashboard(*, actor: Actor) -> dict:
     base = MealLedgerEntry.objects.filter(meal_date=today)
     meals_today = base.filter(entry_type=E.REDEEM).count() - base.filter(entry_type=E.REVERSAL).count()
     sold = Payment.objects.filter(received_at__gte=m_start, received_at__lt=m_end, status=Payment.Status.RECORDED)
-    fee_total = fees.fee_month(tenant, today.year, today.month)["total_paise"]
+    fee_total = fees.fee_month(tenant, today.year, today.month)["total_minor"]
     return {
         "meals_today": meals_today,
         "active_passes": Pass.objects.filter(status=Pass.Status.ACTIVE).count(),
         "expiring_3_days": Pass.objects.filter(status=Pass.Status.ACTIVE, ends_at__lte=now + timedelta(days=3)).count(),
         "passes_sold_month": sold.count(),
-        "revenue_month_paise": sold.aggregate(t=Sum("amount_paise"))["t"] or 0,
-        "platform_fee_month_paise": fee_total,
+        "revenue_month_minor": sold.aggregate(t=Sum("amount_minor"))["t"] or 0,
+        "platform_fee_month_minor": fee_total,
     }
 
 
@@ -103,14 +103,14 @@ def monthly_subscriptions(*, actor: Actor, year: int, month: int) -> dict:
     in_month = Payment.objects.filter(received_at__gte=start, received_at__lt=end)
     sold = in_month.filter(status=Payment.Status.RECORDED)
     voided = Payment.objects.filter(voided_at__gte=start, voided_at__lt=end, status=Payment.Status.VOIDED)
-    by_plan = sold.values("plan__name").annotate(n=Count("id"), total=Sum("amount_paise")).order_by("plan__name")
+    by_plan = sold.values("plan__name").annotate(n=Count("id"), total=Sum("amount_minor")).order_by("plan__name")
     return {
         "month": f"{year:04d}-{month:02d}",
         "passes_sold": sold.count(),
-        "revenue_paise": sold.aggregate(t=Sum("amount_paise"))["t"] or 0,
-        "by_plan": [{"plan": r["plan__name"], "passes": r["n"], "revenue_paise": r["total"]} for r in by_plan],
+        "revenue_minor": sold.aggregate(t=Sum("amount_minor"))["t"] or 0,
+        "by_plan": [{"plan": r["plan__name"], "passes": r["n"], "revenue_minor": r["total"]} for r in by_plan],
         "voids": voided.count(),
-        "void_amount_paise": voided.aggregate(t=Sum("amount_paise"))["t"] or 0,
+        "void_amount_minor": voided.aggregate(t=Sum("amount_minor"))["t"] or 0,
     }
 
 
@@ -167,7 +167,7 @@ def customer_statement(*, actor: Actor, customer, start: date, end: date) -> dic
             {
                 "receipt": p.receipt_number,
                 "date": p.received_at.astimezone(zone).date().isoformat(),
-                "amount_paise": p.amount_paise,
+                "amount_minor": p.amount_minor,
                 "method": p.method,
                 "status": p.status,
             }
@@ -247,7 +247,7 @@ def platform_dashboard(*, include_test: bool = False) -> list[dict]:
                 "customers": Customer.objects.filter(tenant_id=t.id).count(),
                 "active_passes": Pass.objects.filter(tenant_id=t.id, status=Pass.Status.ACTIVE).count(),
                 "meals_month": meals,
-                "fees_month_paise": fees.fee_month(t, today.year, today.month)["total_paise"],
+                "fees_month_minor": fees.fee_month(t, today.year, today.month)["total_minor"],
             }
         )
     return rows
@@ -258,7 +258,7 @@ def platform_totals(rows: list[dict]) -> dict:
         "active_tenants": sum(1 for r in rows if r["status"] == "ACTIVE"),
         "customers": sum(r["customers"] for r in rows),
         "meals_month": sum(r["meals_month"] for r in rows),
-        "fees_month_paise": sum(r["fees_month_paise"] for r in rows),
+        "fees_month_minor": sum(r["fees_month_minor"] for r in rows),
     }
 
 

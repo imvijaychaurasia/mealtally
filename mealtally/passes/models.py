@@ -19,7 +19,7 @@ class Pass(TenantOwnedModel):
     plan = models.ForeignKey("plans.Plan", on_delete=models.PROTECT, related_name="+")
     # Snapshot of the plan at purchase time (later plan edits never change a sold pass).
     plan_name = models.CharField(max_length=120)
-    price_paise = models.PositiveBigIntegerField()
+    price_minor = models.PositiveBigIntegerField()
     meals_total = models.PositiveIntegerField()
     validity_mode = models.CharField(max_length=16, choices=Plan.ValidityMode)
     validity_days = models.PositiveIntegerField()

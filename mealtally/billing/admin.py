@@ -12,7 +12,7 @@ from .models import PlatformFeeEntry
 class PaymentAdmin(ReadOnlyAdmin):
     """Payments are created/voided via the service layer only (pass + fee side effects)."""
 
-    list_display = ("id", "tenant", "customer", "amount_paise", "method", "status", "received_at")
+    list_display = ("id", "tenant", "customer", "amount_minor", "method", "status", "received_at")
     list_filter = ("tenant", "method", "status")
     search_fields = ("reference", "customer__full_name", "customer__phone_e164")
 
@@ -26,5 +26,5 @@ class FeePolicyAdmin(PlatformModelAdmin):
 
 @admin.register(PlatformFeeEntry)
 class PlatformFeeEntryAdmin(ReadOnlyAdmin):
-    list_display = ("id", "tenant", "payment", "kind", "sign", "base_paise", "pct", "amount_paise", "created_at")
+    list_display = ("id", "tenant", "payment", "kind", "sign", "base_minor", "pct", "amount_minor", "created_at")
     list_filter = ("tenant", "kind", "sign")

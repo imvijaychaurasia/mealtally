@@ -15,7 +15,7 @@ from mealtally.common.errors import NotAllowed
 from mealtally.common.errors import NotFound
 from mealtally.common.errors import StateConflict
 from mealtally.common.errors import ValidationFailed
-from mealtally.common.utils import percent_of_paise
+from mealtally.common.utils import percent_of_minor
 from mealtally.customers import services as customers
 from mealtally.ledger import services as ledger
 from mealtally.ledger.models import MealLedgerEntry
@@ -32,7 +32,7 @@ def pay(w, *, actor=None, **kw):
         "actor": actor or w.staff,
         "customer_public_id": w.customer.public_id,
         "plan_public_id": w.plan.public_id,
-        "amount_paise": w.plan.price_paise,
+        "amount_minor": w.plan.price_minor,
         "method": "CASH",
     }
     args.update(kw)
@@ -41,13 +41,13 @@ def pay(w, *, actor=None, **kw):
 
 
 # --- fees ------------------------------------------------------------------------------------------
-def test_platform_fee_is_12_percent_of_1500_rupees_is_18000_paise():
+def test_platform_fee_is_12_percent_of_1500_major_is_18000_minor():
     w = World()
     with w.ctx():
         fees = list(PlatformFeeEntry.objects.all())
     assert len(fees) == 1
     fee = fees[0]
-    assert (fee.kind, fee.base_paise, fee.pct, fee.amount_paise, fee.sign) == (
+    assert (fee.kind, fee.base_minor, fee.pct, fee.amount_minor, fee.sign) == (
         "PLATFORM",
         150000,
         Decimal("12.00"),
@@ -70,7 +70,7 @@ def test_platform_fee_is_12_percent_of_1500_rupees_is_18000_paise():
     ],
 )
 def test_percent_rounding_is_half_up(base, pct, expected):
-    assert percent_of_paise(base, Decimal(pct)) == expected
+    assert percent_of_minor(base, Decimal(pct)) == expected
 
 
 def test_fee_policy_effective_from_selects_the_applicable_row():
@@ -85,7 +85,7 @@ def test_fee_policy_effective_from_selects_the_applicable_row():
     old = pay(w, received_at=t0, reference="")  # before the new policy takes effect -> default 12%
     new = pay(w, received_at=t0 + timedelta(days=2), actor=w.owner)  # w.customer already has pass; queue ok (max 1)
     with w.ctx():
-        pcts = {f.payment_id: (f.pct, f.amount_paise) for f in PlatformFeeEntry.objects.all()}
+        pcts = {f.payment_id: (f.pct, f.amount_minor) for f in PlatformFeeEntry.objects.all()}
     assert pcts[old.payment.id] == (Decimal("12.00"), 18000)
     assert pcts[new.payment.id] == (Decimal("15.00"), 22500)
 
@@ -104,7 +104,7 @@ def test_gateway_payments_also_get_a_gateway_fee_entry():
     w = World(buy_pass=False)
     rec = pay(w, method="GATEWAY", reference="pay_ABC123")
     with w.ctx():
-        kinds = {f.kind: f.amount_paise for f in PlatformFeeEntry.objects.filter(payment=rec.payment)}
+        kinds = {f.kind: f.amount_minor for f in PlatformFeeEntry.objects.filter(payment=rec.payment)}
     assert kinds == {"PLATFORM": 18000, "GATEWAY": 15000}  # 10% gateway
 
 
@@ -114,7 +114,7 @@ def test_record_payment_creates_payment_fee_pass_and_audit_atomically():
     rec = pay(w, method="UPI_MANUAL", reference="UTR123456")
     assert rec.payment.status == "RECORDED" and rec.payment.reference == "UTR123456"
     assert rec.pass_.status == "ACTIVE" and rec.pass_.meals_remaining == 30 and rec.pass_.payment_id == rec.payment.id
-    assert (rec.pass_.plan_name, rec.pass_.price_paise, rec.pass_.meals_total) == ("Monthly Meal Pass", 150000, 30)
+    assert (rec.pass_.plan_name, rec.pass_.price_minor, rec.pass_.meals_total) == ("Monthly Meal Pass", 150000, 30)
     with w.ctx():
         ev = AuditEvent.objects.get(action="payment.record")
         assert ev.after["pass"] == str(rec.pass_.public_id) and ev.actor_id == w.staff.user.pk
@@ -123,17 +123,17 @@ def test_record_payment_creates_payment_fee_pass_and_audit_atomically():
 def test_pass_snapshot_is_unaffected_by_later_plan_edits():
     w = World()
     with w.ctx():
-        w.plan.price_paise = 200000
+        w.plan.price_minor = 200000
         w.plan.meals_per_cycle = 60
         w.plan.save()
         p = Pass.objects.get(pk=w.pass_.pk)
-    assert (p.price_paise, p.meals_total) == (150000, 30)
+    assert (p.price_minor, p.meals_total) == (150000, 30)
 
 
 @pytest.mark.parametrize(
     ("kwargs", "code", "field"),
     [
-        ({"amount_paise": 140000}, "AMOUNT_MISMATCH", None),
+        ({"amount_minor": 140000}, "AMOUNT_MISMATCH", None),
         ({"method": "UPI_MANUAL", "reference": ""}, "VALIDATION_ERROR", "reference"),
         ({"method": "CARD_MANUAL", "reference": "  "}, "VALIDATION_ERROR", "reference"),
         ({"method": "BITCOIN"}, "VALIDATION_ERROR", "method"),
@@ -202,7 +202,7 @@ def test_void_cancels_pass_zeroes_credits_reverses_fees_and_audits():
         assert Pass.objects.get(pk=w.pass_.pk).status == "CANCELLED"
         zero = MealLedgerEntry.objects.get(pass_ref=w.pass_, entry_type="EXPIRE")
         assert zero.source == "ADMIN" and zero.quantity == -30 and zero.reason == "entered twice"
-        fees = list(PlatformFeeEntry.objects.order_by("id").values_list("sign", "amount_paise"))
+        fees = list(PlatformFeeEntry.objects.order_by("id").values_list("sign", "amount_minor"))
         assert fees == [(1, 18000), (-1, 18000)]  # net zero
         assert AuditEvent.objects.filter(action="payment.void").count() == 1
         assert ledger.find_mismatches() == []
@@ -260,10 +260,10 @@ def test_fee_statement_nets_charges_and_voids():
     with w.ctx():
         billing.void_payment(actor=w.owner, payment_public_id=second.payment.public_id, reason="dup")
         stmt = billing.fee_statement(actor=w.owner, year=now.year, month=now.month)
-        assert stmt["payments_count"] == 1 and stmt["gross_paise"] == 150000
+        assert stmt["payments_count"] == 1 and stmt["gross_minor"] == 150000
         assert stmt["voided_count"] == 1
-        assert stmt["platform_fee_paise"] == 18000 and stmt["gateway_fee_paise"] == 0
-        assert stmt["net_to_tenant_paise"] == 132000
+        assert stmt["platform_fee_minor"] == 18000 and stmt["gateway_fee_minor"] == 0
+        assert stmt["net_to_tenant_minor"] == 132000
         assert len(stmt["entries"]) == 3  # +, +, - (the voided payment's charge and its reversal)
         with pytest.raises(NotAllowed):
             billing.fee_statement(actor=w.staff, year=now.year, month=now.month)

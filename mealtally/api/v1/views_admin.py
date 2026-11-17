@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from datetime import date
 from datetime import timedelta
-from decimal import Decimal
 
 from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponse
@@ -27,6 +26,7 @@ from mealtally.api.base import TenantAPIView
 from mealtally.api.throttles import LoginThrottle
 from mealtally.billing import receipts
 from mealtally.billing import services as billing
+from mealtally.common import money
 from mealtally.common.errors import NotFound
 from mealtally.common.errors import ValidationFailed
 from mealtally.common.utils import local_date
@@ -209,10 +209,10 @@ def _plan_in(data) -> dict:
     for key in ("name", "meals_per_cycle", "validity_mode", "validity_days", "max_meals_per_day", "is_active"):
         if key in data:
             out[key] = data[key]
-    if "price_paise" in data:
-        out["price_paise"] = data["price_paise"]
-    elif "price_rupees" in data:
-        out["price_paise"] = int(Decimal(str(data["price_rupees"])) * 100)
+    if "price_minor" in data:
+        out["price_minor"] = data["price_minor"]
+    elif "price_major" in data:
+        out["price_minor"] = money.to_minor(data["price_major"])
     return out
 
 
@@ -310,8 +310,8 @@ def _settings_out(t, row) -> dict:
         "contact_phone",
         "brand_color",
         "receipt_footer",
-        "gstin",
-        "fssai_no",
+        "tax_id",
+        "food_licence_no",
         "redeem_cooldown_seconds",
         "staff_reversal_window_hours",
         "max_queued_passes",
@@ -358,8 +358,8 @@ class MonthlySubscriptionsView(_Staff):
         r = reports.monthly_subscriptions(actor=request.actor, year=y, month=m)
         return _csv_or_json(
             request,
-            ["Plan", "Passes", "Revenue (paise)"],
-            [[p["plan"], p["passes"], p["revenue_paise"]] for p in r["by_plan"]],
+            ["Plan", "Passes", "Revenue (minor)"],
+            [[p["plan"], p["passes"], p["revenue_minor"]] for p in r["by_plan"]],
             r,
             f"subscriptions-{r['month']}",
         )
@@ -388,7 +388,7 @@ class CustomerStatementView(_Staff):
         )
         rows = (
             [["PASS", p["plan"], p["status"], p["starts"], p["ends"], p["remaining"]] for p in r["passes"]]
-            + [["PAYMENT", p["receipt"], p["status"], p["date"], p["method"], p["amount_paise"]] for p in r["payments"]]
+            + [["PAYMENT", p["receipt"], p["status"], p["date"], p["method"], p["amount_minor"]] for p in r["payments"]]
             + [["LEDGER", e["type"], "", e["at"], e["quantity"], e["balance"]] for e in r["ledger"]]
         )
         return _csv_or_json(
@@ -449,7 +449,7 @@ class SalePreviewView(_Staff):
                 "queue_full": pv["queue_full"],
                 "no_proration": pv["no_proration"],
                 "gap": {"from": gap["from"].isoformat(), "to": gap["to"].isoformat()} if gap else None,
-                "amount_paise": plan.price_paise,
+                "amount_minor": plan.price_minor,
             }
         )
 

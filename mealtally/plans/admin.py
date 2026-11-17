@@ -11,7 +11,7 @@ class PlanAdmin(PlatformModelAdmin):
         "id",
         "tenant",
         "name",
-        "price_paise",
+        "price_minor",
         "meals_per_cycle",
         "validity_mode",
         "max_meals_per_day",

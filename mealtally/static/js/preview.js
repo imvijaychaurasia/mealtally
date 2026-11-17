@@ -20,8 +20,8 @@
       o.frequency.value = 784; g.gain.value = 0.15; o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime + 0.25);
     } catch (e) { /* best effort */ }
   }
-  function inr(paise) {  /* Indian digit grouping, same as the server's |inr */
-    var neg = paise < 0, v = Math.abs(Math.round(paise)), rupees = Math.floor(v / 100), p = String(v % 100);
+  function inr(minor) {  /* Indian digit grouping, same as the server's |money */
+    var neg = minor < 0, v = Math.abs(Math.round(minor)), rupees = Math.floor(v / 100), p = String(v % 100);
     var s = String(rupees), last3 = s.slice(-3), rest = s.slice(0, -3);
     if (rest) last3 = rest.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + "," + last3;
     return (neg ? "-" : "") + "\u20b9" + last3 + "." + (p.length < 2 ? "0" + p : p);
@@ -60,7 +60,7 @@
         t.disabled = true;
       }
       if (t.dataset.dec) { var kd = $(t.dataset.dec); if (kd) kd.textContent = Math.max(0, parseInt(kd.textContent, 10) - 1); }
-      if (t.dataset.addMoney) {  /* "#selector|paise": keep a money KPI in step with the action */
+      if (t.dataset.addMoney) {  /* "#selector|minor": keep a money KPI in step with the action */
         var am = t.dataset.addMoney.split("|"), km = $(am[0]);
         if (km) { var np = parseInt(km.dataset.amt, 10) + parseInt(am[1], 10); km.dataset.amt = np; km.textContent = inr(np); }
       }

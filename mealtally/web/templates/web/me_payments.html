@@ -3,7 +3,7 @@
 <section class="mx-auto max-w-lg"><h1 class="text-2xl font-bold">{% trans "Payments & receipts" %}</h1>
   <ul class="mt-3 grid gap-3">{% for p in payments %}
     <li class="card flex items-center justify-between gap-3"><div><p class="font-semibold">{{ p.plan.name }} {% if p.status == 'VOIDED' %}<span class="chip-void">{% trans "Void" %}</span>{% endif %}</p>
-      <p class="text-sm text-muted">{{ p.receipt_number }} · {{ p.received_at|date:"j M Y" }} · {{ p.amount_paise|inr }}</p></div>
+      <p class="text-sm text-muted">{{ p.receipt_number }} · {{ p.received_at|date:"j M Y" }} · {{ p.amount_minor|money }}</p></div>
       <a class="btn-secondary" href="{% url 'web:receipt-pdf' tenant.slug p.public_id %}">{% trans "PDF receipt" %}</a></li>
   {% empty %}<li class="card text-ink-soft">{% trans "No payments yet." %}</li>{% endfor %}</ul>
 </section>

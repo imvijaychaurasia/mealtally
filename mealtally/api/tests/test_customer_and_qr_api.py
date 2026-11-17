@@ -32,7 +32,7 @@ def test_me_endpoints(w, base, cust_client, owner_client):
     ledger = cust_client.get(f"{base}/me/ledger").json()
     assert ledger["count"] == 2 and [e["entry_type"] for e in ledger["results"]] == ["REDEEM", "ISSUE"]  # newest first
     pays = cust_client.get(f"{base}/me/payments").json()
-    assert pays["count"] == 1 and pays["results"][0]["amount_paise"] == 150000
+    assert pays["count"] == 1 and pays["results"][0]["amount_minor"] == 150000
     assert cust_client.get(f"{base}/me/ledger", {"page_size": 1}).json()["next"]
     patched = cust_client.patch(f"{base}/me", {"full_name": "New Name"}, format="json")
     assert patched.status_code == 200 and patched.json()["customer"]["full_name"] == "New Name"

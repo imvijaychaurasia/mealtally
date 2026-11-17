@@ -39,7 +39,7 @@ class Plan(TenantOwnedModel):
         CALENDAR_MONTH = "CALENDAR_MONTH"
 
     name = models.CharField(max_length=120)
-    price_paise = models.PositiveBigIntegerField()
+    price_minor = models.PositiveBigIntegerField()
     meals_per_cycle = models.PositiveIntegerField(default=30)
     validity_mode = models.CharField(max_length=16, choices=ValidityMode, default=ValidityMode.ROLLING_DAYS)
     validity_days = models.PositiveIntegerField(default=30, help_text="Used for ROLLING_DAYS.")
@@ -51,7 +51,7 @@ class Plan(TenantOwnedModel):
 
     class Meta:
         constraints = [
-            models.CheckConstraint(condition=Q(price_paise__gt=0), name="plan_price_positive"),
+            models.CheckConstraint(condition=Q(price_minor__gt=0), name="plan_price_positive"),
             models.CheckConstraint(condition=Q(meals_per_cycle__gt=0), name="plan_meals_positive"),
             models.CheckConstraint(condition=Q(validity_days__gt=0), name="plan_validity_days_positive"),
             models.CheckConstraint(

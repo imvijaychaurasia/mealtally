@@ -27,9 +27,9 @@ def summary(request) -> dict:
         and (o["off"] > 0 or (o.get("end_dt") or now) > now)
     ][:3]
     alerts = []
-    if s["balance_paise"] < 0 or s["days_left"] <= 3:  # noqa: PLR2004
+    if s["balance_minor"] < 0 or s["days_left"] <= 3:  # noqa: PLR2004
         alerts.append({"tone": "danger", "text": "low_balance", "days": s["days_left"]})
     pending = [t for t in D["topups"] if t["sub_id"] == s["id"] and t["status"] == "PENDING"]
     if pending:
-        alerts.append({"tone": "warn", "text": "pending_topup", "amount": pending[0]["amount_paise"]})
+        alerts.append({"tone": "warn", "text": "pending_topup", "amount": pending[0]["amount_minor"]})
     return {"D": D, "s": s, "plan": plan, "nxt": _next_meal(D, s), "upcoming": upcoming, "alerts": alerts}

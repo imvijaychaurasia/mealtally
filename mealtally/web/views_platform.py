@@ -27,7 +27,7 @@ from mealtally.billing import fees
 from mealtally.billing import services as billing
 from mealtally.billing.models import FeePolicy
 from mealtally.common.errors import DomainError
-from mealtally.common.utils import format_inr
+from mealtally.common.money import format_money
 from mealtally.customers.models import Customer
 from mealtally.passes.models import Pass
 from mealtally.reports import services as reports
@@ -81,9 +81,9 @@ def dashboard(request):
     show_test = request.GET.get("show_test") == "1"
     rows = reports.platform_dashboard(include_test=show_test)
     for r in rows:
-        r["fees"] = format_inr(r["fees_month_paise"])
+        r["fees"] = format_money(r["fees_month_minor"])
     totals = reports.platform_totals(rows)
-    totals["fees"] = format_inr(totals["fees_month_paise"])
+    totals["fees"] = format_money(totals["fees_month_minor"])
     return render(request, "web/platform_dashboard.html", {"rows": rows, "totals": totals, "show_test": show_test})
 
 
@@ -120,17 +120,17 @@ def tenant_detail(request, slug):
         "policies": FeePolicy.objects.filter(tenant=tenant).order_by("-effective_from", "-id")[:10],
         "statement": statement,
         "month": statement["month"],
-        "total": format_inr(statement["total_paise"]),
-        "platform_fee": format_inr(statement["platform_fee_paise"]),
-        "gateway_fee": format_inr(statement["gateway_fee_paise"]),
-        "gross": format_inr(statement["gross_paise"]),
+        "total": format_money(statement["total_minor"]),
+        "platform_fee": format_money(statement["platform_fee_minor"]),
+        "gateway_fee": format_money(statement["gateway_fee_minor"]),
+        "gross": format_money(statement["gross_minor"]),
         "lines": [
             {
                 **ln,
-                "base": format_inr(ln["base_paise"]),
-                "fee": format_inr(ln["fee_paise"]),
-                "reversed": format_inr(ln["reversed_paise"]),
-                "net": format_inr(ln["net_paise"]),
+                "base": format_money(ln["base_minor"]),
+                "fee": format_money(ln["fee_minor"]),
+                "reversed": format_money(ln["reversed_minor"]),
+                "net": format_money(ln["net_minor"]),
                 "date_short": ln["date"][:10],
             }
             for ln in statement["lines"]
@@ -154,25 +154,25 @@ def tenant_fees_export(request, slug):
             ln["receipt_number"],
             ln["date"][:10],
             ln["status"],
-            format_inr(ln["base_paise"]),
+            format_money(ln["base_minor"]),
             f"{ln['platform_pct']}%",
-            format_inr(ln["fee_paise"]),
-            format_inr(ln["reversed_paise"]),
-            format_inr(ln["net_paise"]),
+            format_money(ln["fee_minor"]),
+            format_money(ln["reversed_minor"]),
+            format_money(ln["net_minor"]),
         ]
         for ln in m["lines"]
     ]
-    rows.append([_("TOTAL"), "", "", "", "", "", "", format_inr(m["total_paise"])])
+    rows.append([_("TOTAL"), "", "", "", "", "", "", format_money(m["total_minor"])])
     fmt = request.GET.get("format", "csv")
     name = f"fee-statement-{tenant.slug}-{m['month']}"
     if fmt == "pdf":
         from weasyprint import HTML  # noqa: PLC0415
 
         extra = [
-            (_("Gross payments"), format_inr(m["gross_paise"])),
-            (_("Platform fee"), format_inr(m["platform_fee_paise"])),
-            (_("Gateway fee"), format_inr(m["gateway_fee_paise"])),
-            (_("Net payable to platform"), format_inr(m["total_paise"])),
+            (_("Gross payments"), format_money(m["gross_minor"])),
+            (_("Platform fee"), format_money(m["platform_fee_minor"])),
+            (_("Gateway fee"), format_money(m["gateway_fee_minor"])),
+            (_("Net payable to platform"), format_money(m["total_minor"])),
         ]
         html = render_to_string(
             "web/report_pdf.html",

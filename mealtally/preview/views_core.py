@@ -47,7 +47,7 @@ def _passes_30d(D) -> int:
     from mealtally.billing.models import Payment  # noqa: PLC0415
 
     since = timezone.now() - timedelta(days=30)
-    got = Payment.objects.filter(received_at__gte=since).exclude(status="VOIDED").aggregate(t=Sum("amount_paise"))["t"]
+    got = Payment.objects.filter(received_at__gte=since).exclude(status="VOIDED").aggregate(t=Sum("amount_minor"))["t"]
     del _dt
     return int(got or 0)
 
@@ -75,7 +75,7 @@ def _console_dashboard(request, D, real):
     pass_meals = max(0, kinds.get("REDEEM", 0) - kinds.get("REVERSAL", 0))
     delivered30 = len([o for o in D["orders"] if -30 < o["off"] <= 0 and o["status"] in ("DELIVERED", "PICKED_UP")])
     # QA-01 P1-2: "Active customers" = real customers with an active pass OR an active wallet, each counted once
-    from mealtally.common.utils import format_phone  # noqa: PLC0415
+    from mealtally.common.country import format_phone  # noqa: PLC0415
     from mealtally.passes.models import Pass  # noqa: PLC0415
 
     pass_phones = {
@@ -92,10 +92,10 @@ def _console_dashboard(request, D, real):
     pick = [o for o in todays if o["method"] == "PICKUP"]
     low = sorted(
         [s for s in D["subscribers"] if s["status"] == "ACTIVE" and s["days_left"] <= 3],
-        key=lambda s: s["balance_paise"],
+        key=lambda s: s["balance_minor"],
     )
     portal = request.build_absolute_uri(reverse("web:tenant-home", args=[slug]))
-    ratio = round(100 * last["expense_paise"] / last["revenue_paise"])
+    ratio = round(100 * last["expense_minor"] / last["revenue_minor"])
     tiles = [
         {
             "key": "customers",
@@ -118,7 +118,7 @@ def _console_dashboard(request, D, real):
         {
             "key": "revenue",
             "label": "Revenue · 30 days",
-            "value": last["revenue_paise"],
+            "value": last["revenue_minor"],
             "money": True,
             "url": reverse("web:report-monthly", args=[slug]),
             "icon": "wallet",
@@ -127,7 +127,7 @@ def _console_dashboard(request, D, real):
         {
             "key": "expenses",
             "label": "Expenses · 30 days",
-            "value": last["expense_paise"],
+            "value": last["expense_minor"],
             "money": True,
             "url": reverse("preview:expenses", args=[slug]),
             "icon": "expense",
@@ -148,7 +148,7 @@ def _console_dashboard(request, D, real):
         "preview/today_console.html",
         D=D,
         tiles=tiles,
-        fee=real["platform_fee_month_paise"],
+        fee=real["platform_fee_month_minor"],
         alerts=console.alerts(request, D),
         months=months,
         last=last,
@@ -188,7 +188,7 @@ def today(request, D):
     months, last, _exp, _rec = util.money_series(D, _passes_30d(D))
     low = sorted(
         [s for s in D["subscribers"] if s["status"] == "ACTIVE" and s["days_left"] <= 3],
-        key=lambda s: s["balance_paise"],
+        key=lambda s: s["balance_minor"],
     )
     return _page(
         request,
@@ -271,7 +271,7 @@ def orders(request, D):
 @require_GET
 def order_new(request, D):
     customers = [
-        {"name": s["name"], "phone": s["phone"], "bal": s["balance_paise"], "trust": s["trust_limit_paise"]}
+        {"name": s["name"], "phone": s["phone"], "bal": s["balance_minor"], "trust": s["trust_limit_minor"]}
         for s in D["subscribers"]
     ]
     return _page(
@@ -316,7 +316,7 @@ def order_detail(request, D, no):
         nxt=nxt,
         sub=sub,
         drivers=D["routes"],
-        total=sum(it["qty"] * 0 for it in o["items"]) + o["amount_paise"],
+        total=sum(it["qty"] * 0 for it in o["items"]) + o["amount_minor"],
     )
 
 

@@ -99,7 +99,7 @@ class PaymentCreateView(_StaffView):
             actor=request.actor,
             customer_public_id=v["customer"],
             plan_public_id=v["plan"],
-            amount_paise=v["amount_paise"],
+            amount_minor=v["amount_minor"],
             method=v["method"],
             reference=v["reference"],
             received_at=v.get("received_at"),

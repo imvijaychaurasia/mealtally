@@ -37,17 +37,17 @@ def fee_month(tenant, year: int, month: int) -> dict:
     for entry in charges:
         row = by_payment[entry.payment_id]
         row["payment"] = entry.payment
-        row["charged"] += entry.amount_paise
+        row["charged"] += entry.amount_minor
         if entry.kind == PlatformFeeEntry.Kind.PLATFORM:
             row["pct"] = str(entry.pct)
-        totals[entry.kind] += entry.amount_paise
+        totals[entry.kind] += entry.amount_minor
     for entry in reversals:
         row = by_payment[entry.payment_id]
         row["payment"] = entry.payment
-        row["reversed"] += entry.amount_paise
+        row["reversed"] += entry.amount_minor
         if not row["pct"] and entry.kind == PlatformFeeEntry.Kind.PLATFORM:
             row["pct"] = str(entry.pct)
-        totals[entry.kind] -= entry.amount_paise
+        totals[entry.kind] -= entry.amount_minor
 
     zone = tenant.zone
     lines = []
@@ -60,30 +60,30 @@ def fee_month(tenant, year: int, month: int) -> dict:
                 "date": p.received_at.astimezone(zone).isoformat(),
                 "customer": p.customer.full_name,
                 "status": p.status,
-                "base_paise": p.amount_paise,
+                "base_minor": p.amount_minor,
                 "platform_pct": row["pct"],
-                "fee_paise": row["charged"],
-                "reversed_paise": row["reversed"],
-                "net_paise": row["charged"] - row["reversed"],
+                "fee_minor": row["charged"],
+                "reversed_minor": row["reversed"],
+                "net_minor": row["charged"] - row["reversed"],
             }
         )
     platform, gateway = totals[PlatformFeeEntry.Kind.PLATFORM], totals[PlatformFeeEntry.Kind.GATEWAY]
-    assert platform + gateway == sum(line["net_paise"] for line in lines)  # headline == sum of lines, by construction  # noqa: S101
+    assert platform + gateway == sum(line["net_minor"] for line in lines)  # headline == sum of lines, by construction  # noqa: S101
 
     received = Payment.objects.filter(tenant_id=tenant.id, received_at__gte=start, received_at__lt=end)
     recorded = received.filter(status=Payment.Status.RECORDED)
     voided = Payment.objects.filter(
         tenant_id=tenant.id, voided_at__gte=start, voided_at__lt=end, status=Payment.Status.VOIDED
     )
-    gross = sum(p.amount_paise for p in recorded.only("amount_paise"))
+    gross = sum(p.amount_minor for p in recorded.only("amount_minor"))
     return {
         "month": f"{year:04d}-{month:02d}",
         "lines": lines,
         "entries": [*charges, *reversals],
-        "platform_fee_paise": platform,
-        "gateway_fee_paise": gateway,
-        "total_paise": platform + gateway,
-        "gross_paise": gross,
+        "platform_fee_minor": platform,
+        "gateway_fee_minor": gateway,
+        "total_minor": platform + gateway,
+        "gross_minor": gross,
         "payments_count": recorded.count(),
         "voided_count": voided.count(),
     }

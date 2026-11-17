@@ -1,7 +1,7 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
 {% include "preview/_head.html" with title=_("My meals") sub=plan.name %}
-<section class="card mt-3 flex flex-wrap items-center justify-between gap-3"><div><p class="text-sm text-muted">{% trans "Wallet balance" %}</p><p class="text-3xl font-bold {{ s.balance_paise|money_class }}" data-testid="wallet-balance">{{ s.balance_paise|inr_consumer }}</p><p class="text-sm text-ink-soft" data-testid="days-left">{% blocktrans with n=s.days_left count counter=s.days_left %}About {{ n }} day of meals left{% plural %}About {{ n }} days of meals left{% endblocktrans %}</p></div>
+<section class="card mt-3 flex flex-wrap items-center justify-between gap-3"><div><p class="text-sm text-muted">{% trans "Wallet balance" %}</p><p class="text-3xl font-bold {{ s.balance_minor|money_class }}" data-testid="wallet-balance">{{ s.balance_minor|money_consumer }}</p><p class="text-sm text-ink-soft" data-testid="days-left">{% blocktrans with n=s.days_left count counter=s.days_left %}About {{ n }} day of meals left{% plural %}About {{ n }} days of meals left{% endblocktrans %}</p></div>
   <a class="btn-primary" href="{% url 'preview:me-wallet' tenant.slug %}">{% trans "Top up" %}</a></section>
 
 {% if nxt %}

@@ -65,7 +65,7 @@ def test_only_wallet_subscribers_have_a_wallet_and_balances_vary(demo):  # noqa:
         total = Customer.objects.count()
     assert {s["name"] for s in D["subscribers"]} == flagged
     assert total * 0.4 <= len(flagged) <= total * 0.6  # about half
-    balances = {s["balance_paise"] for s in D["subscribers"]}
+    balances = {s["balance_minor"] for s in D["subscribers"]}
     days = {s["days_left"] for s in D["subscribers"]}
     assert len(balances) > len(D["subscribers"]) // 2 and len(days) > 2
 
@@ -84,17 +84,17 @@ def test_a_customer_without_a_wallet_sees_no_wallet_anywhere(demo):  # noqa: F81
 
 
 def test_two_wallet_customers_see_their_own_balance(demo):  # noqa: F811
-    from mealtally.web.templatetags.mealtally_extras import inr_consumer
+    from mealtally.web.templatetags.mealtally_extras import money_consumer
 
     D = dataset()
     a, b = D["subscribers"][0], D["subscribers"][2]
-    assert a["balance_paise"] != b["balance_paise"]
+    assert a["balance_minor"] != b["balance_minor"]
     pages = {}
     for s in (a, b):
         pages[s["name"]] = customer_client(s["name"]).get(reverse("preview:me-wallet", args=[SLUG])).content.decode()
-        assert inr_consumer(s["balance_paise"]) in pages[s["name"]]
+        assert money_consumer(s["balance_minor"]) in pages[s["name"]]
     assert (
-        inr_consumer(b["balance_paise"]) not in pages[a["name"]].split("data-testid")[0]
+        money_consumer(b["balance_minor"]) not in pages[a["name"]].split("data-testid")[0]
         or pages[a["name"]] != pages[b["name"]]
     )
 
@@ -137,7 +137,7 @@ def test_the_cart_uses_the_customers_address_or_asks_for_one(demo):  # noqa: F81
 
 
 def test_active_customers_counts_each_real_customer_once(demo, clients):  # noqa: F811
-    from mealtally.common.utils import format_phone
+    from mealtally.common.country import format_phone
 
     D = dataset()
     with tenant_context(tid()):

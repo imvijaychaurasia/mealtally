@@ -1,6 +1,6 @@
 """D03.9 QA-01 P2-12: the audit log in sentences people read ("Kajal Parmar reversed Mihir Desai's 1:38 PM meal ...").
 
-Names instead of ids, rupees instead of paise. The raw JSON stays available behind a "Details" toggle on the page.
+Names instead of ids, money instead of minor units. The raw JSON stays available behind a "Details" toggle on the page.
 Lookups are batched per page (one query per object kind), never one per row.
 """
 
@@ -13,7 +13,7 @@ from uuid import UUID
 from django.utils.translation import gettext as _
 
 from mealtally.billing.receipts import method_label
-from mealtally.common.utils import format_inr
+from mealtally.common.money import format_money
 
 from .labels import actor_label
 
@@ -54,7 +54,7 @@ def build_lookups(events) -> dict:
             "kind": "payment",
             "name": p.receipt_number or "",
             "customer": p.customer.full_name,
-            "amount": p.amount_paise,
+            "amount": p.amount_minor,
         }
     for e in MealLedgerEntry.objects.filter(public_id__in=ids).select_related("customer"):
         out[e.public_id] = {"kind": "entry", "customer": e.customer.full_name, "at": e.occurred_at}
@@ -69,11 +69,11 @@ def _time(at, tz) -> str:
     return at.astimezone(tz).strftime("%-I:%M %p") if at else ""
 
 
-def _rupees(paise) -> str:
+def _major(minor) -> str:
     try:
-        return format_inr(int(paise))
+        return format_money(int(minor))
     except TypeError, ValueError:
-        return str(paise)
+        return str(minor)
 
 
 def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
@@ -102,7 +102,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
     if a == "payment.record":
         return _("%(who)s recorded %(amount)s by %(method)s from %(cust)s%(receipt)s") % {
             "who": who,
-            "amount": _rupees(after.get("amount_paise")),
+            "amount": _major(after.get("amount_minor")),
             "method": method_label(after.get("method", "")),
             "cust": lookups.get(_as_uuid(after.get("customer")), {}).get("name") or customer or _("a customer"),
             "receipt": f" ({obj['name']})" if obj.get("name") else "",
@@ -111,7 +111,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
         return _("%(who)s voided %(receipt)s (%(amount)s, %(cust)s) — reason: %(reason)s") % {
             "who": who,
             "receipt": obj.get("name") or _("a payment"),
-            "amount": _rupees(obj.get("amount")),
+            "amount": _major(obj.get("amount")),
             "cust": customer or _("a customer"),
             "reason": after.get("reason", "—"),
         }
@@ -173,7 +173,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
             "route": after.get("route", ""),
             "driver": after.get("driver", ""),
         }
-    # generic fallback: readable keys, rupees for *_paise, names for ids
+    # generic fallback: readable keys, money for *_minor, names for ids
     parts = [_field(k, before.get(k) if isinstance(before, dict) else None, v, lookups) for k, v in after.items()]
     return f"{who}: {a.replace('.', ' ').replace('_', ' ')}" + (f" — {'; '.join(parts)}" if parts else "")
 
@@ -188,8 +188,8 @@ def _as_uuid(value):
 def _show(key: str, value, lookups=None) -> str:
     if value is None or value == "":
         return "—"
-    if key.endswith("_paise"):
-        return _rupees(value)
+    if key.endswith("_minor"):
+        return _major(value)
     if isinstance(value, str) and _UUID.match(value) and lookups:
         found = lookups.get(UUID(value), {})
         return found.get("name") or found.get("customer") or value[:8]
@@ -199,7 +199,7 @@ def _show(key: str, value, lookups=None) -> str:
 
 
 def _field(key: str, old, new, lookups=None) -> str:
-    label = key.replace("_paise", "").replace("_", " ")
+    label = key.replace("_minor", "").replace("_", " ")
     if old is None or old == new:
         return f"{label}: {_show(key, new, lookups)}"
     return f"{label}: {_show(key, old, lookups)} → {_show(key, new, lookups)}"

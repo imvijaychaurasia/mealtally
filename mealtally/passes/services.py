@@ -186,7 +186,7 @@ def create_pass_for_payment(*, actor: Actor, tenant, settings_row, payment, cust
     active = active_pass_for(customer.id)
     snapshot = {
         "plan_name": plan.name,
-        "price_paise": plan.price_paise,
+        "price_minor": plan.price_minor,
         "meals_total": plan.meals_per_cycle,
         "validity_mode": plan.validity_mode,
         "validity_days": plan.validity_days,

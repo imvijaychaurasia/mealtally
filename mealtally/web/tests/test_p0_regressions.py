@@ -13,9 +13,9 @@ from django.utils import timezone
 
 from mealtally.billing import fees
 from mealtally.billing import services as billing
-from mealtally.common.utils import format_inr
-from mealtally.common.utils import mask_phone
-from mealtally.common.utils import per_meal_inr
+from mealtally.common.country import mask_phone
+from mealtally.common.money import format_money
+from mealtally.common.money import per_meal as per_meal_price
 from mealtally.reports import services as reports
 from mealtally.tenancy.context import platform_context
 from mealtally.testing import World
@@ -30,7 +30,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 # ---- P0-1 money ------------------------------------------------------------------------------------------
 @pytest.mark.parametrize(
-    ("paise", "text"),
+    ("minor", "text"),
     [
         (0, "₹0.00"),
         (99, "₹0.99"),
@@ -42,23 +42,23 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
         (-250000, "-₹2,500.00"),
     ],
 )
-def test_format_inr_uses_indian_grouping(paise, text):
-    assert format_inr(paise) == text
+def test_format_money_uses_indian_grouping(minor, text):
+    assert format_money(minor) == text
 
 
 def test_per_meal_and_masking_helpers():
-    assert per_meal_inr(150000, 30) == "₹50" and per_meal_inr(100000, 30) == "₹33.33" and per_meal_inr(5, 0) == ""
+    assert per_meal_price(150000, 30) == "₹50" and per_meal_price(100000, 30) == "₹33.33" and per_meal_price(5, 0) == ""
     assert mask_phone("+919000000002") == "••••• 0002"
 
 
-def test_no_template_renders_a_paise_value_without_the_inr_filter():
-    """The x100 bug class: every `*_paise` in a template must be piped through |inr."""
+def test_no_template_renders_a_minor_value_without_the_inr_filter():
+    """The x100 bug class: every `*_minor` in a template must be piped through |money."""
     offenders = []
     for path in ROOT.rglob("*.html"):
         text = path.read_text()
-        for m in re.finditer(r"[\w.]*paise\w*", text):
+        for m in re.finditer(r"[\w.]*minor\w*", text):
             if (
-                not text[m.end() :].lstrip().startswith(("|inr", "|money_class", "|signed_inr", "|raw_amount"))
+                not text[m.end() :].lstrip().startswith(("|money", "|money_class", "|signed_inr", "|raw_amount"))
             ):  # money_class -> a CSS class only
                 offenders.append(f"{path.relative_to(ROOT)}: {m.group(0)}")
     assert offenders == []
@@ -114,19 +114,19 @@ def test_fee_headline_equals_sum_of_lines_with_backdated_payments_and_a_void():
         for back in (0, 1, 2, 3):
             y, m = _months_back(w.tenant, back)
             stmt = billing.fee_statement(actor=w.owner, year=y, month=m)
-            assert stmt["total_fee_paise"] == sum(line["net_paise"] for line in stmt["lines"]), (y, m)
-            assert stmt["platform_fee_paise"] + stmt["gateway_fee_paise"] == stmt["total_fee_paise"]
+            assert stmt["total_fee_minor"] == sum(line["net_minor"] for line in stmt["lines"]), (y, m)
+            assert stmt["platform_fee_minor"] + stmt["gateway_fee_minor"] == stmt["total_fee_minor"]
             for line in stmt["lines"]:
-                assert line["net_paise"] == line["fee_paise"] - line["reversed_paise"]
+                assert line["net_minor"] == line["fee_minor"] - line["reversed_minor"]
             total_by_month[(y, m)] = stmt
         cur, prev, prev2 = (total_by_month[_months_back(w.tenant, i)] for i in (0, 1, 2))
-        assert prev["total_fee_paise"] == 18000  # charge in the payment's month; reversal NOT here
-        assert prev2["total_fee_paise"] == 18000
+        assert prev["total_fee_minor"] == 18000  # charge in the payment's month; reversal NOT here
+        assert prev2["total_fee_minor"] == 18000
         # this month: 1 charge (people[2]), 1 charge/reversal pair (people[3]), reversal of last month's payment
-        assert cur["total_fee_paise"] == 18000 - 18000
+        assert cur["total_fee_minor"] == 18000 - 18000
         assert {line["receipt_number"] for line in cur["lines"]} >= {last.payment.receipt_number}
         # every charge ever made is accounted for exactly once across months
-        assert sum(s["total_fee_paise"] for s in total_by_month.values()) == 18000 * 4 - 18000 * 2
+        assert sum(s["total_fee_minor"] for s in total_by_month.values()) == 18000 * 4 - 18000 * 2
         assert older.payment.receipt_number in {line["receipt_number"] for line in prev2["lines"]}
 
 
@@ -145,11 +145,11 @@ def test_every_fee_headline_agrees_dashboard_statement_platform():
         y, m = fees.local_month(w.tenant)
         stmt = billing.fee_statement(actor=w.owner, year=y, month=m)
         dash = reports.dashboard(actor=w.owner)
-        assert dash["platform_fee_month_paise"] == stmt["total_fee_paise"]
+        assert dash["platform_fee_month_minor"] == stmt["total_fee_minor"]
     with platform_context():
         row = next(r for r in reports.platform_dashboard(include_test=True) if r["slug"] == w.tenant.slug)
-        assert row["fees_month_paise"] == stmt["total_fee_paise"]
-        assert reports.platform_totals([row])["fees_month_paise"] == stmt["total_fee_paise"]
+        assert row["fees_month_minor"] == stmt["total_fee_minor"]
+        assert reports.platform_totals([row])["fees_month_minor"] == stmt["total_fee_minor"]
 
 
 # ---- P0-3 audit log 500 ----------------------------------------------------------------------------------

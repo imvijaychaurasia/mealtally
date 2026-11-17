@@ -14,6 +14,7 @@ from mealtally.accounts import services as accounts
 from mealtally.accounts.models import STAFF_ROLES
 from mealtally.accounts.models import Role
 from mealtally.accounts.policy import Actor
+from mealtally.common import money
 from mealtally.customers.models import Customer
 from mealtally.tenancy import services as tenancy
 from mealtally.tenancy.context import TenancyState
@@ -58,9 +59,14 @@ def tenant_view(*, roles=ANY_MEMBER, public=False, allow_forced=False):
             if tenant is None:
                 return render(request, "web/not_found.html", {"slug": slug}, status=404)
             request.tenant = tenant
-            # Templates render aware datetimes in the *current* timezone: make it the tenant's (never leaks).
-            with timezone.override(tenant.zone):
-                return _serve(request, tenant, slug, args, kwargs)
+            # Templates render aware datetimes in the *current* timezone and money in the *current* currency: make both
+            # the tenant's for this request only (never leaks into the next one).
+            money_token = money.use(tenant.currency, tenant.country)
+            try:
+                with timezone.override(tenant.zone):
+                    return _serve(request, tenant, slug, args, kwargs)
+            finally:
+                money.reset(money_token)
 
         def _serve(request, tenant, slug, args, kwargs):
             if tenant.status != Tenant.Status.ACTIVE:

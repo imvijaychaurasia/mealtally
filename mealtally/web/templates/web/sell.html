@@ -22,7 +22,7 @@
     <section class="card"><h2 class="text-lg font-semibold">2. {% trans "Plan" %}</h2>
       {% for p in plans %}<label class="mb-2 flex min-h-14 items-start gap-3 rounded-lg border border-strong p-3 has-[:checked]:border-primary has-[:checked]:bg-soft">
         <input class="mt-1" type="radio" name="plan" value="{{ p.public_id }}" required {% if form.plan == p.public_id|stringformat:"s" or plans|length == 1 %}checked{% endif %}>
-        <span><span class="block font-semibold">{{ p.name }} — {{ p.price_paise|inr }}</span>
+        <span><span class="block font-semibold">{{ p.name }} — {{ p.price_minor|money }}</span>
         <span class="block text-sm font-medium text-ink" data-testid="per-meal">{% blocktrans with e=p|per_meal %}{{ e }} per meal{% endblocktrans %}</span>
         <span class="block text-sm text-ink-soft">{% blocktrans with m=p.meals_per_cycle %}{{ m }} meals{% endblocktrans %} · {% if p.validity_mode == 'CALENDAR_MONTH' %}{% trans "Valid until end of month · full meals" %}{% else %}{% blocktrans with d=p.validity_days %}{{ d }} days{% endblocktrans %}{% endif %}{% if p.max_meals_per_day %} · {% blocktrans with c=p.max_meals_per_day %}max {{ c }}/day{% endblocktrans %}{% endif %}</span></span></label>
       {% empty %}<p class="text-ink-soft">{% trans "No active plans. Ask the owner to add one." %}</p>{% endfor %}

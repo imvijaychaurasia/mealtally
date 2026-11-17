@@ -138,15 +138,15 @@ LOCALITIES = ["Kothrud", "Karve Nagar", "Erandwane", "Warje", "Baner", "Aundh", 
 STREETS = ["Lane 3", "Shivaji Society", "Gandhi Nagar", "Om Residency", "Sai Park", "Ganesh Apartments", "Rutu Heights"]
 
 WALLET_PLANS = [
-    {"id": "HT-L", "name": "Home Tiffin — Lunch", "daily_paise": 8000, "slots": ["LUNCH"], "jain": False},
+    {"id": "HT-L", "name": "Home Tiffin — Lunch", "daily_minor": 8000, "slots": ["LUNCH"], "jain": False},
     {
         "id": "HT-LD",
         "name": "Home Tiffin — Lunch + Dinner",
-        "daily_paise": 15000,
+        "daily_minor": 15000,
         "slots": ["LUNCH", "DINNER"],
         "jain": False,
     },
-    {"id": "JAIN", "name": "Jain Thali", "daily_paise": 9500, "slots": ["LUNCH"], "jain": True},
+    {"id": "JAIN", "name": "Jain Thali", "daily_minor": 9500, "slots": ["LUNCH"], "jain": True},
 ]
 PLAN = {p["id"]: p for p in WALLET_PLANS}
 
@@ -282,8 +282,8 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     D["wallet_plans"] = [
         {
             **p,
-            "weekly_paise": p["daily_paise"] * 7,
-            "monthly_paise": p["daily_paise"] * 30,
+            "weekly_minor": p["daily_minor"] * 7,
+            "monthly_minor": p["daily_minor"] * 30,
             "menu": _weekly_menu(p, salt),
             "delivery_days": DELIVERY_DAYS,
         }
@@ -356,7 +356,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 "allergy": "nuts" if n == 23 else "",
                 "stop": 0,
                 "tiffin_boxes": 2 if n % 6 == 0 else 1 if method == "DELIVERY" else 0,
-                "trust_limit_paise": 20000,
+                "trust_limit_minor": 20000,
                 "trust_limit": True,
                 "hold": None,
             }
@@ -413,7 +413,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     first_day = today - timedelta(days=74)
     for s in subs:
         plan = PLAN[s["plan"]]
-        per_slot_paise = plan["daily_paise"] // len(plan["slots"])
+        per_slot_minor = plan["daily_minor"] // len(plan["slots"])
         debits = []
         for off in range(-74, 7):
             d = today + timedelta(days=off)
@@ -433,7 +433,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 items = menu_opts[pick]
                 qty = s["qty"][wd]
                 order_no += 1
-                amount = per_slot_paise * qty
+                amount = per_slot_minor * qty
                 slot_info = D["slot"][slot]
                 start_dt = datetime.combine(d, D["slot"][slot]["start"])
                 cutoff_dt = start_dt - timedelta(minutes=slot_info["cutoff_min"])
@@ -490,7 +490,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                     "route": s["route"],
                     "stop": s["stop"],
                     "driver": route_driver[s["route"]]["driver"] if s["route"] in route_driver else None,
-                    "amount_paise": amount,
+                    "amount_minor": amount,
                     "paid": True,
                     "notes": s["notes"],
                     "allergy": s["allergy"],
@@ -505,11 +505,11 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 if charged:
                     debits.append((d, slot, order))
         # ---- wallet simulation ------------------------------------------------------------------------------
-        rate = plan["daily_paise"]
+        rate = plan["daily_minor"]
         entries = []
         bal = 0
         kind = s["kind"]
-        total_after = sum(o["amount_paise"] for d, sl, o in debits if d >= today - timedelta(days=11))
+        total_after = sum(o["amount_minor"] for d, sl, o in debits if d >= today - timedelta(days=11))
         target = {"low": 6000 + (s["n"] % 4) * 2500, "negative": -(4000 + (s["n"] % 3) * 2500)}.get(kind)
         events = []
         for d, slot, o in debits:
@@ -523,7 +523,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         events.sort(key=lambda e: e[0])
         credit_plan = {}
         if target is not None:
-            before = sum(o["amount_paise"] for d, sl, o in debits if d < today - timedelta(days=11))
+            before = sum(o["amount_minor"] for d, sl, o in debits if d < today - timedelta(days=11))
             first_amt = max(_money_round(before * 0.9, 50000), 50000)
             credit_plan[first_day] = first_amt
             last_amt = max(0, total_after + target - (first_amt - before))
@@ -542,10 +542,10 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                     {
                         "dt": dt,
                         "type": "CREDIT",
-                        "amount_paise": payload,
+                        "amount_minor": payload,
                         "desc": f"UPI top-up · UTR {_h(s['id'], dt, 'utr') % 10**12:012d}",
                         "source": "Top-up request",
-                        "bal_paise": bal,
+                        "bal_minor": bal,
                     }
                 )
             else:
@@ -557,27 +557,27 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                         {
                             "dt": dt - timedelta(minutes=30),
                             "type": "CREDIT",
-                            "amount_paise": top,
+                            "amount_minor": top,
                             "desc": f"UPI top-up · UTR {_h(s['id'], dt, 'utr2') % 10**12:012d}",
                             "source": "Top-up request",
-                            "bal_paise": bal,
+                            "bal_minor": bal,
                         }
                     )
-                bal -= o["amount_paise"]
+                bal -= o["amount_minor"]
                 entries.append(
                     {
                         "dt": dt,
                         "type": "DEBIT",
-                        "amount_paise": o["amount_paise"],
+                        "amount_minor": o["amount_minor"],
                         "desc": f"{o['plan'].split(' — ')[0]} · {D['slot'][o['slot']]['name']}",
                         "source": f"Order #{o['no']}",
                         "order_no": o["no"],
-                        "bal_paise": bal,
+                        "bal_minor": bal,
                     }
                 )
         ledger_by_sub[s["id"]] = entries
-        s["balance_paise"] = bal
-        s["daily_paise"] = rate
+        s["balance_minor"] = bal
+        s["daily_minor"] = rate
         s["days_left"] = max(0, bal // rate) if rate else 0
     # a driver works down the route: of today's live lunch stops on each route the first N are the delivered ones
     # (N is however many the spread above produced), the rest keep their statuses in stop order
@@ -600,7 +600,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     D["ledgers"] = ledger_by_sub
     for o in orders:  # low-wallet skipped orders (shown on the board)
         sub = D["sub"][o["sub_id"]]
-        if o["off"] == 1 and sub["balance_paise"] < -sub["trust_limit_paise"] // 2 and sub["kind"] == "negative":
+        if o["off"] == 1 and sub["balance_minor"] < -sub["trust_limit_minor"] // 2 and sub["kind"] == "negative":
             o["status"] = "SKIPPED_LOW_WALLET"
     # a couple of manual counter / on-demand orders today
     thali = [_fmt_item(k, q) for k, q in (("dal-tadka", 1), ("jeera-rice", 1), ("chapati", 4), ("salad", 1))]
@@ -630,7 +630,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 "route": None,
                 "stop": 0,
                 "driver": None,
-                "amount_paise": amt,
+                "amount_minor": amt,
                 "paid": meth == "PICKUP",
                 "notes": "",
                 "allergy": "",
@@ -661,7 +661,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 "id": 900 + i,
                 "sub_id": 200 + n,
                 "customer": subs[n - 1]["name"],
-                "amount_paise": amt,
+                "amount_minor": amt,
                 "status": st,
                 "utr": f"{_h('utr', i) % 10**12:012d}",
                 "method": "UPI",
@@ -695,7 +695,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                         "date": d,
                         "desc": f"{D['slot'][o['slot']]['name']} — " + ", ".join(i["name"] for i in o["items"][:3]),
                         "qty": o["qty"],
-                        "amount_paise": o["amount_paise"],
+                        "amount_minor": o["amount_minor"],
                     }
                 )
         extras = []
@@ -705,18 +705,18 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                     "date": prev_first + timedelta(days=9),
                     "desc": "Extra: Gulab jamun ×2",
                     "qty": 2,
-                    "amount_paise": 4000,
+                    "amount_minor": 4000,
                 }
             )
         topup_total = sum(
-            e["amount_paise"]
+            e["amount_minor"]
             for e in D["ledgers"][s["id"]]
             if e["type"] == "CREDIT" and prev_first <= e["dt"].date() <= prev_last
         )
-        meals_total = sum(r["amount_paise"] for r in rows)
-        extras_total = sum(e["amount_paise"] for e in extras)
+        meals_total = sum(r["amount_minor"] for r in rows)
+        extras_total = sum(e["amount_minor"] for e in extras)
         closing = [e for e in D["ledgers"][s["id"]] if e["dt"].date() <= prev_last]
-        closing_bal = closing[-1]["bal_paise"] if closing else 0
+        closing_bal = closing[-1]["bal_minor"] if closing else 0
         invoices.append(
             {
                 "id": f"INV-{prev_first:%y%m}-{s['n']:04d}",
@@ -728,12 +728,12 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 "rows": rows,
                 "extras": extras,
                 "lines": sorted([*rows, *extras], key=lambda r: r["date"]),  # extras sit under the day they happened
-                "meals_total_paise": meals_total,
-                "extras_total_paise": extras_total,
-                "topups_paise": topup_total,
-                "opening_paise": closing_bal + meals_total + extras_total - topup_total,
-                "closing_paise": closing_bal,
-                "total_paise": meals_total + extras_total,
+                "meals_total_minor": meals_total,
+                "extras_total_minor": extras_total,
+                "topups_minor": topup_total,
+                "opening_minor": closing_bal + meals_total + extras_total - topup_total,
+                "closing_minor": closing_bal,
+                "total_minor": meals_total + extras_total,
                 "status": "PAID" if s["paid"] else "DUE",
                 "issued": prev_last + timedelta(days=1),
                 "address": s["address"],
@@ -800,7 +800,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 "id": 3000 + i,
                 "date": today - timedelta(days=(i * 3 + rng.randint(0, 2)) % 60),
                 "category": cat,
-                "amount_paise": amt,
+                "amount_minor": amt,
                 "note": {
                     "Rent": "Kothrud kitchen rent",
                     "Gas cylinders": "Commercial LPG ×2",
@@ -815,10 +815,10 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     expenses.sort(key=lambda e: e["date"], reverse=True)
     D["expenses"] = expenses
     D["recurring"] = [
-        {"name": "Kitchen rent", "category": "Rent", "amount_paise": 2800000, "every": "Monthly · 1st"},
-        {"name": "Salaries", "category": "Salaries", "amount_paise": 1450000, "every": "Monthly · 5th"},
-        {"name": "Commercial LPG", "category": "Gas cylinders", "amount_paise": 220000, "every": "Weekly · Mon"},
-        {"name": "Milk vendor", "category": "Milk & curd", "amount_paise": 110000, "every": "Daily"},
+        {"name": "Kitchen rent", "category": "Rent", "amount_minor": 2800000, "every": "Monthly · 1st"},
+        {"name": "Salaries", "category": "Salaries", "amount_minor": 1450000, "every": "Monthly · 5th"},
+        {"name": "Commercial LPG", "category": "Gas cylinders", "amount_minor": 220000, "every": "Weekly · Mon"},
+        {"name": "Milk vendor", "category": "Milk & curd", "amount_minor": 110000, "every": "Daily"},
     ]
     months = []
     m = today.replace(day=1)
@@ -836,9 +836,9 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         months.append(
             {
                 "label": date(y, mo, 1).strftime("%b %y"),
-                "revenue_paise": rev,
-                "expense_paise": exp,
-                "profit_paise": rev - exp,
+                "revenue_minor": rev,
+                "expense_minor": exp,
+                "profit_minor": rev - exp,
             }
         )
     D["months"] = months
@@ -954,37 +954,37 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     D["ck_items"] = [
         {
             "name": "Paneer butter masala + 4 chapati",
-            "price_paise": 17000,
+            "price_minor": 17000,
             "diet": "VEG",
             "hours": "12:00–22:00",
             "sold_out": False,
         },
         {
             "name": "Chicken curry rice bowl",
-            "price_paise": 19000,
+            "price_minor": 19000,
             "diet": "NONVEG",
             "hours": "12:00–22:00",
             "sold_out": False,
         },
-        {"name": "Veg thali (mini)", "price_paise": 12000, "diet": "VEG", "hours": "12:00–15:00", "sold_out": False},
-        {"name": "Egg bhurji pav", "price_paise": 9000, "diet": "NONVEG", "hours": "07:30–11:00", "sold_out": True},
-        {"name": "Dal khichdi + papad", "price_paise": 11000, "diet": "VEG", "hours": "12:00–22:00", "sold_out": False},
-        {"name": "Poha plate", "price_paise": 5000, "diet": "VEG", "hours": "07:30–11:00", "sold_out": False},
+        {"name": "Veg thali (mini)", "price_minor": 12000, "diet": "VEG", "hours": "12:00–15:00", "sold_out": False},
+        {"name": "Egg bhurji pav", "price_minor": 9000, "diet": "NONVEG", "hours": "07:30–11:00", "sold_out": True},
+        {"name": "Dal khichdi + papad", "price_minor": 11000, "diet": "VEG", "hours": "12:00–22:00", "sold_out": False},
+        {"name": "Poha plate", "price_minor": 5000, "diet": "VEG", "hours": "07:30–11:00", "sold_out": False},
         {
             "name": "Millet khichdi bowl",
-            "price_paise": 13000,
+            "price_minor": 13000,
             "diet": "VEGAN",
             "hours": "12:00–22:00",
             "sold_out": True,
         },
-        {"name": "Gulab jamun (2 pc)", "price_paise": 4000, "diet": "VEG", "hours": "All day", "sold_out": False},
-        {"name": "Masala chaas", "price_paise": 3000, "diet": "VEG", "hours": "All day", "sold_out": False},
-        {"name": "Rajma chawal", "price_paise": 12500, "diet": "VEG", "hours": "12:00–22:00", "sold_out": False},
+        {"name": "Gulab jamun (2 pc)", "price_minor": 4000, "diet": "VEG", "hours": "All day", "sold_out": False},
+        {"name": "Masala chaas", "price_minor": 3000, "diet": "VEG", "hours": "All day", "sold_out": False},
+        {"name": "Rajma chawal", "price_minor": 12500, "diet": "VEG", "hours": "12:00–22:00", "sold_out": False},
     ]
     D["ck_rules"] = {
-        "delivery_fee_paise": 3000,
-        "free_above_paise": 40000,
-        "min_cart_paise": 15000,
+        "delivery_fee_minor": 3000,
+        "free_above_minor": 40000,
+        "min_cart_minor": 15000,
         "approval": "Manual approval",
         "advance_days": 6,
     }
@@ -993,7 +993,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
             "no": 7001 + i,
             "customer": subs[i % len(subs)]["name"] if subs else "Walk-in",
             "items": D["ck_items"][i % 10]["name"],
-            "total_paise": D["ck_items"][i % 10]["price_paise"] + 3000,
+            "total_minor": D["ck_items"][i % 10]["price_minor"] + 3000,
             "status": ["PENDING", "ACCEPTED", "REJECTED", "ACCEPTED", "PENDING", "ACCEPTED", "ACCEPTED", "PENDING"][i],
             "when": f"{today + timedelta(days=i % 3):%a %d %b}, {12 + i % 6}:30",
         }
@@ -1073,7 +1073,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     D["saas_plans"] = [
         {
             "name": "Starter",
-            "price_paise": 99900,
+            "price_minor": 99900,
             "customers": 150,
             "staff": 3,
             "branches": 1,
@@ -1081,7 +1081,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         },
         {
             "name": "Growth",
-            "price_paise": 249900,
+            "price_minor": 249900,
             "customers": 800,
             "staff": 10,
             "branches": 3,
@@ -1089,7 +1089,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         },
         {
             "name": "Pro",
-            "price_paise": 499900,
+            "price_minor": 499900,
             "customers": 5000,
             "staff": 40,
             "branches": 10,
@@ -1128,7 +1128,7 @@ def roster_for(tenant, persona: str):
     """The tenant's real customers, meal slots and drivers, as a hashable tuple (the cache key)."""
     from mealtally.accounts.models import Membership  # noqa: PLC0415
     from mealtally.accounts.models import Role  # noqa: PLC0415
-    from mealtally.common.utils import format_phone  # noqa: PLC0415
+    from mealtally.common.country import format_phone  # noqa: PLC0415
     from mealtally.customers.models import Customer  # noqa: PLC0415
     from mealtally.plans.models import MealSlot  # noqa: PLC0415
 

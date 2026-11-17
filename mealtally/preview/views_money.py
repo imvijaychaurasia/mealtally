@@ -17,8 +17,8 @@ from .access import preview_view
 @require_GET
 def wallets(request, D):
     pending = [t for t in D["topups"] if t["status"] == "PENDING"]
-    subs = sorted(D["subscribers"], key=lambda s: s["balance_paise"])
-    total = sum(s["balance_paise"] for s in D["subscribers"])
+    subs = sorted(D["subscribers"], key=lambda s: s["balance_minor"])
+    total = sum(s["balance_minor"] for s in D["subscribers"])
     return render(
         request,
         "preview/wallets.html",
@@ -29,7 +29,7 @@ def wallets(request, D):
             "subs": subs,
             "total": total,
             "low": len([s for s in subs if s["days_left"] <= 3 and s["status"] == "ACTIVE"]),
-            "negative": len([s for s in subs if s["balance_paise"] < 0]),
+            "negative": len([s for s in subs if s["balance_minor"] < 0]),
         },
     )
 
@@ -54,7 +54,7 @@ def wallet_customer(request, D, sub_id):
             "lifetime": len([o for o in D["orders"] if o["sub_id"] == sub_id and o["off"] <= 0]),
             "boxes": s["tiffin_boxes"],
             "invoices": [i for i in D["invoices"] if i["sub_id"] == sub_id],
-            "cycle_paise": D["wplan"][s["plan"]]["monthly_paise"],
+            "cycle_minor": D["wplan"][s["plan"]]["monthly_minor"],
             "branch": D["branches"][0]["name"],
         },
     )
@@ -78,8 +78,8 @@ def invoices(request, D):
             "D": D,
             "invoices": D["invoices"],
             "month": D["invoices"][0]["month"] if D["invoices"] else "",
-            "due": sum(i["total_paise"] for i in D["invoices"] if i["status"] == "DUE"),
-            "paid": sum(i["total_paise"] for i in D["invoices"] if i["status"] == "PAID"),
+            "due": sum(i["total_minor"] for i in D["invoices"] if i["status"] == "DUE"),
+            "paid": sum(i["total_minor"] for i in D["invoices"] if i["status"] == "PAID"),
         },
     )
 
@@ -118,7 +118,7 @@ def expenses(request, D):
 
     _months, _last, exps, recurring = util.money_series(D, _passes_30d(D))
     cats = sorted({e["category"] for e in exps})
-    total = sum(e["amount_paise"] for e in exps if (D["today"] - e["date"]).days < 30)
+    total = sum(e["amount_minor"] for e in exps if (D["today"] - e["date"]).days < 30)
     return render(
         request,
         "preview/expenses.html",
@@ -133,11 +133,11 @@ def profit(request, D):
 
     months, last, exps, _rec = util.money_series(D, _passes_30d(D))
     m, passes, wallet = months[-1], last["passes"], last["wallet"]
-    margin = round(100 * m["profit_paise"] / m["revenue_paise"], 1)
+    margin = round(100 * m["profit_minor"] / m["revenue_minor"], 1)
     by_cat: dict = {}
     for e in exps:
         if (D["today"] - e["date"]).days < 30:
-            by_cat[e["category"]] = by_cat.get(e["category"], 0) + e["amount_paise"]
+            by_cat[e["category"]] = by_cat.get(e["category"], 0) + e["amount_minor"]
     return render(
         request,
         "preview/profit.html",

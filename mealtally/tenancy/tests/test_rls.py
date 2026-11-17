@@ -95,7 +95,7 @@ def test_tenant_a_cannot_write_tenant_b_rows(two_tenants):
             assert cur.rowcount == 0
         # INSERT claiming another tenant is rejected by WITH CHECK
         with pytest.raises(DatabaseError), transaction.atomic():
-            Plan.objects.create(tenant_id=b.tenant.id, name="evil", price_paise=1)
+            Plan.objects.create(tenant_id=b.tenant.id, name="evil", price_minor=1)
     with b.ctx():
         assert Customer.objects.get(pk=b.customer.pk).full_name != "hacked"
         assert Plan.objects.filter(pk=b.plan.pk).exists()
@@ -104,7 +104,7 @@ def test_tenant_a_cannot_write_tenant_b_rows(two_tenants):
 def test_insert_without_context_is_rejected(two_tenants):
     a, _ = two_tenants
     with pytest.raises(DatabaseError), transaction.atomic():
-        Plan.objects.create(tenant_id=a.tenant.id, name="no-context", price_paise=1)
+        Plan.objects.create(tenant_id=a.tenant.id, name="no-context", price_minor=1)
 
 
 def test_platform_context_sees_everything(two_tenants):
@@ -173,7 +173,7 @@ def test_api_cannot_redeem_or_pay_across_tenants(two_tenants):
         {
             "customer": str(b.customer.public_id),
             "plan": str(b.plan.public_id),
-            "amount_paise": 150000,
+            "amount_minor": 150000,
             "method": "CASH",
         },
         format="json",

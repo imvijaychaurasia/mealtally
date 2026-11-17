@@ -8,7 +8,9 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils import timezone
 
-from mealtally.common.utils import format_phone
+from mealtally.common import country
+from mealtally.common import money
+from mealtally.common.country import format_phone
 from mealtally.tenancy.models import Tenant
 from mealtally.tenancy.models import TenantSettings
 
@@ -55,7 +57,10 @@ def receipt_context(payment: Payment) -> dict:
         "ends_at": pass_.ends_at.astimezone(zone) if pass_ else None,
         "voided": payment.status == Payment.Status.VOIDED,
         "method_label": method_label(payment.method),
-        "fssai": real_licence(settings_row.fssai_no),
+        "licence": real_licence(settings_row.food_licence_no),
+        "licence_label": country.food_licence_label(tenant.country),
+        "tax_label": country.tax_id_label(tenant.country),
+        "currency": tenant.currency,
         "customer_phone": format_phone(payment.customer.phone_e164),
         "contact_phone": _readable(settings_row.contact_phone),
     }
@@ -65,8 +70,12 @@ def render_receipt_html(payment: Payment, *, print_view: bool = False, inline_cs
     ctx = receipt_context(payment)
     ctx["print_view"] = print_view
     ctx["inline_css"] = inline_css
-    with timezone.override(ctx["tenant"].zone):  # the receipt shows tenant-local date/time
-        return render_to_string("web/receipt.html", ctx)
+    token = money.use(ctx["tenant"].currency, ctx["tenant"].country)  # works outside a request too (emails, PDFs)
+    try:
+        with timezone.override(ctx["tenant"].zone):  # the receipt shows tenant-local date/time
+            return render_to_string("web/receipt.html", ctx)
+    finally:
+        money.reset(token)
 
 
 def render_receipt_pdf(payment: Payment) -> bytes:

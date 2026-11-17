@@ -7,11 +7,11 @@
 
 <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4" data-testid="tiles">
   {% for t in tiles %}
-  <a class="flex items-center justify-between gap-3 rounded-2xl p-4 text-on-tile shadow-sm hover:brightness-110 {% if t.key == 'customers' %}bg-tile-1{% elif t.key == 'meals' %}bg-tile-2{% elif t.key == 'revenue' %}bg-tile-3{% else %}bg-tile-4{% endif %}" href="{{ t.url }}" data-testid="tile-{{ t.key }}"{% if t.money %} title="{{ t.value|inr }}"{% endif %}>
-    <span class="min-w-0"><span class="block text-sm font-medium">{{ t.label }}</span><span class="block text-3xl font-bold leading-tight" data-testid="tile-{{ t.key }}-value">{% if t.money %}{{ t.value|inr_compact }}{% else %}{{ t.value }}{% endif %}</span><span class="block text-xs">{{ t.hint }}</span></span>
+  <a class="flex items-center justify-between gap-3 rounded-2xl p-4 text-on-tile shadow-sm hover:brightness-110 {% if t.key == 'customers' %}bg-tile-1{% elif t.key == 'meals' %}bg-tile-2{% elif t.key == 'revenue' %}bg-tile-3{% else %}bg-tile-4{% endif %}" href="{{ t.url }}" data-testid="tile-{{ t.key }}"{% if t.money %} title="{{ t.value|money }}"{% endif %}>
+    <span class="min-w-0"><span class="block text-sm font-medium">{{ t.label }}</span><span class="block text-3xl font-bold leading-tight" data-testid="tile-{{ t.key }}-value">{% if t.money %}{{ t.value|money_compact }}{% else %}{{ t.value }}{% endif %}</span><span class="block text-xs">{{ t.hint }}</span></span>
     <span class="rounded-lg bg-white/15 p-2 [&>svg]:h-7 [&>svg]:w-7">{% include "web/_icon.html" with name=t.icon %}</span></a>{% endfor %}
 </div>
-{% if role == "OWNER" and fees_on %}<p class="mt-2 text-sm text-ink-soft" data-testid="fee-line" title="{{ fee|inr }}">{% blocktrans with fee=fee|inr_compact %}Platform fee this month {{ fee }}{% endblocktrans %} · <a class="link" href="{% url 'web:report-fees' tenant.slug %}">{% trans "View statement" %}</a></p>{% endif %}
+{% if role == "OWNER" and fees_on %}<p class="mt-2 text-sm text-ink-soft" data-testid="fee-line" title="{{ fee|money }}">{% blocktrans with fee=fee|money_compact %}Platform fee this month {{ fee }}{% endblocktrans %} · <a class="link" href="{% url 'web:report-fees' tenant.slug %}">{% trans "View statement" %}</a></p>{% endif %}
 {% if pv_badge %}<p class="mt-1 text-xs text-muted">{% trans "Orders, wallets, expenses and the chart below use demo data (Preview)." %}</p>{% endif %}
 
 <section class="card mt-4" data-testid="alerts" aria-label="{% trans 'Alerts' %}">
@@ -44,7 +44,7 @@
         <button type="button" class="btn-secondary mt-2 min-h-10 px-3 text-sm" data-copy="{{ portal }}" data-testid="copy-portal">{% trans "Copy link" %}</button></div></div>
     <p class="mt-2 text-xs text-muted">{% trans "Customers sign in with phone and PIN to see meals, QR and history." %}</p></section>
   <section class="card min-w-0" data-testid="low-wallets"><h2 class="font-semibold">{% trans "Low wallet balances" %}</h2>
-    <ul class="mt-2 divide-y divide-subtle">{% for s in low %}<li class="flex items-center gap-2 py-2"><span class="min-w-0 flex-1"><a class="link block truncate text-sm" href="{% url 'preview:wallets-customer' tenant.slug s.id %}">{{ s.name }}</a><span class="block text-xs {{ s.balance_paise|money_class }}">{{ s.balance_paise|inr }}</span></span>
+    <ul class="mt-2 divide-y divide-subtle">{% for s in low %}<li class="flex items-center gap-2 py-2"><span class="min-w-0 flex-1"><a class="link block truncate text-sm" href="{% url 'preview:wallets-customer' tenant.slug s.id %}">{{ s.name }}</a><span class="block text-xs {{ s.balance_minor|money_class }}">{{ s.balance_minor|money }}</span></span>
       <button type="button" class="btn-secondary min-h-9 px-3 text-sm" data-pv="{% trans 'Reminder sent — demo mode only' %}">{% trans "Remind" %}</button></li>{% empty %}<li>{% include "web/_empty.html" with icon="wallet" title=_("Wallets look healthy") text=_("Customers running low will show up here.") %}</li>{% endfor %}</ul></section>
   <section class="card min-w-0" data-testid="shortcuts"><h2 class="font-semibold">{% trans "Shortcuts" %}</h2>
     <div class="mt-2 grid grid-cols-2 gap-2">{% for label, url, icon in shortcuts %}<a class="btn-secondary justify-start gap-2 px-3 text-sm [&>svg]:h-5 [&>svg]:w-5" href="{{ url }}">{% include "web/_icon.html" with name=icon %}{{ label }}</a>{% endfor %}</div></section>

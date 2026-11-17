@@ -114,7 +114,7 @@ def test_plans_crud_and_snapshot_note(w, owner_c, u):
         u + "/admin/plans/new",
         {
             "name": "Weekly",
-            "price_rupees": "700.50",
+            "price_major": "700.50",
             "meals_per_cycle": "7",
             "validity_mode": "ROLLING_DAYS",
             "validity_days": "7",
@@ -127,7 +127,7 @@ def test_plans_crud_and_snapshot_note(w, owner_c, u):
         u + "/admin/plans/new",
         {
             "name": "",
-            "price_rupees": "abc",
+            "price_major": "abc",
             "meals_per_cycle": "7",
             "validity_mode": "ROLLING_DAYS",
             "validity_days": "7",
@@ -138,12 +138,12 @@ def test_plans_crud_and_snapshot_note(w, owner_c, u):
 
     with w.ctx():
         weekly = Plan.objects.get(name="Weekly")
-        assert weekly.price_paise == 70050 and weekly.max_meals_per_day is None
+        assert weekly.price_minor == 70050 and weekly.max_meals_per_day is None
     edit = owner_c.post(
         f"{u}/admin/plans/{weekly.public_id}",
         {
             "name": "Weekly",
-            "price_rupees": "700",
+            "price_major": "700",
             "meals_per_cycle": "7",
             "validity_mode": "ROLLING_DAYS",
             "validity_days": "7",
@@ -184,7 +184,7 @@ def test_settings_save_and_validation(w, owner_c, u):
         "staff_reversal_window_hours": "6",
         "max_queued_passes": "1",
         "receipt_footer": "Thanks",
-        "gstin": "",
+        "tax_id": "",
         "allow_self_signup": "on",
     }
     r = owner_c.post(u + "/admin/settings", data)

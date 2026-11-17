@@ -24,6 +24,8 @@
     <div><label class="label" for="address">{% trans "Address" %}</label><textarea class="input" id="address" name="address" rows="2">{{ cfg.address }}</textarea></div>
     <div><label class="label" for="contact_phone">{% trans "Contact phone" %}</label><input class="input" id="contact_phone" name="contact_phone" value="{{ cfg.contact_phone }}"></div>
     <div><label class="label" for="brand_color">{% trans "Brand colour (not used by themes yet)" %}</label><input class="h-12 w-24 cursor-pointer rounded-lg border border-strong bg-card p-1" id="brand_color" name="brand_color" type="color" value="{{ cfg.brand_color }}"></div>
+    <div class="grid gap-3 sm:grid-cols-2"><div><label class="label" for="country">{% trans "Country" %}</label><select class="input" id="country" name="country" data-testid="country">{% for c, n in countries %}<option value="{{ c }}" {% if c == tenant.country %}selected{% endif %}>{{ n }}</option>{% endfor %}</select></div>
+    <div><label class="label" for="currency">{% trans "Currency (set it before you sell: amounts are not converted)" %}</label><select class="input" id="currency" name="currency" data-testid="currency">{% for c, n in currencies %}<option value="{{ c }}" {% if c == tenant.currency %}selected{% endif %}>{{ n }}</option>{% endfor %}</select></div></div>
     <div><label class="label" for="timezone">{% trans "Timezone" %}</label><select class="input" id="timezone" name="timezone">{% for z in timezones %}<option value="{{ z }}" {% if z == tenant.timezone %}selected{% endif %}>{{ z }}</option>{% endfor %}</select></div></section>
   <section class="card grid gap-3" data-testid="policies"><h2 class="font-semibold">{% trans "Policies" %}</h2>
     <p class="text-sm text-ink-soft">{% trans "Meal times and daily limits are set per plan." %} <a class="link" href="{% url 'web:admin-meal-times' tenant.slug %}" data-testid="meal-times-link">{% trans "Meal times" %}</a> · <a class="link" href="{% url 'web:admin-plans' tenant.slug %}">{% trans "Plans" %}</a></p>
@@ -31,14 +33,14 @@
     <div><label class="label" for="staff_reversal_window_hours">{% trans "Staff can undo within (hours)" %}</label><input class="input" id="staff_reversal_window_hours" name="staff_reversal_window_hours" type="number" min="0" value="{{ cfg.staff_reversal_window_hours }}"></div>
     <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="counter_can_reverse_others" data-testid="counter-can-reverse-others" {% if cfg.counter_can_reverse_others %}checked{% endif %}> {% trans "Counters may undo meals served by other staff (inside the window, with a reason)" %}</label>
     <div class="grid gap-3 sm:grid-cols-2">
-      <div><label class="label" for="topup_min_rupees">{% trans "Smallest wallet top-up (₹)" %}</label><input class="input" id="topup_min_rupees" name="topup_min_rupees" type="number" min="1" value="{{ topup_min_rupees }}"></div>
-      <div><label class="label" for="topup_max_rupees">{% trans "Largest wallet top-up (₹)" %}</label><input class="input" id="topup_max_rupees" name="topup_max_rupees" type="number" min="1" value="{{ topup_max_rupees }}"></div></div>
+      <div><label class="label" for="topup_min_major">{% trans "Smallest wallet top-up (₹)" %}</label><input class="input" id="topup_min_major" name="topup_min_major" type="number" min="1" value="{{ topup_min_major }}"></div>
+      <div><label class="label" for="topup_max_major">{% trans "Largest wallet top-up (₹)" %}</label><input class="input" id="topup_max_major" name="topup_max_major" type="number" min="1" value="{{ topup_max_major }}"></div></div>
     <div><label class="label" for="max_queued_passes">{% trans "Max queued passes per customer" %}</label><input class="input" id="max_queued_passes" name="max_queued_passes" type="number" min="0" max="5" value="{{ cfg.max_queued_passes }}"></div>
     <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="allow_self_signup" {% if cfg.allow_self_signup %}checked{% endif %}> {% trans "Allow customers to sign themselves up" %}</label></section>
   <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Receipts" %}</h2>
     <div><label class="label" for="receipt_footer">{% trans "Receipt footer text" %}</label><input class="input" id="receipt_footer" name="receipt_footer" value="{{ cfg.receipt_footer }}"></div>
-    <div><label class="label" for="fssai_no">{% trans "FSSAI licence number" %}</label><input class="input" id="fssai_no" name="fssai_no" maxlength="20" value="{{ cfg.fssai_no }}"></div>
-    <div><label class="label" for="gstin">{% trans "GSTIN (optional, no tax calculation)" %}</label><input class="input" id="gstin" name="gstin" maxlength="15" value="{{ cfg.gstin }}"></div></section>
+    <div><label class="label" for="food_licence_no">{{ licence_label }} {% trans "(optional; hidden on receipts when empty)" %}</label><input class="input" id="food_licence_no" name="food_licence_no" maxlength="40" value="{{ cfg.food_licence_no }}"></div>
+    <div><label class="label" for="tax_id">{{ tax_label }} {% trans "(optional; no tax is calculated)" %}</label><input class="input" id="tax_id" name="tax_id" maxlength="32" value="{{ cfg.tax_id }}"></div></section>
   <button class="btn-primary" type="submit" data-testid="save-settings">{% trans "Save profile" %}</button>
 </form>
 </div>

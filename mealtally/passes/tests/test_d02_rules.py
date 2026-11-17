@@ -35,13 +35,13 @@ def test_rolling_validity_counts_the_purchase_day_as_day_one():
     w = World(buy_pass=False)
     p = buy(w.tenant, w.owner, w.customer, w.plan, now=ist(2026, 11, 12, 10, 0)).pass_  # 30 days
     assert p.ends_at.astimezone(IST) == datetime(2026, 12, 11, 23, 59, 59, 999999, tzinfo=IST)
-    one = make_plan(w.tenant, name="Day pass", validity_days=1, price_paise=5000)
+    one = make_plan(w.tenant, name="Day pass", validity_days=1, price_minor=5000)
     other = World(buy_pass=False)
     d = buy(
         other.tenant,
         other.owner,
         other.customer,
-        make_plan(other.tenant, name="Day", validity_days=1, price_paise=5000),
+        make_plan(other.tenant, name="Day", validity_days=1, price_minor=5000),
         now=ist(2026, 11, 12, 23, 30),
     ).pass_
     assert d.ends_at.astimezone(IST).date().isoformat() == "2026-11-12"  # a 1-day pass ends the same local day

@@ -42,7 +42,7 @@
 
 <h2 class="mt-6 text-lg font-semibold">{% trans "Payments" %}</h2>
 <ul class="mt-2 grid gap-3">{% for pay in payments %}<li class="card"><div class="flex flex-wrap items-center justify-between gap-2">
-  <div><p class="font-semibold">{{ pay.receipt_number }} · {{ pay.amount_paise|inr }} {% if pay.status == 'VOIDED' %}<span class="chip-void">{% trans "Void" %}</span>{% endif %}</p>
+  <div><p class="font-semibold">{{ pay.receipt_number }} · {{ pay.amount_minor|money }} {% if pay.status == 'VOIDED' %}<span class="chip-void">{% trans "Void" %}</span>{% endif %}</p>
     <p class="text-sm text-ink-soft">{{ pay.received_at|date:"j M Y" }} · {{ pay.method|pay_method }}{% if pay.reference %} · {{ pay.reference }}{% endif %}</p></div>
   <div class="flex gap-2"><a class="btn-secondary" href="{% url 'web:receipt' tenant.slug pay.public_id %}">{% trans "Receipt" %}</a>
   {% if pay.status == 'RECORDED' and not pay.can_void %}<span class="text-sm text-muted" data-testid="void-blocked" title="{{ pay.void_reason_text }}"><button type="button" class="btn-secondary" disabled aria-disabled="true">{% trans "Void" %}</button><span class="mt-1 block max-w-48 text-xs">{{ pay.void_reason_text }}</span></span>{% endif %}

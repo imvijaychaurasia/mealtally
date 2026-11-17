@@ -35,7 +35,7 @@ def test_onboard_tenant_creates_everything_in_one_go():
     assert owner.must_change_password is True and password and owner.check_password(password)
     with platform_context():
         assert (
-            Plan.objects.get(tenant=tenant).price_paise == 150000
+            Plan.objects.get(tenant=tenant).price_minor == 150000
             and Plan.objects.get(tenant=tenant).meals_per_cycle == 30
         )
         assert FeePolicy.objects.get(tenant=tenant).platform_pct == 12
@@ -74,7 +74,7 @@ def test_update_settings_validation_audit_and_timezone():
             brand_color="#112233",
             redeem_cooldown_seconds=60,
             allow_self_signup=True,
-            gstin="29ABCDE1234F1Z5",
+            tax_id="29ABCDE1234F1Z5",
             max_queued_passes=2,
             receipt_footer="Hi",
         )
@@ -89,7 +89,7 @@ def test_update_settings_validation_audit_and_timezone():
             {"redeem_cooldown_seconds": -1},
             {"redeem_cooldown_seconds": 99999},
             {"max_queued_passes": 9},
-            {"gstin": "short"},
+            {"tax_id": "short"},
             {"staff_reversal_window_hours": "x"},
         ):
             with pytest.raises(ValidationFailed):
@@ -153,7 +153,7 @@ def test_plan_management_roles_validation_and_snapshot_independence():
         plan = plans.save_plan(
             actor=w.manager,
             name="Weekly",
-            price_paise=70000,
+            price_minor=70000,
             meals_per_cycle=7,
             validity_mode="ROLLING_DAYS",
             validity_days=7,
@@ -162,15 +162,15 @@ def test_plan_management_roles_validation_and_snapshot_independence():
         )
         assert plan.max_meals_per_day == 1
         plans.save_plan(
-            actor=w.owner, plan=w.plan, price_paise=999900, meals_per_cycle=99
+            actor=w.owner, plan=w.plan, price_minor=999900, meals_per_cycle=99
         )  # edit the plan the pilot pass was sold from
         from mealtally.passes.models import Pass
 
         p = Pass.objects.get(pk=w.pass_.pk)
-        assert (p.price_paise, p.meals_total) == (150000, 30)  # snapshot untouched
+        assert (p.price_minor, p.meals_total) == (150000, 30)  # snapshot untouched
         for bad in (
             {"name": " "},
-            {"price_paise": 0},
+            {"price_minor": 0},
             {"meals_per_cycle": -1},
             {"max_meals_per_day": 0},
             {"validity_mode": "WEEKLY"},
@@ -180,5 +180,5 @@ def test_plan_management_roles_validation_and_snapshot_independence():
         plans.save_plan(actor=w.owner, plan=plan, max_meals_per_day=None, is_active=False)
         assert plan.max_meals_per_day is None and not plan.is_active
         with pytest.raises(NotAllowed):
-            plans.save_plan(actor=w.staff, name="x", price_paise=1, meals_per_cycle=1, validity_days=1)
+            plans.save_plan(actor=w.staff, name="x", price_minor=1, meals_per_cycle=1, validity_days=1)
         assert AuditEvent.objects.filter(action__in=["plan.create", "plan.update"]).count() >= 3

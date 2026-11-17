@@ -91,7 +91,7 @@ class Command(BaseCommand):
             actor=actor,
             customer_public_id=customer.public_id,
             plan_public_id=plan.public_id,
-            amount_paise=plan.price_paise,
+            amount_minor=plan.price_minor,
             method="CASH",
             now=at,
             received_at=at,

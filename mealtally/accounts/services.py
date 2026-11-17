@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from django.db import transaction
 
+from mealtally.common.country import normalize_phone
 from mealtally.common.errors import NotFound
-from mealtally.common.utils import normalize_phone
 
 from .models import ROLE_RANK
 from .models import Membership

@@ -138,7 +138,7 @@ def test_sell_form_preselects_single_plan_shows_per_meal_and_preview_shows_payme
     assert "Cash" in cash
     from mealtally.testing import make_plan
 
-    make_plan(w.tenant, name="Second", price_paise=100000)
+    make_plan(w.tenant, name="Second", price_minor=100000)
     assert not re.search(
         r'name="plan"[^>]*checked', staff_c.get(u + "/staff/sell").content.decode()
     )  # two plans: no preselection
@@ -305,7 +305,7 @@ def test_receipt_has_back_link_name_and_address(w, owner_c, u):
             actor=w.owner, display_name="Pilot Tiffin (test)", address="12 MG Road", contact_phone="+91 80 4000 0000"
         )
     html = owner_c.get(f"{u}/receipt/{w.recorded.payment.public_id}").content.decode()
-    assert "data-back" in html and "Pilot Tiffin (test)" in html and "12 MG Road" in html and "+91 80 4000 0000" in html
+    assert "data-back" in html and "Pilot Tiffin (test)" in html and "12 MG Road" in html and "080 4000 0000" in html
 
 
 # --- 24-28 platform ----------------------------------------------------------------------------

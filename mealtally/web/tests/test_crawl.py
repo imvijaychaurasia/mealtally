@@ -21,7 +21,7 @@ from mealtally.accounts.models import User
 from mealtally.billing import fees
 from mealtally.billing import services as billing
 from mealtally.billing.models import Payment
-from mealtally.common.utils import format_inr
+from mealtally.common.money import format_money
 from mealtally.customers import services as customers
 from mealtally.customers.models import Customer
 from mealtally.tenancy.context import platform_context
@@ -43,7 +43,7 @@ FORBIDDEN = (
 SKIP = ("/logout", "/static/", "/api/", "/sw.js", "/offline/", "/manifest")
 
 
-def to_paise(text: str) -> int:
+def to_minor(text: str) -> int:
     m = MONEY.fullmatch(text.strip())
     return int(m.group(1).replace(",", "")) * 100 + int(m.group(2))
 
@@ -55,7 +55,7 @@ def check_body(path: str, resp) -> None:
         body = resp.content.decode()
         for bad in FORBIDDEN:
             assert bad not in body, f"{path}: contains {bad!r}"
-        for rupees, _paise in MONEY.findall(body):
+        for rupees, _minor in MONEY.findall(body):
             assert int(rupees.replace(",", "")) <= 10_000, (
                 f"{path}: amount ₹{rupees} is too large for demo data (x100 bug?)"
             )
@@ -203,33 +203,33 @@ def test_every_page_for_every_role_renders_with_sane_money_and_consistent_fees(p
         tag = f"{y}-{m:02d}"
         with w.ctx():
             stmt = billing.fee_statement(actor=w.owner, year=y, month=m)
-        assert stmt["total_fee_paise"] == sum(line["net_paise"] for line in stmt["lines"])
+        assert stmt["total_fee_minor"] == sum(line["net_minor"] for line in stmt["lines"])
         html = owner.get(f"{base}/admin/reports/fees?month={tag}").content.decode()
         headline = re.search(r"Net payable to platform</dt>\s*<dd[^>]*>(₹[\d,]+\.\d{2})", html)
-        assert headline and to_paise(headline.group(1)) == stmt["total_fee_paise"], tag
+        assert headline and to_minor(headline.group(1)) == stmt["total_fee_minor"], tag
         csv_rows = list(
             csv.reader(io.StringIO(owner.get(f"{base}/admin/reports/fees?month={tag}&format=csv").content.decode()))
         )
-        line_nets = [to_paise(r[-1]) for r in csv_rows[1:] if r and r[0].startswith("R-")]
-        assert sum(line_nets) == stmt["total_fee_paise"], (
-            f"{tag}: CSV lines {sum(line_nets)} != headline {stmt['total_fee_paise']}"
+        line_nets = [to_minor(r[-1]) for r in csv_rows[1:] if r and r[0].startswith("R-")]
+        assert sum(line_nets) == stmt["total_fee_minor"], (
+            f"{tag}: CSV lines {sum(line_nets)} != headline {stmt['total_fee_minor']}"
         )
         phtml = plat.get(f"/platform/tenants/{SLUG}?month={tag}").content.decode()
         ptotal = re.search(r'data-testid="tenant-fee-total">(₹[\d,]+\.\d{2})', phtml)
-        assert ptotal and to_paise(ptotal.group(1)) == stmt["total_fee_paise"], f"platform tenant page {tag}"
+        assert ptotal and to_minor(ptotal.group(1)) == stmt["total_fee_minor"], f"platform tenant page {tag}"
         pcsv = list(
             csv.reader(io.StringIO(plat.get(f"/platform/tenants/{SLUG}/fees?month={tag}&format=csv").content.decode()))
         )
-        assert sum(to_paise(r[-1]) for r in pcsv[1:] if r and r[0].startswith("R-")) == stmt["total_fee_paise"]
-        assert to_paise(pcsv[-1][-1]) == stmt["total_fee_paise"]  # TOTAL row
+        assert sum(to_minor(r[-1]) for r in pcsv[1:] if r and r[0].startswith("R-")) == stmt["total_fee_minor"]
+        assert to_minor(pcsv[-1][-1]) == stmt["total_fee_minor"]  # TOTAL row
     y, m = months(w)[0]
     with w.ctx():
-        current = billing.fee_statement(actor=w.owner, year=y, month=m)["total_fee_paise"]
+        current = billing.fee_statement(actor=w.owner, year=y, month=m)["total_fee_minor"]
     dash = owner.get(f"{base}/admin/").content.decode()
     shown = re.search(r'data-testid="t-fee">(₹[\d,]+\.\d{2})', dash)
-    assert shown and to_paise(shown.group(1)) == current, "tenant dashboard fee headline"
+    assert shown and to_minor(shown.group(1)) == current, "tenant dashboard fee headline"
     prow = re.search(rf'data-slug="{SLUG}".*?</tr>', plat.get("/platform/", {"show_test": "1"}).content.decode(), re.S)
-    assert prow and format_inr(current) in prow.group(0), "platform dashboard fee headline"
+    assert prow and format_money(current) in prow.group(0), "platform dashboard fee headline"
     # sanity: demo data really spans several months (the bug needed back-dated payments)
     with w.ctx():
         received = {p.received_at.astimezone(w.tenant.zone).strftime("%Y-%m") for p in Payment.objects.all()}

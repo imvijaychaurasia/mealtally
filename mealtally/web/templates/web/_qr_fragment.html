@@ -1,0 +1,13 @@
+{% load i18n %}
+<div class="card bg-card" x-data="countdown" data-seconds="30">
+  <img class="mx-auto h-72 w-72 max-w-full bg-card" src="{{ qr_data_uri }}" alt="{% trans 'Your QR code' %}" width="288" height="288">
+  <p class="mt-2 text-xs font-medium uppercase tracking-wide text-muted">{% trans "Or read this code to the staff" %}</p>
+  <p class="mt-1 select-all font-mono text-2xl font-bold tracking-widest text-ink" data-testid="qr-code">{{ qr_code }}</p>
+  <div class="mt-3 flex items-center justify-center gap-3">
+    <svg viewBox="0 0 40 40" class="h-10 w-10 -rotate-90" aria-hidden="true"><circle cx="20" cy="20" r="16" fill="none" class="stroke-subtle" stroke-width="5"/>
+      <circle cx="20" cy="20" r="16" fill="none" class="stroke-primary" stroke-width="5" pathLength="100" stroke-dasharray="100" :stroke-dashoffset="offset"/></svg>
+    <span class="text-sm text-ink-soft" aria-live="off">{% trans "Refreshes in" %} <strong x-text="n">30</strong>s</span>
+  </div>
+  <p class="mt-3 text-xl font-bold">{{ customer.full_name }}</p><p class="text-ink-soft">{{ customer.customer_code }}</p>
+  {% if card %}<p class="mt-1 text-sm text-ink-soft" data-testid="qr-meals">{% blocktrans with n=card.obj.meals_remaining d=card.ends|date:"j M Y" %}{{ n }} meals left · valid until {{ d }}{% endblocktrans %}</p>{% endif %}
+</div>

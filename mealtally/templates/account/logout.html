@@ -1,0 +1,5 @@
+{% extends "web/auth_base.html" %}{% load i18n %}
+{% block title %}{% trans "Log out" %} · Mealtally{% endblock %}
+{% block panel %}<h1 class="auth-title">{% trans "Log out?" %}</h1>
+<p class="auth-sub">{% trans "Are you sure you want to log out?" %}</p>
+<form method="post" action="{% url 'account_logout' %}" class="mt-6">{% csrf_token %}<button class="btn-primary w-full" type="submit">{% trans "Log out" %}</button></form>{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<section class="mx-auto max-w-sm"><h1 class="text-2xl font-bold">{% trans "New customer" %}</h1>
+  <form method="post" class="card mt-3">{% csrf_token %}
+    {% if error %}<p class="mb-3 rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
+    <label class="label" for="full_name">{% trans "Name" %}</label><input class="input" id="full_name" name="full_name" required value="{{ form.full_name }}">
+    <label class="label mt-3" for="phone">{% trans "Phone" %}</label><input class="input" id="phone" name="phone" type="tel" inputmode="tel" required value="{{ form.phone }}">
+    <div class="mt-3"><span class="label">{% trans "PIN" %}</span>
+      <label class="mr-4 inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="generate" checked> {% trans "Generate for me" %}</label>
+      <label class="inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="own"> {% trans "Customer chooses" %}</label>
+      <input class="input mt-1" name="pin" inputmode="numeric" maxlength="{{ pin_len }}" aria-label="{% trans 'Customer chosen PIN' %}"></div>
+    <button class="btn-primary mt-4 w-full" type="submit">{% trans "Create customer" %}</button>
+  </form></section>
+{% endblock %}

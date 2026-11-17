@@ -1,0 +1,15 @@
+{% extends "web/base.html" %}{% load i18n static %}
+{% block head_scripts %}<script src="{% static 'js/preview.js' %}" defer></script>{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+<div class="no-print flex flex-wrap items-center gap-2"><h1 class="text-xl font-bold">{% trans "Sticker labels" %} — {{ active.name }}, {{ day|date:"D j M" }}</h1>{% if pv_badge %}<span class="chip-preview">{% trans "Preview" %}</span>{% endif %}
+  <button class="btn-primary ml-auto" type="button" data-print>{% trans "Print" %}</button><a class="btn-secondary" href="{% url 'preview:kitchen' tenant.slug %}?date={{ day|date:'Y-m-d' }}&slot={{ active.key }}">{% trans "Close" %}</a></div>
+<div class="mt-3 grid grid-cols-2 gap-2" id="labels">
+  {% for o in orders %}<div class="break-inside-avoid rounded-lg border-2 border-ink p-2 text-sm leading-tight" data-testid="label">
+    <div class="flex items-center justify-between"><span class="font-bold">{{ o.customer }}</span><span class="chip-slate">{% for it in o.items|slice:":1" %}{{ it.diet }}{% endfor %}</span></div>
+    <p class="mt-0.5">{{ o.phone }} · {% if o.qty > 1 %}×{{ o.qty }}{% else %}×1{% endif %}</p>
+    <p class="mt-0.5 text-xs">{{ o.plan }} · {{ active.name }} · {{ day|date:"j M" }}</p>
+    <p class="mt-1 text-xs">{% for it in o.items %}{{ it.name }}{% if it.qty > 1 %} ×{{ it.qty }}{% endif %}{% if not forloop.last %} · {% endif %}{% endfor %}</p>
+    {% if o.route %}<p class="mt-1 text-xs font-semibold">{{ o.route }} · {% trans "stop" %} {{ o.stop }}</p>{% else %}<p class="mt-1 text-xs font-semibold">{% trans "PICK-UP" %}</p>{% endif %}{% if o.allergy %}<p class="mt-1 text-xs font-bold text-danger-ink">⚠ {{ o.allergy|upper }}</p>{% endif %}</div>{% endfor %}
+</div>
+{% endblock %}

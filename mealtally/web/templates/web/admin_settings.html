@@ -1,0 +1,45 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<h1 class="text-2xl font-bold">{% trans "Business profile" %}</h1>
+{% if notice %}<p class="mt-2 rounded-lg bg-ok p-3 text-sm font-semibold text-ok-ink" role="status" data-testid="notice">{{ notice }}</p>{% endif %}
+{% if error %}<p class="mt-2 rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
+<div class="mt-3 grid max-w-xl gap-4">
+<form hx-post="{% url 'web:admin-settings-theme' tenant.slug %}" hx-trigger="change" hx-swap="none">
+  <section class="card grid gap-3" data-testid="theme-picker"><h2 class="font-semibold">{% trans "Theme" %}</h2>
+    <p class="text-sm text-muted">{% trans "Choose the look of your restaurant's screens. It saves and applies to everyone as soon as you pick it." %}</p>
+    <div class="grid gap-3 sm:grid-cols-3">{% for key, label, desc in theme_choices %}
+      <label class="block cursor-pointer rounded-2xl border border-subtle p-2 has-[:checked]:border-primary has-[:checked]:ring-2 has-[:checked]:ring-primary">
+        <input class="sr-only" type="radio" name="theme" value="{{ key }}" data-theme-option {% if key == tenant.theme %}checked{% endif %}>
+        <span data-theme="{{ key }}" class="flex gap-1.5 rounded-xl bg-page p-2" aria-hidden="true">
+          <span class="h-14 w-4 rounded bg-side"></span>
+          <span class="flex-1"><span class="block h-3 rounded bg-card"></span><span class="mt-1 flex gap-1"><span class="h-3 w-3 rounded bg-tile-1"></span><span class="h-3 w-3 rounded bg-tile-2"></span><span class="h-3 w-3 rounded bg-tile-3"></span><span class="h-3 w-3 rounded bg-tile-4"></span></span>
+            <span class="mt-1 flex items-center gap-1"><span class="rounded-lg bg-primary px-2 py-0.5 text-xs text-on-primary">Aa</span><span class="h-3 w-3 rounded-full bg-accent"></span></span></span></span>
+        <span class="mt-2 block font-semibold">{{ label }}</span><span class="block text-xs text-muted">{{ desc }}</span></label>{% endfor %}</div>
+  </section>
+</form>
+<form method="post" class="grid gap-4" data-dirty-guard>{% csrf_token %}
+  <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Restaurant" %}</h2>
+    <div><label class="label" for="display_name">{% trans "Display name" %}</label><input class="input" id="display_name" name="display_name" value="{{ cfg.display_name }}"></div>
+    <div><label class="label" for="tagline">{% trans "Tagline (shown on the sign-in screens)" %}</label><input class="input" id="tagline" name="tagline" maxlength="120" value="{{ cfg.tagline }}"></div>
+    <div><label class="label" for="address">{% trans "Address" %}</label><textarea class="input" id="address" name="address" rows="2">{{ cfg.address }}</textarea></div>
+    <div><label class="label" for="contact_phone">{% trans "Contact phone" %}</label><input class="input" id="contact_phone" name="contact_phone" value="{{ cfg.contact_phone }}"></div>
+    <div><label class="label" for="brand_color">{% trans "Brand colour (not used by themes yet)" %}</label><input class="h-12 w-24 cursor-pointer rounded-lg border border-strong bg-card p-1" id="brand_color" name="brand_color" type="color" value="{{ cfg.brand_color }}"></div>
+    <div><label class="label" for="timezone">{% trans "Timezone" %}</label><select class="input" id="timezone" name="timezone">{% for z in timezones %}<option value="{{ z }}" {% if z == tenant.timezone %}selected{% endif %}>{{ z }}</option>{% endfor %}</select></div></section>
+  <section class="card grid gap-3" data-testid="policies"><h2 class="font-semibold">{% trans "Policies" %}</h2>
+    <p class="text-sm text-ink-soft">{% trans "Meal times and daily limits are set per plan." %} <a class="link" href="{% url 'web:admin-meal-times' tenant.slug %}" data-testid="meal-times-link">{% trans "Meal times" %}</a> · <a class="link" href="{% url 'web:admin-plans' tenant.slug %}">{% trans "Plans" %}</a></p>
+    <div><label class="label" for="redeem_cooldown_seconds">{% trans "Double-scan guard (seconds)" %}</label><input class="input" id="redeem_cooldown_seconds" name="redeem_cooldown_seconds" type="number" min="0" value="{{ cfg.redeem_cooldown_seconds }}"></div>
+    <div><label class="label" for="staff_reversal_window_hours">{% trans "Staff can undo within (hours)" %}</label><input class="input" id="staff_reversal_window_hours" name="staff_reversal_window_hours" type="number" min="0" value="{{ cfg.staff_reversal_window_hours }}"></div>
+    <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="counter_can_reverse_others" data-testid="counter-can-reverse-others" {% if cfg.counter_can_reverse_others %}checked{% endif %}> {% trans "Counters may undo meals served by other staff (inside the window, with a reason)" %}</label>
+    <div class="grid gap-3 sm:grid-cols-2">
+      <div><label class="label" for="topup_min_rupees">{% trans "Smallest wallet top-up (₹)" %}</label><input class="input" id="topup_min_rupees" name="topup_min_rupees" type="number" min="1" value="{{ topup_min_rupees }}"></div>
+      <div><label class="label" for="topup_max_rupees">{% trans "Largest wallet top-up (₹)" %}</label><input class="input" id="topup_max_rupees" name="topup_max_rupees" type="number" min="1" value="{{ topup_max_rupees }}"></div></div>
+    <div><label class="label" for="max_queued_passes">{% trans "Max queued passes per customer" %}</label><input class="input" id="max_queued_passes" name="max_queued_passes" type="number" min="0" max="5" value="{{ cfg.max_queued_passes }}"></div>
+    <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="allow_self_signup" {% if cfg.allow_self_signup %}checked{% endif %}> {% trans "Allow customers to sign themselves up" %}</label></section>
+  <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Receipts" %}</h2>
+    <div><label class="label" for="receipt_footer">{% trans "Receipt footer text" %}</label><input class="input" id="receipt_footer" name="receipt_footer" value="{{ cfg.receipt_footer }}"></div>
+    <div><label class="label" for="fssai_no">{% trans "FSSAI licence number" %}</label><input class="input" id="fssai_no" name="fssai_no" maxlength="20" value="{{ cfg.fssai_no }}"></div>
+    <div><label class="label" for="gstin">{% trans "GSTIN (optional, no tax calculation)" %}</label><input class="input" id="gstin" name="gstin" maxlength="15" value="{{ cfg.gstin }}"></div></section>
+  <button class="btn-primary" type="submit" data-testid="save-settings">{% trans "Save profile" %}</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% load i18n %}
+<div data-testid="undo-done" role="status" hx-get="{% url 'web:staff-card-reset' tenant.slug %}" hx-trigger="load delay:4s" hx-target="#console-card" hx-swap="innerHTML"
+     class="rounded-2xl border-2 p-5 text-center {% if error %}border-danger-ink bg-danger text-danger-ink{% else %}border-accent bg-warn text-warn-ink{% endif %}">
+  {% if error %}<p class="text-lg font-semibold">{{ error }}</p>{% else %}<p class="text-xl font-bold">{% blocktrans with n=left %}Undone — {{ n }} meals left{% endblocktrans %}</p>{% endif %}
+</div>

@@ -1,0 +1,8 @@
+{% extends "preview/base.html" %}{% load i18n %}
+{% block content %}
+<section class="card grid gap-2" data-testid="no-wallet">
+  <h1 class="text-xl font-bold">{% trans "Ask the restaurant about home delivery" %}</h1>
+  <p class="text-ink-soft">{% trans "Home-delivery customers get a wallet here: meals are paid from it and you can top up by UPI. Your meal pass works at the counter as before." %}</p>
+  <a class="btn-secondary w-fit" href="{% url 'web:me-home' tenant.slug %}">{% trans "Back to Home" %}</a>
+</section>
+{% endblock %}

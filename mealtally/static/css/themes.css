@@ -1,0 +1,126 @@
+/* Mealtally theme system (D03.5): the ONLY place raw colour values live.
+ *
+ * Templates, JS and Python use semantic utility classes (bg-primary, text-muted, bg-tile-1 ...) that read these variables.
+ * A theme is a block under [data-theme="<name>"] on <html>. Tenant surfaces use the tenant's theme (masala | fresh | tally);
+ * platform surfaces always use tally. mealtally/web/themes.py parses this file (PDFs, manifest, admin) and the contrast test checks
+ * every text/background pair for WCAG AA (4.5:1).
+ */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../fonts/plus-jakarta-sans-latin-wght.woff2") format("woff2");
+}
+
+/* ---- shared: status chips are identical in every theme (icon + word) and a few constants ---------------------- */
+:root {
+  --on-primary: #FFFFFF;
+  --on-tile: #FFFFFF;
+  --chip-active-bg: #DFF3E4;
+  --chip-active-ink: #14532D;
+  --chip-soon-bg: #FDF1D8;
+  --chip-soon-ink: #7A4B00;
+  --chip-expired-bg: #ECE7E1;
+  --chip-expired-ink: #44403C;
+  --chip-void-bg: #FBE4E2;
+  --chip-void-ink: #8E1B21;
+  --chip-preview-line: #7C3AED;
+  --chip-preview-ink: #5B21B6;
+  --success-solid: #166534;
+}
+
+/* ---- masala (default): warm kitchen --------------------------------------------------------------------------- */
+[data-theme="masala"] {
+  --page: #FFF8EE;
+  --card: #FFFFFF;
+  --subtle: #EADFD2;
+  --ink: #2A1C14;
+  --muted: #7A6656;
+  --primary: #1F7A4D;
+  --primary-hover: #17603C;
+  --accent: #F2A007;
+  --on-accent: #2A1C14;
+  --side-bg: #2A1C14;
+  --side-ink: #F3E7DA;
+  --side-active-bg: #F2A007;
+  --side-active-ink: #2A1C14;
+  --side-label: #E7B866;
+  --tile-1: #5B2A6E;
+  --tile-2: #A15C07;
+  --tile-3: #1F7A4D;
+  --tile-4: #B4232A;
+  --warn-bg: #FDF1D8;
+  --warn-ink: #7A4B00;
+  --danger-bg: #FBE4E2;
+  --danger-ink: #8E1B21;
+  --chart-3: var(--accent);
+  --chart-pending: var(--accent);
+}
+
+/* ---- fresh: market greens ------------------------------------------------------------------------------------- */
+[data-theme="fresh"] {
+  --page: #F5F8F2;
+  --card: #FFFFFF;
+  --subtle: #DDE6DA;
+  --ink: #1E2A24;
+  --muted: #5F6E66;
+  --primary: #0E7C66;
+  --primary-hover: #0B6352;
+  --accent: #E5484D;
+  --on-accent: #140B0A;
+  --side-bg: #FFFFFF;
+  --side-ink: #33413A;
+  --side-active-bg: #E3F4EE;
+  --side-active-ink: #0B5E4D;
+  --side-label: #B4532A;
+  --tile-1: #0E7C66;
+  --tile-2: #4D7C0F;
+  --tile-3: #C2410C;
+  --tile-4: #9D174D;
+  --warn-bg: #FEF3C7;
+  --warn-ink: #78350F;
+  --danger-bg: #FEECE6;
+  --danger-ink: #8A2C0D;
+  --chart-3: #4D7C0F;
+  --chart-pending: #B7791F; /* amber: "not done yet", never red (D03.9 QA-01 P2-17) */
+}
+
+/* ---- tally: platform identity (also the fallback for any page without a theme, e.g. Django admin) -------------- */
+:root:not([data-theme]), [data-theme="tally"] {
+  --page: #F8FAFC;
+  --card: #FFFFFF;
+  --subtle: #E2E8F0;
+  --ink: #0F172A;
+  --muted: #64748B;
+  --primary: #1D4ED8;
+  --primary-hover: #1E3A8A;
+  --accent: #F59E0B;
+  --on-accent: #0F172A;
+  --side-bg: #FFFFFF;
+  --side-ink: #334155;
+  --side-active-bg: #EFF6FF;
+  --side-active-ink: #1E3A8A;
+  --side-label: #B45309;
+  --tile-1: #1D4ED8;
+  --tile-2: #0F766E;
+  --tile-3: #047857;
+  --tile-4: #BE123C;
+  --warn-bg: #FEF3C7;
+  --warn-ink: #78350F;
+  --danger-bg: #FEE2E2;
+  --danger-ink: #991B1B;
+  --chart-3: var(--tile-2);
+  --chart-pending: var(--accent);
+}
+
+/* ---- derived tokens (no raw values: mixed from the theme above) -------------------------------------------------- */
+:root {
+  --ink-soft: color-mix(in srgb, var(--ink) 84%, var(--card));
+  --soft: color-mix(in srgb, var(--page) 55%, var(--card));
+  --track: var(--subtle);
+  --strong: color-mix(in srgb, var(--muted) 55%, var(--card));
+  --primary-soft: color-mix(in srgb, var(--primary) 9%, var(--card));
+  --accent-soft: color-mix(in srgb, var(--accent) 22%, var(--card));
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.04);
+}

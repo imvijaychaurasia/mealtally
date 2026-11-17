@@ -1,0 +1,25 @@
+{% load static %}<!doctype html>
+<html lang="en" data-theme="{{ tenant.theme|default:'masala' }}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Receipt {{ payment.receipt_number }}</title>
+{% if inline_css %}<style>{% theme_css tenant %}{{ inline_css|safe }}</style>{% else %}<link rel="stylesheet" href="{% static 'css/themes.css' %}">
+<link rel="stylesheet" href="{% static 'css/receipt.css' %}">{% endif %}</head>
+<body><div class="wrap">
+  {% if voided %}<div class="void">VOID</div>{% endif %}
+  <h1>{{ business_name }}</h1>
+  <div class="sub">{% if cfg.address %}{{ cfg.address }}<br>{% endif %}{% if contact_phone %}Phone: {{ contact_phone }}{% endif %}{% if cfg.gstin %} · GSTIN: {{ cfg.gstin }}{% endif %}{% if fssai %} · FSSAI: {{ fssai }}{% endif %}</div>
+  <hr>
+  {% if voided %}<div class="voidnote">VOID{% if payment.void_reason %} — {{ payment.void_reason }}{% endif %}</div>{% endif %}
+  <table>
+    <tr><td class="k">Receipt no</td><td class="v">{{ payment.receipt_number }}</td></tr>
+    <tr><td class="k">Date</td><td class="v">{{ received_at|date:"j M Y, g:i A" }}</td></tr>
+    <tr><td class="k">Customer</td><td class="v">{{ customer.full_name }}<br>{{ customer.customer_code }} · {{ customer_phone }}</td></tr>
+    <tr><td class="k">Plan</td><td class="v">{{ payment.plan.name }}</td></tr>
+    {% if pass_ %}<tr><td class="k">Meals</td><td class="v">{{ pass_.meals_total }}</td></tr>
+    <tr><td class="k">Valid</td><td class="v">{{ starts_at|date:"j M Y" }} – {{ ends_at|date:"j M Y" }}</td></tr>{% endif %}
+    <tr><td class="k">Paid by</td><td class="v">{{ method_label }}{% if payment.reference %}<br>Ref: {{ payment.reference }}{% endif %}</td></tr>
+  </table>
+  <hr>
+  <table><tr><td class="k total">Amount</td><td class="v total">{{ payment.amount_paise|inr }}</td></tr></table>
+  <hr>
+  <div class="foot">Prepaid meal pass · No refund or carry-forward of unused meals{% if cfg.receipt_footer %}<br>{{ cfg.receipt_footer }}{% endif %}</div>
+  {% if print_view %}<div class="actions"><button type="button" data-back>← Back</button> <a href="{% url 'web:receipt-pdf' tenant.slug payment.public_id %}">Download PDF</a> <button type="button" data-print>Print</button></div><script src="{% static 'js/app.js' %}"></script>{% endif %}
+</div></body></html>

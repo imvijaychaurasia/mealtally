@@ -1,0 +1,38 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block title %}{% trans "Sell pass" %}{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-2xl"><h1 class="text-2xl font-bold">{% trans "Sell a pass" %}</h1>
+  <form method="post" action="{% url 'web:staff-sell-preview' tenant.slug %}" class="mt-3 grid gap-4">{% csrf_token %}
+    {% if recorded %}<p class="rounded-lg bg-ok p-3 text-sm font-semibold text-ok-ink" role="status" data-testid="sell-recorded">{% blocktrans with r=recorded %}Sale already recorded ({{ r }}). Start a new sale below.{% endblocktrans %}</p>{% endif %}
+    {% if error %}<p class="rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert" data-testid="sell-error">{{ error }}</p>{% endif %}
+    <section class="card"><h2 class="text-lg font-semibold">1. {% trans "Customer" %}</h2>
+      <label class="label" for="sq">{% trans "Search existing customer (phone, code or name)" %}</label>
+      <input class="input" id="sq" name="sq" type="search" autocomplete="off" hx-get="{% url 'web:staff-sell-search' tenant.slug %}" hx-trigger="input changed delay:250ms" hx-target="#sell-results">
+      <div id="sell-results" class="mt-2">{% if customer %}<label class="flex min-h-11 items-center gap-2 rounded-lg border border-primary p-2"><input type="radio" name="customer" value="{{ customer.public_id }}" checked> {{ customer.full_name }} ({{ customer.customer_code }})</label>{% endif %}</div>
+      <details class="mt-3" {% if form.new_name %}open{% endif %}><summary class="cursor-pointer font-medium text-primary">{% trans "New customer" %}</summary>
+        <div class="mt-2 grid gap-3">
+          <div><label class="label" for="new_name">{% trans "Name" %}</label><input class="input" id="new_name" name="new_name" value="{{ form.new_name }}"></div>
+          <div><label class="label" for="new_phone">{% trans "Phone" %}</label><input class="input" id="new_phone" name="new_phone" type="tel" inputmode="tel" value="{{ form.new_phone }}"></div>
+          <div><span class="label">{% trans "PIN" %}</span>
+            <label class="mr-4 inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="generate" checked> {% trans "Generate for me" %}</label>
+            <label class="inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="own"> {% trans "Customer chooses" %}</label>
+            <input class="input mt-1" name="new_pin" inputmode="numeric" maxlength="{{ pin_len }}" placeholder="{% blocktrans with n=pin_len %}{{ n }} digits (only if the customer chooses){% endblocktrans %}" aria-label="{% trans 'Customer chosen PIN' %}"></div>
+        </div></details>
+    </section>
+    <section class="card"><h2 class="text-lg font-semibold">2. {% trans "Plan" %}</h2>
+      {% for p in plans %}<label class="mb-2 flex min-h-14 items-start gap-3 rounded-lg border border-strong p-3 has-[:checked]:border-primary has-[:checked]:bg-soft">
+        <input class="mt-1" type="radio" name="plan" value="{{ p.public_id }}" required {% if form.plan == p.public_id|stringformat:"s" or plans|length == 1 %}checked{% endif %}>
+        <span><span class="block font-semibold">{{ p.name }} — {{ p.price_paise|inr }}</span>
+        <span class="block text-sm font-medium text-ink" data-testid="per-meal">{% blocktrans with e=p|per_meal %}{{ e }} per meal{% endblocktrans %}</span>
+        <span class="block text-sm text-ink-soft">{% blocktrans with m=p.meals_per_cycle %}{{ m }} meals{% endblocktrans %} · {% if p.validity_mode == 'CALENDAR_MONTH' %}{% trans "Valid until end of month · full meals" %}{% else %}{% blocktrans with d=p.validity_days %}{{ d }} days{% endblocktrans %}{% endif %}{% if p.max_meals_per_day %} · {% blocktrans with c=p.max_meals_per_day %}max {{ c }}/day{% endblocktrans %}{% endif %}</span></span></label>
+      {% empty %}<p class="text-ink-soft">{% trans "No active plans. Ask the owner to add one." %}</p>{% endfor %}
+    </section>
+    <section class="card"><h2 class="text-lg font-semibold">3. {% trans "Payment" %}</h2>
+      <label class="label" for="method">{% trans "Method" %}</label>
+      <select class="input" id="method" name="method">{% for v, l in methods %}<option value="{{ v }}" {% if form.method == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+      <label class="label mt-3" for="reference">{% trans "Reference" %} <span class="font-normal text-muted">({% trans "UTR / transaction ID; not needed for cash" %})</span></label>
+      <input class="input" id="reference" name="reference" autocomplete="off" value="{{ form.reference }}">
+    </section>
+    <button class="btn-primary btn-lg" type="submit" data-testid="sell-preview">{% trans "Preview" %}</button>
+  </form></section>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% load i18n %}{% for c in rows %}<tr>
+<td class="td font-medium">{{ c.full_name }} <span class="text-xs text-muted">{{ c.customer_code }}</span>{% if c.status == 'BLOCKED' %} <span class="chip-void">{% trans "Blocked" %}</span>{% endif %}</td>
+<td class="td">{{ c.phone_e164|masked }}</td>
+<td class="td">{% if c.active_meals is not None %}{{ c.active_meals }}{% if c.queued_count %} <span class="chip-slate">+{{ c.queued_count }} {% trans "queued" %}</span>{% endif %}{% else %}<span class="chip-slate">{% trans "No pass" %}</span>{% endif %}</td>
+<td class="td">{% if c.active_ends %}{{ c.active_ends|date:"j M Y" }}{% else %}—{% endif %}</td></tr>
+{% empty %}<tr><td class="td text-muted" colspan="4">{% trans "No customers found." %}</td></tr>{% endfor %}

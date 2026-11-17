@@ -1,0 +1,32 @@
+{% load static i18n %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="tally" class="h-full scroll-smooth bg-page">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Mealtally: prepaid meal passes for tiffin and mess businesses{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% trans 'Prepaid meals, simplified. Meal passes, wallets, kitchen and delivery in one place for Indian tiffin services, messes, cloud kitchens and canteens.' %}{% endblock %}">
+  <link rel="canonical" href="{{ canonical }}">
+  {% block robots %}{% endblock %}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mealtally">
+  <meta property="og:title" content="{% block ogtitle %}Mealtally: prepaid meals, simplified{% endblock %}">
+  <meta property="og:description" content="{% trans 'Meal passes, wallets, kitchen and delivery in one place for Indian tiffin and mess businesses.' %}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-hero.png' %}">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="{{ theme_color }}">
+  <link rel="icon" href="{% static 'icons/icon-192.png' %}">
+  <link rel="preload" href="{% static 'fonts/plus-jakarta-sans-latin-wght.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script src="{% static 'js/marketing.js' %}" defer></script>
+  {% block jsonld %}{% endblock %}
+</head>
+<body class="font-sans text-ink antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
+  {% include "web/marketing/_header.html" %}
+  <main id="main">{% block content %}{% endblock %}</main>
+  {% include "web/marketing/_footer.html" %}
+</body>
+</html>

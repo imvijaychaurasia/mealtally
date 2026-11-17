@@ -1,0 +1,13 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<h1 class="text-2xl font-bold">{% trans "More" %}</h1>
+<ul class="mt-3 grid gap-3 sm:grid-cols-2">
+  <li><a class="card block hover:border-primary" href="{% url 'web:admin-dashboard' tenant.slug %}"><span class="font-semibold">{% trans "Dashboard" %}</span><span class="block text-sm text-ink-soft">{% trans "Today and this month at a glance" %}</span></a></li>
+  <li><a class="card block hover:border-primary" href="{% url 'web:admin-plans' tenant.slug %}"><span class="font-semibold">{% trans "Plans" %}</span><span class="block text-sm text-ink-soft">{% trans "Prices, meals and validity" %}</span></a></li>
+  {% if role == 'OWNER' %}
+  <li><a class="card block hover:border-primary" href="{% url 'web:admin-staff' tenant.slug %}"><span class="font-semibold">{% trans "Staff" %}</span><span class="block text-sm text-ink-soft">{% trans "Add staff, reset passwords" %}</span></a></li>
+  <li><a class="card block hover:border-primary" href="{% url 'web:admin-settings' tenant.slug %}"><span class="font-semibold">{% trans "Settings" %}</span><span class="block text-sm text-ink-soft">{% trans "Name, colour, rules, receipts" %}</span></a></li>
+  {% endif %}
+  <li><a class="card block hover:border-primary" href="{% url 'web:admin-audit' tenant.slug %}"><span class="font-semibold">{% trans "Audit log" %}</span><span class="block text-sm text-ink-soft">{% trans "Who did what, and when" %}</span></a></li>
+</ul>
+{% endblock %}

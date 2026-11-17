@@ -1,0 +1,7 @@
+{% extends "preview/base.html" %}{% load i18n %}
+{% block pv_content %}
+{% include "preview/_head.html" with sub=_("Tiffin boxes issued to and returned by home-delivery customers.") %}
+{% if over %}<p class="mt-3 rounded-xl bg-danger p-3 text-danger-ink" role="alert">{% blocktrans with n=over|length %}{{ n }} customer(s) hold more boxes than their limit.{% endblocktrans %}</p>{% endif %}
+<div class="mt-3 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="w-full"><thead class="bg-soft"><tr><th class="th">{% trans "Customer" %}</th><th class="th">{% trans "Boxes held" %}</th><th class="th">{% trans "Limit" %}</th><th class="th"></th></tr></thead><tbody class="divide-y divide-subtle">
+{% for b in boxes %}<tr data-row><td class="td font-medium">{{ b.customer }}</td><td class="td">{{ b.held }}{% if b.held > b.limit %} <span class="chip-void">{% trans "Over limit" %}</span>{% endif %}</td><td class="td">{{ b.limit }}</td><td class="td"><div class="flex gap-2"><button class="btn-secondary" type="button" data-pv>{% trans "Issue" %}</button><button class="btn-secondary" type="button" data-pv>{% trans "Return" %}</button></div></td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

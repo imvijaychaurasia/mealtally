@@ -1,0 +1,4 @@
+{% load i18n %}
+<div data-reset class="rounded-2xl border border-dashed border-strong p-6 text-center text-muted">
+  {% if error %}<p class="text-lg font-semibold text-danger-ink" role="alert" data-testid="card-error">{{ error }}</p>{% else %}{% trans "Search for a customer or scan a QR code to begin." %}{% endif %}
+</div>

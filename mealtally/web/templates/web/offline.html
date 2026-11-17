@@ -1,0 +1,6 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<section class="mx-auto max-w-md py-10 text-center"><h1 class="text-2xl font-bold">{% trans "You're offline" %}</h1>
+  <p class="mt-3 text-ink-soft">{% trans "Redeeming meals needs a connection. Check your internet and try again." %}</p>
+  <a class="btn-primary mt-6" href="/">{% trans "Try again" %}</a></section>
+{% endblock %}

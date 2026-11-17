@@ -1,0 +1,49 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<p class="text-sm"><a class="link" href="{% url 'web:platform-dashboard' %}">← {% trans "Platform" %}</a></p>
+<div class="mt-1 flex flex-wrap items-center justify-between gap-2"><h1 class="text-2xl font-bold">{{ name }} <span class="text-sm font-normal text-muted">{{ t.slug }}</span></h1>
+  <span class="{% if t.status == 'ACTIVE' %}chip-active{% else %}chip-void{% endif %}" data-testid="tenant-status">{{ t.status }}</span></div>
+{% if notice %}<p class="mt-2 rounded-lg bg-ok p-3 text-sm font-semibold text-ok-ink" role="status">{{ notice }}</p>{% endif %}
+<dl class="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+  <div class="card"><dt class="text-sm text-muted">{% trans "Created" %}</dt><dd class="font-semibold">{{ t.created_at|date:"j M Y" }}</dd></div>
+  <div class="card"><dt class="text-sm text-muted">{% trans "Customers" %}</dt><dd class="text-xl font-bold">{{ customers }}</dd></div>
+  <div class="card"><dt class="text-sm text-muted">{% trans "Active passes" %}</dt><dd class="text-xl font-bold">{{ active_passes }}</dd></div>
+  <div class="card"><dt class="text-sm text-muted">{% trans "Owner" %}</dt><dd class="font-semibold">{% if owner %}{{ owner.name|default:owner.get_username }}<span class="block text-xs font-normal text-ink-soft">{{ owner.email|default:owner.phone_e164 }}</span>{% else %}—{% endif %}</dd></div>
+</dl>
+<form method="post" action="{% url 'web:platform-tenant-flags' t.slug %}" class="card mt-4 flex flex-wrap items-center gap-4" data-testid="preview-flags">{% csrf_token %}
+  <span class="font-semibold">{% trans "Preview modules" %}</span>
+  <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="has_demo_dataset" {% if t.has_demo_dataset %}checked{% endif %}> {% trans "Serve the demo dataset" %}</label>
+  <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="show_preview_badges" {% if t.show_preview_badges %}checked{% endif %}> {% trans "Show “Preview” badges" %}</label>
+  <button class="btn-secondary" type="submit">{% trans "Save" %}</button></form>
+<div class="mt-4 flex flex-wrap gap-2">
+  {% if t.status == 'ACTIVE' %}<a class="btn-secondary" href="{% url 'web:platform-tenant-status' t.slug 'suspend' %}" data-testid="act-suspend">{% trans "Suspend…" %}</a>{% else %}<a class="btn-secondary" href="{% url 'web:platform-tenant-status' t.slug 'activate' %}" data-testid="act-activate">{% trans "Activate…" %}</a>{% endif %}
+  {% if t.status != 'DEACTIVATED' %}<a class="btn-secondary" href="{% url 'web:platform-tenant-status' t.slug 'deactivate' %}">{% trans "Deactivate…" %}</a>{% endif %}
+</div>
+
+<h2 class="mt-6 text-lg font-semibold">{% trans "Fee policy" %}</h2>
+<div class="mt-2 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="min-w-full divide-y divide-subtle"><thead><tr><th class="th">{% trans "Effective from" %}</th><th class="th">{% trans "Platform %" %}</th><th class="th">{% trans "Gateway %" %}</th></tr></thead>
+<tbody class="divide-y divide-subtle">{% for p in policies %}<tr><td class="td">{{ p.effective_from|date:"j M Y, g:i A" }}</td><td class="td">{{ p.platform_pct }}</td><td class="td">{{ p.gateway_pct }}</td></tr>{% endfor %}</tbody></table></div>
+<form method="post" action="{% url 'web:platform-tenant-fee-policy' t.slug %}" class="card mt-3 grid max-w-xl gap-3 sm:grid-cols-3">{% csrf_token %}
+  <div><label class="label" for="platform_pct">{% trans "Platform %" %}</label><input class="input" id="platform_pct" name="platform_pct" inputmode="decimal" required placeholder="12.00"></div>
+  <div><label class="label" for="gateway_pct">{% trans "Gateway %" %}</label><input class="input" id="gateway_pct" name="gateway_pct" inputmode="decimal" required placeholder="10.00"></div>
+  <div><label class="label" for="effective_from">{% trans "Effective from (blank = now)" %}</label><input class="input" id="effective_from" name="effective_from" type="datetime-local"></div>
+  <button class="btn-primary sm:col-span-3" type="submit">{% trans "Add new fee policy" %}</button>
+  <p class="text-sm text-muted sm:col-span-3">{% trans "Policies are effective-dated and never edited: a payment uses the latest policy in force when it was received." %}</p>
+</form>
+
+<h2 class="mt-6 text-lg font-semibold">{% trans "Monthly fee statement" %}</h2>
+<form method="get" class="card mt-2 flex flex-wrap items-end gap-3"><div><label class="label" for="month">{% trans "Month" %}</label><input class="input" id="month" name="month" type="month" value="{{ month }}"></div>
+  <button class="btn-primary" type="submit">{% trans "Show" %}</button>
+  <a class="btn-secondary" href="{% url 'web:platform-tenant-fees' t.slug %}?month={{ month }}&format=csv" data-testid="fees-csv">{% trans "Export CSV" %}</a>
+  <a class="btn-secondary" href="{% url 'web:platform-tenant-fees' t.slug %}?month={{ month }}&format=pdf" data-testid="fees-pdf">{% trans "Download PDF" %}</a></form>
+<dl class="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+  <div class="card"><dt class="text-sm text-muted">{% trans "Gross payments" %}</dt><dd class="text-xl font-bold">{{ gross }}</dd></div>
+  <div class="card"><dt class="text-sm text-muted">{% trans "Platform fee" %}</dt><dd class="text-xl font-bold">{{ platform_fee }}</dd></div>
+  <div class="card"><dt class="text-sm text-muted">{% trans "Gateway fee" %}</dt><dd class="text-xl font-bold">{{ gateway_fee }}</dd></div>
+  <div class="card"><dt class="text-sm text-muted">{% trans "Net payable to platform" %}</dt><dd class="text-xl font-bold" data-testid="tenant-fee-total">{{ total }}</dd></div>
+</dl>
+<div class="mt-3 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="min-w-full divide-y divide-subtle"><thead><tr><th class="th">{% trans "Receipt" %}</th><th class="th">{% trans "Date" %}</th><th class="th">{% trans "Status" %}</th><th class="th">{% trans "Base" %}</th><th class="th">%</th><th class="th">{% trans "Fee" %}</th><th class="th">{% trans "Reversed" %}</th><th class="th">{% trans "Net" %}</th></tr></thead>
+<tbody class="divide-y divide-subtle">{% for ln in lines %}<tr><td class="td">{{ ln.receipt_number }}</td><td class="td">{{ ln.date_short }}</td><td class="td">{{ ln.status }}</td><td class="td">{{ ln.base }}</td><td class="td">{{ ln.platform_pct }}%</td><td class="td">{{ ln.fee }}</td><td class="td">{{ ln.reversed }}</td><td class="td">{{ ln.net }}</td></tr>
+{% empty %}<tr><td class="td text-muted" colspan="8">{% trans "No fees in this month." %}</td></tr>{% endfor %}</tbody></table></div>
+<p class="mt-3 text-sm text-muted">{% trans "This page shows fees only — never the restaurant's customer data." %}</p>
+{% endblock %}

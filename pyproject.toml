@@ -1,0 +1,173 @@
+[project]
+name = "mealtally"
+version = "0.1.0"
+description = "Open-source prepaid meal and subscription management for restaurants, messes and tiffin services"
+readme = "README.md"
+license = "AGPL-3.0-only"
+license-files = [ "LICENSE" ]
+authors = [
+  { name = "Vijay Chaurasia" },
+]
+requires-python = "==3.14.*"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+  "argon2-cffi==25.1.0",
+  "celery==5.7.0",
+  "django==6.1.3",
+  "django-allauth==65.21.1",
+  "django-anymail==15.2",
+  "django-axes",
+  "django-cors-headers==4.9.0",
+  "django-environ==0.14.0",
+  "django-redis==7.0.0",
+  "djangorestframework==3.18.3",
+  "drf-spectacular==0.30.0",
+  "drf-spectacular-sidecar",
+  "gunicorn==26.2.0",
+  "hiredis==3.5.0",
+  "packaging",
+  "psycopg[c]==3.3.8",
+  "redis==8.1.0",
+  "segno",
+  "sentry-sdk==2.74.0",
+  "weasyprint",
+  "whitenoise==6.12.0",
+]
+
+[dependency-groups]
+dev = [
+  "coverage==7.17.2",
+  "django-extensions==4.1",
+  "factory-boy==3.3.3",
+  "pre-commit==4.7.0",
+  "pytest==9.2.0",
+  "pytest-cov",
+  "pytest-django==4.14.0",
+  "ruff==0.17.4",
+  "time-machine==3.6.0",
+  "werkzeug[watchdog]==3.1.9",
+]
+
+# ==== ruff ====
+[tool.ruff]
+line-length = 120
+# Exclude a variety of commonly ignored directories.
+extend-exclude = [
+  "*/migrations/*.py",
+  "staticfiles/*",
+]
+
+lint.select = [
+  "A",
+  "ASYNC",
+  "B",
+  "BLE",
+  "C4",
+  "C90",
+  "COM",
+  "DJ",
+  "DTZ",
+  "E",
+  "EM",
+  "ERA",
+  "EXE",
+  "F",
+  "FA",
+  "FBT",
+  "FLY",
+  "G",
+  "I",
+  "ICN",
+  "INP",
+  "INT",
+  "ISC",
+  "N",
+  "PD",
+  "PERF",
+  "PGH",
+  "PIE",
+  "PL",
+  "PT",
+  "PTH",
+  "PYI",
+  "Q",
+  "RET",
+  "RSE",
+  "RUF",
+  "S",
+  "SIM",
+  "SLF",
+  "SLOT",
+  "T10",
+  "T20",
+  "TC",
+  "TID",
+  "TRY",
+  "UP",
+  "W",
+  "YTT",
+]
+lint.ignore = [
+  "COM812", # conflicts with ruff format
+  "PT018", "PT012", "PLC0415", "SLF001", "PERF401", "DJ008", "RUF059", "S105", "S106", "S311", "RUF005", "SIM117", "PLR2004", "RET504", "TRY004", "TRY300", "ARG002", # pragmatic: see ADR 0010
+  "PLR0913", # services take many keyword-only args by design
+  "PLR0911", "PLR0912", "PLR0915", "C901", # service functions are long, linear business rules
+  "FBT001", "FBT002", "FBT003", # boolean flags are part of the API contract (confirm_additional)
+  "TRY003", "EM101", "EM102", # domain error messages inline
+  "TRY301", "BLE001", "ERA001", "G004", "N818", "RUF100", "S608", # S608: SQL built from constant identifiers only
+  "TC001", "TC002", "TC003", # no runtime typing-import games
+  "ISC001", # conflicts with ruff format
+  "D",
+  "RUF012", # Mutable class attributes should be annotated with `typing.ClassVar`
+  "S101",   # Use of assert detected https://docs.astral.sh/ruff/rules/assert/
+  "SIM102", # sometimes it's better to nest
+  # of types for comparison.
+  # Deactivated because it can make the code slow:
+  # https://github.com/astral-sh/ruff/issues/7871
+]
+lint.isort.force-single-line = true
+lint.per-file-ignores."**/tests/**" = [ "S105", "S106", "S311", "PLR2004", "SLF001", "FBT", "ARG", "INP001" ]
+lint.per-file-ignores."e2e/**" = [ "PTH120", "N803", "N802", "RUF001", "T201", "S108", "E501", "PTH123", "SIM115", "INP001", "PLC0415", "BLE001", "PLR0917", "ISC004" ]
+lint.per-file-ignores."mealtally/preview/**" = [ "N803", "N806", "E501", "C901", "PLR0912", "PLR0915", "PLR0911", "PLR2004", "S311", "ARG001", "PLC0415", "RUF012", "E741", "SIM108", "PLR0917", "PLR0913", "RUF001", "RUF002", "RUF003", "UP031", "PTH101", "B007", "PERF102", "DTZ007", "RUF046", "DTZ005", "DTZ001" ]
+lint.per-file-ignores."mealtally/web/help.py" = [ "E501" ]
+lint.per-file-ignores."mealtally/preview/tour.py" = [ "T201" ]
+lint.per-file-ignores."mealtally/web/marketing.py" = [ "E501", "RUF001" ]
+lint.per-file-ignores."mealtally/web/views_marketing.py" = [ "E501", "BLE001" ]
+lint.per-file-ignores."mealtally/web/tests/test_landing.py" = [ "E501", "RUF001" ]
+lint.per-file-ignores."mealtally/conftest.py" = [ "S105", "S106" ]
+lint.per-file-ignores."config/settings/*.py" = [ "F405" ]
+lint.per-file-ignores."scripts/**" = [ "INP001", "T201" ]
+lint.per-file-ignores."mealtally/plans/meal_rules.py" = [ "RUF001", "RUF002" ]
+lint.per-file-ignores."mealtally/ledger/tests/test_meal_rules.py" = [ "RUF001" ]
+lint.per-file-ignores."mealtally/web/tests/test_d039_web.py" = [ "RUF001", "E501", "PLR0917" ]
+lint.per-file-ignores."mealtally/preview/tests/test_d039_roster.py" = [ "E501" ]
+lint.per-file-ignores."mealtally/preview/tests/test_evening_rehearsal.py" = [ "T201" ]
+
+# ==== pyproject-fmt ====
+[tool.pyproject-fmt]
+keep_full_version = true
+
+# ==== pytest ====
+[tool.pytest]
+addopts = [
+  "--ds=config.settings.test",
+  "--create-db",
+  "--import-mode=importlib",
+]
+minversion = "9.0"
+testpaths = [ "mealtally" ]
+python_files = [
+  "tests.py",
+  "test_*.py",
+]
+markers = [
+  "real_clock: run on the real clock instead of the suite's frozen one (D03.9)",
+]
+
+# ==== Coverage ====
+[tool.coverage.run]
+include = [ "mealtally/**" ]
+omit = [ "*/migrations/*", "*/tests/*", "mealtally/conftest.py" ]

@@ -1,0 +1,30 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+{% if tenant.has_demo_dataset %}{% include "preview/_plans_tabs.html" with here="pass" %}{% endif %}
+<h1 class="text-2xl font-bold">{% if plan %}{% trans "Edit plan" %}{% else %}{% trans "New plan" %}{% endif %}</h1>
+<p class="mt-1 text-sm text-ink-soft">{% trans "Editing a plan never changes passes that were already sold — they keep the price, meals and dates they were sold with." %}</p>
+<form method="post" class="card mt-3 grid max-w-xl gap-3" x-data="planForm" data-price="{{ v.price_rupees }}" data-meals="{{ v.meals_per_cycle }}" data-mode="{{ v.validity_mode }}">{% csrf_token %}
+  {% if error %}<p class="rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
+  <div><label class="label" for="name">{% trans "Name" %}</label><input class="input" id="name" name="name" required value="{{ v.name }}"></div>
+  <div><label class="label" for="price_rupees">{% trans "Price (₹)" %}</label><input class="input" id="price_rupees" name="price_rupees" inputmode="decimal" required value="{{ v.price_rupees }}" x-model="price"></div>
+  <div><label class="label" for="meals_per_cycle">{% trans "Meals" %}</label><input class="input" id="meals_per_cycle" name="meals_per_cycle" type="number" min="1" required value="{{ v.meals_per_cycle }}" x-model="meals">
+    <p class="mt-1 text-sm font-medium text-ink" data-testid="plan-per-meal"><span x-text="perMeal"></span></p></div>
+  <div><label class="label" for="validity_mode">{% trans "Validity" %}</label>
+    <select class="input" id="validity_mode" name="validity_mode" x-model="mode">
+      <option value="ROLLING_DAYS" {% if v.validity_mode == 'ROLLING_DAYS' %}selected{% endif %}>{% trans "Fixed days from purchase" %}</option>
+      <option value="CALENDAR_MONTH" {% if v.validity_mode == 'CALENDAR_MONTH' %}selected{% endif %}>{% trans "Calendar month (ends on the last day of the month)" %}</option>
+    </select>
+    <p class="mt-1 text-sm text-muted" x-show="isCalendar">{% trans "Valid until end of month · full meals, no proration." %}</p></div>
+  <div x-show="showDays"><label class="label" for="validity_days">{% trans "Days (counting the purchase day)" %}</label><input class="input" id="validity_days" name="validity_days" type="number" min="1" required value="{{ v.validity_days }}"></div>
+  <fieldset class="grid gap-2" data-testid="plan-meal-times"><legend class="label">{% trans "Meal times" %}</legend>
+    <p class="text-sm text-ink-soft">{% trans "Tick the meals this pass is for. Tick none for any time." %} <a class="link" href="{% url 'web:admin-meal-times' tenant.slug %}">{% trans "Edit meal times" %}</a></p>
+    <div class="flex flex-wrap gap-2">{% for s in slots %}<label class="flex min-h-11 items-center gap-2 rounded-xl border border-strong bg-card px-3"><input type="checkbox" name="allowed_slots" value="{{ s.id }}" {% if s.id in v.allowed_slots %}checked{% endif %}> {{ s.name }} <span class="text-sm text-ink-soft">{{ s.start_time|time:"H:i" }}–{{ s.end_time|time:"H:i" }}</span></label>{% endfor %}</div></fieldset>
+  <div class="grid gap-3 sm:grid-cols-2">
+    <div><label class="label" for="max_meals_per_slot">{% trans "Meals per meal time" %}</label><input class="input" id="max_meals_per_slot" name="max_meals_per_slot" type="number" min="1" value="{{ v.max_meals_per_slot }}"></div>
+    <div><label class="label" for="max_meals_per_day">{% trans "Daily meal limit (blank = no limit)" %}</label><input class="input" id="max_meals_per_day" name="max_meals_per_day" type="number" min="1" value="{{ v.max_meals_per_day }}"></div>
+  </div>
+  {% if summary %}<p class="rounded-lg bg-soft p-3 text-sm font-semibold" data-testid="plan-rule-summary">{% trans "Rule:" %} {{ summary }}</p>{% endif %}
+  <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="is_active" {% if v.is_active %}checked{% endif %}> {% trans "Active (can be sold)" %}</label>
+  <div class="flex gap-3"><button class="btn-primary" type="submit">{% trans "Save plan" %}</button><a class="btn-secondary" href="{% url 'web:admin-plans' tenant.slug %}">{% trans "Cancel" %}</a></div>
+</form>
+{% endblock %}

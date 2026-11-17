@@ -1,0 +1,11 @@
+{% extends "web/base.html" %}{% load i18n static %}
+{% block head_scripts %}<script src="{% static 'js/preview.js' %}" defer></script>{% endblock %}
+{% block content %}
+<a class="link text-sm" href="{% url 'web:platform-dashboard' %}">← {% trans "Platform" %}</a>
+<div class="mt-1 flex items-center gap-2"><h1 class="text-2xl font-bold">{% trans "SaaS plans & quotas" %}</h1><span class="chip-preview" data-testid="preview-badge">{% trans "Preview" %}</span></div>
+<p class="mt-1 text-ink-soft">{% trans "What a restaurant pays you, and the limits that go with it." %}</p>
+<div class="mt-4 grid gap-4 md:grid-cols-3">{% for p in plans %}<section class="card"><h2 class="text-lg font-semibold">{{ p.name }}</h2><p class="mt-1 text-3xl font-bold">{{ p.price_paise|inr }}<span class="text-sm font-medium text-muted"> /{% trans "month" %}</span></p>
+  <dl class="mt-3 grid gap-1 text-sm"><div class="flex justify-between"><dt>{% trans "Customers" %}</dt><dd class="font-semibold">{{ p.customers }}</dd></div><div class="flex justify-between"><dt>{% trans "Staff logins" %}</dt><dd class="font-semibold">{{ p.staff }}</dd></div><div class="flex justify-between"><dt>{% trans "Branches" %}</dt><dd class="font-semibold">{{ p.branches }}</dd></div></dl>
+  <ul class="mt-3 grid gap-1 text-sm">{% for f in p.features %}<li>✓ {{ f }}</li>{% endfor %}</ul><button class="btn-secondary mt-3 w-full" type="button" data-pv>{% trans "Edit plan" %}</button></section>{% endfor %}</div>
+<div id="pv-toast" class="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4" role="status" aria-live="polite"></div>
+{% endblock %}

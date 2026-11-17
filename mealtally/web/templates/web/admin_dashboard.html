@@ -1,0 +1,12 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<h1 class="text-2xl font-bold">{% trans "Dashboard" %}</h1>
+<div class="mt-3 grid grid-cols-2 gap-3 md:grid-cols-3" data-testid="tiles">
+  <div class="card"><p class="text-sm text-muted">{% trans "Meals redeemed today" %}</p><p class="text-3xl font-bold" data-testid="t-meals">{{ d.meals_today }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Active passes" %}</p><p class="text-3xl font-bold" data-testid="t-active">{{ d.active_passes }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Expiring in 3 days" %}</p><p class="text-3xl font-bold">{{ d.expiring_3_days }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Passes sold this month" %}</p><p class="text-3xl font-bold" data-testid="t-sold">{{ d.passes_sold_month }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Revenue this month" %}</p><p class="text-3xl font-bold" data-testid="t-revenue">{{ revenue }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Platform fee this month" %}</p><p class="text-3xl font-bold" data-testid="t-fee">{{ fee }}</p></div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+{% if notice %}<p class="mb-3 rounded-lg bg-ok p-3 text-sm font-semibold text-ok-ink" role="status" data-testid="notice">{{ notice }}</p>{% endif %}
+{% if error %}<p class="mb-3 rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert" data-testid="error">{{ error }}</p>{% endif %}
+{% if secret_pin %}<div class="mb-3">{% include "web/_pin_slip.html" with pin=secret_pin %}</div>{% endif %}
+<div class="flex flex-wrap items-start justify-between gap-2"><div><h1 class="text-2xl font-bold">{{ customer.full_name }} {% if customer.status == 'BLOCKED' %}<span class="chip-void">{% trans "Blocked" %}</span>{% endif %}</h1>
+  <p class="text-ink-soft">{{ customer.customer_code }} · {{ customer.phone_e164|phone }}</p></div>
+  <div class="flex gap-2"><a class="btn-primary" href="{% url 'web:staff-sell' tenant.slug %}?customer={{ customer.public_id }}">{% trans "Sell pass" %}</a>
+  <a class="btn-secondary" href="{% url 'web:report-statement' tenant.slug customer.public_id %}">{% trans "Statement" %}</a></div></div>
+
+<div class="mt-4 grid gap-3 md:grid-cols-2">
+  <details class="card"><summary class="cursor-pointer font-semibold">{% trans "Edit profile" %}</summary>
+    <form method="post" action="{% url 'web:admin-customer-action' tenant.slug customer.public_id 'edit' %}" class="mt-3">{% csrf_token %}
+      <label class="label" for="en">{% trans "Name" %}</label><input class="input" id="en" name="full_name" value="{{ customer.full_name }}" required>
+      <label class="label mt-2" for="ead">{% trans "Delivery address" %}</label><textarea class="input" id="ead" name="address" rows="2" maxlength="300" data-testid="customer-address">{{ customer.address }}</textarea>
+      <label class="label mt-2" for="eno">{% trans "Notes" %}</label><textarea class="input" id="eno" name="notes" rows="2">{{ customer.notes }}</textarea>
+      <button class="btn-primary mt-3" type="submit">{% trans "Save" %}</button></form></details>
+  <details class="card"><summary class="cursor-pointer font-semibold">{% trans "Reset PIN" %}</summary>
+    <form method="post" action="{% url 'web:admin-customer-action' tenant.slug customer.public_id 'reset-pin' %}" class="mt-3">{% csrf_token %}
+      <label class="mr-4 inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="generate" checked> {% trans "Generate" %}</label>
+      <label class="inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="own"> {% trans "Set a PIN" %}</label>
+      <input class="input mt-1" name="pin" inputmode="numeric" aria-label="{% trans 'PIN' %}"><button class="btn-primary mt-3" type="submit">{% trans "Reset PIN" %}</button></form></details>
+  <details class="card"><summary class="cursor-pointer font-semibold">{% if customer.status == 'BLOCKED' %}{% trans "Unblock customer" %}{% else %}{% trans "Block customer" %}{% endif %}</summary>
+    <form method="post" action="{% if customer.status == 'BLOCKED' %}{% url 'web:admin-customer-action' tenant.slug customer.public_id 'unblock' %}{% else %}{% url 'web:admin-customer-action' tenant.slug customer.public_id 'block' %}{% endif %}" class="mt-3">{% csrf_token %}
+      <label class="label" for="blr">{% trans "Reason" %}</label><input class="input" id="blr" name="reason" required><button class="btn-danger mt-3" type="submit">{% trans "Confirm" %}</button></form></details>
+  <details class="card"><summary class="cursor-pointer font-semibold">{% trans "Adjust credits" %}</summary>
+    <form method="post" action="{% url 'web:admin-customer-action' tenant.slug customer.public_id 'adjust' %}" class="mt-3">{% csrf_token %}<input type="hidden" name="idempotency_key" value="{{ idem }}">
+      <label class="label" for="adp">{% trans "Pass" %}</label><select class="input" id="adp" name="pass">{% for p in passes %}{% if p.status == 'ACTIVE' %}<option value="{{ p.public_id }}">{{ p.plan_name }} ({{ p.meals_remaining }})</option>{% endif %}{% endfor %}</select>
+      <label class="label mt-2" for="adq">{% trans "Change (+/- meals)" %}</label><input class="input" id="adq" name="quantity" type="number" required>
+      <label class="label mt-2" for="adr">{% trans "Reason" %}</label><input class="input" id="adr" name="reason" required><button class="btn-primary mt-3" type="submit">{% trans "Adjust" %}</button></form></details>
+</div>
+
+<h2 class="mt-6 text-lg font-semibold">{% trans "Passes" %}</h2>
+<ul class="mt-2 grid gap-3">{% for p in passes %}<li class="card" data-testid="pass-row"><div class="flex flex-wrap items-center justify-between gap-2">
+  <div><p class="font-semibold">{{ p.plan_name }} <span class="{% if p.status == 'ACTIVE' %}chip-active{% elif p.status == 'QUEUED' %}chip-soon{% elif p.status == 'SUSPENDED' %}chip-void{% else %}chip-slate{% endif %}" data-testid="pass-status">{{ p.status }}</span></p>
+    <p class="text-sm text-ink-soft">{% if p.status == 'QUEUED' %}{% blocktrans with s=p.starts_at|date:"j M" m=p.meals_total e=p.ends_at|date:"j M" %}Starts {{ s }} · {{ m }} meals · ends {{ e }}{% endblocktrans %}{% else %}{{ p.starts_at|date:"j M Y" }} – {{ p.ends_at|date:"j M Y" }} · {{ p.meals_remaining }}/{{ p.meals_total }} {% trans "left" %}{% endif %}</p></div>
+  {% if is_owner and p.status != 'EXPIRED' and p.status != 'CANCELLED' %}<details class="w-full sm:w-auto"><summary class="btn-secondary cursor-pointer">{% trans "Pass actions" %}</summary>
+    <div class="mt-2 grid gap-2">{% for act, label in pass_actions %}{% if act == 'resume' and p.status == 'SUSPENDED' or act == 'suspend' and p.status == 'ACTIVE' or act == 'cancel' %}
+      <form method="post" action="{% url 'web:admin-customer-action' tenant.slug customer.public_id act %}" class="flex gap-2">{% csrf_token %}<input type="hidden" name="pass" value="{{ p.public_id }}">
+        <input class="input" name="reason" placeholder="{% trans 'Reason' %}" aria-label="{% trans 'Reason' %}" required><button class="btn-secondary shrink-0" type="submit">{{ label }}</button></form>{% endif %}{% endfor %}</div></details>{% endif %}
+</div></li>{% empty %}<li class="card text-ink-soft">{% trans "No passes yet." %}</li>{% endfor %}</ul>
+
+<h2 class="mt-6 text-lg font-semibold">{% trans "Payments" %}</h2>
+<ul class="mt-2 grid gap-3">{% for pay in payments %}<li class="card"><div class="flex flex-wrap items-center justify-between gap-2">
+  <div><p class="font-semibold">{{ pay.receipt_number }} · {{ pay.amount_paise|inr }} {% if pay.status == 'VOIDED' %}<span class="chip-void">{% trans "Void" %}</span>{% endif %}</p>
+    <p class="text-sm text-ink-soft">{{ pay.received_at|date:"j M Y" }} · {{ pay.method|pay_method }}{% if pay.reference %} · {{ pay.reference }}{% endif %}</p></div>
+  <div class="flex gap-2"><a class="btn-secondary" href="{% url 'web:receipt' tenant.slug pay.public_id %}">{% trans "Receipt" %}</a>
+  {% if pay.status == 'RECORDED' and not pay.can_void %}<span class="text-sm text-muted" data-testid="void-blocked" title="{{ pay.void_reason_text }}"><button type="button" class="btn-secondary" disabled aria-disabled="true">{% trans "Void" %}</button><span class="mt-1 block max-w-48 text-xs">{{ pay.void_reason_text }}</span></span>{% endif %}
+  {% if pay.status == 'RECORDED' and pay.can_void %}<details><summary class="btn-secondary cursor-pointer">{% trans "Void" %}</summary>
+    <form method="post" action="{% url 'web:admin-customer-action' tenant.slug customer.public_id 'void' %}" class="mt-2 flex gap-2">{% csrf_token %}<input type="hidden" name="payment" value="{{ pay.public_id }}">
+      <input class="input" name="reason" placeholder="{% trans 'Reason' %}" aria-label="{% trans 'Reason' %}" required><button class="btn-danger shrink-0" type="submit">{% trans "Void payment" %}</button></form></details>{% endif %}</div>
+</div></li>{% empty %}<li class="card text-ink-soft">{% trans "No payments yet." %}</li>{% endfor %}</ul>
+
+<h2 class="mt-6 text-lg font-semibold">{% trans "Ledger (latest 40)" %}</h2>
+<div class="mt-2 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="min-w-full divide-y divide-subtle" data-testid="ledger"><thead><tr><th class="th">{% trans "When" %}</th><th class="th">{% trans "What" %}</th>{% if multi_pass %}<th class="th">{% trans "Pass" %}</th>{% endif %}<th class="th">{% trans "Qty" %}</th><th class="th">{% trans "Balance" %}</th><th class="th">{% trans "Source" %}</th><th class="th">{% trans "By" %}</th><th class="th">{% trans "Reason" %}</th></tr></thead>
+<tbody class="divide-y divide-subtle">{% for r in ledger %}<tr><td class="td whitespace-nowrap">{{ r.e.occurred_at|date:"j M, g:i A" }}</td><td class="td">{{ r.label }}</td>{% if multi_pass %}<td class="td text-xs">{{ r.pass }}</td>{% endif %}<td class="td">{{ r.e.quantity|stringformat:"+d" }}</td><td class="td">{{ r.e.balance_after }}</td><td class="td">{{ r.source }}</td><td class="td">{{ r.by }}</td><td class="td">{{ r.e.reason }}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

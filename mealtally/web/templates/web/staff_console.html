@@ -1,0 +1,42 @@
+{% extends "web/base.html" %}{% load i18n static %}
+{% block title %}{% trans "Redeem" %}{% endblock %}
+{% block head_scripts %}{# vendored QR decoder: loaded only where the scanner lives (library first, then the browser wrapper) #}
+<script src="{% static 'vendor/zxing-library.min.js' %}" defer></script>
+<script src="{% static 'vendor/zxing-browser.min.js' %}" defer></script>{% endblock %}
+{% block content %}
+<section class="mx-auto grid max-w-6xl gap-4 lg:grid-cols-5" data-testid="counter-panes"><div class="lg:col-span-3">
+  <div class="card">
+    <div class="flex items-end gap-2" x-data="scanner" data-camera-error="{% trans 'Camera not available. Type the code or paste the QR text below.' %}" data-err-denied="{% trans 'Camera blocked — allow camera for this site in Settings → Safari → Camera, or use manual entry' %}" data-err-none="{% trans 'No camera found — use manual entry' %}">
+      <div class="grow">
+        <label class="label" for="q">{% trans "Customer phone, code or name" %}</label>
+        <input class="input text-lg" id="q" name="q" type="search" autofocus autocomplete="off" inputmode="search" placeholder="{% trans 'Type to search…' %}"
+               hx-get="{% url 'web:staff-search' tenant.slug %}" hx-trigger="input changed delay:250ms, search" hx-target="#results" hx-swap="innerHTML">
+      </div>
+      <button type="button" class="btn-primary h-12 shrink-0" @click="start" data-testid="scan-open">{% trans "Scan QR" %}</button>
+
+      <div x-show="open" x-cloak class="fixed inset-0 z-40 flex flex-col bg-ink/90 p-4" role="dialog" aria-modal="true" aria-label="{% trans 'Scan QR' %}">
+        <video x-ref="video" class="mx-auto max-h-[70vh] w-full max-w-md rounded-2xl bg-ink ring-4 ring-primary" playsinline webkit-playsinline muted autoplay data-testid="scan-video"></video>
+        <p x-show="hasError" class="mt-3 text-center font-medium text-accent" x-text="error"></p>
+        <button type="button" class="btn-secondary mx-auto mt-4" @click="stop">{% trans "Close" %}</button>
+      </div>
+      <form x-ref="form" class="hidden" hx-post="{% url 'web:staff-scan' tenant.slug %}" hx-target="#console-card" hx-swap="innerHTML" hx-disabled-elt="find button">
+        <input x-ref="token" name="token" type="hidden">
+      </form>
+    </div>
+    <div id="results" class="mt-2"></div>
+    <details class="mt-3" x-ref="manual" data-testid="manual-box">
+      <summary class="cursor-pointer text-sm font-medium text-ink-soft">{% trans "Camera not working? Type the code under the customer's QR" %}</summary>
+      <form class="mt-2 flex gap-2" hx-post="{% url 'web:staff-scan' tenant.slug %}" hx-target="#console-card" hx-swap="innerHTML">
+        <label class="sr-only" for="manual-token">{% trans "QR code" %}</label>
+        <input class="input font-mono uppercase" id="manual-token" name="token" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="{% trans 'XXXX XXXX XXXX' %}" required>
+        <button class="btn-secondary shrink-0" type="submit" data-testid="manual-scan">{% trans "Redeem" %}</button>
+      </form>
+    </details>
+  </div>
+  <div id="console-card" class="mt-4" aria-live="polite" data-card-reset="{% url 'web:staff-card-reset' tenant.slug %}">{% include "web/_card_empty.html" %}</div>
+  <p class="mt-3 hidden text-xs text-muted lg:block" data-testid="shortcuts"><kbd class="rounded border border-strong px-1">/</kbd> {% trans "search" %} · <kbd class="rounded border border-strong px-1">Enter</kbd> {% trans "redeem" %} · <kbd class="rounded border border-strong px-1">Esc</kbd> {% trans "clear" %}</p>
+  </div><aside class="lg:col-span-2" aria-label="{% trans 'Today' %}"><div class="flex items-center justify-between"><h2 class="text-lg font-semibold">{% trans "Today's redemptions" %}</h2>
+    <button type="button" class="btn-secondary" x-data="beepToggle" @click="toggle" data-on="{% trans 'Sound on' %}" data-off="{% trans 'Sound off' %}" x-text="label">{% trans "Sound on" %}</button></div>
+  <div id="today" class="mt-3" hx-get="{% url 'web:staff-today' tenant.slug %}" hx-trigger="load, mealtally:refresh-today from:body">{% include "web/_today.html" %}</div>
+</aside></section>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<p class="text-sm"><a class="link" href="{% url 'web:admin-settings' tenant.slug %}">{% trans "Business profile" %}</a> › {% trans "Meal times" %}</p>
+<h1 class="text-2xl font-bold">{% trans "Meal times" %}</h1>
+<p class="mt-1 max-w-xl text-sm text-ink-soft">{% blocktrans with tz=tenant.timezone %}When each meal is served, in your restaurant's time ({{ tz }}). A plan that is set to a meal time can only be redeemed while that meal is served. Grace minutes allow a little before the start and after the end. An end before the start (22:00–01:00) runs past midnight.{% endblocktrans %}</p>
+{% if notice %}<p class="mt-2 max-w-xl rounded-lg bg-ok p-3 text-sm font-semibold text-ok-ink" role="status" data-testid="notice">{{ notice }}</p>{% endif %}
+{% if error %}<p class="mt-2 max-w-xl rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert" data-testid="error">{{ error }}</p>{% endif %}
+<div class="mt-3 grid max-w-xl gap-3">
+{% for s in slots %}
+  <form method="post" class="card grid gap-3" data-testid="meal-slot">{% csrf_token %}<input type="hidden" name="slot" value="{{ s.public_id }}">
+    <div class="grid gap-3 sm:grid-cols-2">
+      <div><label class="label" for="name-{{ s.id }}">{% trans "Name" %}</label><input class="input" id="name-{{ s.id }}" name="name" maxlength="60" required value="{{ s.name }}"></div>
+      <div><label class="label" for="name_hi-{{ s.id }}">{% trans "Name in Hindi (optional)" %}</label><input class="input" id="name_hi-{{ s.id }}" name="name_hi" maxlength="60" value="{{ s.name_hi }}"></div>
+    </div>
+    <div class="grid grid-cols-3 gap-3">
+      <div><label class="label" for="start-{{ s.id }}">{% trans "Starts" %}</label><input class="input" id="start-{{ s.id }}" name="start_time" type="time" required value="{{ s.start_time|time:'H:i' }}"></div>
+      <div><label class="label" for="end-{{ s.id }}">{% trans "Ends" %}</label><input class="input" id="end-{{ s.id }}" name="end_time" type="time" required value="{{ s.end_time|time:'H:i' }}"></div>
+      <div><label class="label" for="grace-{{ s.id }}">{% trans "Grace (min)" %}</label><input class="input" id="grace-{{ s.id }}" name="grace_minutes" type="number" min="0" max="120" value="{{ s.grace_minutes }}"></div>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="is_active" {% if s.is_active %}checked{% endif %}> {% trans "Served" %}</label>
+      <button class="btn-secondary" type="submit">{% blocktrans with n=s.name %}Save {{ n }}{% endblocktrans %}</button>
+    </div>
+  </form>
+{% endfor %}
+  <form method="post" class="card grid gap-3" data-testid="meal-slot-new">{% csrf_token %}
+    <h2 class="font-semibold">{% trans "Add a meal time" %}</h2>
+    <div><label class="label" for="name-new">{% trans "Name" %}</label><input class="input" id="name-new" name="name" maxlength="60" required placeholder="{% trans 'Evening snacks' %}" value="{{ form.name|default:'' }}"></div>
+    <div class="grid grid-cols-3 gap-3">
+      <div><label class="label" for="start-new">{% trans "Starts" %}</label><input class="input" id="start-new" name="start_time" type="time" required value="{{ form.start_time|default:'' }}"></div>
+      <div><label class="label" for="end-new">{% trans "Ends" %}</label><input class="input" id="end-new" name="end_time" type="time" required value="{{ form.end_time|default:'' }}"></div>
+      <div><label class="label" for="grace-new">{% trans "Grace (min)" %}</label><input class="input" id="grace-new" name="grace_minutes" type="number" min="0" max="120" value="{{ form.grace_minutes|default:'0' }}"></div>
+    </div>
+    <input type="hidden" name="is_active" value="on">
+    <button class="btn-primary" type="submit">{% trans "Add meal time" %}</button>
+  </form>
+</div>
+{% endblock %}

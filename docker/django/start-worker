@@ -1,0 +1,4 @@
+#!/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-only
+set -o errexit -o pipefail -o nounset
+exec celery -A config.celery_app worker -l INFO

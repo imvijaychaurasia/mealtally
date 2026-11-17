@@ -1,0 +1,14 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<h1 class="text-2xl font-bold">{% trans "Audit log" %}</h1>
+<form method="get" class="card mt-3 grid gap-3 sm:grid-cols-4">
+  <div><label class="label" for="actor">{% trans "Who" %}</label><input class="input" id="actor" name="actor" value="{{ q.actor }}"></div>
+  <div><label class="label" for="action">{% trans "Action" %}</label><input class="input" id="action" name="action" value="{{ q.action }}" placeholder="payment, pass, ledger…"></div>
+  <div><label class="label" for="start">{% trans "From" %}</label><input class="input" id="start" name="start" type="date" value="{{ q.start }}"></div>
+  <div><label class="label" for="end">{% trans "To" %}</label><input class="input" id="end" name="end" type="date" value="{{ q.end }}"></div>
+  <button class="btn-primary sm:col-span-4" type="submit">{% trans "Filter" %}</button></form>
+<div class="mt-3 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="min-w-full divide-y divide-subtle"><thead><tr><th class="th">{% trans "When" %}</th><th class="th">{% trans "What happened" %}</th></tr></thead>
+<tbody class="divide-y divide-subtle">{% for row in events %}<tr data-testid="audit-row"><td class="td whitespace-nowrap align-top">{{ row.e.created_at|date:"j M, g:i A" }}</td><td class="td"><p data-testid="audit-summary">{{ row.summary }}</p>
+  <details class="mt-1 text-xs text-muted"><summary class="cursor-pointer select-none">{% trans "Details" %} · {{ row.e.action }}</summary><pre class="mt-1 max-w-full overflow-x-auto whitespace-pre-wrap break-all rounded-lg bg-soft p-2" data-testid="audit-raw">{{ row.raw }}</pre></details></td></tr>
+{% empty %}<tr><td class="td text-muted" colspan="2">{% trans "Nothing matches." %}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

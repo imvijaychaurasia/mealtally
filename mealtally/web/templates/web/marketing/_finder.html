@@ -1,0 +1,7 @@
+{% load i18n %}<form method="post" action="{% url 'web:go' %}" data-tenant-finder>{% csrf_token %}
+  <label class="label" for="code-{{ fid }}">{% trans "Restaurant login" %}</label>
+  <input class="input" id="code-{{ fid }}" name="code" required autocomplete="off" autocapitalize="none" placeholder="{% trans 'Enter your restaurant code' %}">
+  <p class="mt-1 text-xs text-muted">{% trans "The code is the last part of your restaurant's web address." %}</p>
+  <div class="mt-2 hidden flex-wrap gap-1" data-recent></div>
+  <button class="btn-primary mt-3 w-full" type="submit">{% trans "Continue" %}</button>
+</form>

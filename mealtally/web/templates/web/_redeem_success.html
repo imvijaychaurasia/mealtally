@@ -1,0 +1,11 @@
+{% load i18n %}
+<div id="results" hx-swap-oob="innerHTML"></div>
+<div class="rounded-2xl bg-success-solid p-5 text-center text-on-primary" role="status" data-testid="redeem-success" data-entry="{{ entry.public_id }}">
+  <p class="text-3xl font-extrabold">✓ {% blocktrans with n=left %}Meal redeemed — {{ n }} left{% endblocktrans %}</p>
+  <p class="mt-1 text-lg">{{ customer.full_name }} · {{ customer.customer_code }}</p>
+  {% if result.replayed %}<p class="mt-1 text-sm">{% trans "(This was already recorded.)" %}</p>{% endif %}
+  <div x-data="undoBar" x-show="active" class="mt-3">
+    <form hx-post="{% url 'web:staff-undo' tenant.slug %}" hx-target="#console-card" hx-swap="innerHTML"><input type="hidden" name="entry" value="{{ entry.public_id }}">
+      <button class="btn-secondary min-h-12 w-full text-danger-ink" type="submit" data-testid="undo"><span>{% trans "Undo" %} (<span x-text="n">30</span>s)</span></button></form>
+  </div>
+</div>

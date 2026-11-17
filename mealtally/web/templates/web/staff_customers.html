@@ -1,0 +1,8 @@
+{% extends "web/base.html" %}{% load i18n %}
+{% block content %}
+<div class="flex flex-wrap items-center justify-between gap-2"><h1 class="text-2xl font-bold">{% trans "Customers" %}</h1><a class="btn-primary" href="{% url 'web:staff-customer-new' tenant.slug %}">{% trans "New customer" %}</a></div>
+<form class="card mt-3" hx-get="{% url 'web:staff-customers' tenant.slug %}" hx-trigger="input changed delay:250ms" hx-target="#rows">
+  <label class="label" for="q">{% trans "Search by phone, code or name" %}</label><input class="input" id="q" name="q" type="search" value="{{ q }}" autocomplete="off"></form>
+<div class="mt-3 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="min-w-full divide-y divide-subtle"><thead><tr><th class="th">{% trans "Name" %}</th><th class="th">{% trans "Phone" %}</th><th class="th">{% trans "Meals left" %}</th><th class="th">{% trans "Valid until" %}</th></tr></thead>
+<tbody id="rows" class="divide-y divide-subtle">{% include "web/_staff_customer_rows.html" %}</tbody></table></div>
+{% endblock %}

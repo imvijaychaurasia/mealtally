@@ -1,0 +1,102 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# `docker compose up -d` builds and starts a working stack on http://localhost:${MEALTALLY_PORT:-8000}.
+# Run `make init` first: it writes the secrets this file reads from .env.
+# Profiles: `dev` adds Mailpit (mail catcher on http://localhost:8025); `test` is the test runner used by `make test`.
+name: mealtally
+
+x-app: &app
+  build:
+    context: .
+    target: runtime
+  image: mealtally:local
+  restart: unless-stopped
+  env_file: .env
+  environment:
+    POSTGRES_HOST: postgres
+    REDIS_URL: redis://valkey:6379/0
+  depends_on:
+    postgres:
+      condition: service_healthy
+    valkey:
+      condition: service_healthy
+
+services:
+  web:
+    <<: *app
+    command: /docker/start-web
+    ports:
+      - "${MEALTALLY_BIND:-0.0.0.0}:${MEALTALLY_PORT:-8000}:8000"
+    volumes:
+      - media:/app/mealtally/media
+
+  worker:
+    <<: *app
+    command: /docker/start-worker
+    healthcheck:
+      disable: true
+
+  beat:
+    <<: *app
+    command: /docker/start-beat
+    healthcheck:
+      disable: true
+
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    image: mealtally-postgres:local
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./backups:/backups
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  valkey:
+    image: docker.io/valkey/valkey:8.1-alpine
+    restart: unless-stopped
+    command: ["valkey-server", "--appendonly", "yes", "--save", "60", "1"]
+    volumes:
+      - valkey_data:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  mailpit:
+    image: docker.io/axllent/mailpit:v1.27
+    profiles: [dev]
+    ports:
+      - "127.0.0.1:8025:8025"
+
+  test:
+    build:
+      context: .
+      target: dev
+    image: mealtally:dev
+    profiles: [test]
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+      REDIS_URL: redis://valkey:6379/0
+      DJANGO_SETTINGS_MODULE: config.settings.test
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+      valkey:
+        condition: service_healthy
+    entrypoint: ["/docker/entrypoint"]
+    command: ["pytest"]
+
+volumes:
+  postgres_data: {}
+  valkey_data: {}
+  media: {}

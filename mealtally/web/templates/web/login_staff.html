@@ -1,0 +1,7 @@
+{% extends "web/auth_base.html" %}{% load i18n %}
+{% block title %}{% trans "Staff login" %} · {{ brand_name }}{% endblock %}
+{% block panel %}
+<h1 class="auth-title">{% trans "Staff login" %}</h1>
+<p class="auth-sub">{% trans "Sign in to redeem meals, sell passes or manage the business." %}</p>
+{% include "web/_auth_staff_form.html" with back=True %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% load i18n %}
+{% for day, items in groups %}
+<h2 class="mt-4 text-sm font-semibold uppercase tracking-wide text-muted">{{ day|date:"D, j M Y" }}</h2>
+<ul class="card mt-1 divide-y divide-subtle p-0">
+  {% for i in items %}
+  <li class="flex items-center justify-between gap-3 px-4 py-3" data-entry="{{ i.e.entry_type }}">
+    <div><p class="font-medium">{{ i.label }}</p><p class="text-sm text-muted">{{ i.at|time:"g:i A" }}{% if i.e.reason %} · {{ i.e.reason }}{% endif %}</p></div>
+    <div class="text-right"><p class="font-semibold {% if i.e.quantity < 0 %}text-ink{% else %}text-ok-ink{% endif %}">{{ i.e.quantity|stringformat:"+d" }}</p><p class="text-sm text-muted">{% blocktrans with b=i.e.balance_after %}Balance {{ b }}{% endblocktrans %}</p></div>
+  </li>
+  {% endfor %}
+</ul>
+{% empty %}<p class="card mt-3 text-ink-soft">{% trans "Nothing here yet." %}</p>{% endfor %}
+{% if next_page %}<div hx-get="{% url 'web:me-history' tenant.slug %}?page={{ next_page }}" hx-trigger="revealed" hx-swap="outerHTML" hx-target="this"><p class="py-4 text-center text-sm text-muted">{% trans "Loading…" %}</p></div>{% endif %}

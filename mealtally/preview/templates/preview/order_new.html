@@ -1,0 +1,34 @@
+{% extends "preview/base.html" %}{% load i18n %}
+{% block pv_content %}
+{% include "preview/_head.html" with title=_("New order") sub=_("Counter or on-demand order. Reads the one wallet ledger — the same balance everywhere.") %}
+<form class="mt-4 grid gap-4 lg:grid-cols-3" data-order-calc data-today="{{ today }}" data-fee="3000" autocomplete="off">
+  <div class="grid gap-4 lg:col-span-2">
+    <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Customer" %}</h2>
+      <div><label class="label" for="customer">{% trans "Search by name or phone" %}</label><input class="input" id="customer" name="customer" list="customer-list" placeholder="{% trans 'e.g. Anita' %}" value="{{ customers.0.name }}">
+        <datalist id="customer-list">{% for c in customers %}<option value="{{ c.name }}" data-balance="{{ c.bal }}" data-trust="{{ c.trust }}">{{ c.phone|phone_last4 }}</option>{% endfor %}</datalist></div>
+      <div class="grid gap-3 sm:grid-cols-2">
+        <div><label class="label" for="date">{% trans "Date" %}</label><input class="input" type="date" id="date" name="date" value="{{ tomorrow }}"></div>
+        <div><label class="label" for="slot">{% trans "Meal slot" %}</label><select class="input" id="slot" name="slot">{% for s in D.slots %}<option value="{{ s.key }}" data-end="{{ s.end_s }}" {% if s.key == "LUNCH" %}selected{% endif %}>{{ s.name }} ({{ s.start_s }}–{{ s.end_s }})</option>{% endfor %}</select></div>
+      </div>
+      <p class="chip-red hidden w-fit" data-closed role="alert"></p>
+    </section>
+    <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Items" %}</h2>
+      <ul class="divide-y divide-subtle">
+      {% for dsh in dishes|slice:":6" %}<li class="flex items-center justify-between gap-3 py-2" data-line data-price="{{ dsh.price|add:0 }}00"><span>{{ dsh.name }} <span class="text-sm text-muted">· ₹{{ dsh.price }}</span></span>
+        <span class="flex items-center gap-2" data-stepper data-min="0" data-max="9"><button type="button" class="btn-secondary px-3" data-step="-1" aria-label="{% trans 'Less' %}">−</button><span class="w-6 text-center font-semibold" data-val>{% if forloop.first %}1{% else %}0{% endif %}</span><button type="button" class="btn-secondary px-3" data-step="1" aria-label="{% trans 'More' %}">+</button></span></li>{% endfor %}
+      </ul></section>
+    <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Delivery & payment" %}</h2>
+      <div class="flex flex-wrap gap-4"><label class="flex min-h-11 items-center gap-2"><input type="radio" name="method" value="DELIVERY" checked> {% trans "Home delivery (₹30)" %}</label><label class="flex min-h-11 items-center gap-2"><input type="radio" name="method" value="PICKUP"> {% trans "Pick-up" %}</label></div>
+      <div class="flex flex-wrap gap-4"><label class="flex min-h-11 items-center gap-2"><input type="radio" name="pay" value="WALLET" checked> {% trans "Charge wallet" %}</label><label class="flex min-h-11 items-center gap-2"><input type="radio" name="pay" value="COD"> {% trans "Pay on delivery" %}</label></div>
+      <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="override"> {% trans "Vendor override — allow negative balance" %}</label>
+    </section>
+  </div>
+  <aside class="card h-fit lg:sticky lg:top-4"><h2 class="font-semibold">{% trans "Summary" %}</h2>
+    <dl class="mt-2 grid gap-1"><div class="flex justify-between"><dt>{% trans "Items" %}</dt><dd data-items>—</dd></div><div class="flex justify-between"><dt>{% trans "Delivery fee" %}</dt><dd data-feeline>—</dd></div><div class="flex justify-between border-t border-subtle pt-1"><dt>{% trans "Order total" %}</dt><dd class="font-semibold" data-total>—</dd></div><div class="flex justify-between"><dt>{% trans "Current balance" %}</dt><dd data-cur>—</dd></div><div class="flex justify-between border-t border-subtle pt-1"><dt>{% trans "Balance after order" %}</dt><dd class="font-bold" data-proj>—</dd></div></dl>
+    <p class="mt-2 hidden rounded-lg bg-warn p-2 text-sm text-warn-ink" data-overdraw role="alert">{% trans "This will overdraw the wallet — placed on vendor authority." %}</p>
+    <p class="mt-2 hidden rounded-lg bg-danger p-2 text-sm text-danger-ink" data-over-limit role="alert">{% trans "Beyond the trust limit — needs the vendor override above." %}</p>
+    <button class="btn-primary mt-3 w-full" type="button" data-place data-pv="{% trans 'Preview — order not placed (demo mode only)' %}">{% trans "Place order" %}</button>
+    <p class="mt-2 text-xs text-muted" data-testid="paid-by">{% trans "Paid-by stamp will read" %}: {{ request.user.name|default:request.user.get_username }} · {{ role|title }}</p>
+  </aside>
+</form>
+{% endblock %}

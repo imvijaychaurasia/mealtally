@@ -1,0 +1,28 @@
+{% load i18n %}<header class="mk-header">
+  <div class="mk-wrap flex items-center justify-between gap-3 py-2">
+    <a class="flex min-h-11 items-center gap-2 text-lg font-extrabold text-primary" href="{% url 'web:landing' %}"><span class="auth-logo !mb-0 !h-9 !w-9 !bg-primary !text-on-primary !text-lg" aria-hidden="true">B</span>Mealtally</a>
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="{% trans 'Sections' %}">
+      <a class="mk-navlink" href="#features">{% trans "Features" %}</a><a class="mk-navlink" href="#how-it-works">{% trans "How it works" %}</a><a class="mk-navlink" href="#tour">{% trans "Product tour" %}</a><a class="mk-navlink" href="#who-its-for">{% trans "Who it's for" %}</a><a class="mk-navlink" href="#pricing">{% trans "Pricing" %}</a><a class="mk-navlink" href="#faq">{% trans "FAQ" %}</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <form method="post" action="{% url 'set_language' %}" class="hidden sm:block">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="btn-secondary min-h-11 px-3 text-sm" type="submit" data-testid="lang" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+      {% if dashboard_url %}<a class="btn-secondary hidden min-h-11 whitespace-nowrap sm:inline-flex" href="{{ dashboard_url }}" data-testid="go-dashboard">{% trans "Dashboard" %}</a>
+      {% else %}
+      <details class="relative hidden sm:block" data-menu><summary class="btn-secondary min-h-11 cursor-pointer list-none">{% trans "Log in" %}<svg class="ml-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <div class="mk-pop">
+          {% include "web/marketing/_finder.html" with fid="d" %}
+          <a class="mt-3 block min-h-11 rounded-lg px-2 py-3 text-sm font-semibold text-primary hover:bg-track" href="{% url 'web:global-login' %}">{% trans "Platform admin" %}</a>
+        </div></details>
+      {% endif %}
+      <a class="btn-primary hidden min-h-11 sm:inline-flex" href="#book-a-demo">{% trans "Book a demo" %}</a>
+      <details class="relative lg:hidden" data-menu><summary class="btn-secondary min-h-11 cursor-pointer list-none px-3" aria-label="{% trans 'Menu' %}">{% include "web/_icon.html" with name="menu-burger" %}</summary>
+        <div class="mk-pop !w-72">
+          <a class="mk-drawer-link" href="#features">{% trans "Features" %}</a><a class="mk-drawer-link" href="#how-it-works">{% trans "How it works" %}</a><a class="mk-drawer-link" href="#who-its-for">{% trans "Who it's for" %}</a><a class="mk-drawer-link" href="#pricing">{% trans "Pricing" %}</a><a class="mk-drawer-link" href="#faq">{% trans "FAQ" %}</a>
+          <hr class="my-2 border-subtle">
+          {% if dashboard_url %}<a class="mk-drawer-link" href="{{ dashboard_url }}">{% trans "Go to my dashboard" %}</a>{% else %}{% include "web/marketing/_finder.html" with fid="m" %}<a class="mk-drawer-link" href="{% url 'web:global-login' %}">{% trans "Platform admin" %}</a>{% endif %}
+          <form method="post" action="{% url 'set_language' %}">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="mk-drawer-link w-full text-left" type="submit" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+          <a class="btn-primary mt-2 w-full" href="#book-a-demo">{% trans "Book a demo" %}</a>
+        </div></details>
+    </div>
+  </div>
+</header>

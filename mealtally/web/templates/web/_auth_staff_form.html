@@ -1,0 +1,10 @@
+{% load i18n %}<form method="post" class="mt-6" data-submit-once novalidate>{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">
+  {% if error %}<p class="auth-alert" role="alert"><svg class="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>{{ error }}</p>{% endif %}
+  <label class="label" for="login">{% trans "Email or phone" %}</label>
+  <input class="input" id="login" name="login" autocomplete="username" required value="{{ login|default:'' }}">
+  <div class="mt-4 flex items-center justify-between"><label class="label mb-0" for="password">{% trans "Password" %}</label><button type="button" class="min-h-11 px-1 text-sm font-semibold text-primary underline" data-reveal="password" aria-controls="password" aria-pressed="false" data-show="{% trans 'Show' %}" data-hide="{% trans 'Hide' %}">{% trans "Show" %}</button></div>
+  <input class="input" id="password" name="password" type="password" autocomplete="current-password" required>
+  <button class="btn-primary mt-6 w-full" type="submit" data-testid="login-submit"><span class="btn-spinner hidden" aria-hidden="true"></span><span data-label>{% trans "Log in" %}</span></button>
+  <p class="mt-4">{% if email_enabled %}<a class="auth-link" href="{% url 'account_reset_password' %}">{% trans "Forgot password?" %}</a>{% else %}<span class="text-sm text-ink-soft">{% trans "Forgot your password? Ask the owner to reset it." %}</span>{% endif %}</p>
+</form>
+{% if back and tenant %}<p class="mt-2"><a class="auth-link" href="{% url 'web:tenant-home' tenant.slug %}">{% trans "Back" %}</a></p>{% endif %}

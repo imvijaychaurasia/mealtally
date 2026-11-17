@@ -1,0 +1,12 @@
+{% extends "preview/base.html" %}{% load i18n %}
+{% block pv_content %}
+<div class="flex flex-wrap items-center gap-2">{% include "preview/_head.html" with sub=_("Meal slots, the dish library and the weekly plan.") %}<a class="btn-primary ml-auto" href="{% url 'preview:menu-planner' tenant.slug %}">{% trans "Weekly planner" %}</a></div>
+<div class="mt-4" data-tabs>
+  <div class="flex gap-1 border-b border-subtle" role="tablist"><button type="button" role="tab" data-tab="slots" aria-selected="true" class="border-b-2 border-primary px-3 py-2 font-medium text-primary">{% trans "Meal slots" %}</button><button type="button" role="tab" data-tab="dishes" aria-selected="false" class="border-b-2 border-transparent px-3 py-2 font-medium text-ink-soft">{% trans "Dishes" %} ({{ dishes|length }})</button></div>
+  <div data-pane="slots" class="mt-3 grid gap-3 sm:grid-cols-3">{% for s in slots %}<div class="card"><h2 class="font-semibold">{{ s.name }}</h2><p class="text-ink-soft">{{ s.start_s }} – {{ s.end_s }}</p><p class="mt-1 text-sm">{% trans "Orders lock" %} <b>{{ s.cutoff_min }} min</b> {% trans "before start" %} ({{ s.cutoff_s }})</p><button class="btn-secondary mt-3" type="button" data-pv>{% trans "Edit slot" %}</button></div>{% endfor %}
+    <div class="card flex items-center justify-center"><button class="btn-secondary" type="button" data-pv>+ {% trans "Add slot" %}</button></div></div>
+  <div data-pane="dishes" class="mt-3 hidden"><div class="mb-2 flex flex-wrap gap-2"><input class="input max-w-xs" data-filter="#dish-table" placeholder="{% trans 'Search dishes' %}" aria-label="{% trans 'Search dishes' %}"><button class="btn-primary" type="button" data-pv>+ {% trans "Add dish" %}</button></div>
+    <div class="overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="w-full" id="dish-table"><thead class="bg-soft"><tr><th class="th">{% trans "Dish" %}</th><th class="th">{% trans "Diet" %}</th><th class="th">{% trans "Allergens" %}</th><th class="th">{% trans "Category" %}</th><th class="th"></th></tr></thead><tbody class="divide-y divide-subtle">
+    {% for d in dishes %}<tr data-row><td class="td font-medium">{{ d.name }}</td><td class="td">{% chip d.diet %}</td><td class="td">{% for a in d.allergens %}<span class="chip-red mr-1 text-xs">{{ a }}</span>{% empty %}—{% endfor %}</td><td class="td">{{ d.category }}</td><td class="td"><button class="btn-secondary px-3" type="button" data-pv>{% trans "Edit" %}</button></td></tr>{% endfor %}</tbody></table></div></div>
+</div>
+{% endblock %}

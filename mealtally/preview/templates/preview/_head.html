@@ -1,0 +1,5 @@
+{% load i18n %}<div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+  <h1 class="text-2xl font-bold">{{ title|default:pv_module.title }}</h1>
+  {% if pv_badge and pv_module.status == "preview" %}<span class="chip-preview" data-testid="preview-badge" title="{% trans 'Rolling out next — shown with demo data' %}">{% trans "Preview" %}</span>{% endif %}
+</div>
+{% if sub %}<p class="mt-1 text-ink-soft">{{ sub }}</p>{% endif %}

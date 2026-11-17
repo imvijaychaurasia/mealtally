@@ -1,0 +1,50 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: ruff
+        run: |
+          uvx ruff@0.17.4 check .
+          uvx ruff@0.17.4 format --check .
+
+  leak-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: gitleaks, trufflehog and the denylist
+        run: scripts/leak-scan.sh
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Configure (throw-away secrets generated per run)
+        run: |
+          cp .env.example .env
+          for key in DJANGO_SECRET_KEY POSTGRES_PASSWORD MEALTALLY_DB_OWNER_PASSWORD MEALTALLY_DB_APP_PASSWORD; do
+            sed -i "s|^${key}=.*|${key}=$(openssl rand -hex 24)|" .env
+          done
+          sed -i "s|^MEALTALLY_ADMIN_EMAIL=.*|MEALTALLY_ADMIN_EMAIL=admin@example.com|" .env
+      - name: Tests (coverage must stay at 95% or above)
+        run: make test
+      - name: Migrations are complete
+        run: docker compose --profile test run --rm test python manage.py makemigrations --check --dry-run

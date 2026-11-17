@@ -1,0 +1,98 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Production: a pinned image (never built on the server), health checks, non-root containers, nightly backups.
+#   docker compose -f compose.prod.yml up -d
+# Set MEALTALLY_IMAGE in .env to a released tag, for example ghcr.io/<owner>/mealtally:0.1.0.
+# Put a TLS proxy in front (docs/deploy.md); Mealtally itself serves plain HTTP.
+name: mealtally
+
+x-app: &app
+  image: ${MEALTALLY_IMAGE:?set MEALTALLY_IMAGE in .env to a released image tag}
+  pull_policy: missing
+  restart: unless-stopped
+  env_file: .env
+  environment:
+    POSTGRES_HOST: postgres
+    REDIS_URL: redis://valkey:6379/0
+  depends_on:
+    postgres:
+      condition: service_healthy
+    valkey:
+      condition: service_healthy
+  logging: &logging
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "5"
+
+services:
+  web:
+    <<: *app
+    command: /docker/start-web
+    ports:
+      - "${MEALTALLY_BIND:-0.0.0.0}:${MEALTALLY_PORT:-8000}:8000"
+    volumes:
+      - media:/app/mealtally/media
+
+  worker:
+    <<: *app
+    command: /docker/start-worker
+    healthcheck:
+      disable: true
+
+  beat:
+    <<: *app
+    command: /docker/start-beat
+    healthcheck:
+      disable: true
+
+  postgres:
+    image: ${MEALTALLY_POSTGRES_IMAGE:-mealtally-postgres:local}
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    logging: *logging
+
+  valkey:
+    image: docker.io/valkey/valkey:8.1-alpine
+    restart: unless-stopped
+    command: ["valkey-server", "--appendonly", "yes", "--save", "60", "1"]
+    volumes:
+      - valkey_data:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    logging: *logging
+
+  # Nightly pg_dump into ./backups (MEALTALLY_BACKUP_AT_UTC, kept MEALTALLY_BACKUP_RETENTION_DAYS days).
+  backup:
+    image: ${MEALTALLY_POSTGRES_IMAGE:-mealtally-postgres:local}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+      BACKUP_AT_UTC: ${MEALTALLY_BACKUP_AT_UTC:-20:30}
+      BACKUP_RETENTION_DAYS: ${MEALTALLY_BACKUP_RETENTION_DAYS:-14}
+    entrypoint: ["/bin/bash", "/usr/local/bin/backup-loop.sh"]
+    volumes:
+      - ./docker/backup/backup-loop.sh:/usr/local/bin/backup-loop.sh:ro
+      - ./backups:/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
+    logging: *logging
+
+volumes:
+  postgres_data: {}
+  valkey_data: {}
+  media: {}

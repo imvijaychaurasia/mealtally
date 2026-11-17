@@ -1,0 +1,38 @@
+{% load static i18n %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="{{ theme }}" class="h-full bg-page">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ brand_name }}{% endblock %}</title>
+  <meta name="htmx-config" content='{"allowEval":false,"allowScriptTags":false,"includeIndicatorStyles":false,"selfRequestsOnly":true}'>
+  <meta name="theme-color" content="{{ theme_color }}">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="{% static 'icons/icon-192.png' %}">
+  <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script src="{% static 'js/app.js' %}" defer></script>
+</head>
+<body class="min-h-full font-sans text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
+  <div class="auth-page">
+    <svg class="auth-blob" viewBox="0 0 600 600" aria-hidden="true" focusable="false"><path d="M437 98c70 52 123 140 96 217-26 77-131 143-226 154-96 11-181-33-224-110S-4 175 63 110 245 4 330 10c33 2 75 38 107 88z" class="fill-primary"/></svg>
+    <div class="auth-card">
+      <aside class="auth-visual" data-testid="auth-visual">
+        <svg class="auth-dots" aria-hidden="true" focusable="false"><defs><pattern id="spice" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2" class="fill-on-primary"/><circle cx="19" cy="17" r="1.4" class="fill-on-primary"/></pattern></defs><rect width="100%" height="100%" fill="url(#spice)"/></svg>
+        {% include "web/_auth_art.html" %}
+        <div class="auth-brand">
+          <span class="auth-logo" aria-hidden="true">{{ brand_name|slice:":1" }}</span>
+          <p class="auth-name" data-testid="auth-name">{{ brand_name }}</p>
+          {% if brand_tagline %}<p class="auth-tagline max-lg:hidden">{{ brand_tagline }}</p>{% endif %}
+          {% if brand_address %}<p class="auth-address max-lg:hidden">{{ brand_address }}</p>{% endif %}
+        </div>
+        <p class="auth-powered max-lg:hidden">{% trans "Powered by Mealtally" %}</p>
+      </aside>
+      <form method="post" action="{% url 'set_language' %}" class="auth-lang">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="btn-secondary min-h-11 px-3 text-sm" type="submit" data-testid="lang" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+      <main id="main" class="auth-panel">
+        {% block panel %}{% endblock %}
+      </main>
+    </div>
+  </div>
+</body>
+</html>

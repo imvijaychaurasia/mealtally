@@ -1,0 +1,23 @@
+# never in an image: secrets, data, local tooling
+.env
+.env.*
+!.env.example
+.demo-credentials*
+*credentials*.txt
+backups/
+*.dump
+.git
+.github
+.venv/
+**/__pycache__/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+node_modules/
+staticfiles/
+mealtally/media/
+docs/screenshots/
+.idea/
+.vscode/

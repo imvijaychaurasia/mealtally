@@ -1,0 +1,7 @@
+{% extends "web/auth_base.html" %}{% load i18n %}
+{% block title %}{% trans "Sign in" %} · Mealtally{% endblock %}
+{% block panel %}
+<h1 class="auth-title">{% trans "Sign in" %}</h1>
+<p class="auth-sub">{% trans "Platform administrators and restaurant staff: no restaurant code needed." %}</p>
+{% include "web/_auth_staff_form.html" %}
+{% endblock %}

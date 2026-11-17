@@ -1,0 +1,4274 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-13 16:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: mealtally/preview/nav.py:93 mealtally/web/context.py:54
+#: mealtally/web/templates/web/_card.html:11
+#: mealtally/web/templates/web/admin_customer.html:8
+#: mealtally/web/templates/web/sell.html:2
+msgid "Sell pass"
+msgstr "पास बेचें"
+
+#: mealtally/preview/nav.py:100 mealtally/preview/templates/preview/more.html:5
+msgid "Money"
+msgstr "पैसा"
+
+#: mealtally/preview/nav.py:108 mealtally/preview/nav.py:128
+#: mealtally/preview/templates/preview/me_meals.html:13
+#: mealtally/preview/templates/preview/me_order.html:6
+#: mealtally/preview/templates/preview/order_new.html:18
+#: mealtally/preview/templates/preview/subscription_new.html:12
+#: mealtally/web/context.py:71 mealtally/web/context.py:72
+#: mealtally/web/templates/web/admin_more.html:3
+msgid "More"
+msgstr "और"
+
+#: mealtally/preview/templates/preview/_head.html:3
+msgid "Rolling out next — shown with demo data"
+msgstr ""
+
+#: mealtally/preview/templates/preview/_head.html:3
+#: mealtally/preview/templates/preview/_plans_tabs.html:3
+#: mealtally/preview/templates/preview/invoice_detail.html:4
+#: mealtally/preview/templates/preview/kitchen_labels.html:5
+#: mealtally/preview/templates/preview/more.html:7
+#: mealtally/preview/templates/preview/order_detail.html:4
+#: mealtally/preview/templates/preview/platform_plans.html:5
+#: mealtally/preview/templates/preview/signup_wizard.html:5
+#: mealtally/preview/templates/preview/subscription_detail.html:4
+#: mealtally/preview/templates/preview/today.html:26
+#: mealtally/preview/templates/preview/wallet_customer.html:4
+#: mealtally/web/templates/web/base.html:53 mealtally/web/templates/web/sell.html:35
+msgid "Preview"
+msgstr "प्रीव्यू"
+
+#: mealtally/preview/templates/preview/_me_tabs.html:1
+msgid "Wallet plan"
+msgstr "वॉलेट प्लान"
+
+#: mealtally/preview/templates/preview/_me_tabs.html:2
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+#: mealtally/web/templates/web/admin_plan_form.html:10 mealtally/web/views_admin.py:451
+#: mealtally/web/views_admin.py:509
+msgid "Meals"
+msgstr "भोजन"
+
+#: mealtally/preview/templates/preview/_me_tabs.html:3
+msgid "Deliveries"
+msgstr "डिलीवरी"
+
+#: mealtally/preview/templates/preview/_me_tabs.html:4
+#: mealtally/preview/templates/preview/_plans_tabs.html:3
+#: mealtally/preview/templates/preview/subscriptions.html:5
+msgid "Wallet"
+msgstr "वॉलेट"
+
+#: mealtally/preview/templates/preview/_me_tabs.html:5
+#: mealtally/preview/templates/preview/invoice_detail.html:3
+#: mealtally/preview/templates/preview/invoices.html:4
+msgid "Invoices"
+msgstr "इनवॉइस"
+
+#: mealtally/preview/templates/preview/_me_tabs.html:6
+#: mealtally/preview/templates/preview/me_order.html:3
+msgid "Order online"
+msgstr "ऑनलाइन ऑर्डर"
+
+#: mealtally/preview/templates/preview/_plans_tabs.html:1
+msgid "Billing model"
+msgstr ""
+
+#: mealtally/preview/templates/preview/_plans_tabs.html:2
+msgid "Meal pass"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:3
+msgid "Kitchens and pick-up points."
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:3
+msgid "Add branch"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:4
+msgid "Main kitchen"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:4
+msgid "Pick-up point"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:5
+msgid "Map pin placeholder"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:6
+#: mealtally/preview/templates/preview/signup_wizard.html:9
+#: mealtally/web/templates/web/admin_settings.html:9
+msgid "Address"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:6
+msgid "Latitude"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:6
+msgid "Longitude"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:6
+msgid "Delivery radius (km)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:7
+msgid "Customers can pick up here"
+msgstr ""
+
+#: mealtally/preview/templates/preview/branches.html:7
+msgid "Save branch"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:3
+msgid "A-la-carte ordering for anyone, up to six days ahead."
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:4
+msgid "Catalogue"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:5
+msgid "Availability changed — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:5
+#: mealtally/preview/templates/preview/me_order.html:6
+msgid "Sold out"
+msgstr "खत्म"
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+#: mealtally/web/templates/web/admin_settings.html:13
+msgid "Rules"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+#: mealtally/preview/templates/preview/order_new.html:27
+msgid "Delivery fee"
+msgstr "डिलीवरी शुल्क"
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+msgid "Free delivery above"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+msgid "Minimum cart"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+msgid "Order ahead"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+#: mealtally/web/templates/web/admin_plans.html:6
+msgid "days"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+msgid "Approval"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+msgid "Edit rules"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:7
+msgid "On-demand orders"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:8
+msgid "Accepted — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:8
+msgid "Accepted"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:8
+msgid "Accept"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:8
+msgid "Rejected — refund goes to the wallet (demo mode only)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:8
+msgid "Rejected — refunded"
+msgstr ""
+
+#: mealtally/preview/templates/preview/cloud_kitchen.html:8
+msgid "Reject & refund"
+msgstr ""
+
+#: mealtally/preview/templates/preview/coming_soon.html:4
+msgid "Coming soon"
+msgstr ""
+
+#: mealtally/preview/templates/preview/coming_soon.html:5
+msgid "This part of Mealtally is rolling out next. Your meal-pass features are fully live."
+msgstr ""
+
+#: mealtally/preview/templates/preview/delivery.html:3
+msgid "Drag stops to reorder a route (or use the arrows), and assign a driver."
+msgstr ""
+
+#: mealtally/preview/templates/preview/delivery.html:5
+msgid "stops"
+msgstr ""
+
+#: mealtally/preview/templates/preview/delivery.html:6
+#: mealtally/preview/templates/preview/order_detail.html:25
+msgid "Driver"
+msgstr ""
+
+#: mealtally/preview/templates/preview/delivery.html:6
+#: mealtally/web/templates/web/admin_customer.html:16
+#: mealtally/web/templates/web/me_profile.html:9
+#: mealtally/web/templates/web/platform_tenant.html:17
+msgid "Save"
+msgstr "सेव करें"
+
+#: mealtally/preview/templates/preview/delivery.html:10
+msgid "Move up"
+msgstr ""
+
+#: mealtally/preview/templates/preview/delivery.html:10
+msgid "Move down"
+msgstr ""
+
+#: mealtally/preview/templates/preview/delivery.html:12
+msgid "Pick-up customers"
+msgstr ""
+
+#: mealtally/preview/templates/preview/delivery.html:12
+msgid "Collected at Kothrud Kitchen or the Baner pick-up point — no route needed."
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:3
+msgid "Driver console"
+msgstr "ड्राइवर कंसोल"
+
+#: mealtally/preview/templates/preview/driver.html:4
+msgid "Duty status — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:4
+msgid "On duty"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:5
+msgid "Lunch"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:5
+msgid "delivered"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:8
+msgid "To deliver"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:12
+msgid "Call"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:13
+msgid "Photo proof"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:15
+msgid "Photo proof preview"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:16
+msgid "Tiffin boxes"
+msgstr "टिफ़िन बॉक्स"
+
+#: mealtally/preview/templates/preview/driver.html:16
+msgid "issued"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:16
+msgid "Fewer boxes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:16
+msgid "More boxes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:17
+msgid "Marked delivered — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:17
+#: mealtally/preview/templates/preview/driver.html:21
+#: mealtally/preview/templates/preview/driver.html:23
+msgid "Delivered"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:17
+msgid "Mark delivered"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:17
+msgid "Marked skipped — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:17
+msgid "Skipped"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:17
+msgid "Skip"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:19
+msgid "All stops delivered — nice work."
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:22
+#: mealtally/preview/templates/preview/me_deliveries.html:5
+#: mealtally/preview/templates/preview/order_detail.html:25
+msgid "Delivery photo"
+msgstr "डिलीवरी की फोटो"
+
+#: mealtally/preview/templates/preview/driver.html:23
+msgid "Day summary"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:23
+msgid "Left"
+msgstr ""
+
+#: mealtally/preview/templates/preview/driver.html:23
+msgid "Boxes to collect"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:3
+msgid "Everything you spend on the kitchen and deliveries."
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:3
+msgid "Profit view"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:3
+msgid "Add expense"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/order_new.html:10
+#: mealtally/preview/templates/preview/orders.html:6
+#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:544
+#: mealtally/web/views_admin.py:587 mealtally/web/views_platform.py:149
+msgid "Date"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:6
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/preview/templates/preview/expenses.html:10
+#: mealtally/preview/templates/preview/menu.html:9
+msgid "Category"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/me_wallet.html:8
+#: mealtally/preview/templates/preview/subscription_new.html:18
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+msgid "Amount (₹)"
+msgstr "राशि (₹)"
+
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/web/templates/web/admin_customer.html:46
+#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:586
+#: mealtally/web/views_platform.py:149
+msgid "Receipt"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:7
+msgid "Note"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:4
+msgid "Save expense"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:5
+msgid "Spent, last 30 days"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:5
+msgid "Entries"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:6
+msgid "All categories"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:7
+msgid "Paid via"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/preview/templates/preview/expenses.html:10
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/me_wallet.html:11
+#: mealtally/preview/templates/preview/subscription_new.html:18
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+msgid "Amount"
+msgstr "राशि"
+
+#: mealtally/preview/templates/preview/expenses.html:8
+msgid "Attached"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:9
+msgid "Recurring rules"
+msgstr ""
+
+#: mealtally/preview/templates/preview/expenses.html:10
+#: mealtally/web/templates/web/admin_customer.html:14
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/admin_plan_form.html:8
+#: mealtally/web/templates/web/admin_staff.html:15
+#: mealtally/web/templates/web/customer_new.html:6
+#: mealtally/web/templates/web/me_profile.html:7 mealtally/web/templates/web/sell.html:13
+#: mealtally/web/templates/web/staff_customers.html:6
+msgid "Name"
+msgstr "नाम"
+
+#: mealtally/preview/templates/preview/expenses.html:10
+msgid "Repeats"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:3
+msgid "Holds & closures"
+msgstr "होल्ड और बंदी"
+
+#: mealtally/preview/templates/preview/holds.html:3
+msgid "Customer vacation holds and whole-business closures."
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:5
+msgid "Business closure"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:6
+msgid "Closed on"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:7
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+#: mealtally/web/templates/web/_today.html:13
+#: mealtally/web/templates/web/admin_customer.html:24
+#: mealtally/web/templates/web/admin_customer.html:29
+#: mealtally/web/templates/web/admin_customer.html:39
+#: mealtally/web/templates/web/admin_customer.html:50
+#: mealtally/web/templates/web/admin_customer.html:54
+msgid "Reason"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:9
+msgid "Closure scheduled — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:9
+msgid "Schedule closure"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:10
+msgid "Past closures"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:10
+msgid "orders skipped"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:11
+msgid "Schedule a customer hold"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:12
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/invoices.html:6
+#: mealtally/preview/templates/preview/order_detail.html:23
+#: mealtally/preview/templates/preview/order_new.html:6
+#: mealtally/preview/templates/preview/orders.html:18
+#: mealtally/preview/templates/preview/subscription_new.html:7
+#: mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/preview/templates/preview/tiffin_boxes.html:5
+#: mealtally/preview/templates/preview/wallets.html:20
+#: mealtally/web/templates/web/sell.html:7 mealtally/web/views_admin.py:509
+#: mealtally/web/views_admin.py:588
+msgid "Customer"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:13
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/me_meals.html:19
+#: mealtally/web/templates/web/admin_audit.html:7
+#: mealtally/web/templates/web/report.html:5
+msgid "From"
+msgstr "से"
+
+#: mealtally/preview/templates/preview/holds.html:13
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/me_meals.html:19
+#: mealtally/web/templates/web/admin_audit.html:8
+#: mealtally/web/templates/web/report.html:6
+msgid "To"
+msgstr "तक"
+
+#: mealtally/preview/templates/preview/holds.html:14
+msgid "Reason (optional)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:14
+msgid "Hold scheduled — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:14
+#: mealtally/preview/templates/preview/me_meals.html:19
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+msgid "Schedule hold"
+msgstr "होल्ड लगाएँ"
+
+#: mealtally/preview/templates/preview/holds.html:16
+msgid "Active and upcoming holds"
+msgstr ""
+
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/planner.html:5
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+#: mealtally/preview/templates/preview/subscription_new.html:9
+#: mealtally/preview/templates/preview/subscription_new.html:10
+#: mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/preview/templates/preview/wallets.html:20
+#: mealtally/web/templates/web/sell.html:21 mealtally/web/views_admin.py:478
+#: mealtally/web/views_admin.py:509
+msgid "Plan"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:5
+msgid "Copy share link"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:5
+#: mealtally/web/templates/web/platform_tenant.html:38
+#: mealtally/web/templates/web/report.html:10
+#: mealtally/web/templates/web/sell_done.html:8
+msgid "Download PDF"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:7
+msgid "Opening wallet"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:7
+msgid "Top-ups"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:7
+msgid "Meals & extras"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:7
+msgid "Closing wallet"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/preview/templates/preview/website.html:9
+msgid "Description"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/order_detail.html:16
+#: mealtally/web/templates/web/admin_customer.html:54
+msgid "Qty"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoice_detail.html:10
+#: mealtally/preview/templates/preview/invoices.html:6
+msgid "Total"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoices.html:4
+#: mealtally/preview/templates/preview/order_detail.html:4
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/subscriptions.html:4
+msgid "Paid"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoices.html:4
+msgid "Due"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoices.html:5
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/web/templates/web/admin_customers.html:5
+msgid "Search"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoices.html:5
+msgid "Search customer"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoices.html:6
+msgid "Invoice"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoices.html:6
+msgid "Period"
+msgstr ""
+
+#: mealtally/preview/templates/preview/invoices.html:6
+#: mealtally/preview/templates/preview/order_detail.html:10
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/preview/templates/preview/orders.html:18
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/web/templates/web/platform_dashboard.html:11
+#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:544
+#: mealtally/web/views_admin.py:589 mealtally/web/views_platform.py:149
+msgid "Status"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:4
+msgid "Production date"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:4
+#: mealtally/preview/templates/preview/orders.html:6
+msgid "Go"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:5
+msgid "New order chime (demo)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:5
+#: mealtally/preview/templates/preview/order_new.html:3
+#: mealtally/preview/templates/preview/orders.html:7
+#: mealtally/preview/templates/preview/today.html:4
+msgid "New order"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:5
+msgid "Print labels"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:6
+#: mealtally/preview/templates/preview/menu.html:5
+#: mealtally/preview/templates/preview/orders.html:9
+msgid "Meal slots"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:10
+msgid "Cooking plan"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:11
+msgid "Packing list"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:12
+#: mealtally/preview/templates/preview/order_detail.html:24
+#: mealtally/preview/templates/preview/order_new.html:21
+#: mealtally/preview/templates/preview/orders.html:23
+#: mealtally/preview/templates/preview/subscriptions.html:6
+msgid "Pick-up"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:15
+msgid "Aggregate preparation quantities"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:15
+msgid "portions"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:16
+#: mealtally/preview/templates/preview/menu.html:9
+msgid "Dish"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:16
+#: mealtally/preview/templates/preview/menu.html:9
+#: mealtally/preview/templates/preview/order_detail.html:16
+msgid "Diet"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:16
+msgid "Total qty"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:16
+msgid "Nothing to cook for this slot."
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:17
+msgid "Alternatives split"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:20
+msgid "Packed"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:23
+#: mealtally/preview/templates/preview/orders.html:21
+msgid "Allergy"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:23
+msgid "No delivery orders."
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:26
+msgid "Ready to pick"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:28
+msgid "Handed over — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:28
+msgid "Picked up"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:28
+msgid "Hand over"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen.html:28
+msgid "No pick-up orders."
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen_labels.html:5
+msgid "Sticker labels"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen_labels.html:6
+msgid "Print"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen_labels.html:6
+#: mealtally/web/templates/web/staff_console.html:17
+msgid "Close"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen_labels.html:13
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+msgid "stop"
+msgstr ""
+
+#: mealtally/preview/templates/preview/kitchen_labels.html:13
+msgid "PICK-UP"
+msgstr ""
+
+#: mealtally/preview/templates/preview/me_deliveries.html:3
+msgid "Delivery history"
+msgstr "डिलीवरी का इतिहास"
+
+#: mealtally/preview/templates/preview/me_deliveries.html:5
+#: mealtally/preview/templates/preview/order_detail.html:25
+msgid "Proof of delivery"
+msgstr "डिलीवरी का सबूत"
+
+#: mealtally/preview/templates/preview/me_deliveries.html:5
+msgid "No deliveries yet."
+msgstr "अभी कोई डिलीवरी नहीं।"
+
+#: mealtally/preview/templates/preview/me_invoices.html:3
+msgid "My invoices"
+msgstr "मेरे इनवॉइस"
+
+#: mealtally/preview/templates/preview/me_invoices.html:5
+msgid "No invoices yet."
+msgstr "अभी कोई इनवॉइस नहीं।"
+
+#: mealtally/preview/templates/preview/me_meals.html:3
+msgid "My meals"
+msgstr "मेरा खाना"
+
+#: mealtally/preview/templates/preview/me_meals.html:5
+#: mealtally/preview/templates/preview/subscription_detail.html:9
+#: mealtally/preview/templates/preview/wallet_customer.html:9
+msgid "Wallet balance"
+msgstr "वॉलेट बैलेंस"
+
+#: mealtally/preview/templates/preview/me_meals.html:5
+#, python-format
+msgid "About %(n)s day of meals left"
+msgid_plural "About %(n)s days of meals left"
+msgstr[0] "लगभग %(n)s दिन का खाना बाकी"
+msgstr[1] "लगभग %(n)s दिन का खाना बाकी"
+
+#: mealtally/preview/templates/preview/me_meals.html:6
+msgid "Top up"
+msgstr "टॉप-अप करें"
+
+#: mealtally/preview/templates/preview/me_meals.html:10
+msgid "Locked — kitchen is preparing"
+msgstr "बंद — किचन तैयारी कर रहा है"
+
+#: mealtally/preview/templates/preview/me_meals.html:11
+msgid "Choose your meal"
+msgstr "अपना खाना चुनें"
+
+#: mealtally/preview/templates/preview/me_meals.html:12
+msgid "Option A"
+msgstr "विकल्प A"
+
+#: mealtally/preview/templates/preview/me_meals.html:12
+msgid "Option B"
+msgstr "विकल्प B"
+
+#: mealtally/preview/templates/preview/me_meals.html:12
+msgid "Your meal"
+msgstr "आपका खाना"
+
+#: mealtally/preview/templates/preview/me_meals.html:13
+msgid "Quantity"
+msgstr "मात्रा"
+
+#: mealtally/preview/templates/preview/me_meals.html:13
+#: mealtally/preview/templates/preview/me_order.html:6
+#: mealtally/preview/templates/preview/subscription_new.html:12
+msgid "Fewer"
+msgstr "कम"
+
+#: mealtally/preview/templates/preview/me_meals.html:14
+msgid "Choice saved — demo mode only"
+msgstr "पसंद सेव हुई — सिर्फ़ डेमो मोड में"
+
+#: mealtally/preview/templates/preview/me_meals.html:14
+msgid "Confirm choice"
+msgstr "पसंद पक्की करें"
+
+#: mealtally/preview/templates/preview/me_meals.html:14
+msgid "Skipped — demo mode only"
+msgstr "छोड़ दिया — सिर्फ़ डेमो मोड में"
+
+#: mealtally/preview/templates/preview/me_meals.html:14
+msgid "Skip this meal"
+msgstr "यह खाना छोड़ें"
+
+#: mealtally/preview/templates/preview/me_meals.html:15
+#, python-format
+msgid "%(n)s skips left this cycle"
+msgstr "इस साइकिल में %(n)s स्किप बाकी"
+
+#: mealtally/preview/templates/preview/me_meals.html:18
+msgid "Vacation hold"
+msgstr "छुट्टी का होल्ड"
+
+#: mealtally/preview/templates/preview/me_meals.html:18
+msgid "Going away? Pause meals for a date range — nothing is charged."
+msgstr "बाहर जा रहे हैं? तारीख़ें चुनकर खाना रोक दें — कोई चार्ज नहीं लगेगा।"
+
+#: mealtally/preview/templates/preview/me_meals.html:21
+msgid "Coming up"
+msgstr "आगे के भोजन"
+
+#: mealtally/preview/templates/preview/me_order.html:3
+msgid "Order anything from the kitchen, up to six days ahead."
+msgstr "किचन से कुछ भी ऑर्डर करें, छह दिन पहले तक।"
+
+#: mealtally/preview/templates/preview/me_order.html:5
+msgid "For which day?"
+msgstr "किस दिन के लिए?"
+
+#: mealtally/preview/templates/preview/me_order.html:7
+#, python-format
+msgid "Minimum cart %(m)s · delivery %(f)s (free above %(free)s) · the kitchen approves each order."
+msgstr "न्यूनतम कार्ट %(m)s · डिलीवरी %(f)s (%(free)s से ऊपर मुफ़्त) · हर ऑर्डर किचन मंज़ूर करता है।"
+
+#: mealtally/preview/templates/preview/me_order.html:7
+msgid "Order request sent — demo mode only"
+msgstr "ऑर्डर अनुरोध भेजा गया — सिर्फ़ डेमो मोड में"
+
+#: mealtally/preview/templates/preview/me_order.html:7
+#: mealtally/preview/templates/preview/order_new.html:30
+msgid "Place order"
+msgstr "ऑर्डर करें"
+
+#: mealtally/preview/templates/preview/me_wallet.html:3
+msgid "My wallet"
+msgstr "मेरा वॉलेट"
+
+#: mealtally/preview/templates/preview/me_wallet.html:5
+#: mealtally/preview/templates/preview/me_wallet.html:11
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/preview/templates/preview/wallets.html:20
+#: mealtally/web/templates/web/admin_customer.html:54
+msgid "Balance"
+msgstr "बैलेंस"
+
+#: mealtally/preview/templates/preview/me_wallet.html:5
+msgid "About"
+msgstr "लगभग"
+
+#: mealtally/preview/templates/preview/me_wallet.html:5
+msgid "days of meals left"
+msgstr "दिन का खाना बाकी"
+
+#: mealtally/preview/templates/preview/me_wallet.html:6
+msgid "Top up by UPI"
+msgstr "UPI से टॉप-अप"
+
+#: mealtally/preview/templates/preview/me_wallet.html:7
+msgid "Pay to"
+msgstr "भुगतान करें"
+
+#: mealtally/preview/templates/preview/me_wallet.html:7
+msgid "from any UPI app"
+msgstr "किसी भी UPI ऐप से"
+
+#: mealtally/preview/templates/preview/me_wallet.html:7
+msgid "Enter the 12-digit UTR and attach the screenshot"
+msgstr "12 अंकों का UTR डालें और स्क्रीनशॉट लगाएँ"
+
+#: mealtally/preview/templates/preview/me_wallet.html:7
+msgid "We approve it within 2 hours"
+msgstr "हम 2 घंटे में मंज़ूर करते हैं"
+
+#: mealtally/preview/templates/preview/me_wallet.html:8
+msgid "UPI QR (placeholder)"
+msgstr "UPI QR (नमूना)"
+
+#: mealtally/preview/templates/preview/me_wallet.html:8
+msgid "Attach screenshot"
+msgstr "स्क्रीनशॉट लगाएँ"
+
+#: mealtally/preview/templates/preview/me_wallet.html:8
+msgid "Screenshot preview"
+msgstr "स्क्रीनशॉट का प्रीव्यू"
+
+#: mealtally/preview/templates/preview/me_wallet.html:9
+msgid "Request sent — waiting for approval (demo mode only)"
+msgstr "अनुरोध भेजा गया — मंज़ूरी का इंतज़ार (सिर्फ़ डेमो मोड में)"
+
+#: mealtally/preview/templates/preview/me_wallet.html:9
+msgid "Send top-up request"
+msgstr "टॉप-अप अनुरोध भेजें"
+
+#: mealtally/preview/templates/preview/me_wallet.html:10
+msgid "Your requests"
+msgstr "आपके अनुरोध"
+
+#: mealtally/preview/templates/preview/me_wallet.html:11
+msgid "Wallet history"
+msgstr "वॉलेट का इतिहास"
+
+#: mealtally/preview/templates/preview/me_wallet.html:11
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/web/templates/web/admin_audit.html:10
+#: mealtally/web/templates/web/admin_customer.html:54
+msgid "When"
+msgstr "कब"
+
+#: mealtally/preview/templates/preview/me_wallet.html:11
+#: mealtally/web/templates/web/admin_audit.html:10
+msgid "Details"
+msgstr "विवरण"
+
+#: mealtally/preview/templates/preview/menu.html:3
+msgid "Meal slots, the dish library and the weekly plan."
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:3
+msgid "Weekly planner"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:5
+msgid "Dishes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:6
+msgid "Orders lock"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:6
+msgid "before start"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:6
+msgid "Edit slot"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:7
+msgid "Add slot"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:8
+msgid "Search dishes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:8
+msgid "Add dish"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:9
+msgid "Allergens"
+msgstr ""
+
+#: mealtally/preview/templates/preview/menu.html:10
+#: mealtally/preview/templates/preview/planner.html:7
+#: mealtally/preview/templates/preview/wallet_customer.html:5
+#: mealtally/web/templates/web/admin_plans.html:7
+msgid "Edit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/more.html:3
+msgid "All sections"
+msgstr ""
+
+#: mealtally/preview/templates/preview/more.html:5
+msgid "Daily work"
+msgstr ""
+
+#: mealtally/preview/templates/preview/more.html:5
+msgid "Setup & settings"
+msgstr ""
+
+#: mealtally/preview/templates/preview/notifications.html:3
+msgid "What customers hear from you, per event and channel."
+msgstr ""
+
+#: mealtally/preview/templates/preview/notifications.html:6
+msgid "In-app"
+msgstr ""
+
+#: mealtally/preview/templates/preview/notifications.html:6
+msgid "Web push"
+msgstr ""
+
+#: mealtally/preview/templates/preview/notifications.html:6
+msgid "via provider"
+msgstr ""
+
+#: mealtally/preview/templates/preview/notifications.html:7
+msgid "Message"
+msgstr ""
+
+#: mealtally/preview/templates/preview/notifications.html:8
+msgid "Placeholders"
+msgstr ""
+
+#: mealtally/preview/templates/preview/notifications.html:9
+#: mealtally/web/templates/web/base.html:32
+msgid "Recent notifications"
+msgstr "हाल की सूचनाएँ"
+
+#: mealtally/preview/templates/preview/notifications.html:9
+#: mealtally/web/templates/web/base.html:32
+msgid "min ago"
+msgstr "मिनट पहले"
+
+#: mealtally/preview/templates/preview/notifications.html:10
+msgid "Save templates"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:3
+#: mealtally/preview/templates/preview/today.html:29
+msgid "Orders"
+msgstr "ऑर्डर"
+
+#: mealtally/preview/templates/preview/order_detail.html:4
+msgid "Order"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:4
+#: mealtally/preview/templates/preview/order_new.html:22
+msgid "Pay on delivery"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:4
+msgid "by"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:11
+msgid "Preview — status changed in demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:15
+#: mealtally/preview/templates/preview/order_new.html:15
+#: mealtally/preview/templates/preview/order_new.html:27
+msgid "Items"
+msgstr "आइटम"
+
+#: mealtally/preview/templates/preview/order_detail.html:16
+#: mealtally/web/views_admin.py:544
+msgid "Item"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:18
+msgid "Grand total"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:19
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/web/templates/web/sell.html:29
+msgid "Payment"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/web/templates/web/sell.html:30
+msgid "Method"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:20
+msgid "Wallet debit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:20
+msgid "Cash / UPI"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:20
+msgid "Pending"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:20
+msgid "Paid by"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:20
+msgid "Wallet balance (one ledger)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:24
+#: mealtally/preview/templates/preview/orders.html:23
+#: mealtally/preview/templates/preview/subscriptions.html:5
+msgid "Delivery"
+msgstr "डिलीवरी"
+
+#: mealtally/preview/templates/preview/order_detail.html:25
+msgid "Assign driver"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_detail.html:25
+msgid "Assign"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:3
+msgid "Counter or on-demand order. Reads the one wallet ledger — the same balance everywhere."
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:7
+msgid "Search by name or phone"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:7
+msgid "e.g. Anita"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:11
+msgid "Meal slot"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:18
+msgid "Less"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:20
+msgid "Delivery & payment"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:21
+msgid "Home delivery (₹30)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:22
+msgid "Charge wallet"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:23
+msgid "Vendor override — allow negative balance"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:26
+msgid "Summary"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:27
+msgid "Order total"
+msgstr "ऑर्डर का कुल"
+
+#: mealtally/preview/templates/preview/order_new.html:27
+msgid "Current balance"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:27
+msgid "Balance after order"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:28
+msgid "This will overdraw the wallet — placed on vendor authority."
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:29
+msgid "Beyond the trust limit — needs the vendor override above."
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:30
+msgid "Preview — order not placed (demo mode only)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/order_new.html:31
+msgid "Paid-by stamp will read"
+msgstr ""
+
+#: mealtally/preview/templates/preview/orders.html:3
+msgid "Every subscription meal and counter order, by slot."
+msgstr ""
+
+#: mealtally/preview/templates/preview/orders.html:13
+#, python-format
+msgid "Orders lock %(m)s min before the slot starts."
+msgstr ""
+
+#: mealtally/preview/templates/preview/orders.html:14
+msgid "Locked at"
+msgstr ""
+
+#: mealtally/preview/templates/preview/orders.html:18
+msgid "Meal"
+msgstr ""
+
+#: mealtally/preview/templates/preview/orders.html:18
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+msgid "Type"
+msgstr ""
+
+#: mealtally/preview/templates/preview/orders.html:25
+msgid "No orders for this slot."
+msgstr ""
+
+#: mealtally/preview/templates/preview/orders.html:28
+#, python-format
+msgid "+ %(n)s more orders in this slot"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:3
+msgid "Where customers send money when they top up. Shown to them on the Wallet screen."
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:5
+msgid "UPI ID (VPA)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:6
+msgid "UPI QR placeholder"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:6
+msgid "Upload QR image"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:7
+msgid "Bank details"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:7
+msgid "Account name"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:7
+msgid "Account no."
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:8
+msgid "Instructions for customers"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:8
+msgid "Instructions"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:8
+msgid "Save payment setup"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:9
+msgid "Online payment gateway"
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:9
+msgid "Accept cards, UPI and netbanking with automatic wallet credit."
+msgstr ""
+
+#: mealtally/preview/templates/preview/payment_setup.html:9
+msgid "connect"
+msgstr ""
+
+#: mealtally/preview/templates/preview/planner.html:3
+msgid "Menu"
+msgstr "मेन्यू"
+
+#: mealtally/preview/templates/preview/planner.html:4
+msgid "Weekly menu planner"
+msgstr ""
+
+#: mealtally/preview/templates/preview/planner.html:5
+#: mealtally/web/templates/web/admin_customers.html:6
+#: mealtally/web/templates/web/platform_tenant.html:36
+#: mealtally/web/templates/web/report.html:8
+msgid "Show"
+msgstr ""
+
+#: mealtally/preview/templates/preview/planner.html:5
+msgid "Copied Monday to all days — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/planner.html:5
+msgid "Apply Monday to all days"
+msgstr ""
+
+#: mealtally/preview/templates/preview/planner.html:5
+msgid "Publish week"
+msgstr ""
+
+#: mealtally/preview/templates/preview/planner.html:6
+#: mealtally/preview/templates/preview/today.html:29
+msgid "Slot"
+msgstr ""
+
+#: mealtally/preview/templates/preview/platform_plans.html:4
+#: mealtally/web/templates/web/platform_dashboard.html:3
+#: mealtally/web/templates/web/platform_tenant.html:3
+msgid "Platform"
+msgstr ""
+
+#: mealtally/preview/templates/preview/platform_plans.html:5
+msgid "SaaS plans & quotas"
+msgstr ""
+
+#: mealtally/preview/templates/preview/platform_plans.html:6
+msgid "What a restaurant pays you, and the limits that go with it."
+msgstr ""
+
+#: mealtally/preview/templates/preview/platform_plans.html:7
+#: mealtally/preview/templates/preview/wallet_customer.html:18
+#: mealtally/preview/templates/preview/wallet_plans.html:6
+msgid "month"
+msgstr ""
+
+#: mealtally/preview/templates/preview/platform_plans.html:8 mealtally/web/context.py:56
+#: mealtally/web/context.py:59 mealtally/web/templates/web/admin_customers.html:3
+#: mealtally/web/templates/web/platform_dashboard.html:6
+#: mealtally/web/templates/web/platform_dashboard.html:11
+#: mealtally/web/templates/web/platform_tenant.html:9
+#: mealtally/web/templates/web/staff_customers.html:3
+msgid "Customers"
+msgstr "ग्राहक"
+
+#: mealtally/preview/templates/preview/platform_plans.html:8
+msgid "Staff logins"
+msgstr ""
+
+#: mealtally/preview/templates/preview/platform_plans.html:8
+msgid "Branches"
+msgstr "शाखाएँ"
+
+#: mealtally/preview/templates/preview/platform_plans.html:9
+#: mealtally/web/templates/web/admin_plan_form.html:4
+msgid "Edit plan"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:3
+#: mealtally/preview/templates/preview/profit.html:5
+#: mealtally/preview/templates/preview/today.html:37
+#: mealtally/preview/templates/preview/today.html:40
+msgid "Expenses"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:4
+#: mealtally/preview/templates/preview/today.html:37
+#: mealtally/preview/templates/preview/today.html:40
+msgid "Profit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:4
+#: mealtally/preview/templates/preview/today.html:37
+msgid "Last 30 days"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:5
+#: mealtally/preview/templates/preview/today.html:37
+#: mealtally/preview/templates/preview/today.html:40 mealtally/web/views_admin.py:470
+#: mealtally/web/views_admin.py:478
+msgid "Revenue"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:5 mealtally/web/views_admin.py:469
+msgid "Passes sold"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:5
+msgid "wallet debits"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:5
+msgid "Net profit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:5
+msgid "Margin"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:6
+msgid "Last 12 months"
+msgstr ""
+
+#: mealtally/preview/templates/preview/profit.html:7
+msgid "Where the money went (30 days)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/roles.html:3
+msgid "Roles & permissions"
+msgstr "भूमिकाएँ और अनुमतियाँ"
+
+#: mealtally/preview/templates/preview/roles.html:3
+msgid "Presets you can tweak per person. Existing staff logins are managed under Staff."
+msgstr ""
+
+#: mealtally/preview/templates/preview/roles.html:4
+msgid "Manage staff logins"
+msgstr ""
+
+#: mealtally/preview/templates/preview/roles.html:5
+msgid "Module"
+msgstr ""
+
+#: mealtally/preview/templates/preview/roles.html:7
+msgid "Save preset"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:5
+msgid "Start your restaurant on Mealtally"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:6
+msgid "Steps"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:8
+msgid "Your business"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:8
+msgid "Business name"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:8
+#: mealtally/web/templates/web/signup.html:6
+msgid "Your name"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:8
+msgid "WhatsApp number"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:9
+msgid "Your first branch"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:9
+#: mealtally/web/templates/web/admin_settings.html:20
+msgid "FSSAI licence number"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+msgid "Your first plan"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+#: mealtally/preview/templates/preview/wallet_plan_form.html:7
+msgid "Plan name"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+#: mealtally/web/templates/web/admin_plan_form.html:9
+msgid "Price (₹)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+msgid "Valid for (days)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:11
+msgid "Invite your staff"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:11
+msgid "Staff phone or email"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:11
+msgid "Demo mode — no account created."
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:12
+#: mealtally/web/templates/web/login_customer.html:13
+#: mealtally/web/templates/web/login_staff.html:13
+#: mealtally/web/templates/web/sell_preview.html:18
+msgid "Back"
+msgstr "वापस"
+
+#: mealtally/preview/templates/preview/signup_wizard.html:12
+msgid "Next"
+msgstr ""
+
+#: mealtally/preview/templates/preview/signup_wizard.html:14
+msgid "Back to home"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:5
+msgid "Site"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/site.html:9
+msgid "This week's menu"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/site.html:13
+#: mealtally/preview/templates/preview/website.html:8 mealtally/web/context.py:63
+#: mealtally/web/templates/web/admin_more.html:6
+#: mealtally/web/templates/web/admin_plans.html:4
+msgid "Plans"
+msgstr "प्लान"
+
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/site.html:14
+#: mealtally/preview/templates/preview/website.html:8
+msgid "How it works"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/website.html:8
+msgid "Contact"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:6
+#: mealtally/web/templates/web/global_login.html:9
+#: mealtally/web/templates/web/login_customer.html:10
+#: mealtally/web/templates/web/login_staff.html:10
+#: mealtally/web/templates/web/signup_done.html:5
+msgid "Log in"
+msgstr "लॉग इन"
+
+#: mealtally/preview/templates/preview/site.html:9
+msgid "See plans"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:11
+#: mealtally/preview/templates/preview/website.html:8
+msgid "Menu of the week"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:11
+msgid "Lunch · Home Tiffin"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:13
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/wallet_customer.html:18
+#: mealtally/preview/templates/preview/wallet_plans.html:6
+#: mealtally/web/templates/web/admin_plans.html:6
+msgid "day"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:13
+msgid "a month"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:13
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+msgid "Mon–Sat"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:13
+msgid "Get started"
+msgstr ""
+
+#: mealtally/preview/templates/preview/site.html:15
+msgid "Find us"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:3
+#: mealtally/preview/templates/preview/subscription_new.html:3
+#: mealtally/preview/templates/preview/wallet_customer.html:14
+msgid "Subscriptions"
+msgstr "सब्सक्रिप्शन"
+
+#: mealtally/preview/templates/preview/subscription_detail.html:4
+msgid "Customer & wallet"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+msgid "Combined rate"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+msgid "Billing cycle"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+msgid "Trial"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+msgid "Regular"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/subscription_new.html:17
+msgid "Initial payment"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/preview/templates/preview/subscriptions.html:6
+msgid "Unpaid"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:9
+msgid "days left"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:9
+msgid "Start / end"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:9
+msgid "Open-ended"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+msgid "Skips"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+msgid "used"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+msgid "Delivery days"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:14
+msgid "Shipping"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:14
+msgid "Self pick-up"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:14
+msgid "Home delivery"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Kitchen notes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:11
+#: mealtally/preview/templates/preview/wallet_customer.html:17
+msgid "Recent orders"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:12
+msgid "Vacation holds"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:13
+msgid "No holds scheduled."
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+msgid "Start"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+msgid "End"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+msgid "All plans"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:4
+#: mealtally/preview/templates/preview/subscriptions.html:3
+msgid "New subscription"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:7
+msgid "Customer & address"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:7
+msgid "Search name or phone"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:7
+msgid "Add customer"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:8
+msgid "Delivery address"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:8
+#: mealtally/preview/templates/preview/wallet_customer.html:5
+msgid "Add address"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:11
+msgid "Daily (₹)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:11
+msgid "Weekly (₹)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:11
+msgid "Monthly (₹)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:12
+msgid "Meals per day, by weekday"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Billing period & dates"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Billing period"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Monthly"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Weekly"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Max skips"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Start date"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "End date"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Blank means open-ended."
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "Trial meal"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:13
+msgid "e.g. less spicy"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:14
+msgid "Driver instructions"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:16
+msgid "Billing & first payment"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:16
+msgid "Cycle amount"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:16
+msgid "monthly cycle"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:17
+msgid "Unpaid (no wallet credit)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:17
+msgid "Paid (credit to wallet)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscription_new.html:19
+msgid "Create subscription"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:3
+msgid "Customers on a home-delivery or pick-up wallet plan."
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/preview/templates/preview/wallets.html:19
+msgid "Search name"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:4
+msgid "All statuses"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/web/templates/web/_customer_rows.html:3
+#: mealtally/web/templates/web/me_home.html:10
+msgid "Active"
+msgstr "चालू"
+
+#: mealtally/preview/templates/preview/subscriptions.html:4
+msgid "Paused"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:4
+msgid "Cancelled"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:4 mealtally/web/labels.py:18
+#: mealtally/web/views_customer.py:36
+msgid "Expired"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:4
+msgid "Paid & unpaid"
+msgstr ""
+
+#: mealtally/preview/templates/preview/subscriptions.html:5
+msgid "Days left"
+msgstr ""
+
+#: mealtally/preview/templates/preview/tiffin_boxes.html:3
+msgid "Tiffin boxes issued to and returned by home-delivery customers."
+msgstr ""
+
+#: mealtally/preview/templates/preview/tiffin_boxes.html:4
+#, python-format
+msgid "%(n)s customer(s) hold more boxes than their limit."
+msgstr ""
+
+#: mealtally/preview/templates/preview/tiffin_boxes.html:5
+msgid "Boxes held"
+msgstr ""
+
+#: mealtally/preview/templates/preview/tiffin_boxes.html:5
+msgid "Limit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/tiffin_boxes.html:6
+msgid "Over limit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/tiffin_boxes.html:6
+msgid "Issue"
+msgstr ""
+
+#: mealtally/preview/templates/preview/tiffin_boxes.html:6
+msgid "Return"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:3
+msgid "Today"
+msgstr "आज"
+
+#: mealtally/preview/templates/preview/today.html:4
+msgid "Open redeem console"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:8
+msgid "Finish setting up"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:16
+msgid "Meal passes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:18
+#: mealtally/web/templates/web/admin_dashboard.html:5
+msgid "Meals redeemed today"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:19
+#: mealtally/web/templates/web/admin_dashboard.html:6
+#: mealtally/web/templates/web/platform_dashboard.html:11
+#: mealtally/web/templates/web/platform_tenant.html:10
+msgid "Active passes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:20
+#: mealtally/web/templates/web/admin_dashboard.html:7 mealtally/web/views_admin.py:100
+msgid "Expiring in 3 days"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:21
+#: mealtally/web/templates/web/admin_dashboard.html:8
+msgid "Passes sold this month"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:22
+#: mealtally/web/templates/web/admin_dashboard.html:9
+msgid "Revenue this month"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:23
+#: mealtally/web/templates/web/admin_dashboard.html:10
+msgid "Platform fee this month"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:26
+msgid "Home delivery & subscriptions"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:28
+msgid "Today's orders by slot"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:29
+msgid "Delivered / picked up"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:32
+msgid "Delivered vs pending"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:32
+msgid "still to go today"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:34
+msgid "How meals reached customers today"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:35
+msgid "Low wallet alerts"
+msgstr ""
+
+#: mealtally/preview/templates/preview/today.html:36
+#, python-format
+msgid "%(n)s day of meals left"
+msgid_plural "%(n)s days of meals left"
+msgstr[0] ""
+msgstr[1] ""
+
+#: mealtally/preview/templates/preview/today.html:39
+msgid "Revenue, expenses and profit — last 12 months"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:3
+#: mealtally/preview/templates/preview/wallets.html:3
+msgid "Wallets & top-ups"
+msgstr "वॉलेट और टॉप-अप"
+
+#: mealtally/preview/templates/preview/wallet_customer.html:4
+msgid "Joined"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:5
+msgid "Wallet adjust"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:5
+msgid "Delete"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+msgid "Credit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+msgid "Debit"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+msgid "Remark (required)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+msgid "e.g. Cash received"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:7
+msgid "In the live product this becomes an append-only ledger entry with your name and the reason — it can never be edited."
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:7
+msgid "Save adjustment"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:9
+#, python-format
+msgid "Credit limit %(l)s"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:9
+msgid "Prepaid only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:9
+#, python-format
+msgid "%(n)s day left"
+msgid_plural "%(n)s days left"
+msgstr[0] ""
+msgstr[1] ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:10
+msgid "Tiffin boxes held"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:11
+msgid "Active subscriptions"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:12
+msgid "Lifetime orders"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:15
+msgid "Wallet ledger"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:16
+msgid "Addresses"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/web/templates/web/admin_customer.html:54
+msgid "Source"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_customer.html:21
+#: mealtally/web/context.py:46
+msgid "Home"
+msgstr "होम"
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:3
+#: mealtally/preview/templates/preview/wallet_plans.html:3
+msgid "Wallet plans"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:4
+#: mealtally/preview/templates/preview/wallet_plans.html:5
+msgid "New wallet plan"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:8
+msgid "Daily rate (₹)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:9
+msgid "Weekly (₹) — auto ×7"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:10
+msgid "Monthly (₹) — auto ×30"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:11
+msgid "Linked menu"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:11
+msgid "Weekly menu — Lunch"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:12
+msgid "Delivery days & dishes"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:12
+msgid "Every delivery day needs at least one dish."
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:13
+msgid "— choose dish —"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:14
+msgid "Copied to all days — demo mode only"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:14
+msgid "Copy Monday to all days"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:16
+msgid "Save wallet plan"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plan_form.html:16
+#: mealtally/web/templates/web/_card.html:23
+#: mealtally/web/templates/web/admin_plan_form.html:21
+#: mealtally/web/templates/web/platform_confirm.html:8
+msgid "Cancel"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plans.html:3
+msgid "Pay-as-you-eat daily plans: customers top up a wallet and orders are placed at the cutoff."
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plans.html:6
+msgid "week"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plans.html:6
+msgid "Delivery Mon–Sat"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plans.html:6
+msgid "meal(s) a day"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallet_plans.html:6
+msgid "Edit weekly menu"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:3
+msgid "Approve UPI top-up requests and see every customer's wallet."
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:4
+msgid "Pending requests"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:4
+msgid "Wallet money held"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:4
+msgid "Low (≤ 3 days)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:4
+msgid "Negative balance"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:7
+msgid "Top-up requests"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:8
+msgid "Wallets"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:9
+#: mealtally/preview/templates/preview/wallets.html:23
+msgid "Online payments"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:13
+msgid "Payment screenshot (placeholder)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:16
+msgid "Approved — wallet credited (demo mode only)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:16
+msgid "Approved"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:16
+msgid "Approve"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:16
+msgid "Rejected — customer notified (demo mode only)"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:16
+msgid "Rejected"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:16
+msgid "Reject"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:19
+msgid "Search wallets"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:20
+msgid "Est. days left"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:23
+msgid "Customers will be able to top up their wallet by card, UPI or netbanking, and it credits automatically — no UTR to check. Connect Razorpay or Cashfree to switch it on."
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:23
+msgid "Connect Razorpay"
+msgstr ""
+
+#: mealtally/preview/templates/preview/wallets.html:23
+msgid "Connect Cashfree"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:3
+msgid "Your restaurant's own public page, built from your menu and plans."
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:3
+msgid "View public page"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:6
+msgid "Domain"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:6
+msgid "Point a CNAME record at sites.tally.example. We issue the HTTPS certificate."
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:6
+msgid "Verify domain"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:7
+msgid "Preview this theme"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:8
+msgid "Headline"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:8
+msgid "Sub-headline"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:8
+msgid "About us"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:8
+msgid "Hero"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:8
+msgid "Save content"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:9
+msgid "Page title"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:9
+msgid "Save SEO"
+msgstr ""
+
+#: mealtally/preview/templates/preview/website.html:10
+msgid "Edit policies"
+msgstr ""
+
+#: mealtally/web/context.py:47 mealtally/web/templates/web/me_qr.html:2
+msgid "My QR"
+msgstr "मेरा QR"
+
+#: mealtally/web/context.py:48 mealtally/web/templates/web/me_history.html:3
+#: mealtally/web/templates/web/me_home.html:4
+msgid "History"
+msgstr "इतिहास"
+
+#: mealtally/web/context.py:49 mealtally/web/templates/web/admin_customer.html:42
+#: mealtally/web/templates/web/me_home.html:4
+msgid "Payments"
+msgstr "भुगतान"
+
+#: mealtally/web/context.py:50 mealtally/web/templates/web/me_profile.html:3
+msgid "Profile"
+msgstr "प्रोफ़ाइल"
+
+#: mealtally/web/context.py:53 mealtally/web/templates/web/staff_console.html:2
+#: mealtally/web/templates/web/staff_console.html:29
+msgid "Redeem"
+msgstr "रिडीम"
+
+#: mealtally/web/context.py:60 mealtally/web/templates/web/admin_reports.html:3
+msgid "Reports"
+msgstr "रिपोर्ट"
+
+#: mealtally/web/context.py:62 mealtally/web/templates/web/admin_dashboard.html:3
+#: mealtally/web/templates/web/admin_more.html:5
+msgid "Dashboard"
+msgstr "डैशबोर्ड"
+
+#: mealtally/web/context.py:67 mealtally/web/context.py:132
+#: mealtally/web/templates/web/admin_more.html:8
+#: mealtally/web/templates/web/admin_staff.html:3
+msgid "Staff"
+msgstr "स्टाफ़"
+
+#: mealtally/web/context.py:68 mealtally/web/templates/web/admin_more.html:9
+#: mealtally/web/templates/web/admin_settings.html:3
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: mealtally/web/context.py:70 mealtally/web/templates/web/admin_audit.html:3
+#: mealtally/web/templates/web/admin_more.html:11
+msgid "Audit log"
+msgstr "ऑडिट लॉग"
+
+#: mealtally/web/context.py:132
+msgid "Platform admin"
+msgstr "प्लेटफ़ॉर्म एडमिन"
+
+#: mealtally/web/copy.py:6
+msgid "This customer has no active pass. Sell a pass first."
+msgstr ""
+
+#: mealtally/web/copy.py:7
+msgid "The pass is not valid right now - it has expired or has not started yet."
+msgstr ""
+
+#: mealtally/web/copy.py:8
+msgid "No meals left on this pass."
+msgstr ""
+
+#: mealtally/web/copy.py:9
+msgid "The daily meal limit for this pass has been reached."
+msgstr ""
+
+#: mealtally/web/copy.py:10
+msgid "This customer was served a moment ago."
+msgstr ""
+
+#: mealtally/web/copy.py:11
+msgid "This QR code has expired. Ask the customer to refresh their QR."
+msgstr ""
+
+#: mealtally/web/copy.py:12
+msgid "This QR code is not valid for this restaurant."
+msgstr ""
+
+#: mealtally/web/copy.py:13
+msgid "This QR code was already used. Ask the customer to refresh their QR."
+msgstr ""
+
+#: mealtally/web/copy.py:14
+msgid "This customer or restaurant is not allowed to redeem right now (customer blocked?)."
+msgstr ""
+
+#: mealtally/web/copy.py:15
+msgid "This meal was already undone."
+msgstr ""
+
+#: mealtally/web/copy.py:16
+msgid "Credits can only be restored on an active pass."
+msgstr ""
+
+#: mealtally/web/copy.py:17
+msgid "This customer already has the maximum number of queued passes."
+msgstr ""
+
+#: mealtally/web/copy.py:18
+msgid "The amount must equal the plan price."
+msgstr ""
+
+#: mealtally/web/copy.py:19
+msgid "This payment can no longer be voided (a meal was already redeemed, or the pass ended)."
+msgstr ""
+
+#: mealtally/web/copy.py:20
+msgid "Too many attempts. Please try again in 15 minutes."
+msgstr ""
+
+#: mealtally/web/copy.py:21
+msgid "Those details did not match. Please check and try again."
+msgstr ""
+
+#: mealtally/web/help.py:12
+msgid "How do I show my QR at the counter?"
+msgstr "काउंटर पर अपना QR कैसे दिखाऊँ?"
+
+#: mealtally/web/help.py:12
+msgid "Open My QR and show the screen to the staff. The code refreshes by itself and each code works only once."
+msgstr "मेरा QR खोलकर स्क्रीन स्टाफ़ को दिखाएँ। कोड अपने-आप रिफ़्रेश होता है और हर कोड सिर्फ़ एक बार चलता है।"
+
+#: mealtally/web/help.py:13
+#, fuzzy
+#| msgid "How do I redeem a meal?"
+msgid "How do I see how many meals I have left?"
+msgstr "मेरे कितने भोजन बाकी हैं, यह कैसे देखूँ?"
+
+#: mealtally/web/help.py:13
+msgid "Your Home screen shows meals left, days left and the date your pass ends."
+msgstr "होम स्क्रीन पर बचे भोजन, बचे दिन और पास खत्म होने की तारीख़ दिखती है।"
+
+#: mealtally/web/help.py:14
+msgid "What happens when my pass ends?"
+msgstr "पास खत्म होने पर क्या होता है?"
+
+#: mealtally/web/help.py:14
+msgid "Unused meals expire on the end date and cannot be carried forward. Renew at the counter and the new pass starts right after."
+msgstr "बचे हुए भोजन अंतिम तारीख़ को खत्म हो जाते हैं और आगे नहीं जाते। काउंटर पर रिन्यू करें; नया पास उसके तुरंत बाद शुरू होगा।"
+
+#: mealtally/web/help.py:15
+msgid "How do I change my PIN?"
+msgstr "अपना PIN कैसे बदलूँ?"
+
+#: mealtally/web/help.py:15
+msgid "Open Profile and choose Change PIN. If you forgot it, ask the counter staff to reset it for you."
+msgstr "प्रोफ़ाइल खोलकर PIN बदलें चुनें। अगर PIN भूल गए हों तो काउंटर स्टाफ़ से रीसेट करवाएँ।"
+
+#: mealtally/web/help.py:17
+msgid "How do I sell a pass?"
+msgstr "पास कैसे बेचें?"
+
+#: mealtally/web/help.py:17
+msgid "Open Sell pass, find the customer (or add them), pick the plan and the payment method, then confirm. The receipt is ready straight away."
+msgstr "पास बेचें खोलें, ग्राहक चुनें (या नया जोड़ें), प्लान और भुगतान का तरीका चुनें, फिर पक्का करें। रसीद तुरंत तैयार हो जाती है।"
+
+#: mealtally/web/help.py:18
+msgid "How do I redeem a meal?"
+msgstr "खाना कैसे रिडीम करें?"
+
+#: mealtally/web/help.py:18
+msgid "On Redeem, scan the customer's QR or type the last digits of their phone, then tap Redeem meal. You can undo for 30 seconds."
+msgstr "रिडीम पर ग्राहक का QR स्कैन करें या फ़ोन के आख़िरी अंक लिखें, फिर रिडीम पर टैप करें। 30 सेकंड तक वापस ले सकते हैं।"
+
+#: mealtally/web/help.py:19
+msgid "The card is red — what now?"
+msgstr "कार्ड लाल है — अब क्या करें?"
+
+#: mealtally/web/help.py:19
+msgid "The customer has no active pass. Tap Sell pass to renew; a new pass can queue to start when the current one ends."
+msgstr "ग्राहक का कोई चालू पास नहीं है। नया पास लेने के लिए पास बेचें दबाएँ; नया पास मौजूदा खत्म होने पर शुरू होने के लिए कतार में रह सकता है।"
+
+#: mealtally/web/help.py:20
+msgid "A meal was redeemed by mistake"
+msgstr "गलती से खाना रिडीम हो गया"
+
+#: mealtally/web/help.py:20
+msgid "Tap Undo on the green card within 30 seconds, or use Reverse in Today's redemptions. Every reversal is recorded with your name."
+msgstr "30 सेकंड के भीतर हरे कार्ड पर वापस लें दबाएँ, या आज के रिडीम में उलटें चुनें। हर उलटफेर आपके नाम से दर्ज होता है।"
+
+#: mealtally/web/help.py:21
+msgid "Who can see what?"
+msgstr "कौन क्या देख सकता है?"
+
+#: mealtally/web/help.py:21
+msgid "Owners and managers see everything. Counter staff see Redeem, Sell and customer lookup. Chefs see the kitchen and drivers see their route."
+msgstr "मालिक और मैनेजर सब कुछ देखते हैं। काउंटर स्टाफ़ रिडीम, बिक्री और ग्राहक खोज देखते हैं। शेफ़ किचन और ड्राइवर अपना रूट देखते हैं।"
+
+#: mealtally/web/help.py:22
+msgid "How do I add a staff login?"
+msgstr "स्टाफ़ लॉगिन कैसे जोड़ें?"
+
+#: mealtally/web/help.py:22
+msgid "Owners can open More → Staff, add a name and phone or email, and share the temporary password. They choose their own at first login."
+msgstr "मालिक और → स्टाफ़ खोलकर नाम और फ़ोन या ईमेल जोड़ें, और अस्थायी पासवर्ड साझा करें। पहले लॉगिन पर वे अपना पासवर्ड खुद चुनते हैं।"
+
+#: mealtally/web/help.py:23
+msgid "What does the platform fee cover?"
+msgstr "प्लेटफ़ॉर्म फ़ीस में क्या शामिल है?"
+
+#: mealtally/web/help.py:23
+msgid "Money → Platform fee statement lists each payment, the fee on it and any reversals, month by month. It always adds up to the invoice."
+msgstr "पैसा → प्लेटफ़ॉर्म फ़ीस स्टेटमेंट में हर भुगतान, उस पर फ़ीस और रिवर्सल महीने-दर-महीने दिखते हैं। कुल हमेशा इनवॉइस से मेल खाता है।"
+
+#: mealtally/web/help.py:24
+msgid "How do customers see their balance?"
+msgstr "ग्राहक अपना बैलेंस कैसे देखते हैं?"
+
+#: mealtally/web/help.py:24
+msgid "They log in with their phone and PIN. Their home screen shows meals left, validity and a QR for the counter."
+msgstr "वे फ़ोन और PIN से लॉग इन करते हैं। होम स्क्रीन पर बचे भोजन, वैधता और काउंटर के लिए QR दिखता है।"
+
+#: mealtally/web/labels.py:7 mealtally/web/labels.py:8 mealtally/web/labels.py:24
+#: mealtally/web/views_admin.py:133
+msgid "System"
+msgstr ""
+
+#: mealtally/web/labels.py:14 mealtally/web/views_customer.py:32
+msgid "Credits issued"
+msgstr ""
+
+#: mealtally/web/labels.py:15 mealtally/web/views_customer.py:33
+msgid "Meal redeemed"
+msgstr ""
+
+#: mealtally/web/labels.py:16 mealtally/web/templates/web/_redeem_success.html:9
+msgid "Undo"
+msgstr ""
+
+#: mealtally/web/labels.py:17
+msgid "Adjusted"
+msgstr ""
+
+#: mealtally/web/labels.py:21
+msgid "Counter search"
+msgstr "काउंटर पर खोज"
+
+#: mealtally/web/labels.py:22
+msgid "QR scan"
+msgstr "QR स्कैन"
+
+#: mealtally/web/labels.py:23
+msgid "Device"
+msgstr ""
+
+#: mealtally/web/labels.py:25
+msgid "Admin"
+msgstr ""
+
+#: mealtally/web/templates/web/_card.html:6
+msgid "meals left"
+msgstr ""
+
+#: mealtally/web/templates/web/_card.html:8
+#, python-format
+msgid "Valid until %(d)s"
+msgstr ""
+
+#: mealtally/web/templates/web/_card.html:8 mealtally/web/templates/web/me_home.html:22
+#, python-format
+msgid "Meals today: %(n)s"
+msgstr "आज के भोजन: %(n)s"
+
+#: mealtally/web/templates/web/_card.html:13
+msgid "Served a moment ago — redeeming again needs confirmation."
+msgstr ""
+
+#: mealtally/web/templates/web/_card.html:16
+msgid "Redeem 1 meal"
+msgstr ""
+
+#: mealtally/web/templates/web/_card.html:21
+msgid "Already redeemed less than a minute ago — give another meal?"
+msgstr ""
+
+#: mealtally/web/templates/web/_card.html:21
+#, python-format
+msgid "Already redeemed %(counter)s minute ago — give another meal?"
+msgid_plural "Already redeemed %(counter)s minutes ago — give another meal?"
+msgstr[0] ""
+msgstr[1] ""
+
+#: mealtally/web/templates/web/_card.html:26 mealtally/web/templates/web/_today.html:14
+#: mealtally/web/templates/web/admin_customer.html:24
+#: mealtally/web/templates/web/platform_confirm.html:8
+msgid "Confirm"
+msgstr ""
+
+#: mealtally/web/templates/web/_card_empty.html:3
+msgid "Search for a customer or scan a QR code to begin."
+msgstr ""
+
+#: mealtally/web/templates/web/_customer_rows.html:1
+#: mealtally/web/templates/web/_search_results.html:6
+#: mealtally/web/templates/web/_staff_customer_rows.html:2
+#: mealtally/web/templates/web/admin_customer.html:6 mealtally/web/views_admin.py:101
+msgid "Blocked"
+msgstr ""
+
+#: mealtally/web/templates/web/_customer_rows.html:2
+#: mealtally/web/templates/web/_staff_customer_rows.html:4
+msgid "queued"
+msgstr ""
+
+#: mealtally/web/templates/web/_customer_rows.html:3
+msgid "Expiring"
+msgstr ""
+
+#: mealtally/web/templates/web/_customer_rows.html:3
+msgid "None"
+msgstr ""
+
+#: mealtally/web/templates/web/_customer_rows.html:4
+#: mealtally/web/templates/web/_staff_customer_rows.html:6
+msgid "No customers found."
+msgstr ""
+
+#: mealtally/web/templates/web/_history_rows.html:8
+#, python-format
+msgid "Balance %(b)s"
+msgstr ""
+
+#: mealtally/web/templates/web/_history_rows.html:12
+msgid "Nothing here yet."
+msgstr ""
+
+#: mealtally/web/templates/web/_history_rows.html:13
+msgid "Loading…"
+msgstr ""
+
+#: mealtally/web/templates/web/_pin_slip.html:5
+msgid "Your login PIN (shown only once)"
+msgstr ""
+
+#: mealtally/web/templates/web/_pin_slip.html:7
+msgid "Log in at"
+msgstr ""
+
+#: mealtally/web/templates/web/_pin_slip.html:7
+msgid "You will be asked to choose your own PIN the first time."
+msgstr ""
+
+#: mealtally/web/templates/web/_pin_slip.html:8
+msgid "Copy PIN"
+msgstr ""
+
+#: mealtally/web/templates/web/_pin_slip.html:8
+#: mealtally/web/templates/web/admin_staff.html:8
+#: mealtally/web/templates/web/platform_onboarded.html:7
+msgid "Copied"
+msgstr ""
+
+#: mealtally/web/templates/web/_pin_slip.html:9
+msgid "Print slip"
+msgstr ""
+
+#: mealtally/web/templates/web/_qr_fragment.html:3
+msgid "Your QR code"
+msgstr "आपका QR कोड"
+
+#: mealtally/web/templates/web/_qr_fragment.html:7
+msgid "Refreshes in"
+msgstr "रिफ़्रेश होगा"
+
+#: mealtally/web/templates/web/_qr_fragment.html:10
+#, python-format
+msgid "%(n)s meals left · valid until %(d)s"
+msgstr "%(n)s भोजन बाकी · %(d)s तक मान्य"
+
+#: mealtally/web/templates/web/_redeem_success.html:4
+#, python-format
+msgid "Meal redeemed — %(n)s left"
+msgstr ""
+
+#: mealtally/web/templates/web/_redeem_success.html:6
+msgid "(This was already recorded.)"
+msgstr ""
+
+#: mealtally/web/templates/web/_search_results.html:7
+#, python-format
+msgid "Active · %(n)s left"
+msgstr ""
+
+#: mealtally/web/templates/web/_search_results.html:8
+#: mealtally/web/templates/web/me_home.html:32
+#: mealtally/web/templates/web/sell_done.html:6
+#: mealtally/web/templates/web/sell_preview.html:9
+msgid "Queued"
+msgstr "कतार में"
+
+#: mealtally/web/templates/web/_search_results.html:9
+#: mealtally/web/templates/web/_staff_customer_rows.html:4
+msgid "No pass"
+msgstr ""
+
+#: mealtally/web/templates/web/_search_results.html:11
+msgid "Pick a customer from the list."
+msgstr ""
+
+#: mealtally/web/templates/web/_search_results.html:12
+msgid "No customer found."
+msgstr ""
+
+#: mealtally/web/templates/web/_search_results.html:12
+msgid "Add new customer"
+msgstr ""
+
+#: mealtally/web/templates/web/_sell_results.html:3
+msgid "No match. Use “New customer” below."
+msgstr ""
+
+#: mealtally/web/templates/web/_today.html:4
+#, python-format
+msgid "%(counter)s meal today"
+msgid_plural "%(counter)s meals today"
+msgstr[0] ""
+msgstr[1] ""
+
+#: mealtally/web/templates/web/_today.html:9
+msgid "undone"
+msgstr ""
+
+#: mealtally/web/templates/web/_today.html:10
+msgid "Reverse"
+msgstr ""
+
+#: mealtally/web/templates/web/_today.html:14
+msgid "Reason (required)"
+msgstr ""
+
+#: mealtally/web/templates/web/_today.html:15
+msgid "No redemptions yet today."
+msgstr ""
+
+#: mealtally/web/templates/web/_undo_done.html:4
+#, python-format
+msgid "Undone — %(n)s meals left"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_audit.html:5
+#: mealtally/web/templates/web/admin_audit.html:10
+msgid "Who"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_audit.html:6
+#: mealtally/web/templates/web/admin_audit.html:10
+msgid "Action"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_audit.html:9
+msgid "Filter"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_audit.html:10
+msgid "Object"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_audit.html:12
+msgid "Nothing matches."
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:9
+msgid "Statement"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:12
+msgid "Edit profile"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:15
+msgid "Notes"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:17
+#: mealtally/web/templates/web/admin_customer.html:21
+msgid "Reset PIN"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:19
+msgid "Generate"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:20
+msgid "Set a PIN"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:21
+#: mealtally/web/templates/web/customer_new.html:8
+#: mealtally/web/templates/web/sell.html:15
+msgid "PIN"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:22
+msgid "Unblock customer"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:22
+msgid "Block customer"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:25
+msgid "Adjust credits"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:27
+#: mealtally/web/templates/web/admin_customer.html:54
+#: mealtally/web/templates/web/admin_customers.html:9
+msgid "Pass"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:28
+msgid "Change (+/- meals)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:29
+msgid "Adjust"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:32 mealtally/web/views_admin.py:478
+msgid "Passes"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:35
+#, python-format
+msgid "Starts %(s)s · %(m)s meals · ends %(e)s"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:35
+msgid "left"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:36
+msgid "Pass actions"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:40
+msgid "No passes yet."
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:44
+#: mealtally/web/templates/web/admin_customer.html:47
+#: mealtally/web/templates/web/admin_customer.html:48
+#: mealtally/web/templates/web/me_payments.html:5
+msgid "Void"
+msgstr "रद्द"
+
+#: mealtally/web/templates/web/admin_customer.html:50
+msgid "Void payment"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:51
+#: mealtally/web/templates/web/me_payments.html:8
+msgid "No payments yet."
+msgstr "अभी कोई भुगतान नहीं।"
+
+#: mealtally/web/templates/web/admin_customer.html:53
+msgid "Ledger (latest 40)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:54
+msgid "What"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customer.html:54
+msgid "By"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customers.html:3
+#: mealtally/web/templates/web/customer_new.html:3
+#: mealtally/web/templates/web/sell.html:11
+#: mealtally/web/templates/web/sell_preview.html:5
+#: mealtally/web/templates/web/staff_customers.html:3
+msgid "New customer"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customers.html:9 mealtally/web/views_admin.py:509
+msgid "Code"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/admin_staff.html:17
+#: mealtally/web/templates/web/customer_new.html:7
+#: mealtally/web/templates/web/me_profile.html:8 mealtally/web/templates/web/sell.html:14
+#: mealtally/web/templates/web/staff_customers.html:6
+msgid "Phone"
+msgstr "फ़ोन"
+
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/staff_customers.html:6
+msgid "Meals left"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/staff_customers.html:6
+msgid "Valid until"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_more.html:5
+msgid "Today and this month at a glance"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_more.html:6
+msgid "Prices, meals and validity"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_more.html:8
+msgid "Add staff, reset passwords"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_more.html:9
+msgid "Name, colour, rules, receipts"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_more.html:11
+msgid "Who did what, and when"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:4
+#: mealtally/web/templates/web/admin_plans.html:4
+msgid "New plan"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:5
+msgid "Editing a plan never changes passes that were already sold — they keep the price, meals and dates they were sold with."
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:12
+msgid "Validity"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:14
+msgid "Fixed days from purchase"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:15
+msgid "Calendar month (ends on the last day of the month)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:17
+msgid "Valid until end of month · full meals, no proration."
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:18
+msgid "Days (counting the purchase day)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:19
+msgid "Daily meal limit (blank = no limit)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:20
+msgid "Active (can be sold)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plan_form.html:21
+msgid "Save plan"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plans.html:5
+#: mealtally/web/templates/web/admin_staff.html:9
+msgid "Inactive"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plans.html:6
+msgid "meals"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plans.html:6
+msgid "end of month"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_plans.html:6
+msgid "max"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:6 mealtally/web/views_admin.py:450
+msgid "Daily consumption"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:6
+msgid "Meals per day and per customer"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:7 mealtally/web/views_admin.py:477
+msgid "Monthly subscriptions"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:7
+msgid "Passes sold, revenue, by plan, voids"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:8 mealtally/web/views_admin.py:508
+msgid "Expired & unused"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:8
+msgid "Meals forfeited at pass end"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:9 mealtally/web/views_admin.py:584
+msgid "Platform fee statement"
+msgstr "प्लेटफ़ॉर्म फ़ीस स्टेटमेंट"
+
+#: mealtally/web/templates/web/admin_reports.html:9
+msgid "Per month, for the platform invoice"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_reports.html:11
+msgid "Customer statements are on each customer's page."
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:7
+msgid "Restaurant"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:8
+msgid "Display name"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:10
+msgid "Contact phone"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:11
+msgid "Brand colour"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:12
+#: mealtally/web/templates/web/platform_onboard.html:8
+msgid "Timezone"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:14
+msgid "Double-scan guard (seconds)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:15
+msgid "Staff can undo within (hours)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:16
+msgid "Max queued passes per customer"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:17
+msgid "Allow customers to sign themselves up"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:18
+msgid "Receipts"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:19
+msgid "Receipt footer text"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:21
+msgid "GSTIN (optional, no tax calculation)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:22
+msgid "Save settings"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:5
+msgid "Temporary password (shown only once)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:6
+#: mealtally/web/templates/web/platform_onboarded.html:5
+msgid "Login"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:7
+msgid "They must choose a new password at first login."
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:8
+msgid "Copy"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:11
+msgid "Reset password"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:12
+msgid "Deactivate"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:12
+msgid "Activate"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:13
+msgid "Add a staff member"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:16
+msgid "Email"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:18
+msgid "Role"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:18
+msgid "Staff (redeem & sell)"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:18
+msgid "Manager"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_staff.html:19
+msgid "Add staff member"
+msgstr ""
+
+#: mealtally/web/templates/web/base.html:20
+msgid "Skip to content"
+msgstr "सीधे सामग्री पर जाएँ"
+
+#: mealtally/web/templates/web/base.html:31
+msgid "Notifications"
+msgstr "सूचनाएँ"
+
+#: mealtally/web/templates/web/base.html:35 mealtally/web/templates/web/base.html:36
+msgid "Help"
+msgstr "मदद"
+
+#: mealtally/web/templates/web/base.html:38
+msgid "Chat with us on WhatsApp"
+msgstr "WhatsApp पर हमसे बात करें"
+
+#: mealtally/web/templates/web/base.html:43
+#: mealtally/web/templates/web/me_profile.html:12
+msgid "Log out"
+msgstr "लॉग आउट"
+
+#: mealtally/web/templates/web/base.html:48
+msgid "Main"
+msgstr "मुख्य"
+
+#: mealtally/web/templates/web/base.html:65
+msgid "Tabs"
+msgstr "टैब"
+
+#: mealtally/web/templates/web/customer_created.html:3
+msgid "Customer created"
+msgstr ""
+
+#: mealtally/web/templates/web/customer_created.html:5
+#: mealtally/web/templates/web/sell.html:4
+msgid "Sell a pass"
+msgstr ""
+
+#: mealtally/web/templates/web/customer_created.html:5
+msgid "Done"
+msgstr ""
+
+#: mealtally/web/templates/web/customer_new.html:9
+#: mealtally/web/templates/web/sell.html:16
+msgid "Generate for me"
+msgstr ""
+
+#: mealtally/web/templates/web/customer_new.html:10
+#: mealtally/web/templates/web/sell.html:17
+msgid "Customer chooses"
+msgstr ""
+
+#: mealtally/web/templates/web/customer_new.html:11
+#: mealtally/web/templates/web/sell.html:18
+msgid "Customer chosen PIN"
+msgstr ""
+
+#: mealtally/web/templates/web/customer_new.html:12
+msgid "Create customer"
+msgstr ""
+
+#: mealtally/web/templates/web/error.html:15 mealtally/web/templates/web/not_found.html:5
+msgid "Back to start"
+msgstr ""
+
+#: mealtally/web/templates/web/global_login.html:4
+#: mealtally/web/templates/web/login_staff.html:5
+#: mealtally/web/templates/web/tenant_home.html:10
+msgid "Staff login"
+msgstr "स्टाफ़ लॉगिन"
+
+#: mealtally/web/templates/web/global_login.html:7
+msgid "Email or phone"
+msgstr "ईमेल या फ़ोन"
+
+#: mealtally/web/templates/web/global_login.html:8
+msgid "Password"
+msgstr "पासवर्ड"
+
+#: mealtally/web/templates/web/landing.html:5
+msgid "Prepaid meal passes for restaurants & tiffin services"
+msgstr ""
+
+#: mealtally/web/templates/web/landing.html:7
+msgid "Restaurant login"
+msgstr ""
+
+#: mealtally/web/templates/web/landing.html:8
+msgid "Enter your restaurant code"
+msgstr ""
+
+#: mealtally/web/templates/web/landing.html:9
+msgid "The code is the last part of your restaurant's web address."
+msgstr ""
+
+#: mealtally/web/templates/web/landing.html:11
+msgid "Continue"
+msgstr ""
+
+#: mealtally/web/templates/web/landing.html:13
+msgid "Own a tiffin or mess? See how to get started"
+msgstr ""
+
+#: mealtally/web/templates/web/landing.html:14
+msgid "Staff? Log in without a restaurant code"
+msgstr ""
+
+#: mealtally/web/templates/web/login_customer.html:5
+msgid "Customer login"
+msgstr "ग्राहक लॉगिन"
+
+#: mealtally/web/templates/web/me_home.html:4
+msgid "Shortcuts"
+msgstr "शॉर्टकट"
+
+#: mealtally/web/templates/web/me_home.html:4
+msgid "Home delivery meals"
+msgstr "घर पर डिलीवरी वाला खाना"
+
+#: mealtally/web/templates/web/me_home.html:5
+#, python-format
+msgid "Hello, %(name)s"
+msgstr "नमस्ते, %(name)s"
+
+#: mealtally/web/templates/web/me_home.html:10
+msgid "Suspended"
+msgstr "रोका गया"
+
+#: mealtally/web/templates/web/me_home.html:13
+#, python-format
+msgid "%(l)s of %(t)s meals left"
+msgstr "%(t)s में से %(l)s भोजन बाकी"
+
+#: mealtally/web/templates/web/me_home.html:17
+#, python-format
+msgid "of %(t)s meals left"
+msgstr "%(t)s में से भोजन बाकी"
+
+#: mealtally/web/templates/web/me_home.html:19
+#, python-format
+msgid "Valid until %(d)s · %(counter)s day left"
+msgid_plural "Valid until %(d)s · %(counter)s days left"
+msgstr[0] "%(d)s तक मान्य · %(counter)s दिन बाकी"
+msgstr[1] "%(d)s तक मान्य · %(counter)s दिन बाकी"
+
+#: mealtally/web/templates/web/me_home.html:20
+#, python-format
+msgid "%(counter)s meal will expire on %(d)s — renew at the counter"
+msgid_plural "%(counter)s meals will expire on %(d)s — renew at the counter"
+msgstr[0] "%(counter)s भोजन %(d)s को खत्म हो जाएगा — काउंटर पर रिन्यू करें"
+msgstr[1] "%(counter)s भोजन %(d)s को खत्म हो जाएँगे — काउंटर पर रिन्यू करें"
+
+#: mealtally/web/templates/web/me_home.html:21
+#, python-format
+msgid "Running low — %(counter)s meal left"
+msgid_plural "Running low — %(counter)s meals left"
+msgstr[0] "कम बचा है — %(counter)s भोजन"
+msgstr[1] "कम बचा है — %(counter)s भोजन"
+
+#: mealtally/web/templates/web/me_home.html:23 mealtally/web/templates/web/sell.html:26
+msgid "Valid until end of month · full meals"
+msgstr "महीने के अंत तक मान्य · पूरे भोजन"
+
+#: mealtally/web/templates/web/me_home.html:24
+#: mealtally/web/templates/web/me_home.html:29
+msgid "No refund or carry-forward of unused meals."
+msgstr "बचे हुए भोजन का रिफ़ंड या अगले पास में ट्रांसफ़र नहीं होता।"
+
+#: mealtally/web/templates/web/me_home.html:28
+msgid "No active pass — pay at the counter to start"
+msgstr "कोई चालू पास नहीं — शुरू करने के लिए काउंटर पर भुगतान करें"
+
+#: mealtally/web/templates/web/me_home.html:34
+#, python-format
+msgid "Starts %(d)s · %(t)s meals"
+msgstr "%(d)s से शुरू · %(t)s भोजन"
+
+#: mealtally/web/templates/web/me_home.html:36
+msgid "Show my QR"
+msgstr "मेरा QR दिखाएँ"
+
+#: mealtally/web/templates/web/me_payments.html:3
+msgid "Payments & receipts"
+msgstr "भुगतान और रसीदें"
+
+#: mealtally/web/templates/web/me_payments.html:7
+msgid "PDF receipt"
+msgstr "PDF रसीद"
+
+#: mealtally/web/templates/web/me_pin.html:3
+msgid "Change your PIN"
+msgstr "अपना PIN बदलें"
+
+#: mealtally/web/templates/web/me_pin.html:4
+msgid "For your security, please choose your own PIN before continuing."
+msgstr "आपकी सुरक्षा के लिए, आगे बढ़ने से पहले अपना PIN चुनें।"
+
+#: mealtally/web/templates/web/me_pin.html:7
+msgid "Current PIN"
+msgstr "मौजूदा PIN"
+
+#: mealtally/web/templates/web/me_pin.html:8
+msgid "New PIN"
+msgstr "नया PIN"
+
+#: mealtally/web/templates/web/me_pin.html:9
+msgid "Repeat new PIN"
+msgstr "नया PIN दोबारा डालें"
+
+#: mealtally/web/templates/web/me_pin.html:10
+msgid "Save PIN"
+msgstr "PIN सेव करें"
+
+#: mealtally/web/templates/web/me_profile.html:11
+msgid "Change PIN"
+msgstr "PIN बदलें"
+
+#: mealtally/web/templates/web/me_qr.html:6
+msgid "Show this to the staff. It refreshes automatically."
+msgstr "यह स्टाफ़ को दिखाएँ। यह अपने-आप रिफ़्रेश होता है।"
+
+#: mealtally/web/templates/web/not_found.html:3 mealtally/web/views_platform.py:63
+msgid "We couldn't find that page"
+msgstr ""
+
+#: mealtally/web/templates/web/not_found.html:4
+msgid "Check the restaurant code or the link, or ask the restaurant for help."
+msgstr ""
+
+#: mealtally/web/templates/web/offline.html:3
+msgid "You're offline"
+msgstr "आप ऑफ़लाइन हैं"
+
+#: mealtally/web/templates/web/offline.html:4
+msgid "Redeeming meals needs a connection. Check your internet and try again."
+msgstr "खाना रिडीम करने के लिए इंटरनेट चाहिए। कनेक्शन जाँचकर दोबारा कोशिश करें।"
+
+#: mealtally/web/templates/web/offline.html:5
+msgid "Try again"
+msgstr "दोबारा कोशिश करें"
+
+#: mealtally/web/templates/web/paused.html:3
+msgid "Service paused"
+msgstr ""
+
+#: mealtally/web/templates/web/paused.html:4
+msgid "This restaurant's service is paused. Please contact the restaurant."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_confirm.html:3
+msgid "Suspend tenant"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_confirm.html:3
+msgid "Activate tenant"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_confirm.html:3
+msgid "Deactivate tenant"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_confirm.html:4
+msgid "Staff and customers of this tenant will see a 'service paused' page until it is activated again."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_confirm.html:4
+msgid "Service resumes immediately."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_confirm.html:4
+msgid "Deactivating ends service for this tenant. Data is kept."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_confirm.html:7
+msgid "Reason (required — written to the audit log)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:3
+msgid "Onboard tenant"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:3
+msgid "SaaS plans"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:5
+msgid "Active tenants"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:7
+msgid "Meals this month"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:8
+msgid "Fees this month"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:10
+msgid "Hide test tenants"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:10
+msgid "Show test tenants"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:11
+msgid "Tenant"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:11
+msgid "Meals (month)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:11
+msgid "Fees (month)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_dashboard.html:14
+msgid "No tenants."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:3
+msgid "Onboard a tenant"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:6
+msgid "Restaurant name"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:7
+msgid "Restaurant code (letters, digits, hyphens)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:9
+msgid "Owner name"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:10
+msgid "Owner email"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:11
+msgid "Owner phone (optional)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:12
+msgid "Test tenant (hidden from platform lists and metrics)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboard.html:13
+msgid "Create tenant"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboarded.html:3
+msgid "Tenant created"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboarded.html:4
+msgid "Owner login (temporary password shown only once)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboarded.html:6
+msgid "The owner must choose a new password at first login."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboarded.html:7
+msgid "Copy password"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_onboarded.html:8
+msgid "Back to platform"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:8
+msgid "Created"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:11
+msgid "Owner"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:14
+msgid "Preview modules"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:15
+msgid "Serve the demo dataset"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:16
+msgid "Show “Preview” badges"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:19
+msgid "Suspend…"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:19
+msgid "Activate…"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:20
+msgid "Deactivate…"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:23
+msgid "Fee policy"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:24
+msgid "Effective from"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:24
+#: mealtally/web/templates/web/platform_tenant.html:27
+#, python-format
+msgid "Platform %%"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:24
+#: mealtally/web/templates/web/platform_tenant.html:28
+#, python-format
+msgid "Gateway %%"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:29
+msgid "Effective from (blank = now)"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:30
+msgid "Add new fee policy"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:31
+msgid "Policies are effective-dated and never edited: a payment uses the latest policy in force when it was received."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:34
+msgid "Monthly fee statement"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:35
+#: mealtally/web/templates/web/report.html:7
+msgid "Month"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:37
+#: mealtally/web/templates/web/report.html:9
+msgid "Export CSV"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:40 mealtally/web/views_admin.py:574
+#: mealtally/web/views_platform.py:170
+msgid "Gross payments"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:41 mealtally/web/views_admin.py:575
+#: mealtally/web/views_platform.py:171
+msgid "Platform fee"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:42 mealtally/web/views_admin.py:576
+#: mealtally/web/views_platform.py:172
+msgid "Gateway fee"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:43 mealtally/web/views_admin.py:578
+#: mealtally/web/views_platform.py:173
+msgid "Net payable to platform"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:590
+#: mealtally/web/views_platform.py:149
+msgid "Base"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:592
+#: mealtally/web/views_platform.py:149
+msgid "Fee"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:45
+msgid "Reversed"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:594
+#: mealtally/web/views_platform.py:149
+msgid "Net"
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:47
+msgid "No fees in this month."
+msgstr ""
+
+#: mealtally/web/templates/web/platform_tenant.html:48
+msgid "This page shows fees only — never the restaurant's customer data."
+msgstr ""
+
+#: mealtally/web/templates/web/report.html:14
+msgid "No data for this period."
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:8
+msgid "Search existing customer (phone, code or name)"
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:18
+#, python-format
+msgid "%(n)s digits (only if the customer chooses)"
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:25
+#, python-format
+msgid "%(e)s per meal"
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:26
+#: mealtally/web/templates/web/sell_preview.html:6
+#, python-format
+msgid "%(m)s meals"
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:26
+#, python-format
+msgid "%(d)s days"
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:26
+#, python-format
+msgid "max %(c)s/day"
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:27
+msgid "No active plans. Ask the owner to add one."
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:32
+msgid "Reference"
+msgstr ""
+
+#: mealtally/web/templates/web/sell.html:32
+msgid "UTR / transaction ID; not needed for cash"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_done.html:4
+msgid "Pass sold"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_done.html:6
+#: mealtally/web/templates/web/sell_preview.html:9
+msgid "Active now"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_done.html:7
+msgid "Print receipt"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_done.html:10
+msgid "Sell another"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_preview.html:3
+msgid "Check and confirm"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_preview.html:8
+msgid "Ref"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_preview.html:10
+#, python-format
+msgid "%(a)s to %(b)s"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_preview.html:11
+msgid "Valid until end of month · full meals (no proration)."
+msgstr ""
+
+#: mealtally/web/templates/web/sell_preview.html:16
+#, python-format
+msgid "No active pass from %(a)s to %(b)s"
+msgstr ""
+
+#: mealtally/web/templates/web/sell_preview.html:17
+msgid "The customer understands there will be a gap."
+msgstr ""
+
+#: mealtally/web/templates/web/sell_preview.html:19
+msgid "Confirm sale"
+msgstr ""
+
+#: mealtally/web/templates/web/signup.html:3
+msgid "Create your account"
+msgstr ""
+
+#: mealtally/web/templates/web/signup.html:7
+msgid "Phone number"
+msgstr ""
+
+#: mealtally/web/templates/web/signup.html:8
+#, python-format
+msgid "Choose a %(n)s-digit PIN"
+msgstr ""
+
+#: mealtally/web/templates/web/signup.html:9
+msgid "Sign up"
+msgstr ""
+
+#: mealtally/web/templates/web/signup_closed.html:2
+msgid "Sign-up is not open"
+msgstr ""
+
+#: mealtally/web/templates/web/signup_closed.html:2
+msgid "Please ask the restaurant to create your account."
+msgstr ""
+
+#: mealtally/web/templates/web/signup_done.html:3
+msgid "You're signed up"
+msgstr ""
+
+#: mealtally/web/templates/web/signup_done.html:4
+msgid "To start your meal pass, please pay at the counter. Then log in to see your meals."
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:6
+msgid "Camera not available. Type the code or paste the QR text below."
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:8
+msgid "Customer phone, code or name"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:9
+msgid "Type to search…"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:12
+#: mealtally/web/templates/web/staff_console.html:14
+msgid "Scan QR"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:25
+msgid "Camera not working? Enter the QR text manually"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:27
+msgid "QR text"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:28
+msgid "Paste QR text"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:34
+msgid "Today's redemptions"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:35
+msgid "Sound on"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_console.html:35
+msgid "Sound off"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_customers.html:5
+msgid "Search by phone, code or name"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_password.html:3
+msgid "Change your password"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_password.html:4
+msgid "Please choose your own password before continuing."
+msgstr ""
+
+#: mealtally/web/templates/web/staff_password.html:7
+msgid "Current password"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_password.html:8
+msgid "New password (at least 10 characters)"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_password.html:9
+msgid "Repeat new password"
+msgstr ""
+
+#: mealtally/web/templates/web/staff_password.html:10
+msgid "Save password"
+msgstr ""
+
+#: mealtally/web/templates/web/tenant_home.html:4
+#, python-format
+msgid "Welcome to %(name)s"
+msgstr "%(name)s में आपका स्वागत है"
+
+#: mealtally/web/templates/web/tenant_home.html:8
+msgid "I'm a customer"
+msgstr "मैं ग्राहक हूँ"
+
+#: mealtally/web/templates/web/tenant_home.html:8
+msgid "See my meals, QR code and history (phone + PIN)"
+msgstr "अपने भोजन, QR कोड और इतिहास देखें (फ़ोन + PIN)"
+
+#: mealtally/web/templates/web/tenant_home.html:10
+msgid "Redeem meals, sell passes, manage (email or phone + password)"
+msgstr "भोजन रिडीम करें, पास बेचें, मैनेज करें (ईमेल या फ़ोन + पासवर्ड)"
+
+#: mealtally/web/templates/web/tenant_home.html:12
+msgid "New customer? Create an account"
+msgstr "नए ग्राहक? अकाउंट बनाएँ"
+
+#: mealtally/web/templates/web/tenant_picker.html:3
+msgid "Choose a restaurant"
+msgstr ""
+
+#: mealtally/web/views_admin.py:61
+msgid "The two passwords do not match."
+msgstr ""
+
+#: mealtally/web/views_admin.py:97
+msgid "All"
+msgstr ""
+
+#: mealtally/web/views_admin.py:98
+msgid "With active pass"
+msgstr ""
+
+#: mealtally/web/views_admin.py:99
+msgid "No active pass"
+msgstr ""
+
+#: mealtally/web/views_admin.py:121
+msgid "Meals already redeemed — use Adjust credits"
+msgstr ""
+
+#: mealtally/web/views_admin.py:123
+msgid "This pass has already ended"
+msgstr ""
+
+#: mealtally/web/views_admin.py:146
+msgid "Suspend"
+msgstr ""
+
+#: mealtally/web/views_admin.py:146
+msgid "Resume"
+msgstr ""
+
+#: mealtally/web/views_admin.py:146
+msgid "Cancel pass"
+msgstr ""
+
+#: mealtally/web/views_admin.py:176 mealtally/web/views_customer.py:151
+msgid "Saved."
+msgstr ""
+
+#: mealtally/web/views_admin.py:184
+msgid "Customer blocked."
+msgstr ""
+
+#: mealtally/web/views_admin.py:184
+msgid "Customer unblocked."
+msgstr ""
+
+#: mealtally/web/views_admin.py:189
+msgid "New PIN set. The customer must change it at next login."
+msgstr ""
+
+#: mealtally/web/views_admin.py:198
+msgid "Credits adjusted."
+msgstr ""
+
+#: mealtally/web/views_admin.py:204
+msgid "Pass updated."
+msgstr ""
+
+#: mealtally/web/views_admin.py:207
+msgid "Payment voided."
+msgstr ""
+
+#: mealtally/web/views_admin.py:221
+msgid "Enter a whole number."
+msgstr ""
+
+#: mealtally/web/views_admin.py:242
+msgid "Check the numbers: whole numbers only (price may have paise)."
+msgstr ""
+
+#: mealtally/web/views_admin.py:361
+msgid "Settings saved."
+msgstr ""
+
+#: mealtally/web/views_admin.py:363
+msgid "Enter whole numbers."
+msgstr ""
+
+#: mealtally/web/views_admin.py:451
+msgid "Date / customer"
+msgstr ""
+
+#: mealtally/web/views_admin.py:453
+msgid "Total meals"
+msgstr ""
+
+#: mealtally/web/views_admin.py:471
+msgid "Voids"
+msgstr ""
+
+#: mealtally/web/views_admin.py:509
+msgid "Ended"
+msgstr ""
+
+#: mealtally/web/views_admin.py:509
+msgid "Unused"
+msgstr ""
+
+#: mealtally/web/views_admin.py:511
+msgid "Total meals forfeited"
+msgstr ""
+
+#: mealtally/web/views_admin.py:544
+msgid "Kind"
+msgstr ""
+
+#: mealtally/web/views_admin.py:544
+msgid "Detail"
+msgstr ""
+
+#: mealtally/web/views_admin.py:544
+msgid "Amount / balance"
+msgstr ""
+
+#: mealtally/web/views_admin.py:577
+msgid "Voids in month"
+msgstr ""
+
+#: mealtally/web/views_admin.py:591 mealtally/web/views_platform.py:149
+msgid "%"
+msgstr ""
+
+#: mealtally/web/views_admin.py:593 mealtally/web/views_platform.py:149
+msgid "Reversed (void)"
+msgstr ""
+
+#: mealtally/web/views_customer.py:34
+msgid "Meal undone"
+msgstr ""
+
+#: mealtally/web/views_customer.py:35
+msgid "Adjusted by restaurant"
+msgstr ""
+
+#: mealtally/web/views_customer.py:170
+msgid "The two PINs do not match."
+msgstr ""
+
+#: mealtally/web/views_platform.py:64
+msgid "Check the link, or head back to the start."
+msgstr ""
+
+#: mealtally/web/views_platform.py:163
+msgid "TOTAL"
+msgstr ""
+
+#: mealtally/web/views_platform.py:209
+msgid "Fee policy saved."
+msgstr ""
+
+#: mealtally/web/views_platform.py:211
+msgid "Check the percentages (0-100) and the date."
+msgstr ""
+
+#: mealtally/web/views_platform.py:252
+msgid "A reason is required."
+msgstr ""
+
+#: mealtally/web/views_public.py:49
+msgid "Enter your restaurant code."
+msgstr ""
+
+#: mealtally/web/views_public.py:84
+msgid "This account has no staff access to any restaurant."
+msgstr ""
+
+#: mealtally/web/views_public.py:141
+msgid "This account does not have staff access here."
+msgstr ""
+
+#: mealtally/web/views_staff.py:99 mealtally/web/views_staff.py:163
+msgid "Customer not found."
+msgstr ""
+
+#: mealtally/web/views_staff.py:199
+msgid "Undone at counter"
+msgstr ""
+
+#: mealtally/web/views_staff.py:239
+msgid "Cash"
+msgstr ""
+
+#: mealtally/web/views_staff.py:240
+msgid "UPI"
+msgstr ""
+
+#: mealtally/web/views_staff.py:241
+msgid "Card"
+msgstr ""
+
+#: mealtally/web/views_staff.py:242
+msgid "Bank transfer"
+msgstr ""
+
+#: mealtally/web/views_staff.py:278
+msgid "Pick a customer or enter the new customer's name and phone."
+msgstr ""
+
+#: mealtally/web/views_staff.py:280
+msgid "A reference (UTR / transaction ID) is required for non-cash payments."
+msgstr ""
+
+#: mealtally/web/views_staff.py:315
+msgid "Please confirm the gap in coverage before selling."
+msgstr ""
+
+#~ msgid "Kitchen"
+#~ msgstr "किचन"
+
+#~ msgid "Expenses & profit"
+#~ msgstr "खर्च और मुनाफ़ा"
+
+#~ msgid "Payment setup"
+#~ msgstr "भुगतान सेटअप"
+
+#~ msgid "Website"
+#~ msgstr "वेबसाइट"
+
+#~ msgid "Cloud kitchen"
+#~ msgstr "क्लाउड किचन"
+
+#: D03.6 sign-in screens
+msgid "Welcome"
+msgstr "स्वागत है"
+
+#: D03.6 sign-in screens
+msgid "Choose how you'd like to sign in to %(name)s."
+msgstr "%(name)s में साइन इन करने का तरीका चुनें।"
+
+#: D03.6 sign-in screens
+msgid "Check meals, show my QR, see history"
+msgstr "भोजन देखें, अपना QR दिखाएँ, इतिहास देखें"
+
+#: D03.6 sign-in screens
+msgid "I work here"
+msgstr "मैं यहाँ काम करता/करती हूँ"
+
+#: D03.6 sign-in screens
+msgid "Staff login: redeem, sell, manage"
+msgstr "स्टाफ़ लॉगिन: भोजन रिडीम करें, पास बेचें, प्रबंधन करें"
+
+#: D03.6 sign-in screens
+msgid "Last time"
+msgstr "पिछली बार"
+
+#: D03.6 sign-in screens
+msgid "Use your phone number and PIN."
+msgstr "अपना फ़ोन नंबर और PIN डालें।"
+
+#: D03.6 sign-in screens
+msgid "Hide"
+msgstr "छिपाएँ"
+
+#: D03.6 sign-in screens
+msgid "Forgot your PIN? Ask at the counter, and staff can reset it."
+msgstr "PIN भूल गए? काउंटर पर पूछें, स्टाफ़ इसे रीसेट कर सकता है।"
+
+#: D03.6 sign-in screens
+msgid "Sign in to redeem meals, sell passes or manage the business."
+msgstr "भोजन रिडीम करने, पास बेचने या कारोबार संभालने के लिए साइन इन करें।"
+
+#: D03.6 sign-in screens
+msgid "Forgot password?"
+msgstr "पासवर्ड भूल गए?"
+
+#: D03.6 sign-in screens
+msgid "Platform administrators and restaurant staff: no restaurant code needed."
+msgstr "प्लेटफ़ॉर्म एडमिन और रेस्तराँ स्टाफ़: रेस्तराँ कोड की ज़रूरत नहीं।"
+
+#: D03.6 sign-in screens
+msgid "Prepaid meals, simplified."
+msgstr "प्रीपेड भोजन, आसान।"
+
+#: D03.6 sign-in screens
+msgid "Powered by Mealtally"
+msgstr "Mealtally द्वारा संचालित"
+
+#: D03.6 sign-in screens
+msgid "Tagline (shown on the sign-in screens)"
+msgstr "टैगलाइन (साइन-इन स्क्रीन पर दिखती है)"
+
+#: D03.6 sign-in screens
+msgid "Theme changed to %(name)s"
+msgstr "थीम बदलकर %(name)s की गई"
+
+#: D03.6 sign-in screens
+msgid "Choose the look of your restaurant's screens. It saves and applies to everyone as soon as you pick it."
+msgstr "अपने रेस्तराँ की स्क्रीन का रूप चुनें। चुनते ही यह सबके लिए सेव और लागू हो जाता है।"
+
+#: D03.7
+msgid "Activity"
+msgstr "गतिविधि"
+
+#: D03.7
+msgid "Account"
+msgstr "खाता"
+
+#: D03.7
+msgid "Show QR"
+msgstr "QR दिखाएँ"
+
+#: D03.7
+msgid "Counter"
+msgstr "काउंटर"
+
+#: D03.7
+msgid "Chef"
+msgstr "शेफ़"
+
+#: D03.7
+msgid "Business profile"
+msgstr "बिज़नेस प्रोफ़ाइल"
+
+#: D03.7
+msgid "Save profile"
+msgstr "प्रोफ़ाइल सेव करें"
+
+#: D03.7
+msgid "My plans"
+msgstr "मेरे प्लान"
+
+#: D03.7
+msgid "Back to Home"
+msgstr "होम पर वापस"
+
+#: D03.7
+msgid "Customer code"
+msgstr "ग्राहक कोड"
+
+#: D03.7
+msgid "Security"
+msgstr "सुरक्षा"
+
+#: D03.7
+msgid "Language and help"
+msgstr "भाषा और मदद"
+
+#: D03.7
+msgid "Call the restaurant"
+msgstr "रेस्तराँ को कॉल करें"
+
+#: D03.7
+msgid "Schedule a hold"
+msgstr "होल्ड शेड्यूल करें"
+
+#: D03.7
+msgid "To renew, ask at the counter."
+msgstr "रीन्यू करने के लिए काउंटर पर पूछें।"
+
+#: D03.7
+msgid "Directions"
+msgstr "रास्ता"
+
+#: D03.7
+msgid "Choose, skip or hold"
+msgstr "चुनें, छोड़ें या होल्ड करें"
+
+#: D03.7
+msgid "Choose before cutoff"
+msgstr "कटऑफ़ से पहले चुनें"
+
+#: D03.7
+msgid "Sign in"
+msgstr "साइन इन"
+
+#: D03.7
+msgid "Scheduled"
+msgstr "निर्धारित"
+
+#: D03.7
+msgid "Stops"
+msgstr "स्टॉप"
+
+#: D03.7
+msgid "Navigate"
+msgstr "नेविगेट"
+
+#: D03.7
+msgid "Reason for skipping"
+msgstr "छोड़ने का कारण"
+
+#: D03.7
+msgid "Customer not home"
+msgstr "ग्राहक घर पर नहीं"
+
+#: D03.7
+msgid "Wrong address"
+msgstr "गलत पता"
+
+#: D03.7
+msgid "Customer cancelled"
+msgstr "ग्राहक ने रद्द किया"
+
+#: D03.7
+msgid "Confirm skip"
+msgstr "छोड़ना पक्का करें"
+
+#: D03.7
+msgid "Updated"
+msgstr "अपडेट हुआ"
+
+#: D03.7
+msgid "Hide undone"
+msgstr "रद्द की गई प्रविष्टियाँ छिपाएँ"
+
+#: D03.7
+msgid "Cash today"
+msgstr "आज का नकद"
+
+#: D03.7
+msgid "Meals today"
+msgstr "आज के भोजन"
+
+#: D03.7
+msgid "Your cart"
+msgstr "आपकी कार्ट"
+
+#: D03.7
+msgid "View cart"
+msgstr "कार्ट देखें"
+
+#: D03.7
+msgid "Pickup"
+msgstr "पिकअप"

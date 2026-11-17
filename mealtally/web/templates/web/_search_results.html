@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if results %}<ul class="divide-y divide-subtle rounded-lg border border-subtle">
+  {% for r in results %}<li><button type="button" class="flex min-h-14 w-full items-center justify-between gap-3 px-3 py-2 text-left hover:bg-soft"
+      hx-get="{% url 'web:staff-card' tenant.slug r.c.public_id %}" hx-target="#console-card" hx-swap="innerHTML" data-testid="result">
+    <span><span class="block font-semibold">{{ r.c.full_name }}</span><span class="block text-sm text-muted">{{ r.c.customer_code }} · {{ r.phone }}</span></span>
+    {% if r.c.status == 'BLOCKED' %}<span class="chip-void">{% trans "Blocked" %}</span>
+    {% elif r.pass %}<span class="chip-active">{% blocktrans with n=r.pass.meals_remaining %}Active · {{ n }} left{% endblocktrans %}</span>
+    {% elif r.queued %}<span class="chip-soon">{% trans "Queued" %}</span>
+    {% else %}<span class="chip-slate">{% trans "No pass" %}</span>{% endif %}</button></li>{% endfor %}
+</ul>
+<div id="console-card" hx-swap-oob="innerHTML"><div class="rounded-2xl border border-dashed border-strong p-6 text-center text-muted">{% trans "Pick a customer from the list." %}</div></div>
+{% elif q %}<p class="py-2 text-sm text-ink-soft">{% trans "No customer found." %} <a class="link" href="{% url 'web:staff-customer-new' tenant.slug %}">{% trans "Add new customer" %}</a></p>{% endif %}

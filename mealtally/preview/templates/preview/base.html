@@ -1,0 +1,8 @@
+{% extends "web/base.html" %}{% load i18n static %}
+{% block head_scripts %}<script src="{% static 'js/preview.js' %}" defer></script>{% endblock %}
+{% block content %}
+<div data-pv-root>
+{% block pv_content %}{% endblock %}
+</div>
+<div id="pv-toast" class="no-print pointer-events-none fixed inset-x-0 bottom-20 z-50 flex justify-center px-4 sm:bottom-6" role="status" aria-live="polite"></div>
+{% endblock %}

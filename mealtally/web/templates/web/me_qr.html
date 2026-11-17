@@ -1,0 +1,9 @@
+{% extends "web/base.html" %}{% load i18n static %}
+{% block title %}{% trans "My QR" %}{% endblock %}
+{% block alpine %}<script src="{% static 'vendor/alpine-csp.min.js' %}" defer></script>{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-sm text-center" x-data="qrScreen">
+  <div id="qr-box" hx-get="{% url 'web:me-qr-fragment' tenant.slug %}" hx-trigger="every 30s" hx-swap="innerHTML">{% include "web/_qr_fragment.html" %}</div>
+  <p class="mt-4 text-sm text-ink-soft">{% trans "Show this to the staff. It refreshes automatically." %}</p>
+  </section>
+{% endblock %}

@@ -1,0 +1,8 @@
+#!/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-only
+# Wait for PostgreSQL and Valkey, then run the command.
+set -o errexit -o pipefail -o nounset
+wait-for-it "${POSTGRES_HOST:-postgres}:${POSTGRES_PORT:-5432}" -t 60 -q
+redis_hostport=$(echo "${REDIS_URL:-redis://valkey:6379/0}" | sed -E 's#^rediss?://([^/:]*:?[^@/]*@)?([^/:]+):([0-9]+).*#\2:\3#')
+wait-for-it "${redis_hostport}" -t 60 -q
+exec "$@"

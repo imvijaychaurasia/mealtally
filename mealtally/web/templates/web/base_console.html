@@ -1,0 +1,85 @@
+{% load static i18n %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="{{ theme }}" class="h-full bg-page">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% if tenant %}{{ cfg.display_name|default:tenant.name }}{% else %}Mealtally{% endif %}{% endblock %}</title>
+  <meta name="htmx-config" content='{"allowEval":false,"allowScriptTags":false,"includeIndicatorStyles":false,"selfRequestsOnly":true,"historyCacheSize":0,"refreshOnHistoryMiss":true,"attributesToSettle":["class","width","height"]}'>
+  <meta name="theme-color" content="{{ theme_color }}">
+  <link rel="manifest" href="{% url 'web:manifest' %}?theme={{ theme }}">
+  <link rel="icon" href="{% static 'icons/icon-192.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'icons/icon-192.png' %}">
+  <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script src="{% static 'vendor/htmx.min.js' %}" defer></script>
+  <script src="{% static 'js/app.js' %}" defer></script>
+  <script src="{% static 'js/console.js' %}" defer></script>
+  {% block head_scripts %}{% endblock %}
+  <script src="{% static 'vendor/alpine-csp.min.js' %}" defer></script>
+</head>
+<body class="shell-console {% if role == 'STAFF' %}sb-collapsed {% endif %}{% if station %}station {% endif %}min-h-full font-sans text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
+
+  {% block sidebar %}{% if sidebar %}
+  <aside class="console-sidebar no-print fixed inset-y-0 left-0 z-40 flex flex-col overflow-y-auto border-r border-side-ink/10 bg-side text-side-ink" data-testid="sidebar" aria-label="{% trans 'Main' %}">
+    <div class="border-b border-side-ink/10 px-4 py-4">
+      <a class="flex items-center gap-2" href="{{ home_href }}" aria-label="Mealtally">
+        <svg class="h-8 w-8 shrink-0" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" class="fill-primary"/><path d="M9 16.5l4.5 4.5L23 11" fill="none" class="stroke-on-primary" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="sb-label font-display text-lg font-extrabold tracking-tight text-side-ink">Mealtally <span class="text-side-label">Mealtally</span></span>
+      </a>
+      <div class="sb-tenant mt-3 flex items-center gap-2 rounded-xl bg-side-ink/10 p-2" data-testid="sidebar-tenant">
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-side-active text-sm font-bold text-side-active-ink" aria-hidden="true">{{ cfg.display_name|default:tenant.name|slice:":1" }}</span>
+        <span class="min-w-0 truncate text-sm font-semibold text-side-ink">{{ cfg.display_name|default:tenant.name }}</span>
+      </div>
+    </div>
+    <nav class="flex-1 px-3 py-3" aria-label="{% trans 'Sections' %}">
+      {% for g in sidebar %}
+      {% if g.label %}<p class="sb-section mb-1 mt-5 px-3 text-xs font-bold uppercase tracking-wider text-side-label">{{ g.label }}</p>{% elif not forloop.first %}<hr class="my-3 border-side-ink/10">{% endif %}
+      <ul class="grid gap-0.5">
+        {% for it in g.items %}<li><a title="{{ it.label }}" aria-label="{{ it.label }}" class="sb-link flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors duration-150 {% if it.active %}bg-side-active font-semibold text-side-active-ink{% else %}text-side-ink hover:bg-side-ink/10{% endif %}" href="{{ it.url }}" {% if it.active %}aria-current="page"{% endif %} title="{{ it.label }}" data-sb-link>
+          {% include "web/_icon.html" with name=it.icon %}<span class="sb-label min-w-0 flex-1 truncate">{{ it.label }}</span>{% if role == "STAFF" %}<span class="rail-label" aria-hidden="true">{{ it.short }}</span>{% endif %}{% if it.preview and pv_badge %}<span class="sb-label h-2 w-2 shrink-0 rounded-full bg-primary" title="{% trans 'Preview' %}"><span class="sr-only">{% trans "Preview" %}</span></span>{% endif %}</a></li>{% endfor %}
+      </ul>
+      {% endfor %}
+    </nav>
+  </aside>
+  <div id="sb-scrim" class="no-print fixed inset-0 z-30 hidden bg-ink/40 lg:hidden" data-sb-scrim></div>
+  {% endif %}{% endblock %}
+
+  <div class="{% if sidebar %}console-main{% endif %} min-h-screen">
+    {% block header %}
+    <header class="no-print sticky top-0 z-20 border-b border-subtle bg-card" data-testid="topbar">
+      <div class="flex items-center gap-2 px-3 py-2 lg:px-6">
+        {% if sidebar %}<button type="button" class="btn-secondary px-3" data-sb-toggle aria-label="{% trans 'Toggle menu' %}" aria-expanded="false">{% include "web/_icon.html" with name="menu-burger" %}</button>{% endif %}
+        <a class="min-w-0 flex-1 truncate text-base font-bold text-primary-hover {% if not station %}lg:hidden{% endif %}" href="{{ home_href }}">{{ cfg.display_name|default:tenant.name|default:"Mealtally" }}</a>
+        {% if station %}<span class="chip-active" data-testid="station-role">{{ role|role_label }}</span><span class="text-lg font-semibold tabular-nums" data-clock data-testid="clock"></span>{% endif %}
+        <span class="hidden flex-1 lg:block"></span>
+        {% if request.user.is_authenticated and tenant and role %}
+        {% if help_articles %}
+        <details class="relative" data-testid="help"><summary class="btn-secondary cursor-pointer list-none px-3" aria-label="{% trans 'Help' %}"><span class="font-bold" aria-hidden="true">?</span><span class="hidden sm:inline">{% trans "Help" %}</span></summary>
+          <div class="absolute right-0 z-30 mt-1 w-96 max-w-[92vw] rounded-xl border border-subtle bg-card p-3 shadow-lg"><p class="font-semibold">{% trans "Help" %}</p>
+            <div class="mt-1 max-h-96 divide-y divide-subtle overflow-y-auto">{% for q, a in help_articles %}<details class="py-1"><summary class="min-h-11 cursor-pointer py-2 font-medium">{{ q }}</summary><p class="pb-2 text-sm text-ink-soft">{{ a }}</p></details>{% endfor %}</div>
+            {% if whatsapp_number %}<a class="btn-primary mt-2 w-full" href="https://wa.me/{{ whatsapp_number }}" rel="noopener" data-testid="whatsapp">{% trans "Chat with us on WhatsApp" %}</a>{% endif %}</div></details>
+        {% endif %}
+        <form method="post" action="{% url 'set_language' %}" class="no-print max-sm:hidden">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="btn-secondary whitespace-nowrap px-3" type="submit" data-testid="lang" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+        {% if role == "OWNER" or role == "MANAGER" %}
+        <details class="relative" data-testid="bell"><summary class="btn-secondary cursor-pointer list-none px-3" aria-label="{% trans 'Alerts' %}"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 004 0"/></svg>{% if console_alerts %}<span class="ml-0.5 rounded-full bg-tile-4 px-1.5 text-xs font-bold text-on-primary" data-alert-count>{{ console_alerts|length }}</span>{% endif %}</summary>
+          <div class="absolute right-0 z-30 mt-1 w-80 max-w-[90vw] rounded-xl border border-subtle bg-card p-2 shadow-lg"><p class="px-2 py-1 text-sm font-semibold">{% trans "Alerts" %}</p>
+            <ul class="divide-y divide-subtle">{% for a in console_alerts %}<li><a class="block px-2 py-2 text-sm hover:bg-soft" href="{{ a.url }}">{{ a.text }}</a></li>{% empty %}<li class="px-2 py-3 text-sm text-muted">{% trans "Nothing needs your attention." %}</li>{% endfor %}</ul></div></details>
+        {% endif %}
+        <details class="relative" data-testid="user-menu"><summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg border border-strong bg-card px-2 hover:bg-soft" aria-label="{% trans 'Account' %}">
+          <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-on-primary" aria-hidden="true">{{ request.user.name|default:request.user.get_username|slice:":1"|upper }}</span>
+          <span class="hidden text-left leading-tight sm:block"><span class="block max-w-[10rem] truncate text-sm font-semibold" data-testid="who">{{ request.user.name|default:request.user.get_username }}</span><span class="block text-xs text-muted">{{ role|role_label }}</span></span></summary>
+          <div class="absolute right-0 z-30 mt-1 w-56 rounded-xl border border-subtle bg-card p-1 shadow-lg">
+            <p class="px-3 py-2 text-xs text-muted sm:hidden">{{ who }}</p>
+            <a class="flex min-h-11 items-center rounded-lg px-3 hover:bg-track" href="{% url 'web:staff-password' tenant.slug %}">{% trans "Profile & password" %}</a>
+            <form method="post" action="{% url 'set_language' %}" class="sm:hidden">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="flex min-h-11 w-full items-center rounded-lg px-3 text-left hover:bg-track" type="submit">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+            <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug|default:'' }}"><button class="flex min-h-11 w-full items-center rounded-lg px-3 text-left hover:bg-track" type="submit" data-testid="logout">{% trans "Log out" %}</button></form></div></details>
+        {% endif %}
+      </div>
+    </header>
+    {% endblock %}
+    <main id="main" class="min-w-0 overflow-x-clip px-4 py-5 lg:px-6{% if station_tabs %} pb-28{% endif %}">{% if meal_rules_banner %}<div class="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent bg-accent-soft p-3" role="status" data-testid="meal-rules-banner"><p class="font-semibold text-ink">{% trans "Set meal times and daily limits for your plans." %} <a class="link" href="{% url 'web:admin-plans' tenant.slug %}">{% trans "Open plans" %}</a></p><form method="post" action="{% url 'web:admin-meal-rules-banner' tenant.slug %}">{% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}"><button class="btn-secondary" type="submit" data-testid="meal-rules-banner-dismiss">{% trans "Dismiss" %}</button></form></div>{% endif %}{% block content %}{% endblock %}</main>
+  </div>
+  {% if station_tabs %}<nav class="no-print cust-tabbar" aria-label="{% trans 'Tabs' %}" data-testid="station-bar"><ul class="mx-auto grid max-w-md grid-cols-3">{% for t in station_tabs %}<li><a class="cust-tab {% if t.active %}cust-tab-on{% endif %}" href="{{ t.url }}" {% if t.active %}aria-current="page"{% endif %}>{% include "web/_icon.html" with name=t.icon %}<span>{{ t.label }}</span></a></li>{% endfor %}</ul></nav>{% endif %}
+</body>
+</html>

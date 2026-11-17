@@ -1,0 +1,41 @@
+{% extends "preview/base.html" %}{% load i18n %}
+{% block pv_content %}
+<div class="flex flex-wrap items-end justify-between gap-2"><div><h1 class="text-2xl font-bold">{% trans "Today" %}</h1><p class="text-ink-soft">{{ D.today|date:"l, j F" }}</p></div>
+  <div class="flex gap-2"><a class="btn-secondary" href="{% url 'web:staff-console' tenant.slug %}">{% trans "Open redeem console" %}</a><a class="btn-primary" href="{% url 'preview:orders-new' tenant.slug %}">{% trans "New order" %}</a></div></div>
+
+{% if pct < 100 %}
+<section class="card mt-4" data-testid="checklist">
+  <div class="flex items-center justify-between"><h2 class="font-semibold">{% trans "Finish setting up" %}</h2><span class="chip-slate">{{ pct }}%</span></div>
+  <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-track"><div class="h-2 rounded-full bg-primary" data-w="{{ pct }}"></div></div>
+  <ul class="mt-3 grid gap-1 sm:grid-cols-2">
+    {% for c in checklist %}<li class="flex items-center gap-2 text-sm">{% if c.done %}<span class="text-ok-ink" aria-hidden="true">✓</span><span class="text-muted line-through">{{ c.label }}</span>{% else %}<span aria-hidden="true">○</span><a class="link" href="{{ c.url }}">{{ c.label }}</a>{% endif %}<span class="ml-auto text-xs text-muted">{{ c.weight }}%</span></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+<h2 class="mt-6 text-lg font-semibold">{% trans "Meal passes" %}</h2>
+<div class="mt-2 grid grid-cols-2 gap-3 md:grid-cols-3" data-testid="tiles">
+  <div class="card"><p class="text-sm text-muted">{% trans "Meals redeemed today" %}</p><p class="text-3xl font-bold" data-testid="t-meals">{{ d.meals_today }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Active passes" %}</p><p class="text-3xl font-bold" data-testid="t-active">{{ d.active_passes }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Expiring in 3 days" %}</p><p class="text-3xl font-bold">{{ d.expiring_3_days }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Passes sold this month" %}</p><p class="text-3xl font-bold" data-testid="t-sold">{{ d.passes_sold_month }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Revenue this month" %}</p><p class="text-3xl font-bold" data-testid="t-revenue">{{ d.revenue_month_paise|inr }}</p></div>
+  <div class="card"><p class="text-sm text-muted">{% trans "Platform fee this month" %}</p><p class="text-3xl font-bold" data-testid="t-fee">{{ d.platform_fee_month_paise|inr }}</p></div>
+</div>
+
+<div class="mt-6 flex items-center gap-2"><h2 class="text-lg font-semibold">{% trans "Home delivery & subscriptions" %}</h2>{% if pv_badge %}<span class="chip-preview">{% trans "Preview" %}</span>{% endif %}</div>
+<div class="mt-2 grid gap-3 md:grid-cols-3">
+  <section class="card md:col-span-2"><h3 class="font-semibold">{% trans "Today's orders by slot" %}</h3>
+    <table class="mt-2 w-full"><thead><tr><th class="th">{% trans "Slot" %}</th><th class="th">{% trans "Orders" %}</th><th class="th">{% trans "Delivered / picked up" %}</th></tr></thead><tbody class="divide-y divide-subtle">
+      {% for s in by_slot %}<tr><td class="td font-medium">{{ s.name }}</td><td class="td">{{ s.total }}</td><td class="td">{{ s.delivered }}</td></tr>{% endfor %}</tbody></table>
+  </section>
+  <section class="card"><h3 class="font-semibold">{% trans "Delivered vs pending" %}</h3><p class="mt-2 text-3xl font-bold">{{ delivered }}<span class="text-lg font-medium text-muted"> / {{ live }}</span></p><p class="text-sm text-ink-soft">{{ pending }} {% trans "still to go today" %}</p>
+    <div class="mt-3 h-2 w-full overflow-hidden rounded-full bg-track"><div class="h-2 rounded-full bg-primary" data-w="{% widthratio delivered live 100 %}"></div></div></section>
+  <section class="card md:col-span-3"><h3 class="font-semibold">{% trans "How meals reached customers today" %}</h3>{% split_bar pickup delivery dine_in %}</section>
+  <section class="card md:col-span-2"><div class="flex items-center justify-between"><h3 class="font-semibold">{% trans "Low wallet alerts" %}</h3><span class="chip-red">{{ low_total }}</span></div>
+    <ul class="mt-2 divide-y divide-subtle">{% for s in low %}<li class="flex items-center justify-between gap-2 py-2"><span><a class="link" href="{% url 'preview:wallets-customer' tenant.slug s.id %}">{{ s.name }}</a><span class="block text-xs text-muted">{% blocktrans count n=s.days_left %}{{ n }} day of meals left{% plural %}{{ n }} days of meals left{% endblocktrans %}</span></span><span class="font-semibold {{ s.balance_paise|money_class }}">{{ s.balance_paise|inr }}</span></li>{% endfor %}</ul></section>
+  <section class="card"><h3 class="font-semibold">{% trans "Last 30 days" %}</h3><dl class="mt-2 grid gap-1 text-sm"><div class="flex justify-between"><dt>{% trans "Revenue" %}</dt><dd class="font-semibold">{{ last.revenue_paise|inr }}</dd></div><div class="flex justify-between"><dt>{% trans "Expenses" %}</dt><dd class="font-semibold">{{ last.expense_paise|inr }}</dd></div><div class="flex justify-between border-t border-subtle pt-1"><dt>{% trans "Profit" %}</dt><dd class="font-bold">{{ last.profit_paise|inr }}</dd></div></dl></section>
+</div>
+<section class="card mt-3"><h3 class="font-semibold">{% trans "Revenue, expenses and profit — last 12 months" %}</h3><div class="mt-2">{% bar_chart months %}</div>
+  <p class="mt-1 flex flex-wrap gap-x-4 text-sm text-ink-soft"><span><span class="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-primary"></span>{% trans "Revenue" %}</span><span><span class="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-accent"></span>{% trans "Expenses" %}</span><span><span class="mr-1 inline-block h-0.5 w-4 bg-ink align-middle"></span>{% trans "Profit" %}</span></p></section>
+{% endblock %}

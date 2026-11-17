@@ -1,0 +1,29 @@
+{% extends "preview/base.html" %}{% load i18n %}
+{% block pv_content %}
+{% include "preview/_head.html" with sub=_("Every subscription meal and counter order, by slot.") %}
+<div class="mt-3 flex flex-wrap items-center gap-2">
+  {% for l in days %}<a class="btn-secondary {% if l.active %}border-primary text-primary{% endif %}" href="?date={{ l.date|date:'Y-m-d' }}&slot={{ active.key }}">{{ l.label }}</a>{% endfor %}
+  <form method="get" class="flex items-center gap-2"><label class="sr-only" for="date">{% trans "Date" %}</label><input class="input w-auto" type="date" id="date" name="date" value="{{ day|date:'Y-m-d' }}"><input type="hidden" name="slot" value="{{ active.key }}"><button class="btn-secondary" type="submit">{% trans "Go" %}</button></form>
+  {% if can_create %}<a class="btn-primary ml-auto" href="{% url 'preview:orders-new' tenant.slug %}">{% trans "New order" %}</a>{% endif %}
+</div>
+<nav class="mt-3 flex gap-1 overflow-x-auto border-b border-subtle" aria-label="{% trans 'Meal slots' %}">
+  {% for s in slots %}<a data-testid="slot-tab" class="whitespace-nowrap border-b-2 px-3 py-2 font-medium {% if s.key == active.key %}border-primary text-primary{% else %}border-transparent text-ink-soft{% endif %}" href="?date={{ day|date:'Y-m-d' }}&slot={{ s.key }}">{{ s.name }} ({{ s.count }})</a>{% endfor %}
+</nav>
+<div class="card mt-3 flex flex-wrap items-center justify-between gap-2">
+  <div><p class="font-semibold">{{ active.name }} · {{ active.start_s }}–{{ active.end_s }}</p><p class="text-sm text-ink-soft">{% blocktrans with m=active.cutoff_min %}Orders lock {{ m }} min before the slot starts.{% endblocktrans %}</p></div>
+  {% for s in slots %}{% if s.key == active.key %}<span class="chip-green" data-testid="cutoff" data-countdown="{{ s.cutoff_iso }}" data-locked-text="{% trans 'Locked at' %} {{ s.cutoff_s }}">…</span>{% endif %}{% endfor %}
+</div>
+<div class="mt-3 flex flex-wrap gap-2" data-testid="status-chips">{% for st, n in chips %}{% chip st %}<span class="-ml-1 mr-2 text-sm text-ink-soft">{{ n }}</span>{% endfor %}</div>
+<div class="mt-3 overflow-x-auto rounded-2xl border border-subtle bg-card">
+  <table class="w-full" id="orders-table"><thead class="bg-soft"><tr><th class="th">#</th><th class="th">{% trans "Customer" %}</th><th class="th">{% trans "Meal" %}</th><th class="th">{% trans "Type" %}</th><th class="th">{% trans "Status" %}</th></tr></thead>
+  <tbody class="divide-y divide-subtle">
+  {% for o in rows %}<tr data-row><td class="td"><a class="link" href="{% url 'preview:orders-detail' tenant.slug o.no %}">{{ o.no }}</a></td>
+    <td class="td"><span class="font-medium">{{ o.customer }}</span>{% if o.allergy %} <span class="chip-void">{% trans "Allergy" %}</span>{% endif %}<span class="block text-xs text-muted">{{ o.phone|phone_last4 }}</span></td>
+    <td class="td">{% for it in o.items|slice:":3" %}{{ it.name }}{% if it.qty > 1 %} ×{{ it.qty }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}{% if o.qty > 1 %} <span class="chip-slate">×{{ o.qty }}</span>{% endif %}</td>
+    <td class="td">{{ o.type }} · {% if o.method == "PICKUP" %}{% trans "Pick-up" %}{% else %}{% trans "Delivery" %}{% endif %}</td>
+    <td class="td">{% chip o.status %}</td></tr>
+  {% empty %}<tr><td colspan="5">{% include "web/_empty.html" with icon="orders" title=_("No orders in this slot") text=_("Orders appear here when customers choose a meal or you add one at the counter.") action_url=new_order_url action_label=_("New order") %}</td></tr>{% endfor %}
+  </tbody></table>
+</div>
+{% if more_rows %}<p class="mt-2 text-sm text-muted">{% blocktrans with n=more_rows %}+ {{ n }} more orders in this slot{% endblocktrans %}</p>{% endif %}
+{% endblock %}

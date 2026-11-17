@@ -1,0 +1,15 @@
+{% extends "preview/base.html" %}{% load i18n %}
+{% block pv_content %}
+{% include "preview/_head.html" with sub=_("Drag stops to reorder a route (or use the arrows), and assign a driver.") %}
+{% if notice %}<p class="mt-2 rounded-lg bg-ok p-3 text-sm font-semibold text-ok-ink" role="status" data-testid="notice">{% trans "Driver assigned." %}</p>{% endif %}
+<div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
+  {% for r in routes %}<section class="card min-w-0"><div class="flex flex-wrap items-start justify-between gap-2"><div><h2 class="text-lg font-semibold">{{ r.name }}</h2><p class="text-sm text-ink-soft" data-testid="route-driver">{{ r.driver }} · {{ r.vehicle }} · {{ r.stops|length }} {% trans "stops" %}</p></div>
+    {% include "web/_driver_assign.html" with route=r %}</div>
+    <ol class="mt-3 grid grid-cols-1 gap-2" data-testid="route-{{ r.id }}">{% for s in r.stops %}<li class="flex min-w-0 items-center gap-2 rounded-xl border border-subtle bg-card p-2" draggable="true" data-sort-item>
+      <span class="cursor-grab select-none px-1 text-muted" aria-hidden="true">⋮⋮</span><span class="chip-slate" data-seq>{{ forloop.counter }}</span>
+      <span class="min-w-0 flex-1"><span class="block truncate font-medium">{{ s.name }}</span><span class="block truncate text-xs text-muted">{{ s.address }}</span></span>
+      <span class="flex gap-1"><button type="button" class="btn-secondary px-2" data-move="up" aria-label="{% trans 'Move up' %}">↑</button><button type="button" class="btn-secondary px-2" data-move="down" aria-label="{% trans 'Move down' %}">↓</button></span></li>{% endfor %}</ol></section>{% endfor %}
+</div>
+<section class="card mt-4"><h2 class="font-semibold">{% trans "Pick-up customers" %}</h2><p class="text-sm text-ink-soft">{% trans "Collected at the kitchen or a pick-up point — no route needed." %}</p>
+  <ul class="mt-2 flex flex-wrap gap-2">{% for s in pickup_subs %}<li class="chip-slate">{{ s.name }}</li>{% endfor %}</ul></section>
+{% endblock %}

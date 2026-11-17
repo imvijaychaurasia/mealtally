@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@source "../templates";
+@source "../../preview/templates";
+@source "../../preview/templatetags";
+@source "../../static/js";
+
+/* D03.5: semantic tokens only. The values live in static/css/themes.css under [data-theme="..."]; nothing here (or in any
+   template) may contain a raw colour. `inline` makes utilities read the CSS variable directly, so a theme switch is instant. */
+@theme inline {
+  --color-page: var(--page);
+  --color-card: var(--card);
+  --color-subtle: var(--subtle);
+  --color-strong: var(--strong);
+  --color-soft: var(--soft);
+  --color-track: var(--track);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-side: var(--side-bg);
+  --color-side-ink: var(--side-ink);
+  --color-side-active: var(--side-active-bg);
+  --color-side-active-ink: var(--side-active-ink);
+  --color-side-label: var(--side-label);
+  --color-tile-1: var(--tile-1);
+  --color-tile-2: var(--tile-2);
+  --color-tile-3: var(--tile-3);
+  --color-tile-4: var(--tile-4);
+  --color-on-tile: var(--on-tile);
+  --color-warn: var(--warn-bg);
+  --color-warn-ink: var(--warn-ink);
+  --color-danger: var(--danger-bg);
+  --color-danger-ink: var(--danger-ink);
+  --color-success-solid: var(--success-solid);
+  --color-ok: var(--chip-active-bg);
+  --color-ok-ink: var(--chip-active-ink);
+  --color-chart-3: var(--chart-3);
+  --color-chart-pending: var(--chart-pending);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+}
+
+@layer base {
+  body { background: var(--page); color: var(--ink); font-variant-numeric: tabular-nums; }
+  h1, h2, h3, .font-display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
+  td, th, dd, .tabular { font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+}
+
+@utility btn { @apply inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl px-4 py-2 text-base font-semibold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50; }
+@utility btn-primary { @apply btn bg-primary text-on-primary hover:bg-primary-hover; }
+@utility btn-secondary { @apply btn border border-strong bg-card text-ink hover:bg-soft; }
+@utility btn-danger { @apply btn bg-tile-4 text-on-tile hover:brightness-110; }
+@utility btn-lg { @apply min-h-16 w-full text-xl; }
+@utility card { @apply rounded-2xl border border-subtle bg-card p-4; box-shadow: var(--shadow-card); }
+@utility label { @apply mb-1 block text-sm font-medium text-ink-soft; }
+@utility input { @apply min-h-11 w-full rounded-xl border border-strong bg-card px-3 py-2 text-base text-ink placeholder:text-muted focus:border-primary focus:outline-2 focus:outline-primary; }
+@utility toast { @apply fixed bottom-20 left-1/2 z-50 flex max-w-[92vw] -translate-x-1/2 items-center gap-3 rounded-xl bg-ink px-4 py-3 text-sm font-semibold text-page shadow-lg sm:bottom-6; }
+@utility toast-action { @apply min-h-9 rounded-lg px-2 font-bold underline; }
+@utility chip { @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold; }
+/* plain tints (labels, counts) */
+@utility chip-green { @apply chip; background: var(--chip-active-bg); color: var(--chip-active-ink); }
+@utility chip-amber { @apply chip bg-warn text-warn-ink; }
+@utility chip-red { @apply chip bg-danger text-danger-ink; }
+@utility chip-slate { @apply chip; background: var(--chip-expired-bg); color: var(--chip-expired-ink); }
+/* status chips: always an icon AND a word, identical in every theme */
+@utility chip-active { @apply chip; background: var(--chip-active-bg); color: var(--chip-active-ink); &::before { content: "\2713"; } }
+@utility chip-soon { @apply chip; background: var(--chip-soon-bg); color: var(--chip-soon-ink); &::before { content: "\25D4"; } }
+@utility chip-expired { @apply chip; background: var(--chip-expired-bg); color: var(--chip-expired-ink); &::before { content: "\25CB"; } }
+@utility chip-void { @apply chip; background: var(--chip-void-bg); color: var(--chip-void-ink); &::before { content: "\2715"; } }
+@utility chip-preview { @apply chip bg-transparent; border: 1px solid var(--chip-preview-line); color: var(--chip-preview-ink); &::before { content: "\25C7"; } }
+@utility link { @apply font-medium text-primary underline underline-offset-2 hover:text-primary-hover; }
+@utility th { @apply px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-muted; }
+@utility td { @apply px-3 py-2 text-sm text-ink; }
+
+@media print {
+  .no-print { display: none !important; }
+}
+
+[x-cloak] { display: none !important; }
+
+/* ---- D03.4 console shell (tokens only) ------------------------------------------------------------------- */
+.console-sidebar { width: 260px; }
+.console-main { padding-left: 0; }
+@media (min-width: 1024px) {
+  .console-sidebar { transform: none !important; }
+  .console-main { padding-left: 260px; }
+  body.sb-collapsed .console-sidebar { width: 72px; }
+  body.sb-collapsed .console-main { padding-left: 72px; }
+  body.sb-collapsed .sb-label, body.sb-collapsed .sb-tenant, body.sb-collapsed .sb-section { display: none; }
+  body.sb-collapsed .sb-link { justify-content: center; padding-left: 0; padding-right: 0; }
+  body.sb-collapsed .rail-label { display: block; font-size: 0.65rem; letter-spacing: -0.01em; line-height: 1; font-weight: 600; }
+  body.sb-collapsed .sb-link:has(.rail-label) { flex-direction: column; gap: 0.2rem; min-height: 4rem; justify-content: center; }
+  body:not(.sb-collapsed) .rail-label { display: none; }
+}
+@media (max-width: 1023.98px) {
+  .console-sidebar { transform: translateX(-100%); transition: transform 0.15s ease; }
+  body.sb-open .console-sidebar { transform: translateX(0); }
+}
+
+/* ---- D03.6 sign-in screens (split panel) ------------------------------------------------------------------ */
+@utility auth-page { @apply relative isolate flex min-h-screen items-start justify-center overflow-hidden bg-page px-4 py-5 sm:items-center sm:py-10; }
+@utility auth-blob { @apply pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[56rem] w-[56rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.07]; }
+@utility auth-card { @apply relative grid w-full max-w-[1080px] overflow-hidden rounded-3xl border border-subtle bg-card lg:grid-cols-2; box-shadow: var(--shadow-card); }
+@utility auth-visual { @apply relative flex h-[180px] items-start overflow-hidden bg-primary p-5 text-on-primary lg:h-auto lg:min-h-[660px] lg:p-10; }
+@utility auth-dots { @apply absolute inset-0 h-full w-full opacity-15; }
+@utility auth-art { @apply absolute -bottom-16 -right-6 w-52 max-w-[420px] lg:bottom-0 lg:right-0 lg:w-[86%]; }
+@utility auth-brand { @apply relative z-10 flex max-w-[60%] flex-col gap-1 lg:max-w-[80%] lg:gap-2; }
+@utility auth-logo { @apply mb-1 flex h-11 w-11 items-center justify-center rounded-2xl bg-card text-xl font-bold text-primary lg:mb-3 lg:h-14 lg:w-14 lg:text-2xl; }
+@utility auth-name { @apply text-xl font-bold leading-tight lg:text-3xl; }
+@utility auth-tagline { @apply text-base font-medium; }
+@utility auth-address { @apply text-sm; }
+@utility auth-powered { @apply absolute bottom-4 left-10 z-10 text-xs font-semibold; }
+@utility auth-panel { @apply relative flex flex-col justify-center p-6 pt-8 sm:p-10 lg:p-14; }
+@utility auth-lang { @apply absolute right-3 top-3 z-20 sm:right-6 sm:top-5; }
+@utility auth-title { @apply text-3xl font-bold tracking-tight; }
+@utility auth-sub { @apply mt-1 text-ink-soft; }
+@utility auth-tile { @apply relative flex min-h-20 items-center gap-4 rounded-2xl border border-strong bg-card p-4 transition hover:border-primary hover:bg-soft focus-visible:outline-2 focus-visible:outline-primary; }
+@utility auth-tile-icon { @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary; }
+@utility auth-alert { @apply mb-4 flex items-start gap-2 rounded-xl bg-danger p-3 text-sm font-semibold text-danger-ink; }
+@utility auth-phone { @apply flex; }
+@utility auth-prefix { @apply flex min-h-11 items-center rounded-l-xl border border-r-0 border-strong bg-soft px-3 font-semibold text-ink-soft; }
+@utility pin-wrap { @apply relative; }
+@utility pin-cells { @apply hidden gap-2; }
+@utility pin-cell { @apply flex h-12 min-w-0 flex-1 items-center justify-center rounded-xl border border-strong bg-card text-xl font-bold tabular-nums; }
+.pin-js .pin-cells { display: flex; }
+.pin-js .pin-input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: text; }
+.pin-js .pin-cell[data-on="1"] { border-color: var(--primary); outline: 2px solid var(--primary); }
+@utility btn-spinner { @apply inline-block h-4 w-4 animate-spin rounded-full border-2 border-on-primary border-t-transparent; }
+@media (prefers-reduced-motion: reduce) { .btn-spinner { animation: none; } }
+@utility auth-link { @apply min-h-11 inline-flex items-center font-semibold text-primary underline underline-offset-2; }
+
+/* ---- D03.6 Part B: public landing page ---------------------------------------------------------------------- */
+@utility mk-wrap { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+@utility mk-header { @apply sticky top-0 z-40 border-b border-subtle bg-card; }
+@utility mk-navlink { @apply inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-ink-soft hover:bg-track hover:text-ink; }
+@utility mk-pop { @apply absolute right-0 z-50 mt-2 w-80 max-w-[92vw] rounded-2xl border border-subtle bg-card p-4 shadow-lg; }
+@utility mk-drawer-link { @apply flex min-h-11 items-center rounded-lg px-3 font-semibold hover:bg-track; }
+@utility mk-hero { @apply bg-accent-soft; }
+@utility mk-eyebrow { @apply text-sm font-bold uppercase tracking-wide text-primary; }
+@utility mk-chip { @apply inline-flex min-h-8 items-center rounded-full border border-strong bg-card px-3 py-1 text-sm font-semibold text-ink-soft; }
+@utility mk-section { @apply py-12 sm:py-16; }
+@utility mk-h2 { @apply text-3xl font-extrabold tracking-tight; }
+@utility mk-h3 { @apply mt-6 text-xl font-bold; }
+@utility mk-lead { @apply mt-2 max-w-2xl text-lg text-ink-soft; }
+@utility mk-step { @apply flex h-10 w-10 items-center justify-center rounded-full bg-accent text-lg font-extrabold text-on-accent; }
+@utility mk-err { @apply mt-1 text-sm font-semibold text-danger-ink; }
+@utility mk-flink { @apply inline-flex min-h-11 items-center text-ink-soft hover:text-primary hover:underline; }
+@utility mk-pre { opacity: 0; transform: translateY(12px); }
+[data-reveal] { transition: opacity 200ms ease, transform 200ms ease; }
+@media (prefers-reduced-motion: reduce) { [data-reveal] { transition: none; } .mk-pre { opacity: 1; transform: none; } html { scroll-behavior: auto; } }
+@utility mk-tab { @apply inline-flex min-h-11 items-center rounded-full border border-strong bg-card px-5 font-semibold text-ink-soft aria-selected:border-primary aria-selected:bg-primary aria-selected:text-on-primary; }
+@utility mk-laptop { @apply mx-auto w-full max-w-[640px] overflow-hidden rounded-t-2xl border-[10px] border-b-[18px] border-ink bg-ink; box-shadow: var(--shadow-card); }
+@utility mk-phone { @apply mx-auto w-full max-w-[280px] overflow-hidden rounded-[2.2rem] border-[10px] border-ink bg-ink; box-shadow: var(--shadow-card); }
+
+/* ---- D03.7 customer app shell ------------------------------------------------------------------------------ */
+@utility cust-wrap { @apply mx-auto w-full max-w-3xl px-4 lg:max-w-5xl; }
+@utility cust-top { @apply sticky top-0 z-30 border-b border-subtle bg-card; padding-top: env(safe-area-inset-top); }
+@utility cust-mono { @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-lg font-extrabold text-on-primary; }
+@utility cust-avatar { @apply flex h-12 w-12 items-center justify-center rounded-full bg-primary-soft text-lg font-bold text-primary; }
+@utility cust-toplink { @apply inline-flex min-h-12 items-center rounded-xl px-4 font-semibold text-ink-soft hover:bg-track; }
+@utility cust-toplink-on { @apply bg-primary-soft text-primary; }
+@utility cust-tabbar { @apply fixed inset-x-0 bottom-0 z-30 border-t border-subtle bg-card; padding-bottom: env(safe-area-inset-bottom); }
+@utility cust-tab { @apply flex min-h-16 flex-col items-center justify-center gap-0.5 px-1 text-xs font-semibold text-ink-soft; }
+@utility cust-tab-on { @apply text-primary; }
+@utility cust-fab { @apply fixed bottom-24 right-4 z-30 inline-flex min-h-14 items-center gap-2 rounded-full bg-primary px-5 font-bold text-on-primary shadow-lg; }
+/* every customer page shares one content width, whatever its template says */
+.cust-fab { transition: padding 160ms ease, width 160ms ease; }
+.cust-fab-mini { width: 3.5rem; padding-left: 0; padding-right: 0; justify-content: center; }
+.cust-fab-mini .cust-fab-label { display: none; }
+@media (prefers-reduced-motion: reduce) { .cust-fab { transition: none; } }
+.cust-main > * { max-width: 44rem !important; margin-left: auto !important; margin-right: auto !important; }
+.cust-main > [data-pv-root] > section, .cust-main > [data-pv-root] > div, .cust-main > [data-pv-root] > ul { max-width: 44rem; margin-left: auto; margin-right: auto; }
+/* themed native controls (no browser-default blue) */
+input[type="radio"], input[type="checkbox"], input[type="range"], progress { accent-color: var(--primary); }
+input[type="date"], input[type="time"], select { color-scheme: light; }
+@utility ord-date { @apply flex min-h-16 min-w-14 shrink-0 flex-col items-center justify-center rounded-2xl border border-strong bg-card px-3 text-ink-soft aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-on-primary; }
+@utility ord-bar { @apply fixed inset-x-3 bottom-20 z-30 mx-auto max-w-xl overflow-hidden rounded-2xl bg-primary text-on-primary shadow-lg lg:bottom-6; }
+.ord-cat[aria-pressed="true"], .ord-diet[aria-pressed="true"] { border-color: var(--primary); background: var(--primary); color: var(--on-primary); }
+.ord-amt[aria-pressed="true"] { border-color: var(--primary); background: var(--primary); color: var(--on-primary); }
+body:has([data-cart-bar]:not(.hidden)) .cust-fab { bottom: 9.5rem; }

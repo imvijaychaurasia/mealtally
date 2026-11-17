@@ -1,0 +1,17 @@
+@page { size: A5; margin: 10mm; }
+body { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 11pt; color: black; margin: 0; }
+.wrap { position: relative; max-width: 120mm; margin: 0 auto; padding: 6mm; }
+h1 { color: var(--primary); font-size: 15pt; margin: 0 0 2mm; text-align: center; }
+.sub { text-align: center; color: black; font-size: 9.5pt; margin-bottom: 3mm; }
+hr { border: 0; border-top: 1px dashed var(--muted); margin: 3mm 0; }
+table { width: 100%; border-collapse: collapse; }
+td { padding: 1.2mm 0; vertical-align: top; }
+td.k { color: black; width: 38%; }
+td.v { text-align: right; font-weight: 600; }
+.total { font-size: 14pt; font-weight: 700; }
+.foot { font-size: 8.5pt; color: black; text-align: center; margin-top: 4mm; }
+.void { position: absolute; top: 45%; left: 5%; width: 90%; text-align: center; font-size: 60pt; font-weight: 800; color: var(--danger-ink); opacity: 0.28; transform: rotate(-24deg); letter-spacing: 4pt; }
+.voidnote { border: 1.5px solid var(--danger-ink); color: var(--danger-ink); padding: 2mm; margin: 2mm 0; font-weight: 700; text-align: center; }
+.actions { text-align: center; margin: 4mm 0; }
+.actions a, .actions button { font: inherit; padding: 2mm 5mm; margin: 0 1mm; border: 1px solid var(--primary); background: var(--primary); color: var(--on-primary); border-radius: 2mm; text-decoration: none; }
+@media print { .actions { display: none; } }

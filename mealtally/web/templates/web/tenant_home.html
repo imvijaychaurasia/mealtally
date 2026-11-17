@@ -1,0 +1,17 @@
+{% extends "web/auth_base.html" %}{% load i18n %}
+{% block title %}{% blocktrans with name=brand_name %}Welcome to {{ name }}{% endblocktrans %}{% endblock %}
+{% block panel %}
+<h1 class="auth-title">{% trans "Welcome" %}</h1>
+<p class="auth-sub">{% blocktrans with name=brand_name %}Choose how you'd like to sign in to {{ name }}.{% endblocktrans %}</p>
+<div class="mt-6 grid gap-4" data-choices>
+  <a class="auth-tile" data-choice="customer" href="{% url 'web:login-customer' tenant.slug %}{% if next %}?next={{ next|urlencode }}{% endif %}">
+    <span class="auth-tile-icon">{% include "web/_icon.html" with name="qr" %}</span>
+    <span class="min-w-0 flex-1"><span class="block text-lg font-semibold">{% trans "I'm a customer" %}</span><span class="block text-sm text-ink-soft">{% trans "Check meals, show my QR, see history" %}</span><span class="mt-1 hidden" data-last-chip><span class="chip-soon">{% trans "Last time" %}</span></span></span>
+    <svg class="h-5 w-5 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+  <a class="auth-tile" data-choice="staff" href="{% url 'web:login-staff' tenant.slug %}{% if next %}?next={{ next|urlencode }}{% endif %}">
+    <span class="auth-tile-icon">{% include "web/_icon.html" with name="redeem" %}</span>
+    <span class="min-w-0 flex-1"><span class="block text-lg font-semibold">{% trans "I work here" %}</span><span class="block text-sm text-ink-soft">{% trans "Staff login: redeem, sell, manage" %}</span><span class="mt-1 hidden" data-last-chip><span class="chip-soon">{% trans "Last time" %}</span></span></span>
+    <svg class="h-5 w-5 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+</div>
+{% if cfg.allow_self_signup %}<p class="mt-6"><a class="auth-link" href="{% url 'web:signup' tenant.slug %}">{% trans "New customer? Create an account" %}</a></p>{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+# secrets and local data: never committed
+.env
+.env.*
+!.env.example
+.demo-credentials*
+*credentials*.txt
+backups/
+*.dump
+mealtally/media/
+
+# build and tool output
+.venv/
+__pycache__/
+*.py[cod]
+staticfiles/
+mealtally/static/css/app.css
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.tools/
+node_modules/
+/e2e/.screens/
+.DS_Store
+.idea/
+.vscode/

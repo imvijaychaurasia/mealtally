@@ -1,0 +1,72 @@
+{% load static i18n %}<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="{{ theme }}" class="h-full bg-page">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% if tenant %}{{ cfg.display_name|default:tenant.name }}{% else %}Mealtally{% endif %}{% endblock %}</title>
+  <meta name="htmx-config" content='{"allowEval":false,"allowScriptTags":false,"includeIndicatorStyles":false,"selfRequestsOnly":true,"historyCacheSize":0,"refreshOnHistoryMiss":true,"attributesToSettle":["class","width","height"]}'>
+  <meta name="theme-color" content="{{ theme_color }}">
+  <link rel="manifest" href="{% url 'web:manifest' %}?theme={{ theme }}">
+  <link rel="icon" href="{% static 'icons/icon-192.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'icons/icon-192.png' %}">
+  <link rel="stylesheet" href="{% static 'css/themes.css' %}">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script src="{% static 'vendor/htmx.min.js' %}" defer></script>
+  <script src="{% static 'js/app.js' %}" defer></script>
+  {% block head_scripts %}{% endblock %}
+  <script src="{% static 'vendor/alpine-csp.min.js' %}" defer></script>
+</head>
+<body class="min-h-full font-sans text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
+  {% block header %}
+  <header class="no-print border-b border-subtle bg-card">
+    <div class="mx-auto flex {% if pv_nav %}max-w-6xl{% else %}max-w-5xl{% endif %} items-center justify-between gap-3 px-4 py-2">
+      <a class="flex min-h-11 min-w-0 items-center truncate text-lg font-bold text-primary" href="{{ home_href }}">
+        {% if tenant %}{{ cfg.display_name|default:tenant.name }}{% else %}Mealtally{% endif %}
+      </a>
+      <div class="flex shrink-0 items-center gap-1 sm:gap-2">
+        {% if who %}<span class="hidden max-w-[16rem] truncate text-sm text-ink-soft sm:inline" data-testid="who">{{ who }}</span>{% if who_chip %}<span class="chip-active hidden sm:inline-flex">{{ who_chip }}</span>{% endif %}{% endif %}
+        {% if request.user.is_authenticated and tenant and role %}
+        {% if pv_bell %}
+        <details class="relative max-sm:hidden" data-testid="bell"><summary class="btn-secondary cursor-pointer list-none px-2 sm:px-3" aria-label="{% trans 'Notifications' %}"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 004 0"/></svg><span class="ml-0.5 rounded-full bg-tile-4 px-1.5 text-xs font-bold text-on-primary">{{ pv_bell|length }}</span></summary>
+          <div class="absolute right-0 z-30 mt-1 w-80 max-w-[90vw] rounded-xl border border-subtle bg-card p-2 shadow-lg"><p class="px-2 py-1 text-sm font-semibold">{% trans "Recent notifications" %}</p><ul class="max-h-80 divide-y divide-subtle overflow-y-auto">{% for b in pv_bell %}<li class="px-2 py-2 text-sm">{{ b.text }}<span class="block text-xs text-muted">{{ b.ago_min }} {% trans "min ago" %}</span></li>{% endfor %}</ul></div></details>
+        {% endif %}
+        {% if help_articles %}
+        <details class="relative" data-testid="help"><summary class="btn-secondary cursor-pointer list-none px-2 sm:px-3" aria-label="{% trans 'Help' %}"><span class="font-bold" aria-hidden="true">?</span></summary>
+          <div class="absolute right-0 z-30 mt-1 w-96 max-w-[92vw] rounded-xl border border-subtle bg-card p-3 shadow-lg"><p class="font-semibold">{% trans "Help" %}</p>
+            <div class="mt-1 max-h-96 divide-y divide-subtle overflow-y-auto">{% for q, a in help_articles %}<details class="py-1"><summary class="min-h-11 cursor-pointer py-2 font-medium">{{ q }}</summary><p class="pb-2 text-sm text-ink-soft">{{ a }}</p></details>{% endfor %}</div>
+            {% if whatsapp_number %}<a class="btn-primary mt-2 w-full" href="https://wa.me/{{ whatsapp_number }}" rel="noopener" data-testid="whatsapp">{% trans "Chat with us on WhatsApp" %}</a>{% endif %}</div></details>
+        {% endif %}
+        {% endif %}
+        <form method="post" action="{% url 'set_language' %}" class="no-print">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="btn-secondary whitespace-nowrap px-2 sm:px-3" type="submit" data-testid="lang" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+        {% if request.user.is_authenticated %}
+        <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug|default:'' }}"><button class="btn-secondary whitespace-nowrap px-2 sm:px-3" type="submit">{% trans "Log out" %}</button></form>
+        {% endif %}
+      </div>
+    </div>
+    {% if nav_top and role != 'CUSTOMER' %}
+    <nav class="mx-auto hidden {% if pv_nav %}max-w-6xl{% else %}max-w-5xl{% endif %} flex-wrap gap-1 px-4 pb-2 sm:flex" aria-label="{% trans 'Main' %}">
+      {% for item in nav_top %}
+        {% if item.children %}
+        <details class="relative"><summary class="btn-secondary cursor-pointer list-none {% if item.active %}border-primary text-primary{% endif %}" {% if item.active %}aria-current="page"{% endif %}>{% include "web/_icon.html" with name=item.icon %}{{ item.label }} ▾</summary>
+          <ul class="absolute left-0 z-30 mt-1 min-w-52 rounded-xl border border-subtle bg-card p-1 shadow-lg">
+            {% for child in item.children %}<li><a class="flex min-h-11 items-center justify-between gap-2 rounded-lg px-3 hover:bg-track {% if child.active %}font-semibold text-primary{% endif %}" href="{{ child.url }}">{{ child.label }}{% if child.preview and pv_badge %}<span class="chip-preview text-xs">{% trans "Preview" %}</span>{% endif %}</a></li>{% endfor %}
+          </ul></details>
+        {% else %}
+        <a class="btn-secondary {% if item.active %}border-primary bg-soft text-primary{% endif %}" href="{{ item.url }}" {% if item.active %}aria-current="page"{% endif %}>{% include "web/_icon.html" with name=item.icon %}{{ item.label }}</a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    {% endif %}
+  </header>
+  {% endblock %}
+  <main id="main" class="mx-auto w-full {% if pv_nav %}max-w-6xl{% else %}max-w-5xl{% endif %} px-4 py-5 {% if nav_tabs %}pb-24 sm:pb-5{% endif %}">{% if meal_rules_banner %}<div class="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent bg-accent-soft p-3" role="status" data-testid="meal-rules-banner"><p class="font-semibold text-ink">{% trans "Set meal times and daily limits for your plans." %} <a class="link" href="{% url 'web:admin-plans' tenant.slug %}">{% trans "Open plans" %}</a></p><form method="post" action="{% url 'web:admin-meal-rules-banner' tenant.slug %}">{% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}"><button class="btn-secondary" type="submit" data-testid="meal-rules-banner-dismiss">{% trans "Dismiss" %}</button></form></div>{% endif %}{% block content %}{% endblock %}</main>
+  {% if nav_tabs %}
+  <nav class="no-print fixed inset-x-0 bottom-0 z-20 border-t border-subtle bg-card sm:hidden" aria-label="{% trans 'Tabs' %}" data-testid="tabbar">
+    <ul class="mx-auto grid max-w-md {% if nav_tabs|length == 3 %}grid-cols-3{% elif nav_tabs|length == 4 %}grid-cols-4{% else %}grid-cols-5{% endif %}">
+      {% for item in nav_tabs %}<li><a class="flex min-h-14 flex-col items-center justify-center gap-0.5 px-1 text-xs font-medium {% if item.active %}text-primary{% else %}text-ink-soft{% endif %}" href="{{ item.url }}" {% if item.active %}aria-current="page"{% endif %}>{% include "web/_icon.html" with name=item.icon %}<span>{{ item.label }}</span></a></li>{% endfor %}
+    </ul>
+  </nav>
+  {% endif %}
+</body>
+</html>

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
 /* Preview-mode interactions (D03). Vanilla + event delegation; no inline script/style (CSP), no network, no writes. */
 (function () {
   "use strict";

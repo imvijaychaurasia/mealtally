@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03: create the demo tenant ``demo-tiffin`` ("Saffron Tiffins & Mess (Demo)") with REAL data through the real services.
 
 Real: plans, 25 pass customers in mixed states, ~45 days of back-dated redemptions (with a few undos and one adjustment),

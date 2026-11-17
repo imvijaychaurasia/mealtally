@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Plain-words copy for domain error codes (the same codes the API returns)."""
 
 from django.utils.translation import gettext_lazy as _

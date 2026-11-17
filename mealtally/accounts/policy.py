@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Role x action matrix (D01 section 6) -- the single source of authorisation truth."""
 
 from __future__ import annotations

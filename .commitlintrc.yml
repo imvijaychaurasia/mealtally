@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Conventional Commits (https://www.conventionalcommits.org/), checked on every pull request.
+extends:
+  - "@commitlint/config-conventional"
+rules:
+  # names of screens and products may start a subject ("feat: Preview modules ..."), so any case is fine
+  subject-case: [0]
+  # bodies wrap at 72, but a pasted URL or log line may be longer
+  body-max-line-length: [0]
+  footer-max-line-length: [0]

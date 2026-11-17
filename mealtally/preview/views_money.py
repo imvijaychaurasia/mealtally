@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Preview: wallets & top-ups, invoices (PDF real from demo data), expenses & profit, payment setup."""
 
 from __future__ import annotations

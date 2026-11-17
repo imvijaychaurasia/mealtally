@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Receipt data + PDF (WeasyPrint). Same data feeds the HTML print view and the PDF."""
 
 from __future__ import annotations

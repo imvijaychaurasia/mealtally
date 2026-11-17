@@ -31,7 +31,7 @@ def test_platform_admin_signs_in(page, creds):
     page.goto("/login")
     page.fill("#login", login)
     page.fill("#password", password)
-    page.click("#login-submit")
+    page.click("[data-testid=login-submit]")
     page.wait_for_load_state("networkidle")
     assert "/login" not in page.url
     expect(page.locator("h1").first).to_be_visible()
@@ -67,7 +67,7 @@ def test_customer_home_and_qr(page, creds):
     customer_login(page, *creds["customers"][1])
     expect(page.locator("[data-testid=cust-home]")).to_be_visible()
     page.goto(f"/t/{SLUG}/me/qr")
-    expect(page.locator("svg, img, canvas").first).to_be_visible()
+    expect(page.locator("[data-testid=qr-code]")).to_be_visible()
     page.assert_clean()
 
 

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Fail if any tenant-scoped table lacks ENABLE+FORCE row level security or a policy."""
 
 from django.apps import apps

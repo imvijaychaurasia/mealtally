@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Recording / voiding payments and platform-fee accounting."""
 
 from __future__ import annotations

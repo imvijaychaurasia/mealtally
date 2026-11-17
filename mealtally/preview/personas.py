@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Demo personas: the preview dataset is written for Saffron Tiffins (Kothrud); a second demo tenant gets its own identity.
 
 ``localize`` rewrites every string of a built dataset in ONE regex pass (so Kothrud -> Baner and Baner -> Aundh never chain).

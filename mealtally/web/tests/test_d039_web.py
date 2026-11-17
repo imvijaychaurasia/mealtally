@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.9 web layer: §A1 reversal policy, §B screens (meal times, plan rule, counter card, override, refused report,
 banner, customer rule line) and the QA-01 P1-5/P1-6/P2 fixes. Time-dependent cases run on a frozen clock."""
 

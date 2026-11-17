@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
 /* Order page (D03.7 b): category and diet filters, date chips, sticky cart bar and checkout sheet. Demo only: nothing is sent. */
 (function () {
   "use strict";

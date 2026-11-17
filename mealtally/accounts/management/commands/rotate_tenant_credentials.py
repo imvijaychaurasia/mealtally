@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.9 §D3: rotate a tenant's logins -- every staff member gets a new random password (and must change it at the next
 login); the customers named with ``--customer-phone`` get a new PIN (also must-change).
 

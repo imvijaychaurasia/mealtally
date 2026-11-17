@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D02 section 1 rule changes: inclusive rolling validity, promote-next, purchase preview, redeem status."""
 
 from __future__ import annotations

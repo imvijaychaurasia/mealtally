@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Small pure helpers: tenant-local time and rounding. Money is in .money, phones in .country."""
 
 from __future__ import annotations

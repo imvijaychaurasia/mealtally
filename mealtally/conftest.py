@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Pytest wiring.
 
 * pytest-django builds the test database with the *superuser* from POSTGRES_* ...

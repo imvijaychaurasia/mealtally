@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Redeem console, sell-pass flow and customer creation (STAFF, MANAGER, OWNER)."""
 
 from __future__ import annotations

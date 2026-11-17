@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.4 console shell: sidebar IA per role and the alerts that feed the bell and the dashboard strip.
 
 Template/presentation layer only: every item maps to an EXISTING view (real or preview); nothing here creates routes.

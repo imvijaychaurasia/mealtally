@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Create (or reset) a platform administrator; the generated password is printed once."""
 
 import secrets

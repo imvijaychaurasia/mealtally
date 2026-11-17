@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Platform admin screens (platform administrators only): dashboard, tenant detail, onboarding, status changes."""
 
 from __future__ import annotations

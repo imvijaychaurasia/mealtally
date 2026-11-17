@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
 /* Mealtally theme system (D03.5): the ONLY place raw colour values live.
  *
  * Templates, JS and Python use semantic utility classes (bg-primary, text-muted, bg-tile-1 ...) that read these variables.

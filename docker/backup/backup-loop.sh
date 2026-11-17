@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: AGPL-3.0-only
 # Nightly custom-format dump of the application database; prunes dumps older than N days.
 # Run once immediately with:  docker exec mealtally-backup /usr/local/bin/backup-loop.sh --once
 #

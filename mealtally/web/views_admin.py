@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Owner / manager admin UI: dashboard, customers, plans, staff, settings, reports, audit."""
 
 from __future__ import annotations

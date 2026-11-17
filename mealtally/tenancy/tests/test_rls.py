@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Tenant isolation: ORM, raw SQL, DRF endpoints and admin -- enforced by Postgres RLS."""
 
 from __future__ import annotations

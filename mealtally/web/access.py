@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Tenant resolution + role gate for server-rendered views (same rules as the API's TenantAPIView)."""
 
 from __future__ import annotations

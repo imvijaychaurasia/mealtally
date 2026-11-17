@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from django.conf import settings
 from django.db import models
 from django.db.models import Q

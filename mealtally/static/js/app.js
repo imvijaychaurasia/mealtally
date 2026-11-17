@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
 /* Mealtally front-end glue. No inline scripts anywhere (CSP script-src 'self'); Alpine runs in its CSP build. */
 (function () {
   "use strict";

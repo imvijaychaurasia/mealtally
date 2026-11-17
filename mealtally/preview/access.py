@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Role-gated preview views: 404 for roles a module does not allow, "Coming soon" for tenants without the dataset."""
 
 from __future__ import annotations

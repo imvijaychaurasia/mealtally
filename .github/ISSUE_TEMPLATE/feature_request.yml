@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+name: Feature request
+description: Suggest something Mealtally should do.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What is hard or impossible today, and for whom (owner, counter staff, customer, ...)?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What you'd like
+      description: How you imagine it working. Sketches welcome.
+  - type: textarea
+    id: today
+    attributes:
+      label: How you manage today
+      description: Registers, spreadsheets, another app? This helps us size the need.

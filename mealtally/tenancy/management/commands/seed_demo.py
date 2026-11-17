@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Pilot reseed (D02 section 9): rename the pilot's display name and add 5 demo customers in different pass states.
 
 Idempotent. Demo PINs are generated and printed ONCE (customers must change them at first login).

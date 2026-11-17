@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from django.contrib import admin
 
 from mealtally.accounts.admin_site import PlatformModelAdmin

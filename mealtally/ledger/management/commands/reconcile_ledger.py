@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Check SUM(ledger.quantity) == pass.meals_remaining for every pass (exit 1 on mismatch)."""
 
 from django.core.management.base import BaseCommand

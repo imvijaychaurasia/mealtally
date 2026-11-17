@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Template filters available everywhere (registered as builtins)."""
 
 from django import template

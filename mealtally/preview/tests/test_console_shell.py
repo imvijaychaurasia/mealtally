@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.4 console shell: the sidebar is behind a per-tenant switch, every sidebar link works for every role in BOTH shells."""
 
 from __future__ import annotations

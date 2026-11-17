@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Registry-driven navigation for tenants that have the demo dataset (D03 section 3)."""
 
 from __future__ import annotations

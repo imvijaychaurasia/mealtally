@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Branded 400/403/404/500 pages that work with no tenant, no session and under the strict CSP.
 
 API paths (``/api/...``) get the JSON error envelope instead of HTML. The 500 handler never touches the database.

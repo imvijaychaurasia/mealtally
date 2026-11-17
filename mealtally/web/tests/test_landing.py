@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.6 Part B: the public landing page, honest feature badges, the demo request form, SEO files and the legal drafts."""
 
 from __future__ import annotations

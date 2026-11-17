@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Tenant lifecycle. These functions run in (and open) platform context themselves."""
 
 from __future__ import annotations

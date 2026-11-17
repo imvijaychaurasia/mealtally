@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Builders shared by the test-suite (they go through the real service layer)."""
 
 from __future__ import annotations

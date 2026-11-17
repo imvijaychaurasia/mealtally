@@ -1,0 +1,50 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+name: Bug report
+description: Something in Mealtally doesn't work as it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security problem? Don't file it here; see SECURITY.md.
+        Please remove phone numbers, names and other personal data from screenshots and logs.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Sign in as a counter user
+        2. Search for a customer
+        3. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Who sees it
+      multiple: true
+      options: [Owner, Manager, Counter, Chef, Driver, Customer, Platform admin, Everyone]
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The release (for example 0.1.0) or the commit you run.
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      placeholder: Android phone, Chrome 131
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      render: text

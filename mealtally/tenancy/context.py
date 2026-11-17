@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Tenant context: the single place that talks to the ``app.*`` Postgres settings.
 
 Two things always move together:

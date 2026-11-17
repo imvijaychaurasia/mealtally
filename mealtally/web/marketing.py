@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Public landing page content (D03.6 Part B). The feature grid is generated from the preview feature registry so a badge can
 never say "Live" for something the product does not do: a feature is Live only when EVERY registry module it needs is ``real``.
 """

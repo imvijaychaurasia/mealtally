@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.6 Part A: every sign-in screen uses the split-panel shell in all three themes, CSP-clean, auth unchanged."""
 
 from __future__ import annotations

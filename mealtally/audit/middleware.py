@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from mealtally.common.net import client_ip
 
 from .context import RequestMeta

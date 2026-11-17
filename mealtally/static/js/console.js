@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
 /* D03.4 console shell glue: sidebar collapse (desktop) / drawer (mobile), alert dismissal. No inline script (CSP). */
 (function () {
   "use strict";

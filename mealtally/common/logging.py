@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Tiny structured (JSON-lines) log formatter -- no extra dependency."""
 
 from __future__ import annotations

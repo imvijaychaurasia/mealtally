@@ -92,7 +92,7 @@ def staff_login(page, login: str, password: str, slug: str = SLUG):
     page.goto(f"/t/{slug}/login/staff")
     page.fill("#login", login)
     page.fill("#password", password)
-    page.click("#login-submit")
+    page.click("[data-testid=login-submit]")
     page.wait_for_load_state("networkidle")
 
 
@@ -100,5 +100,5 @@ def customer_login(page, phone: str, pin: str, slug: str = SLUG):
     page.goto(f"/t/{slug}/login/customer")
     page.fill("#phone", phone)
     page.fill("#pin", pin)
-    page.click("#login-submit")
+    page.click("[data-testid=login-submit]")
     page.wait_for_load_state("networkidle")

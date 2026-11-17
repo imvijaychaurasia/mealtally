@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from django.db import connection
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET

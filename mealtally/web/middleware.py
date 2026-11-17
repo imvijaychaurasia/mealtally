@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Scoped Content-Security-Policy relaxation.
 
 The whole site runs on the strict policy from settings (``script-src 'self'``, ``style-src 'self'``). Two

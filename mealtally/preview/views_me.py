@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Preview: wallet-plan customer app. The logged-in customer sees THEIR OWN wallet (D03.9 QA-01 P1-3), or none."""
 
 from __future__ import annotations

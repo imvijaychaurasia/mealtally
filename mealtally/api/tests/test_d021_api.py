@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D02.1 Q2: while a temporary password / PIN is in force the API refuses everything except the change itself."""
 
 from __future__ import annotations

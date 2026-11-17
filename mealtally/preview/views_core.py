@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Preview views: today, orders, kitchen, delivery, driver, holds, tiffin boxes (D03). No database writes anywhere."""
 
 from __future__ import annotations

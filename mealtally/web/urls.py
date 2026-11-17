@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from django.urls import path
 
 from . import views_admin as adm

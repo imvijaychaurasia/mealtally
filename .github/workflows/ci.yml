@@ -24,6 +24,8 @@ jobs:
         run: |
           uvx ruff@0.17.4 check .
           uvx ruff@0.17.4 format --check .
+      - name: SPDX licence headers
+        run: python3 scripts/spdx.py --check
 
   leak-scan:
     runs-on: ubuntu-latest
@@ -31,6 +33,16 @@ jobs:
       - uses: actions/checkout@v4
       - name: gitleaks, trufflehog and the denylist
         run: scripts/leak-scan.sh
+
+  licences:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Runtime dependencies are AGPL-compatible
+        run: |
+          uv sync --frozen --no-dev
+          .venv/bin/python scripts/licenses.py
 
   test:
     runs-on: ubuntu-latest
@@ -48,3 +60,27 @@ jobs:
         run: make test
       - name: Migrations are complete
         run: docker compose --profile test run --rm test python manage.py makemigrations --check --dry-run
+
+  image:
+    name: Docker image (amd64 and arm64)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - name: Build the application image for both architectures
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: runtime
+          platforms: linux/amd64,linux/arm64
+          push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Build the database image for both architectures
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/postgres/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: false

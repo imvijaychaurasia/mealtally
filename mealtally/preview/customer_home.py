@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Customer Home extras for demo tenants (D03.7): wallet, today's meal, coming up and alerts, from the preview dataset."""
 
 from __future__ import annotations

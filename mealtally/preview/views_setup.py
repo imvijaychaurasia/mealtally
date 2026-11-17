@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Preview: menu, wallet plans, subscriptions, roles, branches, notifications, website, cloud kitchen, platform plans, sign-up."""
 
 from __future__ import annotations

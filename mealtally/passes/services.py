@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Pass lifecycle: create / queue / activate / expire / suspend / resume / cancel.
 
 Public entry points are called by ``billing`` (create / cancel-for-void), the

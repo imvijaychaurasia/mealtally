@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D02.1 P1: navigation, console, sell, detail/list, customer app, QR code, platform pages."""
 
 from __future__ import annotations

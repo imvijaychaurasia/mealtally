@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Seeded-data crawl (D02.1 section 4) -- runs in default CI.
 
 Loads ``seed_demo`` into a pilot-like tenant (back-dated payments, an expired pass, a queued pass, a void),

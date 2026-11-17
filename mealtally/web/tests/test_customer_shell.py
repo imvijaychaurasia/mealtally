@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.7 a: the customer app shell, unified Home, Activity, Account, old URLs, themed controls and consumer money."""
 
 from __future__ import annotations

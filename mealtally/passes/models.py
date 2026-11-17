@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.db.models import Q

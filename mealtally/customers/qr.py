@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Short-lived, single-use QR identification tokens (D01 section 7)."""
 
 from __future__ import annotations

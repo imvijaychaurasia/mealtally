@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """One JSON error envelope for everything: ``{"error": {"code", "message", "details"}}``."""
 
 from __future__ import annotations

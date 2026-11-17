@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Base views that bind the URL's tenant to the DB transaction (RLS) and to an ``Actor``."""
 
 from __future__ import annotations

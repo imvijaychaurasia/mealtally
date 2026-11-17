@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 import pytest
 from django.core.management import call_command
 from django.core.management.base import CommandError

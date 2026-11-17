@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from .base import *  # noqa: F403
 from .base import INSTALLED_APPS
 from .base import SPECTACULAR_SETTINGS

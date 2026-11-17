@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D02.1 P0 regressions: money x100, fee totals vs lines, audit-log 500, unbranded error pages."""
 
 from __future__ import annotations

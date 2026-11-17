@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.9 QA-01 P1-2..P1-5: the preview dataset is built from the tenant's REAL customers, wallets, drivers and slots."""
 
 from __future__ import annotations

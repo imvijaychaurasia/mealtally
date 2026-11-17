@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03 preview modules: crawl every preview page as every role (default CI), role gating, tenant isolation, no real writes."""
 
 from __future__ import annotations

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.5 theme system: tokens, WCAG AA contrast for every pair, no raw colours in templates, compact money, theme switching."""
 
 from __future__ import annotations

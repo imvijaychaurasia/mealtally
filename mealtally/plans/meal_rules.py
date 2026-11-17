@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.9 meal-time rules: which meal slot is open now (in the tenant's timezone), and plain-words rule summaries.
 
 Pure functions over ``MealSlot`` rows. The redemption check itself lives in ``mealtally.ledger.services`` (in the locked

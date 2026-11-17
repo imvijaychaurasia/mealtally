@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 from rest_framework.pagination import PageNumberPagination
 
 

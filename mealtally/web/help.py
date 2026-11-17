@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """In-app help articles (D03 #23, D03.2): short how-tos in our own words, shown by audience in the header help drawer.
 
 Audiences: ``customer`` (the customer app), ``staff`` (counter staff), ``owner`` (owners and managers; they also see staff articles).

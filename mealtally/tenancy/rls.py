@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """SQL for row-level security and append-only enforcement (used by migrations & checks)."""
 
 from __future__ import annotations

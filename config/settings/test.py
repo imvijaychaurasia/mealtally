@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Test settings.
 
 Tests create their database with the *superuser* credentials from POSTGRES_*

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Domain errors shared by every module. The API maps them to the error envelope."""
 
 from __future__ import annotations

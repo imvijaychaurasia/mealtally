@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """The meal ledger: the ONLY writer of ``MealLedgerEntry`` and of pass balances' meaning.
 
 Every credit movement is one append-only row; ``pass.meals_remaining`` is a cache kept

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Preview template helpers: chips, SVG charts (server-rendered: nothing inline, nothing to load)."""
 
 from __future__ import annotations

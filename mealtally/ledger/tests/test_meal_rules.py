@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """D03.9 §B: meal-time and per-day redemption rules. Every case runs on a frozen clock (time-machine)."""
 
 from __future__ import annotations

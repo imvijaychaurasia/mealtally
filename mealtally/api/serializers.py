@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Input validation (DRF serializers) and output shaping (plain dicts keyed by ``public_id``)."""
 
 from __future__ import annotations

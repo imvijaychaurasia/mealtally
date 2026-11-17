@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: AGPL-3.0-only
 """Deterministic demo dataset for the preview modules (D03). Pure Python, no database.
 
 ``build(today, roster)`` is seeded: same inputs -> same data, and every date is relative to ``today`` so the demo always

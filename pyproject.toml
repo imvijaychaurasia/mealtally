@@ -18,7 +18,7 @@ dependencies = [
   "babel==2.17.0",
   "celery==5.7.0",
   "django==6.1.3",
-  "django-allauth==65.21.1",
+  "django-allauth==65.22.1",
   "django-anymail==15.2",
   "django-axes",
   "django-cors-headers==4.9.0",

@@ -105,8 +105,8 @@ def scan(root: Path) -> list[str]:
             text = path.read_text(encoding="utf-8")
         except UnicodeDecodeError:
             continue
-        for n, line in enumerate(text.splitlines(), 1):
-            line = _without_allowed_contact(line, rel.as_posix())
+        for n, raw in enumerate(text.splitlines(), 1):
+            line = _without_allowed_contact(raw, rel.as_posix())
             for word in denied_words(line):
                 problems.append(f"{rel}:{n}: denylisted word ({word})")
             for m in IPV4.finditer(line):

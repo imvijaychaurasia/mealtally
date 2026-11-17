@@ -93,6 +93,7 @@ Without email, new PINs and passwords are shown on screen once, and password res
 |---|---|---|
 | `MEALTALLY_BACKUP_AT_UTC` | `20:30` | When the nightly dump runs, in UTC (`compose.prod.yml`). If the server was off at that time, a dump runs as soon as it is back. |
 | `MEALTALLY_BACKUP_RETENTION_DAYS` | `14` | How many days of dumps to keep in `./backups`. |
+| `MEALTALLY_UID`, `MEALTALLY_GID` | yours (set by `make init`) | The host user and group the backup container writes `./backups` as, so you can read the dumps for `make restore`. |
 
 ## Limits
 

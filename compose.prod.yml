@@ -78,6 +78,8 @@ services:
   backup:
     image: ${MEALTALLY_POSTGRES_IMAGE:-mealtally-postgres:local}
     restart: unless-stopped
+    # write the dumps as the host user from .env (make init records it), not as root
+    user: "${MEALTALLY_UID:-1000}:${MEALTALLY_GID:-1000}"
     env_file: .env
     environment:
       POSTGRES_HOST: postgres

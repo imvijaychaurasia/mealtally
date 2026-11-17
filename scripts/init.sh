@@ -25,6 +25,14 @@ fill POSTGRES_PASSWORD
 fill MEALTALLY_DB_OWNER_PASSWORD
 fill MEALTALLY_DB_APP_PASSWORD
 
+# the nightly backup container writes ./backups as this user, so the dumps stay readable for `make restore`
+for pair in "MEALTALLY_UID=$(id -u)" "MEALTALLY_GID=$(id -g)"; do
+  key=${pair%%=*}
+  grep -qE "^${key}=.+" .env && continue
+  if grep -qE "^${key}=" .env; then sed -i.bak "s|^${key}=.*|${pair}|" .env && rm -f .env.bak; else echo "${pair}" >> .env; fi
+done
+mkdir -p backups && chmod 700 backups
+
 admin=$(grep -E '^MEALTALLY_ADMIN_EMAIL=' .env | cut -d= -f2- || true)
 if [ -z "${admin}" ]; then
   if [ -t 0 ]; then

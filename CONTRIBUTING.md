@@ -29,7 +29,8 @@ cd mealtally
 cp .env.example .env
 ```
 
-In `.env`, set `MEALTALLY_ENV=development` and `MEALTALLY_ADMIN_EMAIL=you@example.com`, then:
+In `.env`, set `MEALTALLY_ENV=development` and `MEALTALLY_ADMIN_EMAIL=you@example.com`, then run `make init`; it asks
+for a country, currency and time zone (the test suite itself always uses India):
 
 ```bash
 make init

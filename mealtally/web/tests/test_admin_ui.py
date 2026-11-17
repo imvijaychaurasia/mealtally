@@ -257,7 +257,7 @@ def test_platform_screens_and_onboarding(w):
         root = User.objects.create_superuser(email="root-ui@example.test", password="Sup3r-Secret-Pw!")
     c = client_for(root)
     dash = c.get("/platform/")
-    assert dash.status_code == 200 and b"webt" in dash.content and b"Onboard tenant" in dash.content
+    assert dash.status_code == 200 and b"webt" in dash.content and b"Onboard restaurant" in dash.content
     assert Client().get("/platform/").status_code == 302
     assert client_for(w.owner.user).get("/platform/").status_code == 404  # not a platform admin
     assert c.get("/platform/onboard/").status_code == 200

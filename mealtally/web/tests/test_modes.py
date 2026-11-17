@@ -147,7 +147,7 @@ def test_plain_http_notice_for_admins_on_a_lan_address_until_dismissed(defaults)
         assert 'data-testid="http-notice"' not in fresh.get(u + "/admin/").content.decode()
 
 
-def _production_settings(base_url: str, trust_proxy: str = "false") -> dict:
+def _production_settings(base_url: str, trust_proxy: str = "false", **extra) -> dict:
     import json
     import os
     import subprocess
@@ -159,6 +159,10 @@ def _production_settings(base_url: str, trust_proxy: str = "false") -> dict:
         "MEALTALLY_BASE_URL": base_url,
         "MEALTALLY_TRUST_PROXY": trust_proxy,
         "DJANGO_SETTINGS_MODULE": "config.settings.production",
+        "MEALTALLY_DEFAULT_COUNTRY": "GB",
+        "MEALTALLY_DEFAULT_CURRENCY": "GBP",
+        "MEALTALLY_DEFAULT_TIMEZONE": "Europe/London",
+        **extra,
     }
     code = (
         "import json, config.settings.production as s;"
@@ -185,6 +189,18 @@ def test_production_settings_follow_the_base_url():
         "https",
     ]
     assert tls["SESSION_COOKIE_NAME"] == "__Secure-mealtally-session"
+
+
+def test_start_is_refused_without_country_currency_and_timezone(settings):
+    """`migrate` (run before the web server starts) fails with a clear message; image builds are not affected."""
+    from mealtally.tenancy.checks import locale_defaults
+
+    assert locale_defaults() == []
+    settings.MEALTALLY_DEFAULT_COUNTRY = ""
+    settings.MEALTALLY_DEFAULT_TIMEZONE = "Mars/Base"
+    errors = locale_defaults()
+    assert [e.id for e in errors] == ["mealtally.E001", "mealtally.E003"]
+    assert all("make init asks for it" in e.hint for e in errors)
 
 
 @pytest.mark.django_db

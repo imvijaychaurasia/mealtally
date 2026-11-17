@@ -49,7 +49,9 @@
 
 @layer base {
   body { background: var(--page); color: var(--ink); font-variant-numeric: tabular-nums; }
-  h1, h2, h3, .font-display { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.01em; }
+  /* Plus Jakarta Sans has a narrow space (0.17em): no negative tracking on display text, and a little extra word
+     spacing, or headings read as one word ("Stafflogin"). e2e/test_smoke.py::test_heading_words_have_visible_spaces pins this. */
+  h1, h2, h3, .font-display { font-family: var(--font-display); font-weight: 700; letter-spacing: normal; word-spacing: 0.08em; }
   td, th, dd, .tabular { font-variant-numeric: tabular-nums; }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
 }
@@ -96,7 +98,7 @@
   body.sb-collapsed .console-main { padding-inline-start: 72px; }
   body.sb-collapsed .sb-label, body.sb-collapsed .sb-tenant, body.sb-collapsed .sb-section { display: none; }
   body.sb-collapsed .sb-link { justify-content: center; padding-inline-start: 0; padding-inline-end: 0; }
-  body.sb-collapsed .rail-label { display: block; font-size: 0.65rem; letter-spacing: -0.01em; line-height: 1; font-weight: 600; }
+  body.sb-collapsed .rail-label { display: block; font-size: 0.65rem; line-height: 1; font-weight: 600; }
   body.sb-collapsed .sb-link:has(.rail-label) { flex-direction: column; gap: 0.2rem; min-height: 4rem; justify-content: center; }
   body:not(.sb-collapsed) .rail-label { display: none; }
 }
@@ -122,7 +124,7 @@
 @utility auth-powered { @apply absolute bottom-4 start-10 z-10 text-xs font-semibold; }
 @utility auth-panel { @apply relative flex flex-col justify-center p-6 pt-8 sm:p-10 lg:p-14; }
 @utility auth-lang { @apply absolute end-3 top-3 z-20 sm:end-6 sm:top-5; }
-@utility auth-title { @apply text-3xl font-bold tracking-tight; }
+@utility auth-title { @apply text-3xl font-bold; }
 @utility auth-sub { @apply mt-1 text-ink-soft; }
 @utility auth-tile { @apply relative flex min-h-20 items-center gap-4 rounded-2xl border border-strong bg-card p-4 transition hover:border-primary hover:bg-soft focus-visible:outline-2 focus-visible:outline-primary; }
 @utility auth-tile-icon { @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary; }
@@ -149,7 +151,7 @@
 @utility mk-eyebrow { @apply text-sm font-bold uppercase tracking-wide text-primary; }
 @utility mk-chip { @apply inline-flex min-h-8 items-center rounded-full border border-strong bg-card px-3 py-1 text-sm font-semibold text-ink-soft; }
 @utility mk-section { @apply py-12 sm:py-16; }
-@utility mk-h2 { @apply text-3xl font-extrabold tracking-tight; }
+@utility mk-h2 { @apply text-3xl font-extrabold; }
 @utility mk-h3 { @apply mt-6 text-xl font-bold; }
 @utility mk-lead { @apply mt-2 max-w-2xl text-lg text-ink-soft; }
 @utility mk-step { @apply flex h-10 w-10 items-center justify-center rounded-full bg-accent text-lg font-extrabold text-on-accent; }
@@ -172,6 +174,8 @@
 @utility cust-tabbar { @apply fixed inset-x-0 bottom-0 z-30 border-t border-subtle bg-card; padding-bottom: env(safe-area-inset-bottom); }
 @utility cust-tab { @apply flex min-h-16 flex-col items-center justify-center gap-0.5 px-1 text-xs font-semibold text-ink-soft; }
 @utility cust-tab-on { @apply text-primary; }
+/* The floating Show QR button sits above the tab bar; pages that show it get room at the bottom (cust-main pb-44) so
+   it never covers the last card on a 390px phone. */
 @utility cust-fab { @apply fixed bottom-24 end-4 z-30 inline-flex min-h-14 items-center gap-2 rounded-full bg-primary px-5 font-bold text-on-primary shadow-lg; }
 /* every customer page shares one content width, whatever its template says */
 .cust-fab { transition: padding 160ms ease, width 160ms ease; }

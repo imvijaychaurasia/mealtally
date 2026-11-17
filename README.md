@@ -23,8 +23,8 @@ From the demo restaurants that `make demo` creates. Every screen, on desktop and
 
 | Role | |
 |---|---|
-| Counter: a meal redeemed | <img src="docs/screenshots/counter/redeem-success-desktop.webp" alt="Counter screen after redeeming a meal: 37 meals left, with an undo button" width="560"> |
-| Customer: meals left and QR code | <img src="docs/screenshots/customer/home-pass-only-mobile.webp" alt="Customer home on a phone: 29 of 30 meals left" width="220"> <img src="docs/screenshots/customer/qr-mobile.webp" alt="Customer QR code with the code to read out" width="220"> |
+| Counter: a meal redeemed | <img src="docs/screenshots/counter/redeem-success-desktop.webp" alt="Counter screen just after a meal is redeemed: a green confirmation with the customer's name and meals left, an undo button, and the list of today's redemptions" width="560"> |
+| Customer: meals left and QR code | <img src="docs/screenshots/customer/home-pass-only-mobile.webp" alt="Customer home on a phone: a ring with the meals left on the pass, its validity and a Show QR button" width="220"> <img src="docs/screenshots/customer/qr-mobile.webp" alt="Customer QR code with the code to read out" width="220"> |
 | Owner: plans with meal times | <img src="docs/screenshots/owner/plans-desktop.webp" alt="Owner's list of meal plans" width="560"> |
 | Manager: dashboard | <img src="docs/screenshots/manager/dashboard-desktop.webp" alt="Manager dashboard with today's meals and passes" width="560"> |
 | Chef: kitchen (Preview) | <img src="docs/screenshots/chef/kitchen-plan-desktop.webp" alt="Kitchen cooking plan, a Preview module" width="560"> |
@@ -69,7 +69,9 @@ make init
 make up
 ```
 
-Open http://localhost:8000 and sign in with the email and the password that `make init` printed. You'll be asked to
+`make init` asks for your restaurant's country, currency and time zone (or set `MEALTALLY_DEFAULT_COUNTRY`,
+`MEALTALLY_DEFAULT_CURRENCY` and `MEALTALLY_DEFAULT_TIMEZONE` in `.env` first). Open http://localhost:8000 and sign
+in with the email and the password that `make init` printed. You'll be asked to
 choose your own password.
 
 To look around with sample data first, set `MEALTALLY_ENV=development` in `.env` before `make init`, then run
@@ -85,7 +87,8 @@ Everything is set through environment variables in `.env`. The ones you are most
 |---|---|---|
 | `MEALTALLY_BASE_URL` | `http://localhost:8000` | The address people type. `https://` turns on secure cookies and HSTS. |
 | `MEALTALLY_MODE` | `single` | `multi` to host several restaurants. |
-| `MEALTALLY_DEFAULT_COUNTRY`, `_CURRENCY`, `_TIMEZONE`, `_LANGUAGE` | `IN`, `INR`, `Asia/Kolkata`, `en` | Defaults for a new restaurant; each restaurant can change them in Settings. |
+| `MEALTALLY_DEFAULT_COUNTRY`, `_CURRENCY`, `_TIMEZONE` | none: `make init` asks | Country (ISO 3166), currency (ISO 4217) and time zone of new restaurants. Each restaurant can change them in Settings. |
+| `MEALTALLY_DEFAULT_LANGUAGE` | `en` | Language for people who haven't picked one. |
 | `MEALTALLY_TRUST_PROXY` | `false` | `true` behind a reverse proxy. |
 
 The full list is in [docs/configuration.md](docs/configuration.md).

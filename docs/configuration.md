@@ -42,13 +42,14 @@ Switches accept `on`/`off`, `true`/`false`, `yes`/`no` or `1`/`0`.
 |---|---|---|
 | `MEALTALLY_ADMIN_EMAIL` | (required) | `make init` creates the platform admin with this email. |
 | `MEALTALLY_RESTAURANT_NAME` | `My Restaurant` | Single mode: the restaurant `make init` creates. Change the name later in Settings. |
-| `MEALTALLY_DEFAULT_COUNTRY` | `IN` | ISO 3166 country of new restaurants: phone format, tax-ID label, payment methods. |
-| `MEALTALLY_DEFAULT_CURRENCY` | `INR` | ISO 4217 currency of new restaurants. Set it before selling: amounts are not converted later. |
-| `MEALTALLY_DEFAULT_TIMEZONE` | `Asia/Kolkata` | Time zone of new restaurants (meal times, pass validity, reports). |
+| `MEALTALLY_DEFAULT_COUNTRY` | none (required; `make init` asks) | ISO 3166 country of new restaurants: phone format, tax-ID label, payment methods. |
+| `MEALTALLY_DEFAULT_CURRENCY` | none (required; `make init` asks) | ISO 4217 currency of new restaurants. Set it before selling: amounts are not converted later. |
+| `MEALTALLY_DEFAULT_TIMEZONE` | none (required; `make init` asks) | IANA time zone of new restaurants (meal times, pass validity, reports). |
 | `MEALTALLY_DEFAULT_LANGUAGE` | `en` | Language for people who haven't picked one, until the restaurant sets its own default. |
 | `MEALTALLY_MEAL_SLOTS_FILE` | built-in | A JSON file with the default meal times for new restaurants (see `mealtally/plans/seed/meal_slots.json`). |
 
-Each restaurant can change its country, currency, time zone and default language later in Settings.
+There is no built-in country: production refuses to start until these three are set, with a message naming the
+missing ones. Each restaurant can change its country, currency, time zone and default language later in Settings.
 
 ## Secrets
 

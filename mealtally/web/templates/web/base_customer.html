@@ -29,7 +29,7 @@
     </div>
   </header>
   <main id="main" class="cust-main cust-wrap py-5 pb-44 lg:pb-8">{% block content %}{% endblock %}</main>
-  {% if show_qr and request.resolver_match.url_name != "me-qr" and request.resolver_match.url_name != "me-wallet" and request.resolver_match.url_name != "me-order" %}<a class="cust-fab lg:hidden" href="{% url 'web:me-qr' tenant.slug %}" data-testid="show-qr" data-fab aria-label="{% trans 'Show QR' %}">{% include "web/_icon.html" with name="qr" %}<span class="cust-fab-label">{% trans "Show QR" %}</span></a>{% endif %}
+  {% if show_qr and request.resolver_match.url_name != "me-qr" and request.resolver_match.url_name != "me-wallet" and request.resolver_match.url_name != "me-order" and request.resolver_match.url_name != "me-home" %}<a class="cust-fab lg:hidden" href="{% url 'web:me-qr' tenant.slug %}" data-testid="show-qr" data-fab aria-label="{% trans 'Show QR' %}">{% include "web/_icon.html" with name="qr" %}<span class="cust-fab-label">{% trans "Show QR" %}</span></a>{% endif %}
   <nav class="no-print cust-tabbar lg:hidden" aria-label="{% trans 'Tabs' %}" data-testid="tabbar">
     <ul class="mx-auto grid max-w-md {% if cust_tabs|length == 3 %}grid-cols-3{% elif cust_tabs|length == 4 %}grid-cols-4{% else %}grid-cols-5{% endif %}">{% for t in cust_tabs %}<li><a class="cust-tab {% if t.active %}cust-tab-on{% endif %}" href="{{ t.url }}" {% if t.active %}aria-current="page"{% endif %}>{% include "web/_icon.html" with name=t.icon %}<span>{{ t.label }}</span></a></li>{% endfor %}</ul>
   </nav>

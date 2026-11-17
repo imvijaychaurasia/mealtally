@@ -255,4 +255,41 @@ def web(request):
         same = str(shown).strip().lower() == str(label).lower()
         ctx["who"] = shown if same else f"{shown} · {label}"
         ctx["who_chip"] = label if same else ""
+    if (
+        request.path.startswith("/platform/")
+        and not request.path.startswith("/platform/admin/")
+        and user is not None
+        and user.is_authenticated
+        and getattr(user, "is_platform_admin", False)
+    ):
+        ctx["shell_template"] = "web/base_console.html"
+        ctx["sidebar"] = platform_sidebar(user, current)
+        ctx["home_href"] = reverse("web:platform-dashboard")
+        ctx["platform_shell"] = True
     return ctx
+
+
+def platform_sidebar(user, current: str) -> list[dict]:
+    """The platform admin's console: restaurants, onboarding (multi mode), SaaS plans (platform fees on) and the
+    Django admin (Django superusers only)."""
+    rows = [(_("Restaurants"), "web:platform-dashboard", "store", {"platform-dashboard", "platform-tenant"})]
+    if settings.MEALTALLY_MODE == "multi":
+        rows.append((_("Onboard restaurant"), "web:platform-onboard", "grid", {"platform-onboard"}))
+    if settings.MEALTALLY_PLATFORM_FEES:
+        rows.append((_("SaaS plans"), "preview:platform-plans", "plans", {"platform-plans"}))
+    items = [
+        {"label": label, "short": label, "url": reverse(name), "icon": icon, "preview": False, "active": current in on}
+        for label, name, icon, on in rows
+    ]
+    if getattr(user, "is_superuser", False):
+        items.append(
+            {
+                "label": _("Django admin"),
+                "short": _("Django admin"),
+                "url": "/platform/admin/",
+                "icon": "cog",
+                "preview": False,
+                "active": False,
+            }
+        )
+    return [{"label": "", "items": items}]

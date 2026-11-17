@@ -115,9 +115,10 @@ def manager(browser, creds):
 def counter(browser, creds):
     ctx, page = staff_session(browser, *creds["staff"]["counter"])
     got = set()
-    for phone, _pin in creds["customers"]:
+    # the counter finds customers by code: try all 25 demo customers, so one is still due a meal in any meal time
+    for code in (f"C{n:04d}" for n in range(1, 26)):
         go(page, f"/t/{SLUG}/staff/")
-        page.fill("#q", phone[-10:])
+        page.fill("#q", code)
         try:
             page.locator("#results button").first.click(timeout=5000)
             page.locator("[data-testid=customer-card]").wait_for(timeout=5000)
@@ -227,6 +228,8 @@ def sign_in(browser):
     page = ctx.new_page()
     for slug, theme in ((SLUG, "masala"), (SLUG2, "fresh")):
         go(page, f"/t/{slug}/login/staff")
+        actual = page.locator("html").get_attribute("data-theme")
+        assert actual == theme, f"{slug} sign-in renders theme {actual}, expected {theme}"
         save(page, "sign-in", f"staff-{theme}")
     ctx.add_cookies([{"name": "mealtally-language", "value": "ar", "url": BASE}])
     go(page, f"/t/{SLUG}/login/customer")

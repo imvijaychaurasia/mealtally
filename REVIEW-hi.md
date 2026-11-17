@@ -1,6 +1,6 @@
 # Hindi review checklist
 
-Hindi (`hi`) is fully translated: 1,336 of 1,336 strings. It stays **Beta** (`LANGUAGE_REVIEW["hi"] = False` in
+Hindi (`hi`) is fully translated: 1,337 of 1,337 strings. It stays **Beta** (`LANGUAGE_REVIEW["hi"] = False` in
 `config/settings/base.py`) until a native speaker has reviewed it and the maintainer signs off.
 
 ## Where the strings are

@@ -44,3 +44,8 @@ MEALTALLY_MODE = "multi"
 MEALTALLY_PLATFORM_FEES = True
 MEALTALLY_MARKETING_SITE = True
 MEALTALLY_LEGAL_PAGES = True
+
+# The test suite is written against an Indian restaurant (the international cases set their own country).
+MEALTALLY_DEFAULT_COUNTRY = "IN"
+MEALTALLY_DEFAULT_CURRENCY = "INR"
+MEALTALLY_DEFAULT_TIMEZONE = "Asia/Kolkata"

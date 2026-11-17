@@ -82,3 +82,22 @@ def test_arabic_is_right_to_left(page):
     page.wait_for_load_state("networkidle")
     expect(html).to_have_attribute("dir", "ltr")
     page.assert_clean()
+
+
+SPACE_WIDTH_JS = """(el) => {
+  const text = el.firstChild;
+  const i = text.data.indexOf(' ');
+  const range = document.createRange();
+  range.setStart(text, i);
+  range.setEnd(text, i + 1);
+  return range.getBoundingClientRect().width / parseFloat(getComputedStyle(el).fontSize);
+}"""
+
+
+def test_heading_words_have_visible_spaces(page):
+    """Visual check: the display font's narrow space plus tight tracking once rendered "Staff login" as "Stafflogin"."""
+    page.goto(f"/t/{SLUG}/login/staff")
+    page.evaluate("document.fonts.ready")
+    heading = page.locator("h1").first
+    expect(heading).to_have_text(re.compile(r"\w \w"))
+    assert heading.evaluate(SPACE_WIDTH_JS) >= 0.22  # noqa: PLR2004  in em; a normal word gap is 0.25 to 0.3

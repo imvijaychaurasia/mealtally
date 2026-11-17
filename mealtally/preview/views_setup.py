@@ -7,6 +7,8 @@ from django.http import Http404
 from django.shortcuts import render
 from django.views.decorators.http import require_GET
 
+from mealtally.web.features import fees
+from mealtally.web.features import requires
 from mealtally.web.views_platform import platform_view
 
 from . import data
@@ -212,6 +214,7 @@ def _preview_theme(request):
 
 
 @platform_view
+@requires(fees)  # SaaS plans are about platform fees: hidden when MEALTALLY_PLATFORM_FEES is off
 @require_GET
 def platform_plans(request):
     from .data import SEED  # noqa: F401, PLC0415

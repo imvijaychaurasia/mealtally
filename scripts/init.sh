@@ -33,6 +33,36 @@ for pair in "MEALTALLY_UID=$(id -u)" "MEALTALLY_GID=$(id -g)"; do
 done
 mkdir -p backups && chmod 700 backups
 
+set_env() {  # set KEY=value in .env, replacing an empty or missing line
+  if grep -qE "^$1=" .env; then sed -i.bak "s|^$1=.*|$1=$2|" .env && rm -f .env.bak; else echo "$1=$2" >> .env; fi
+}
+# country, currency and time zone of new restaurants: no built-in default, so ask (or stop with a clear message)
+missing=()
+interactive=0; [ -t 0 ] && interactive=1
+while IFS="|" read -r key question example pattern; do
+  grep -qE "^${key}=.+" .env && continue
+  if [ "${interactive}" = 1 ]; then
+    while true; do
+      read -rp "${question} (for example ${example}): " value </dev/tty
+      [ "${key}" = MEALTALLY_DEFAULT_TIMEZONE ] || value=$(printf "%s" "${value}" | tr "[:lower:]" "[:upper:]")
+      if [[ "${value}" =~ ${pattern} ]]; then set_env "${key}" "${value}"; break; fi
+      echo "  That doesn't look right; try again."
+    done
+  else
+    missing+=("${key} (${question}, for example ${example})")
+  fi
+done <<'ASK'
+MEALTALLY_DEFAULT_COUNTRY|Country of your restaurant, as an ISO 3166 code|IN, US, GB, AE|^[A-Z]{2}$
+MEALTALLY_DEFAULT_CURRENCY|Currency, as an ISO 4217 code|INR, USD, GBP, AED|^[A-Z]{3}$
+MEALTALLY_DEFAULT_TIMEZONE|Time zone|Asia/Kolkata, America/New_York, Europe/London|^[A-Za-z_]+(/[A-Za-z0-9_+-]+)+$|^UTC$
+ASK
+if [ ${#missing[@]} -gt 0 ]; then
+  echo "make init needs these in .env (there is no built-in default):" >&2
+  printf "  %s\n" "${missing[@]}" >&2
+  echo "Set them, then run make init again." >&2
+  exit 1
+fi
+
 admin=$(grep -E '^MEALTALLY_ADMIN_EMAIL=' .env | cut -d= -f2- || true)
 if [ -z "${admin}" ]; then
   if [ -t 0 ]; then

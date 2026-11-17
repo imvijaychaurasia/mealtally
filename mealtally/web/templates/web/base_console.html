@@ -24,11 +24,12 @@
     <div class="border-b border-side-ink/10 px-4 py-4">
       <a class="flex items-center gap-2" href="{{ home_href }}" aria-label="Mealtally">
         <img class="h-8 w-8 shrink-0" src="{% static 'brand/icon.svg' %}" alt="" width="32" height="32">
-        <span class="sb-label font-display text-lg font-extrabold tracking-tight text-side-ink">Mealtally</span>
+        <span class="sb-label font-display text-lg font-extrabold text-side-ink">Mealtally</span>
       </a>
       <div class="sb-tenant mt-3 flex items-center gap-2 rounded-xl bg-side-ink/10 p-2" data-testid="sidebar-tenant">
-        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-side-active text-sm font-bold text-side-active-ink" aria-hidden="true">{{ cfg.display_name|default:tenant.name|slice:":1" }}</span>
+        {% if tenant %}<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-side-active text-sm font-bold text-side-active-ink" aria-hidden="true">{{ cfg.display_name|default:tenant.name|slice:":1" }}</span>
         <span class="min-w-0 truncate text-sm font-semibold text-side-ink">{{ cfg.display_name|default:tenant.name }}</span>
+        {% else %}<span class="min-w-0 truncate px-1 text-sm font-semibold text-side-ink">{% trans "Platform" %}</span>{% endif %}
       </div>
     </div>
     <nav class="flex-1 px-3 py-3" aria-label="{% trans 'Sections' %}">
@@ -49,10 +50,13 @@
     <header class="no-print sticky top-0 z-20 border-b border-subtle bg-card" data-testid="topbar">
       <div class="flex items-center gap-2 px-3 py-2 lg:px-6">
         {% if sidebar %}<button type="button" class="btn-secondary px-3" data-sb-toggle aria-label="{% trans 'Toggle menu' %}" aria-expanded="false">{% include "web/_icon.html" with name="menu-burger" %}</button>{% endif %}
-        <a class="min-w-0 flex-1 truncate text-base font-bold text-primary-hover {% if not station %}lg:hidden{% endif %}" href="{{ home_href }}">{{ cfg.display_name|default:tenant.name|default:"Mealtally" }}</a>
+        <a class="min-w-0 flex-1 truncate text-base font-bold text-primary-hover {% if not station %}lg:hidden{% endif %}" href="{{ home_href }}">{% if tenant %}{{ cfg.display_name|default:tenant.name }}{% else %}Mealtally{% endif %}</a>
         {% if station %}<span class="chip-active" data-testid="station-role">{{ role|role_label }}</span><span class="text-lg font-semibold tabular-nums" data-clock data-testid="clock"></span>{% endif %}
         <span class="hidden flex-1 lg:block"></span>
-        {% if request.user.is_authenticated and tenant and role %}
+        {% if platform_shell %}
+        {% include "web/_language_picker.html" with picker_class="no-print max-sm:hidden" picker_id="baseconsole1" %}
+        <form method="post" action="{% url 'web:logout' %}" data-testid="platform-logout">{% csrf_token %}<button class="btn-secondary" type="submit">{% trans "Log out" %}</button></form>
+        {% elif request.user.is_authenticated and tenant and role %}
         {% if help_articles %}
         <details class="relative" data-testid="help"><summary class="btn-secondary cursor-pointer list-none px-3" aria-label="{% trans 'Help' %}"><span class="font-bold" aria-hidden="true">?</span><span class="hidden sm:inline">{% trans "Help" %}</span></summary>
           <div class="absolute end-0 z-30 mt-1 w-96 max-w-[92vw] rounded-xl border border-subtle bg-card p-3 shadow-lg"><p class="font-semibold">{% trans "Help" %}</p>

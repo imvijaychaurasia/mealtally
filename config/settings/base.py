@@ -406,10 +406,11 @@ MEALTALLY_MARKETING_SITE = _flag("MEALTALLY_MARKETING_SITE")
 MEALTALLY_DEMO_DATASET = _flag("MEALTALLY_DEMO_DATASET")
 MEALTALLY_LEGAL_PAGES = _flag("MEALTALLY_LEGAL_PAGES")
 MEALTALLY_TRUST_PROXY = _flag("MEALTALLY_TRUST_PROXY", "false")
-# Defaults for the first restaurant (all editable later in Business profile).
-MEALTALLY_DEFAULT_COUNTRY = env.str("MEALTALLY_DEFAULT_COUNTRY", default="IN").upper()
-MEALTALLY_DEFAULT_CURRENCY = env.str("MEALTALLY_DEFAULT_CURRENCY", default="INR").upper()
-MEALTALLY_DEFAULT_TIMEZONE = env.str("MEALTALLY_DEFAULT_TIMEZONE", default="Asia/Kolkata")
+# Defaults for new restaurants (each restaurant can change them in Settings). No built-in country: `make init`
+# asks for them, and production settings refuse to start without them.
+MEALTALLY_DEFAULT_COUNTRY = env.str("MEALTALLY_DEFAULT_COUNTRY", default="").strip().upper()
+MEALTALLY_DEFAULT_CURRENCY = env.str("MEALTALLY_DEFAULT_CURRENCY", default="").strip().upper()
+MEALTALLY_DEFAULT_TIMEZONE = env.str("MEALTALLY_DEFAULT_TIMEZONE", default="").strip()
 MEALTALLY_DEFAULT_LANGUAGE = env.str("MEALTALLY_DEFAULT_LANGUAGE", default="en")
 
 # landing-page pricing moved to PlatformSettings (platform admin, no restart); no environment variable.

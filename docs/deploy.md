@@ -30,7 +30,8 @@ Edit `.env`:
 - `MEALTALLY_BASE_URL`: the address people will type, for example `https://meals.example.com` or
   `http://192.168.1.20:8000`.
 - `MEALTALLY_ADMIN_EMAIL`: your login.
-- `MEALTALLY_RESTAURANT_NAME`, `MEALTALLY_DEFAULT_COUNTRY`, `MEALTALLY_DEFAULT_CURRENCY`, `MEALTALLY_DEFAULT_TIMEZONE`.
+- `MEALTALLY_RESTAURANT_NAME`, and `MEALTALLY_DEFAULT_COUNTRY`, `MEALTALLY_DEFAULT_CURRENCY`, `MEALTALLY_DEFAULT_TIMEZONE`
+  (required; without them `make init` asks, or stops when it has no terminal).
 - `MEALTALLY_IMAGE=ghcr.io/<owner>/mealtally:0.1.0` and `MEALTALLY_POSTGRES_IMAGE=ghcr.io/<owner>/mealtally-postgres:0.1.0`.
 
 Then:

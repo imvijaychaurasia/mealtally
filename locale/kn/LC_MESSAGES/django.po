@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 13:41+0000\n"
+"POT-Creation-Date: 2026-11-17 15:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,6 +235,7 @@ msgstr ""
 #: mealtally/web/templates/web/admin_dashboard.html:3
 #: mealtally/web/templates/web/admin_more.html:5
 #: mealtally/web/templates/web/marketing/_header.html:9
+#: mealtally/web/tests/test_i18n.py:134
 #, fuzzy
 msgid "Dashboard"
 msgstr "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್"
@@ -498,7 +499,9 @@ msgid "Confirm skip"
 msgstr ""
 
 #: mealtally/preview/templates/preview/_head.html:3
-#: mealtally/web/templates/web/me_home.html:5
+#: mealtally/web/templates/web/me_home.html:41
+#: mealtally/web/templates/web/me_home.html:45
+#: mealtally/web/templates/web/me_home.html:49
 #, fuzzy
 msgid "Rolling out next — shown with demo data"
 msgstr "ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ — ಡೆಮೊ ಡೇಟಾದೊಂದಿಗೆ ತೋರಿಸಲಾಗಿದೆ"
@@ -515,8 +518,10 @@ msgstr "ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ — ಡೆಮೊ ಡ�
 #: mealtally/preview/templates/preview/today.html:26
 #: mealtally/preview/templates/preview/wallet_customer.html:4
 #: mealtally/web/templates/web/base_classic.html:52
-#: mealtally/web/templates/web/base_console.html:39
-#: mealtally/web/templates/web/me_home.html:5
+#: mealtally/web/templates/web/base_console.html:40
+#: mealtally/web/templates/web/me_home.html:41
+#: mealtally/web/templates/web/me_home.html:45
+#: mealtally/web/templates/web/me_home.html:49
 #: mealtally/web/templates/web/sell.html:36
 #, fuzzy
 msgid "Preview"
@@ -1284,7 +1289,7 @@ msgstr[1] ""
 
 #: mealtally/preview/templates/preview/me_meals.html:5
 #: mealtally/web/templates/web/marketing/home.html:42
-#: mealtally/web/templates/web/me_home.html:7
+#: mealtally/web/templates/web/me_home.html:6
 #: mealtally/web/templates/web/me_home.html:48
 #, fuzzy
 msgid "Top up"
@@ -1379,6 +1384,7 @@ msgstr ""
 #: mealtally/preview/templates/preview/me_order.html:6
 #: mealtally/web/templates/web/base_customer.html:25
 #: mealtally/web/templates/web/base_customer.html:32
+#: mealtally/web/templates/web/me_home.html:27
 #, fuzzy
 msgid "Show QR"
 msgstr "QR ತೋರಿಸಿ"
@@ -1966,6 +1972,7 @@ msgid "OR B"
 msgstr ""
 
 #: mealtally/preview/templates/preview/platform_plans.html:4
+#: mealtally/web/templates/web/base_console.html:32
 #: mealtally/web/templates/web/platform_dashboard.html:3
 #: mealtally/web/templates/web/platform_tenant.html:3
 msgid "Platform"
@@ -2468,7 +2475,7 @@ msgstr ""
 #: mealtally/preview/templates/preview/subscriptions.html:4
 #: mealtally/web/templates/web/_customer_rows.html:3
 #: mealtally/web/templates/web/me_account.html:13
-#: mealtally/web/templates/web/me_home.html:13
+#: mealtally/web/templates/web/me_home.html:12
 #, fuzzy
 msgid "Active"
 msgstr "ಸಕ್ರಿಯ"
@@ -2632,8 +2639,8 @@ msgid "Orders, wallets, expenses and the chart below use demo data (Preview)."
 msgstr ""
 
 #: mealtally/preview/templates/preview/today_console.html:17
-#: mealtally/web/templates/web/base_console.html:64
-#: mealtally/web/templates/web/base_console.html:65
+#: mealtally/web/templates/web/base_console.html:68
+#: mealtally/web/templates/web/base_console.html:69
 #, fuzzy
 msgid "Alerts"
 msgstr "ಎಚ್ಚರಿಕೆಗಳು"
@@ -2645,7 +2652,7 @@ msgstr ""
 #: mealtally/preview/templates/preview/today_console.html:22
 #: mealtally/web/templates/web/_http_notice.html:5
 #: mealtally/web/templates/web/base_classic.html:62
-#: mealtally/web/templates/web/base_console.html:80
+#: mealtally/web/templates/web/base_console.html:84
 #, fuzzy
 msgid "Dismiss"
 msgstr "ತೆಗೆದುಹಾಕಿ"
@@ -3033,7 +3040,8 @@ msgstr ""
 #: mealtally/templates/account/logout.html:2
 #: mealtally/templates/account/logout.html:5
 #: mealtally/web/templates/web/base_classic.html:42
-#: mealtally/web/templates/web/base_console.html:75
+#: mealtally/web/templates/web/base_console.html:58
+#: mealtally/web/templates/web/base_console.html:79
 #: mealtally/web/templates/web/me_account.html:22
 #: mealtally/web/templates/web/me_profile.html:12
 #, fuzzy
@@ -3286,7 +3294,7 @@ msgid "Activity"
 msgstr "ಚಟುವಟಿಕೆ"
 
 #: mealtally/web/context.py:113 mealtally/web/context.py:236
-#: mealtally/web/templates/web/base_console.html:68
+#: mealtally/web/templates/web/base_console.html:72
 #: mealtally/web/templates/web/base_customer.html:27
 #: mealtally/web/templates/web/me_account.html:3
 #, fuzzy
@@ -3317,6 +3325,27 @@ msgstr "ಆಯಿತು"
 #, fuzzy
 msgid "Platform admin"
 msgstr "ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಅಡ್ಮಿನ್"
+
+#: mealtally/web/context.py:275
+#, fuzzy
+msgid "Restaurants"
+msgstr "ರೆಸ್ಟೋರೆಂಟ್‌ಗೆ ಕರೆ ಮಾಡಿ"
+
+#: mealtally/web/context.py:277
+#: mealtally/web/templates/web/platform_dashboard.html:3
+#, fuzzy
+msgid "Onboard restaurant"
+msgstr "ರೆಸ್ಟೋರೆಂಟ್‌ಗೆ ಕರೆ ಮಾಡಿ"
+
+#: mealtally/web/context.py:279
+#: mealtally/web/templates/web/platform_dashboard.html:3
+msgid "SaaS plans"
+msgstr ""
+
+#: mealtally/web/context.py:287 mealtally/web/context.py:288
+#: mealtally/web/templates/web/platform_dashboard.html:3
+msgid "Django admin"
+msgstr ""
 
 #: mealtally/web/copy.py:7
 msgid "This customer has no active pass. Sell a pass first."
@@ -3870,7 +3899,7 @@ msgid "Valid until %(d)s"
 msgstr ""
 
 #: mealtally/web/templates/web/_card.html:8
-#: mealtally/web/templates/web/me_home.html:26
+#: mealtally/web/templates/web/me_home.html:25
 #, fuzzy, python-format
 msgid "Meals today: %(n)s"
 msgstr "ಇಂದಿನ ಊಟ: %(n)s"
@@ -4713,14 +4742,14 @@ msgstr "Mealtally ಮೂಲಕ ನಡೆಯುತ್ತದೆ"
 
 #: mealtally/web/templates/web/base_classic.html:34
 #: mealtally/web/templates/web/base_classic.html:35
-#: mealtally/web/templates/web/base_console.html:57
-#: mealtally/web/templates/web/base_console.html:58
+#: mealtally/web/templates/web/base_console.html:61
+#: mealtally/web/templates/web/base_console.html:62
 #, fuzzy
 msgid "Help"
 msgstr "ಸಹಾಯ"
 
 #: mealtally/web/templates/web/base_classic.html:37
-#: mealtally/web/templates/web/base_console.html:60
+#: mealtally/web/templates/web/base_console.html:64
 #, fuzzy
 msgid "Chat with us on WhatsApp"
 msgstr "WhatsApp ನಲ್ಲಿ ನಮ್ಮೊಂದಿಗೆ ಮಾತನಾಡಿ"
@@ -4733,41 +4762,41 @@ msgid "Main"
 msgstr "ಮುಖ್ಯ"
 
 #: mealtally/web/templates/web/base_classic.html:62
-#: mealtally/web/templates/web/base_console.html:80
+#: mealtally/web/templates/web/base_console.html:84
 #, fuzzy
 msgid "Set meal times and daily limits for your plans."
 msgstr "ನಿಮ್ಮ ಯೋಜನೆಗಳಿಗೆ ಊಟದ ಸಮಯ ಮತ್ತು ದೈನಂದಿನ ಮಿತಿಗಳನ್ನು ಹೊಂದಿಸಿ."
 
 #: mealtally/web/templates/web/base_classic.html:62
-#: mealtally/web/templates/web/base_console.html:80
+#: mealtally/web/templates/web/base_console.html:84
 #, fuzzy
 msgid "Open plans"
 msgstr "ಯೋಜನೆಗಳನ್ನು ತೆರೆಯಿರಿ"
 
 #: mealtally/web/templates/web/base_classic.html:64
-#: mealtally/web/templates/web/base_console.html:82
+#: mealtally/web/templates/web/base_console.html:86
 #: mealtally/web/templates/web/base_customer.html:33
 #, fuzzy
 msgid "Tabs"
 msgstr "ಟ್ಯಾಬ್‌ಗಳು"
 
-#: mealtally/web/templates/web/base_console.html:34
+#: mealtally/web/templates/web/base_console.html:35
 #: mealtally/web/templates/web/marketing/_header.html:4
 #, fuzzy
 msgid "Sections"
 msgstr "ವಿಭಾಗಗಳು"
 
-#: mealtally/web/templates/web/base_console.html:51
+#: mealtally/web/templates/web/base_console.html:52
 #, fuzzy
 msgid "Toggle menu"
 msgstr "ಮೆನು ತೋರಿಸಿ/ಮರೆಮಾಡಿ"
 
-#: mealtally/web/templates/web/base_console.html:66
+#: mealtally/web/templates/web/base_console.html:70
 #, fuzzy
 msgid "Nothing needs your attention."
 msgstr "ಈಗ ಯಾವುದಕ್ಕೂ ನಿಮ್ಮ ಗಮನ ಬೇಕಿಲ್ಲ."
 
-#: mealtally/web/templates/web/base_console.html:73
+#: mealtally/web/templates/web/base_console.html:77
 #, fuzzy
 msgid "Profile & password"
 msgstr "ಪ್ರೊಫೈಲ್ ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್"
@@ -5253,53 +5282,53 @@ msgstr "ಬಾಗಿಲಲ್ಲಿ ತೆಗೆದ ಫೋಟೋ (ಡೆಮೊ)"
 msgid "Hello, %(name)s"
 msgstr "ನಮಸ್ಕಾರ, %(name)s"
 
-#: mealtally/web/templates/web/me_home.html:7
+#: mealtally/web/templates/web/me_home.html:6
 #, fuzzy, python-format
 msgid "Your wallet is running low: about %(n)s days of meals left."
 msgstr "ನಿಮ್ಮ ವಾಲೆಟ್ ಕಡಿಮೆಯಾಗುತ್ತಿದೆ: ಸುಮಾರು %(n)s ದಿನಗಳ ಊಟ ಉಳಿದಿದೆ."
 
-#: mealtally/web/templates/web/me_home.html:8
+#: mealtally/web/templates/web/me_home.html:7
 #, fuzzy, python-format
 msgid "Your top-up of %(a)s is waiting for approval."
 msgstr "ನಿಮ್ಮ %(a)s ಟಾಪ್-ಅಪ್ ಅನುಮೋದನೆಗಾಗಿ ಕಾಯುತ್ತಿದೆ."
 
-#: mealtally/web/templates/web/me_home.html:13
+#: mealtally/web/templates/web/me_home.html:12
 #, fuzzy
 msgid "Suspended"
 msgstr "ತಾತ್ಕಾಲಿಕವಾಗಿ ನಿಲ್ಲಿಸಲಾಗಿದೆ"
 
-#: mealtally/web/templates/web/me_home.html:16
+#: mealtally/web/templates/web/me_home.html:15
 #, fuzzy, python-format
 msgid "%(l)s of %(t)s meals left"
 msgstr "%(t)s ರಲ್ಲಿ %(l)s ಊಟ ಉಳಿದಿದೆ"
 
-#: mealtally/web/templates/web/me_home.html:20
+#: mealtally/web/templates/web/me_home.html:19
 #, fuzzy, python-format
 msgid "of %(t)s meals left"
 msgstr "%(t)s ರಲ್ಲಿ ಊಟ ಉಳಿದಿದೆ"
 
-#: mealtally/web/templates/web/me_home.html:23
+#: mealtally/web/templates/web/me_home.html:22
 #, fuzzy, python-format
 msgid "Valid until %(d)s · %(counter)s day left"
 msgid_plural "Valid until %(d)s · %(counter)s days left"
 msgstr[0] "%(d)s ವರೆಗೆ ಮಾನ್ಯ · %(counter)s ದಿನ ಉಳಿದಿದೆ"
 msgstr[1] "%(d)s ವರೆಗೆ ಮಾನ್ಯ · %(counter)s ದಿನಗಳು ಉಳಿದಿವೆ"
 
-#: mealtally/web/templates/web/me_home.html:24
+#: mealtally/web/templates/web/me_home.html:23
 #, fuzzy, python-format
 msgid "%(counter)s meal will expire on %(d)s — renew at the counter"
 msgid_plural "%(counter)s meals will expire on %(d)s — renew at the counter"
 msgstr[0] "%(counter)s ಊಟ %(d)s ರಂದು ಅವಧಿ ಮುಗಿಯುತ್ತದೆ — ಕೌಂಟರ್‌ನಲ್ಲಿ ನವೀಕರಿಸಿ"
 msgstr[1] "%(counter)s ಊಟಗಳು %(d)s ರಂದು ಅವಧಿ ಮುಗಿಯುತ್ತವೆ — ಕೌಂಟರ್‌ನಲ್ಲಿ ನವೀಕರಿಸಿ"
 
-#: mealtally/web/templates/web/me_home.html:25
+#: mealtally/web/templates/web/me_home.html:24
 #, fuzzy, python-format
 msgid "Running low — %(counter)s meal left"
 msgid_plural "Running low — %(counter)s meals left"
 msgstr[0] "ಕಡಿಮೆಯಾಗುತ್ತಿದೆ — %(counter)s ಊಟ ಉಳಿದಿದೆ"
 msgstr[1] "ಕಡಿಮೆಯಾಗುತ್ತಿದೆ — %(counter)s ಊಟಗಳು ಉಳಿದಿವೆ"
 
-#: mealtally/web/templates/web/me_home.html:27
+#: mealtally/web/templates/web/me_home.html:26
 #: mealtally/web/templates/web/sell.html:27
 #, fuzzy
 msgid "Valid until end of month · full meals"
@@ -5472,18 +5501,6 @@ msgstr ""
 
 #: mealtally/web/templates/web/platform_confirm.html:7
 msgid "Reason (required — written to the audit log)"
-msgstr ""
-
-#: mealtally/web/templates/web/platform_dashboard.html:3
-msgid "Onboard tenant"
-msgstr ""
-
-#: mealtally/web/templates/web/platform_dashboard.html:3
-msgid "SaaS plans"
-msgstr ""
-
-#: mealtally/web/templates/web/platform_dashboard.html:3
-msgid "Django admin"
 msgstr ""
 
 #: mealtally/web/templates/web/platform_dashboard.html:5

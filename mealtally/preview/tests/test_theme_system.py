@@ -469,7 +469,10 @@ def test_d038_customer_polish_wallet_has_no_fab_order_card_and_history_rows(demo
     assert 'data-testid="show-qr"' not in wallet and 'data-testid="wallet-history"' in wallet and "<table" not in wallet
     assert "−₹80" in wallet and "−₹80.00" not in wallet  # Activity-style rows with consumer money
     home = cust.get(f"/t/{SLUG}/me/").content.decode()
-    assert 'data-testid="show-qr"' in home and "cust-fab-label" in home and "pb-44" in home
+    # Home shows QR as a button in the pass card, not floating over the cards; other pages keep the floating button
+    assert 'data-testid="show-qr"' in home and "cust-fab-label" not in home and "pb-44" in home
+    activity = cust.get(f"/t/{SLUG}/me/activity").content.decode()
+    assert 'data-testid="show-qr"' in activity and "cust-fab-label" in activity
     order = cust.get(f"/t/{SLUG}/me/order").content.decode()
     assert (
         "data-add" in order

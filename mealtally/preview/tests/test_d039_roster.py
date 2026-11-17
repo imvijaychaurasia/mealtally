@@ -171,3 +171,14 @@ def test_qa02_wallet_header_has_no_qr_button_and_staff_list_says_counter(demo, c
     staff = clients["OWNER"].get(f"/t/{SLUG}/admin/staff").content.decode()
     assert '<span class="chip-slate" data-testid="staff-role">Counter</span>' in staff
     assert ">STAFF<" not in staff
+
+
+def test_preview_badge_only_beside_preview_cards(demo):  # noqa: F811
+    with tenant_context(tid()):
+        pass_only = Customer.objects.filter(has_wallet=False).order_by("customer_code").first().full_name
+    home = customer_client(pass_only).get(f"/t/{SLUG}/me/").content.decode()
+    assert 'data-testid="preview-badge"' not in home  # a pass-only customer sees no Preview module, so no badge
+    wallet_home = customer_client(dataset()["subscribers"][0]["name"]).get(f"/t/{SLUG}/me/").content.decode()
+    card = wallet_home.split('data-testid="home-wallet"', 1)[1].split('data-testid="home-restaurant"', 1)[0]
+    assert 'data-testid="preview-badge"' in card
+    assert wallet_home.index('data-testid="preview-badge"') > wallet_home.index("<h1")  # not under the greeting

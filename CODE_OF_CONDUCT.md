@@ -32,9 +32,9 @@ elsewhere.
 
 ## Reporting and enforcement
 
-<!-- TO CONFIRM (maintainer): a conduct contact address. Until then, reports go through the GitHub profile. -->
-Until a conduct address is published here, report problems privately to the repository owner through their
-GitHub profile. Every report is reviewed and answered, and reporters' privacy is respected.
+Report problems privately to the maintainer, Vijay Chaurasia, at
+[imvijaychaurasia@gmail.com](mailto:imvijaychaurasia@gmail.com). Every report is reviewed and answered, and
+reporters' privacy is respected.
 
 Maintainers may remove comments, commits, code, issues and other contributions that break this code of conduct, and
 may warn, temporarily ban or permanently ban contributors, following the enforcement guidelines of the Contributor

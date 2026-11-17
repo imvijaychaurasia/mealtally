@@ -17,8 +17,7 @@ Agreement](CLA.md).
 
 ## Contact
 
-<!-- TO CONFIRM (maintainer): the commercial contact address. Until then, requests go through GitHub. -->
-Write to the repository owner through their GitHub profile, with a short description of how you plan to use
-Mealtally. Please don't put commercial requests in public issues.
+Write to Vijay Chaurasia at [imvijaychaurasia@gmail.com](mailto:imvijaychaurasia@gmail.com) with a short
+description of how you plan to use Mealtally. Please don't put commercial requests in public issues.
 
 A commercial licence doesn't cover the Mealtally name or logo; see [TRADEMARK.md](TRADEMARK.md).

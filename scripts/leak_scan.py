@@ -49,6 +49,16 @@ PRIVATE_PATH = re.compile(r"(/Users/[A-Za-z][\w.-]+/|/home/(?!mealtally\b)[a-z][
 PHONE = re.compile(r"\+?91[ -]?([6-9]\d{4})[ -]?(\d{5})\b")
 
 
+# The maintainer's contact address is published in exactly these files (sha256 prefix, as for the denylist). It is
+# removed from the line before the denylist check there, and nowhere else: the handle inside it stays blocked.
+ALLOWED_CONTACT = {"709bdf15f3e94ad0": {"COMMERCIAL.md", "CODE_OF_CONDUCT.md", "CLA.md"}}
+EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
+
+def _without_allowed_contact(line: str, rel: str) -> str:
+    return EMAIL.sub(lambda m: "" if rel in ALLOWED_CONTACT.get(_h(m.group(0).lower()), ()) else m.group(0), line)
+
+
 def _h(text: str) -> str:
     return hashlib.sha256(text.encode()).hexdigest()[:16]
 
@@ -96,6 +106,7 @@ def scan(root: Path) -> list[str]:
         except UnicodeDecodeError:
             continue
         for n, line in enumerate(text.splitlines(), 1):
+            line = _without_allowed_contact(line, rel.as_posix())
             for word in denied_words(line):
                 problems.append(f"{rel}:{n}: denylisted word ({word})")
             for m in IPV4.finditer(line):

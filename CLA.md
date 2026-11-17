@@ -1,11 +1,10 @@
 # Individual Contributor Licence Agreement
 
-<!-- TO CONFIRM (maintainer): the legal name of the person or entity that receives these rights ("the Maintainer").
-     This agreement follows the structure of the Apache Software Foundation Individual Contributor License Agreement
-     v2.2, with one addition (clause 3, relicensing). Have it reviewed before the repository goes public. -->
+This agreement is based on the Apache Software Foundation Individual Contributor License Agreement v2.2, with one
+addition (clause 3, relicensing).
 
 Thank you for contributing to Mealtally. This agreement makes clear what rights you give the project's maintainer,
-**Vijay Chaurasia** ("the Maintainer"), for the things you contribute. You keep the copyright in your contributions.
+**Vijay Chaurasia**, an individual ("the Maintainer"), for the things you contribute. You keep the copyright in your contributions.
 
 You accept this agreement by commenting on your first pull request with the sentence the CLA bot asks for. The
 agreement then covers all your past and future contributions to Mealtally.

@@ -7,29 +7,39 @@ a step from you; [docs/upgrading.md](docs/upgrading.md) lists them.
 
 ## [Unreleased]
 
-## [0.1.0] - unreleased
+## [0.1.0] - 2026-11-17
 
 The first open-source release.
 
-### Ready
+### Added
 
-- Prepaid meal passes: plans with price, number of meals, validity (fixed days or calendar month), meal times and a
-  daily limit. Renewals queue behind the current pass.
-- Counter: QR scan or search by name, phone or code; redeem in one tap; protection against double scans; undo and
-  override with a reason; sell a pass with a numbered receipt (PDF).
-- Customer web app (installable): meals left, a refreshing QR code, history, receipts, PIN sign-in.
-- Customers, staff and roles (owner, manager, counter), with an audit log of every change.
-- Reports: daily consumption, monthly sales, expired passes, refused redemptions, customer statements (CSV and PDF).
-- Single-restaurant mode (default) and multi-restaurant mode for hosting providers, with optional platform fees.
-- Any country and currency: amounts in the currency's minor units, CLDR formatting, phone numbers in local format,
-  local tax-ID and food-licence labels. UPI only where it applies (India).
-- Languages: English; Hindi fully translated (Beta until reviewed); Marathi, Tamil, Telugu, Bengali, Gujarati, Kannada, Spanish, French,
-  Brazilian Portuguese, Arabic and Indonesian in Beta. Right-to-left layout for Arabic.
-- Three themes.
-- Data safety: PostgreSQL row-level security between restaurants, an append-only ledger and audit log, nightly
-  backups and a tested restore.
+- **Meal passes:** plans with a price, a number of meals, a validity (fixed days or a calendar month), meal times and a
+  daily limit. Selling a pass while one is active queues the renewal.
+- **Redemption at the counter:** QR scan with the phone camera, or search by name, phone or customer code; one tap to
+  redeem; double-scan protection; undo and manager override, each with a reason.
+- **Customer app** (installable web app): meals left, a QR code that refreshes and works once, history, receipts,
+  sign-in with phone and PIN.
+- **Receipts:** numbered, on screen and as PDF.
+- **Customers, staff and roles:** owner, manager, counter; temporary passwords and PINs that must be changed at first
+  sign-in.
+- **Audit log** of every change, append-only.
+- **Reports:** daily consumption, monthly sales, expired passes, refused redemptions and customer statements, as CSV
+  and PDF.
+- **One restaurant or many:** single mode (default) and multi mode for hosting providers, with optional platform fees
+  and fee statements.
+- **Three themes:** Masala, Fresh and Mealtally, each checked for WCAG AA contrast.
+- **Languages:** 13 languages, with right-to-left layout for Arabic. English is the source; Hindi is fully translated
+  and Marathi, Tamil, Telugu, Bengali, Gujarati, Kannada, Spanish, French, Brazilian Portuguese, Arabic and Indonesian
+  have the most-used screens drafted. All twelve are labelled Beta until native speakers review them.
+- **Any country and currency:** amounts in the currency's minor units with CLDR formatting, phone numbers in the
+  local format, local tax-ID and food-licence labels, UPI only where it applies.
+- **Data safety:** PostgreSQL row-level security between restaurants, an append-only meal ledger, nightly backups and a
+  tested `make restore`.
+- **Running it:** Docker images for amd64 and arm64, `make init` / `make up` / `make demo` / `make upgrade`, plain
+  HTTP by default with documented HTTPS set-ups (Caddy, Traefik, nginx).
 
 ### Preview
 
-Shown with sample data and labelled "Preview", off unless `MEALTALLY_DEMO_DATASET=on`: wallets and top-ups, orders,
-kitchen, delivery routes and the driver screen, invoices, expenses, notifications, cloud kitchen, restaurant website.
+Screens with sample data, labelled "Preview" and off unless `MEALTALLY_DEMO_DATASET=on` (or `make demo`). They are
+not working features yet: wallets and top-ups, orders, kitchen (cooking plan, packing, labels), delivery routes and
+the driver screen, invoices, expenses, notifications, cloud kitchen, and the restaurant's own website.

@@ -7,8 +7,6 @@
 Report them privately through GitHub: on the repository page, open **Security → Report a vulnerability**. Only the
 maintainers can see the report.
 
-<!-- TO CONFIRM (maintainer): an email address for people without a GitHub account. -->
-
 Please include:
 
 - what an attacker can do and what they need first (for example "a counter login at one restaurant"),

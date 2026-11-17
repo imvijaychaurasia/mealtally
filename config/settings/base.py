@@ -25,8 +25,9 @@ if READ_DOT_ENV_FILE:
 DEBUG = env.bool("DJANGO_DEBUG", False)
 TIME_ZONE = "UTC"
 LANGUAGE_CODE = env.str("MEALTALLY_DEFAULT_LANGUAGE", default="en")
-# Each language by its own name. English and Hindi are complete and reviewed; the rest are machine-drafted (fuzzy in
-# the .po files) and shown as "Beta" in the picker until a human reviews them. See TRANSLATING.md.
+# Each language by its own name. A language is shown as "Beta" in the picker until a native speaker has reviewed
+# it (LANGUAGE_REVIEW). Hindi is fully translated but not yet reviewed; the others are machine-drafted core sets
+# (fuzzy in the .po files). See TRANSLATING.md and REVIEW-hi.md.
 LANGUAGES = [
     ("en", "English"),
     ("hi", "हिन्दी"),
@@ -42,7 +43,9 @@ LANGUAGES = [
     ("ar", "العربية"),
     ("id", "Bahasa Indonesia"),
 ]
-MEALTALLY_BETA_LANGUAGES = frozenset({"mr", "ta", "te", "bn", "gu", "kn", "es", "fr", "pt-br", "ar", "id"})
+# code -> reviewed by a native speaker? English is the source language.
+LANGUAGE_REVIEW = {code: code == "en" for code, _name in LANGUAGES}
+MEALTALLY_BETA_LANGUAGES = frozenset(code for code, reviewed in LANGUAGE_REVIEW.items() if not reviewed)
 LANGUAGE_COOKIE_NAME = "mealtally-language"
 LOCALE_PATHS = [BASE_DIR / "locale"]
 USE_I18N = True

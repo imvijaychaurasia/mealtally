@@ -45,7 +45,7 @@ From the demo restaurants that `make demo` creates. Every screen, on desktop and
 | Reports (CSV and PDF) | Notifications |
 | One restaurant or many (multi mode) | Cloud kitchen |
 | Three themes | The restaurant's own website |
-| 13 languages (2 complete, 11 in Beta), right to left | |
+| 13 languages (English, and 12 in Beta), right to left | |
 
 **Preview** modules are screens filled with sample data, so you can see where Mealtally is going. They don't save
 anything and are labelled "Preview" on every screen. They are off unless you set `MEALTALLY_DEMO_DATASET=on` or use
@@ -120,9 +120,10 @@ More detail in [docs/architecture.md](docs/architecture.md).
 
 ## Languages
 
-English and हिंदी (Hindi) are complete. Marathi, Tamil, Telugu, Bengali, Gujarati, Kannada, Spanish, French,
-Brazilian Portuguese, Arabic and Indonesian are in Beta: the screens people use most are translated (drafts, waiting
-for review by native speakers) and the rest is in English. Arabic is shown right to left. Each person picks a
+English is the source language. हिंदी (Hindi) is fully translated and in Beta until its review is finished. Marathi,
+Tamil, Telugu, Bengali, Gujarati, Kannada, Spanish, French, Brazilian Portuguese, Arabic and Indonesian are in Beta:
+the screens people use most are translated (drafts, waiting for review by native speakers) and the rest is in
+English. Arabic is shown right to left. Each person picks a
 language on any screen; a restaurant sets a default for everyone else.
 
 Corrections and new languages are welcome: [TRANSLATING.md](TRANSLATING.md).

@@ -8,7 +8,7 @@ Mealtally uses Django's gettext catalogues: one `locale/<code>/LC_MESSAGES/djang
 | Code | Language | Status |
 |---|---|---|
 | `en` | English | Source language |
-| `hi` | हिंदी (Hindi) | Complete |
+| `hi` | हिंदी (Hindi) | Beta: fully translated, waiting for review ([REVIEW-hi.md](REVIEW-hi.md)) |
 | `mr` | मराठी (Marathi) | Beta |
 | `ta` | தமிழ் (Tamil) | Beta |
 | `te` | తెలుగు (Telugu) | Beta |
@@ -27,7 +27,8 @@ until a native speaker reviews them. Anything without a translation falls back t
 "Beta" next to these languages.
 
 The release image compiles the catalogues with `--use-fuzzy`, so Beta drafts are shown to users. A language leaves
-Beta when a native speaker has reviewed the whole file and no `fuzzy` entries are left.
+Beta when a native speaker has reviewed the whole file, no `fuzzy` entries are left, and `LANGUAGE_REVIEW` in
+`config/settings/base.py` marks it as reviewed.
 
 ## How the language is chosen
 

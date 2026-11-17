@@ -23,7 +23,7 @@ The first open-source release.
 - Single-restaurant mode (default) and multi-restaurant mode for hosting providers, with optional platform fees.
 - Any country and currency: amounts in the currency's minor units, CLDR formatting, phone numbers in local format,
   local tax-ID and food-licence labels. UPI only where it applies (India).
-- Languages: English and Hindi complete; Marathi, Tamil, Telugu, Bengali, Gujarati, Kannada, Spanish, French,
+- Languages: English; Hindi fully translated (Beta until reviewed); Marathi, Tamil, Telugu, Bengali, Gujarati, Kannada, Spanish, French,
   Brazilian Portuguese, Arabic and Indonesian in Beta. Right-to-left layout for Arabic.
 - Three themes.
 - Data safety: PostgreSQL row-level security between restaurants, an append-only ledger and audit log, nightly

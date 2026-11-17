@@ -34,7 +34,9 @@ def test_language_list():
     codes = [c for c, _ in settings.LANGUAGES]
     assert codes[:2] == ["en", "hi"]
     assert {"ar", "mr", "ta", "te", "bn", "gu", "kn", "es", "fr", "pt-br", "id"} <= set(codes)
-    assert set(settings.MEALTALLY_BETA_LANGUAGES) == set(codes) - {"en", "hi"}
+    # Hindi stays Beta (reviewed: false) until its review is signed off (REVIEW-hi.md)
+    assert set(settings.MEALTALLY_BETA_LANGUAGES) == set(codes) - {"en"}
+    assert settings.LANGUAGE_REVIEW["hi"] is False
     assert translation.get_language_info("ar")["bidi"] is True
 
 
@@ -110,7 +112,26 @@ def test_hindi_is_complete_and_beta_languages_are_marked_fuzzy():
     hi = polib.pofile(str(root / "hi/LC_MESSAGES/django.po"))
     assert hi.untranslated_entries() == []
     assert hi.fuzzy_entries() == []
-    for code in settings.MEALTALLY_BETA_LANGUAGES:
+    for code in settings.MEALTALLY_BETA_LANGUAGES - {"hi"}:  # Hindi: complete, only the review is pending
         po = polib.pofile(str(root / translation.to_locale(code) / "LC_MESSAGES/django.po"))
         assert len(po.fuzzy_entries()) >= 200, code  # noqa: PLR2004  the core set is drafted
         assert not po.translated_entries(), code  # drafts stay fuzzy until a native speaker reviews them
+
+
+@pytest.mark.parametrize(
+    ("code", "dashboard", "sign_in"),
+    [("ar", "لوحة التحكم", "تسجيل الدخول"), ("ta", "டாஷ்போர்டு", "உள்நுழை")],
+)
+@pytest.mark.django_db
+def test_fuzzy_beta_drafts_are_compiled_and_shown(client, code, dashboard, sign_in):
+    """Beta drafts are `fuzzy` in the .po file; they must still reach people (compiled with --use-fuzzy)."""
+    import polib
+
+    po = polib.pofile(str(Path(settings.BASE_DIR) / "locale" / translation.to_locale(code) / "LC_MESSAGES/django.po"))
+    fuzzy = {e.msgid: e.msgstr for e in po.fuzzy_entries()}
+    assert fuzzy["Dashboard"] == dashboard and fuzzy["Sign in"] == sign_in  # still drafts, not reviewed
+    with translation.override(code):
+        assert translation.gettext("Dashboard") == dashboard
+    client.cookies[settings.LANGUAGE_COOKIE_NAME] = code
+    page = client.get("/login").content.decode()
+    assert f'lang="{code}"' in page and sign_in in page

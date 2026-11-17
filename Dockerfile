@@ -28,17 +28,20 @@ RUN tailwindcss -i mealtally/web/tailwind/input.css -o /out/app.css --minify
 
 # --- Python dependencies ---------------------------------------------------------------------------------------------
 FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim AS build
+# one uv cache per architecture: a multi-arch build otherwise has both builds wait on one cache lock, and the slow
+# emulated arm64 build can hold it past uv's lock timeout
+ARG TARGETARCH
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=0 UV_PROJECT_ENVIRONMENT=/opt/venv
 WORKDIR /app
 RUN apt-get update && apt-get install --no-install-recommends -y build-essential libpq-dev gettext \
   && rm -rf /var/lib/apt/lists/*
-RUN --mount=type=cache,target=/root/.cache/uv \
+RUN --mount=type=cache,id=uv-${TARGETARCH},target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     uv sync --locked --no-install-project --no-dev
 COPY . /app
 COPY --from=css /out/app.css /app/mealtally/static/css/app.css
-RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev
+RUN --mount=type=cache,id=uv-${TARGETARCH},target=/root/.cache/uv uv sync --locked --no-dev
 # --use-fuzzy: Beta languages ship as machine-drafted (fuzzy) translations, see TRANSLATING.md
 RUN cd /app && /opt/venv/bin/django-admin compilemessages --use-fuzzy --ignore=.venv
 
@@ -46,7 +49,7 @@ RUN cd /app && /opt/venv/bin/django-admin compilemessages --use-fuzzy --ignore=.
 FROM build AS dev
 RUN apt-get update && apt-get install --no-install-recommends -y wait-for-it libpango-1.0-0 libpangoft2-1.0-0 fonts-dejavu-core \
   && rm -rf /var/lib/apt/lists/*
-RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked
+RUN --mount=type=cache,id=uv-${TARGETARCH},target=/root/.cache/uv uv sync --locked
 ENV PATH="/opt/venv/bin:$PATH" PYTHONUNBUFFERED=1 DJANGO_SETTINGS_MODULE=config.settings.test
 COPY docker/django/ /docker/
 RUN chmod +x /docker/*

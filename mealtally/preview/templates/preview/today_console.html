@@ -11,7 +11,7 @@
     <span class="min-w-0"><span class="block text-sm font-medium">{{ t.label }}</span><span class="block text-3xl font-bold leading-tight" data-testid="tile-{{ t.key }}-value">{% if t.money %}{{ t.value|inr_compact }}{% else %}{{ t.value }}{% endif %}</span><span class="block text-xs">{{ t.hint }}</span></span>
     <span class="rounded-lg bg-white/15 p-2 [&>svg]:h-7 [&>svg]:w-7">{% include "web/_icon.html" with name=t.icon %}</span></a>{% endfor %}
 </div>
-{% if role == "OWNER" %}<p class="mt-2 text-sm text-ink-soft" data-testid="fee-line" title="{{ fee|inr }}">{% blocktrans with fee=fee|inr_compact %}Platform fee this month {{ fee }}{% endblocktrans %} · <a class="link" href="{% url 'web:report-fees' tenant.slug %}">{% trans "View statement" %}</a></p>{% endif %}
+{% if role == "OWNER" and fees_on %}<p class="mt-2 text-sm text-ink-soft" data-testid="fee-line" title="{{ fee|inr }}">{% blocktrans with fee=fee|inr_compact %}Platform fee this month {{ fee }}{% endblocktrans %} · <a class="link" href="{% url 'web:report-fees' tenant.slug %}">{% trans "View statement" %}</a></p>{% endif %}
 {% if pv_badge %}<p class="mt-1 text-xs text-muted">{% trans "Orders, wallets, expenses and the chart below use demo data (Preview)." %}</p>{% endif %}
 
 <section class="card mt-4" data-testid="alerts" aria-label="{% trans 'Alerts' %}">

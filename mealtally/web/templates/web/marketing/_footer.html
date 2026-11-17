@@ -4,7 +4,7 @@
     <nav aria-label="{% trans 'Footer' %}"><ul class="grid gap-1 text-sm">
       <li><a class="mk-flink" href="{% url 'web:landing' %}#features">{% trans "Features" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#how-it-works">{% trans "How it works" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#pricing">{% trans "Pricing" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#faq">{% trans "FAQ" %}</a></li></ul></nav>
     <nav aria-label="{% trans 'Account and legal' %}"><ul class="grid gap-1 text-sm">
-      <li><a class="mk-flink" href="{% url 'web:global-login' %}">{% trans "Log in" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#book-a-demo">{% trans "Book a demo" %}</a></li><li><a class="mk-flink" href="{% url 'web:privacy' %}">{% trans "Privacy notice" %}</a></li><li><a class="mk-flink" href="{% url 'web:terms' %}">{% trans "Terms" %}</a></li></ul></nav>
+      <li><a class="mk-flink" href="{% url 'web:global-login' %}">{% trans "Log in" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#book-a-demo">{% trans "Book a demo" %}</a></li>{% if legal_live %}<li><a class="mk-flink" href="{% url 'web:privacy' %}">{% trans "Privacy notice" %}</a></li><li><a class="mk-flink" href="{% url 'web:terms' %}">{% trans "Terms" %}</a></li>{% endif %}</ul></nav>
   </div>
   <div class="border-t border-subtle py-4 text-center text-sm text-ink-soft">© 2026 Mealtally · {% trans "Made in India" %}</div>
 </footer>

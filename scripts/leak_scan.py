@@ -79,7 +79,12 @@ def scan(root: Path) -> list[str]:
     problems = []
     for path in sorted(root.rglob("*")):
         # the scanner's own patterns would match themselves
-        if not path.is_file() or path.relative_to(root).as_posix() == "scripts/leak_scan.py" or path.suffix.lower() in BINARY or path.name in SKIP_FILES:
+        if (
+            not path.is_file()
+            or path.relative_to(root).as_posix() == "scripts/leak_scan.py"
+            or path.suffix.lower() in BINARY
+            or path.name in SKIP_FILES
+        ):
             continue
         if any(part in SKIP_DIRS for part in path.relative_to(root).parts):
             continue

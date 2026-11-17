@@ -1,11 +1,11 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
-<div class="flex flex-wrap items-center justify-between gap-2"><h1 class="text-2xl font-bold">{% trans "Platform" %}</h1><div class="flex gap-2"><a class="btn-primary" href="{% url 'web:platform-onboard' %}">{% trans "Onboard tenant" %}</a><a class="btn-secondary" href="{% url 'preview:platform-plans' %}">{% trans "SaaS plans" %}</a><a class="btn-secondary" href="/platform/admin/">Django admin</a></div></div>
+<div class="flex flex-wrap items-center justify-between gap-2"><h1 class="text-2xl font-bold">{% trans "Platform" %}</h1><div class="flex gap-2">{% if mode_multi %}<a class="btn-primary" href="{% url 'web:platform-onboard' %}">{% trans "Onboard tenant" %}</a>{% endif %}<a class="btn-secondary" href="{% url 'preview:platform-plans' %}">{% trans "SaaS plans" %}</a><a class="btn-secondary" href="/platform/admin/">Django admin</a></div></div>
 <dl class="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4" data-testid="platform-totals">
   <div class="card"><dt class="text-sm text-muted">{% trans "Active tenants" %}</dt><dd class="text-2xl font-bold" data-testid="pt-tenants">{{ totals.active_tenants }}</dd></div>
   <div class="card"><dt class="text-sm text-muted">{% trans "Customers" %}</dt><dd class="text-2xl font-bold">{{ totals.customers }}</dd></div>
   <div class="card"><dt class="text-sm text-muted">{% trans "Meals this month" %}</dt><dd class="text-2xl font-bold">{{ totals.meals_month }}</dd></div>
-  <div class="card"><dt class="text-sm text-muted">{% trans "Fees this month" %}</dt><dd class="text-2xl font-bold" data-testid="pt-fees">{{ totals.fees }}</dd></div>
+  {% if fees_on %}<div class="card"><dt class="text-sm text-muted">{% trans "Fees this month" %}</dt><dd class="text-2xl font-bold" data-testid="pt-fees">{{ totals.fees }}</dd></div>{% endif %}
 </dl>
 <p class="mt-3 text-sm">{% if show_test %}<a class="link" href="{% url 'web:platform-dashboard' %}">{% trans "Hide test tenants" %}</a>{% else %}<a class="link" href="?show_test=1" data-testid="show-test">{% trans "Show test tenants" %}</a>{% endif %}</p>
 <div class="mt-3 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="min-w-full divide-y divide-subtle" data-testid="tenants"><thead><tr><th class="th">{% trans "Tenant" %}</th><th class="th">{% trans "Status" %}</th><th class="th">{% trans "Customers" %}</th><th class="th">{% trans "Active passes" %}</th><th class="th">{% trans "Meals (month)" %}</th><th class="th">{% trans "Fees (month)" %}</th></tr></thead>

@@ -7,6 +7,7 @@ from datetime import UTC
 from datetime import datetime
 from decimal import Decimal
 
+from django.conf import settings
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db import transaction
 from django.utils import timezone
@@ -174,7 +175,8 @@ def record_payment(
             recorded_by=actor.user,
             receipt_number=tenancy.next_receipt_number(tenant.id),
         )
-        _write_fee_entries(payment)
+        if settings.MEALTALLY_PLATFORM_FEES:  # a self-hosted restaurant pays no platform fee
+            _write_fee_entries(payment)
         pass_ = passes.create_pass_for_payment(
             actor=actor,
             tenant=tenant,

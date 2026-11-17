@@ -7,7 +7,7 @@
   <li><a class="card block hover:border-primary" href="{% url 'web:report-monthly' tenant.slug %}"><span class="font-semibold">{% trans "Monthly subscriptions" %}</span><span class="block text-sm text-ink-soft">{% trans "Passes sold, revenue, by plan, voids" %}</span></a></li>
   <li><a class="card block hover:border-primary" href="{% url 'web:report-expired' tenant.slug %}"><span class="font-semibold">{% trans "Expired & unused" %}</span><span class="block text-sm text-ink-soft">{% trans "Meals forfeited at pass end" %}</span></a></li>
   {% if role == "OWNER" %}<li><a class="card block hover:border-primary" href="{% url 'web:report-refused' tenant.slug %}" data-testid="report-refused"><span class="font-semibold">{% trans "Refused redemptions" %}</span><span class="block text-sm text-ink-soft">{% trans "Meals the rules blocked: who, when, why" %}</span></a></li>{% endif %}
-  {% if role == "OWNER" %}<li><a class="card block hover:border-primary" href="{% url 'web:report-fees' tenant.slug %}"><span class="font-semibold">{% trans "Platform fee statement" %}</span><span class="block text-sm text-ink-soft">{% trans "Per month, for the platform invoice" %}</span></a></li>{% endif %}
+  {% if role == "OWNER" and fees_on %}<li><a class="card block hover:border-primary" href="{% url 'web:report-fees' tenant.slug %}"><span class="font-semibold">{% trans "Platform fee statement" %}</span><span class="block text-sm text-ink-soft">{% trans "Per month, for the platform invoice" %}</span></a></li>{% endif %}
 </ul>
 <p class="mt-4 text-sm text-ink-soft">{% trans "Customer statements are on each customer's page." %}</p>
 {% endblock %}

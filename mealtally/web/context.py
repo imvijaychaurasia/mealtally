@@ -144,7 +144,14 @@ def web(request):
         "email_enabled": settings.EMAIL_BACKEND != "django.core.mail.backends.smtp.EmailBackend"
         or settings.EMAIL_HOST not in ("", "localhost", "127.0.0.1"),
         "whatsapp_number": getattr(settings, "WHATSAPP_SUPPORT_NUMBER", ""),
+        "legal_live": False,
+        "mode_multi": settings.MEALTALLY_MODE == "multi",
+        "fees_on": settings.MEALTALLY_PLATFORM_FEES,
     }
+    if settings.MEALTALLY_LEGAL_PAGES:
+        from .views_marketing import legal_pages_live  # noqa: PLC0415
+
+        ctx["legal_live"] = legal_pages_live()
     if tenant and not request.path.startswith("/platform"):  # platform surfaces are always tally (D03.5)
         ctx["theme"] = themes.theme_for(tenant)
         ctx["theme_color"] = themes.tokens(ctx["theme"])["primary"]

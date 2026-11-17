@@ -1,0 +1,5 @@
+{% extends "web/marketing/base.html" %}{% load i18n %}
+{% block title %}{{ title }} · Mealtally{% endblock %}
+{% block content %}<article class="mk-wrap mk-prose max-w-3xl py-10" data-testid="legal-page">{{ body }}
+  <p class="mt-8"><a class="auth-link" href="{% url 'web:landing' %}">{% trans "Back to home" %}</a></p>
+</article>{% endblock %}

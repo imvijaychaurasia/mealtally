@@ -46,9 +46,13 @@ def landing(request):
 def go(request):
     code = slugify(request.POST.get("code", ""))
     if not code:
+        from . import features  # noqa: PLC0415
         from .views_marketing import render_home  # noqa: PLC0415
 
-        return render_home(request, status=400, go_error=_("Enter your restaurant code."))
+        error = _("Enter your restaurant code.")
+        if features.marketing():
+            return render_home(request, status=400, go_error=error)
+        return render(request, "web/root_finder.html", {"go_error": error}, status=400)
     return redirect("web:tenant-home", slug=code)
 
 
@@ -200,8 +204,9 @@ def manifest(request):
         "background_color": tok["card"],
         "theme_color": tok["primary"],
         "icons": [
-            {"src": "/static/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
-            {"src": "/static/icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
+            {"src": "/static/brand/icon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "/static/brand/icon-512.png", "sizes": "512x512", "type": "image/png"},
+            {"src": "/static/brand/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
         ],
     }
     return HttpResponse(json.dumps(data), content_type="application/manifest+json")

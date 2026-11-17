@@ -122,48 +122,6 @@ def test_demo_request_needs_post_and_csrf_is_enforced(client):
 
     assert Client(enforce_csrf_checks=True).post("/demo-request", GOOD).status_code == 403
 
-
-def test_robots_sitemap_privacy_and_terms(client):
-    robots = client.get("/robots.txt").content.decode()
-    assert (
-        "Disallow: /t/" in robots
-        and "Sitemap:" in robots
-        and client.get("/robots.txt")["Content-Type"].startswith("text/plain")
-    )
-    sm = client.get("/sitemap.xml")
-    assert sm.status_code == 200 and b"<urlset" in sm.content and b"/privacy" in sm.content and b"/terms" in sm.content
-    assert "Allow: /terms" in client.get("/robots.txt").content.decode()
-    # D03.9 §A3: approved -- no draft banners, terms indexable, no [bracketed] placeholders ever
-    priv = client.get("/privacy").content.decode()
-    assert "DRAFT" not in priv and "demo form" in priv and "contact you about a demo" in priv and "noindex" not in priv
-    terms = client.get("/terms").content.decode()
-    assert "DRAFT" not in terms and "noindex" not in terms and "12% of the subscription revenue" in terms
-    for page in (priv, terms):
-        assert "[To be confirmed" not in page and "To be confirmed" not in page
-        assert 'data-testid="contact-us"' in page  # empty platform settings -> "Contact us"
-
-
-def test_legal_pages_fill_in_from_platform_settings(client):
-    from mealtally.tenancy.models import PlatformSettings
-
-    PlatformSettings(
-        legal_entity_name="Mealtally Example Pvt Ltd",
-        registered_address="Example Road, Pune",
-        contact_email="privacy@example.test",
-        grievance_officer_name="Grievance Officer",
-        grievance_officer_email="grievance@example.test",
-        demo_request_retention="12 months",
-        governing_law="the laws of India",
-        terms_changes_notice="by email, 30 days ahead",
-    ).save()
-    priv = client.get("/privacy").content.decode()
-    terms = client.get("/terms").content.decode()
-    assert "Mealtally Example Pvt Ltd" in priv and "grievance@example.test" in priv and "12 months" in priv
-    assert "the laws of India" in terms and "by email, 30 days ahead" in terms
-    assert 'data-testid="contact-us"' not in priv and 'data-testid="contact-us"' not in terms
-    assert PlatformSettings.load().empty_legal_fields() == []
-
-
 def test_signed_in_users_get_a_dashboard_button_not_a_redirect(w, client, u):
     from mealtally.testing import PASSWORD
 
@@ -176,3 +134,16 @@ def test_signed_in_users_get_a_dashboard_button_not_a_redirect(w, client, u):
 def test_go_with_an_empty_code_shows_the_landing_with_an_error(client):
     r = client.post("/go", {"code": ""})
     assert r.status_code == 400 and 'data-theme="tally"' in r.content.decode()
+
+
+def test_robots_and_sitemap_list_the_legal_pages_only_once_they_are_live(client):
+    from mealtally.tenancy.models import PlatformSettings
+    from mealtally.web.tests.test_modes import LEGAL
+
+    robots = client.get("/robots.txt")
+    assert "Disallow: /t/" in robots.content.decode() and robots["Content-Type"].startswith("text/plain")
+    sm = client.get("/sitemap.xml").content
+    assert b"<urlset" in sm and b"/privacy" not in sm
+    PlatformSettings(**LEGAL).save()
+    sm = client.get("/sitemap.xml").content
+    assert b"/privacy" in sm and b"/terms" in sm

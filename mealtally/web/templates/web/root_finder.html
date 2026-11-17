@@ -1,0 +1,9 @@
+{% extends "web/auth_base.html" %}{% load i18n %}
+{% block title %}{% trans "Find your restaurant" %} · Mealtally{% endblock %}
+{% block panel %}
+<h1 class="auth-title">{% trans "Find your restaurant" %}</h1>
+<p class="auth-sub">{% trans "Customers and staff sign in on their restaurant's page." %}</p>
+{% if go_error %}<p class="auth-alert" role="alert">{{ go_error }}</p>{% endif %}
+{% include "web/marketing/_finder.html" with fid="root" %}
+<p class="mt-6 text-sm">{% if dashboard_url %}<a class="auth-link" href="{{ dashboard_url }}">{% trans "Go to your dashboard" %}</a>{% else %}<a class="auth-link" href="{% url 'web:global-login' %}">{% trans "Staff and administrators: sign in without a code" %}</a>{% endif %}</p>
+{% endblock %}

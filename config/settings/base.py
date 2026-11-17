@@ -158,7 +158,8 @@ MIDDLEWARE = [
 # ------------------------------------------------------------------------------
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [str(APPS_DIR / "static")]
+# assets/brand (logo, icons) is served as /static/brand/: one copy of every brand file
+STATICFILES_DIRS = [str(APPS_DIR / "static"), ("brand", str(BASE_DIR / "assets" / "brand"))]
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",

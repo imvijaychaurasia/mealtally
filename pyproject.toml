@@ -28,6 +28,7 @@ dependencies = [
   "drf-spectacular-sidecar",
   "gunicorn==26.2.0",
   "hiredis==3.5.0",
+  "markdown==3.9",
   "packaging",
   "psycopg[c]==3.3.8",
   "redis==8.1.0",

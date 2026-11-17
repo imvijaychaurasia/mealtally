@@ -1,0 +1,8 @@
+{% extends "web/auth_base.html" %}{% load i18n %}
+{% block title %}{% trans "Not set up yet" %} · Mealtally{% endblock %}
+{% block panel %}
+<h1 class="auth-title">{% trans "Mealtally is running, but not set up yet" %}</h1>
+<p class="auth-sub">{% trans "Create the admin and the restaurant with this command on the server, then reload this page:" %}</p>
+<pre class="mt-3 rounded-xl bg-soft p-3 text-sm"><code>make init</code></pre>
+<p class="mt-4 text-sm"><a class="auth-link" href="{% url 'web:global-login' %}">{% trans "Administrators: sign in" %}</a></p>
+{% endblock %}

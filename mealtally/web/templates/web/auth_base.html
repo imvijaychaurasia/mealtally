@@ -7,7 +7,7 @@
   <meta name="htmx-config" content='{"allowEval":false,"allowScriptTags":false,"includeIndicatorStyles":false,"selfRequestsOnly":true}'>
   <meta name="theme-color" content="{{ theme_color }}">
   <meta name="robots" content="noindex">
-  <link rel="icon" href="{% static 'icons/icon-192.png' %}">
+  {% include "web/_icons.html" %}
   <link rel="stylesheet" href="{% static 'css/themes.css' %}">
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
   <script src="{% static 'js/app.js' %}" defer></script>
@@ -21,8 +21,9 @@
         <svg class="auth-dots" aria-hidden="true" focusable="false"><defs><pattern id="spice" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="2" class="fill-on-primary"/><circle cx="19" cy="17" r="1.4" class="fill-on-primary"/></pattern></defs><rect width="100%" height="100%" fill="url(#spice)"/></svg>
         {% include "web/_auth_art.html" %}
         <div class="auth-brand">
-          <span class="auth-logo" aria-hidden="true">{{ brand_name|slice:":1" }}</span>
+          {% if tenant %}<span class="auth-logo" aria-hidden="true">{{ brand_name|slice:":1" }}</span>
           <p class="auth-name" data-testid="auth-name">{{ brand_name }}</p>
+          {% else %}<img src="{% static 'brand/logo-horizontal.svg' %}" alt="Mealtally" class="auth-wordmark" width="220" height="50" data-testid="auth-name">{% endif %}
           {% if brand_tagline %}<p class="auth-tagline max-lg:hidden">{{ brand_tagline }}</p>{% endif %}
           {% if brand_address %}<p class="auth-address max-lg:hidden">{{ brand_address }}</p>{% endif %}
         </div>

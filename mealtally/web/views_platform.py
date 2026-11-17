@@ -38,6 +38,7 @@ from mealtally.tenancy.context import end
 from mealtally.tenancy.models import Tenant
 from mealtally.tenancy.models import TenantSettings
 
+from . import features
 from .copy import friendly
 
 TIMEZONES = ["Asia/Kolkata", "Asia/Dubai", "Asia/Singapore", "Europe/London", "America/New_York", "UTC"]
@@ -141,6 +142,7 @@ def tenant_detail(request, slug):
 
 @platform_view
 @require_GET
+@features.requires(features.fees)
 def tenant_fees_export(request, slug):
     """Per-tenant monthly fee statement for the platform invoice (CSV or PDF). Contains NO customer data."""
     tenant = _tenant_or_404(slug)
@@ -192,6 +194,7 @@ def tenant_fees_export(request, slug):
 
 @platform_view
 @require_POST
+@features.requires(features.fees)
 def tenant_fee_policy(request, slug):
     tenant = _tenant_or_404(slug)
     d = request.POST
@@ -258,6 +261,7 @@ def tenant_status(request, slug, action):
 
 @platform_view
 @require_http_methods(["GET", "POST"])
+@features.requires(features.multi)
 def onboard(request):
     ctx = {"timezones": TIMEZONES}
     if request.method == "POST":

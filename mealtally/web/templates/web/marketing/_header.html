@@ -1,8 +1,8 @@
-{% load i18n %}<header class="mk-header">
+{% load i18n static %}<header class="mk-header">
   <div class="mk-wrap flex items-center justify-between gap-3 py-2">
-    <a class="flex min-h-11 items-center gap-2 text-lg font-extrabold text-primary" href="{% url 'web:landing' %}"><span class="auth-logo !mb-0 !h-9 !w-9 !bg-primary !text-on-primary !text-lg" aria-hidden="true">B</span>Mealtally</a>
+    <a class="flex min-h-11 items-center" href="{% url 'web:landing' %}"><img src="{% static 'brand/logo-horizontal.svg' %}" alt="Mealtally" class="h-9 w-auto" width="160" height="36"></a>
     <nav class="hidden items-center gap-1 lg:flex" aria-label="{% trans 'Sections' %}">
-      <a class="mk-navlink" href="#features">{% trans "Features" %}</a><a class="mk-navlink" href="#how-it-works">{% trans "How it works" %}</a><a class="mk-navlink" href="#tour">{% trans "Product tour" %}</a><a class="mk-navlink" href="#who-its-for">{% trans "Who it's for" %}</a><a class="mk-navlink" href="#pricing">{% trans "Pricing" %}</a><a class="mk-navlink" href="#faq">{% trans "FAQ" %}</a>
+      <a class="mk-navlink" href="#features">{% trans "Features" %}</a><a class="mk-navlink" href="#how-it-works">{% trans "How it works" %}</a><a class="mk-navlink" href="#who-its-for">{% trans "Who it's for" %}</a><a class="mk-navlink" href="#pricing">{% trans "Pricing" %}</a><a class="mk-navlink" href="#faq">{% trans "FAQ" %}</a>
     </nav>
     <div class="flex items-center gap-2">
       <form method="post" action="{% url 'set_language' %}" class="hidden sm:block">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="btn-secondary min-h-11 px-3 text-sm" type="submit" data-testid="lang" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>

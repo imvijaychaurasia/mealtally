@@ -7,6 +7,6 @@
   <div class="card"><p class="text-sm text-muted">{% trans "Expiring in 3 days" %}</p><p class="text-3xl font-bold">{{ d.expiring_3_days }}</p></div>
   <div class="card"><p class="text-sm text-muted">{% trans "Passes sold this month" %}</p><p class="text-3xl font-bold" data-testid="t-sold">{{ d.passes_sold_month }}</p></div>
   <div class="card"><p class="text-sm text-muted">{% trans "Revenue this month" %}</p><p class="text-3xl font-bold" data-testid="t-revenue">{{ revenue }}</p></div>
-  <div class="card"><p class="text-sm text-muted">{% trans "Platform fee this month" %}</p><p class="text-3xl font-bold" data-testid="t-fee">{{ fee }}</p></div>
+  {% if fees_on %}<div class="card"><p class="text-sm text-muted">{% trans "Platform fee this month" %}</p><p class="text-3xl font-bold" data-testid="t-fee">{{ fee }}</p></div>{% endif %}
 </div>
 {% endblock %}

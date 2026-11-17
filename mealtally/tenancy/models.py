@@ -170,10 +170,9 @@ class DemoRequest(models.Model):
 
 
 class PlatformSettings(models.Model):
-    """D03.9 §A2/§A3: platform-wide settings, edited in platform admin (no restart). One row (pk=1); no tenant, no RLS.
+    """Instance-wide settings, edited in platform admin (no restart). One row (pk=1); no tenant, no RLS.
 
-    The landing-page pricing and the legal pages read from here. Empty legal fields show "Contact us" on the pages,
-    never bracketed placeholder text.
+    The marketing page's pricing block and the legal pages read from here.
     """
 
     class PricingMode(models.TextChoices):
@@ -185,31 +184,43 @@ class PlatformSettings(models.Model):
     )
     pricing_headline = models.CharField(max_length=120, blank=True, help_text="Optional; replaces the default title.")
     pricing_footnote = models.CharField(max_length=300, blank=True, help_text="Optional small print under the price.")
-    legal_entity_name = models.CharField(max_length=200, blank=True)
-    registered_address = models.TextField(blank=True)
-    contact_email = models.EmailField(blank=True)
-    grievance_officer_name = models.CharField(max_length=120, blank=True, help_text="DPDP Act: grievance officer.")
-    grievance_officer_email = models.EmailField(blank=True)
-    demo_request_retention = models.CharField(
-        max_length=120, blank=True, help_text="How long demo requests are kept, e.g. '12 months'."
+    # Legal pages (privacy notice, terms). Whoever runs the instance is the data controller and fills these in;
+    # the pages stay hidden (404) until MEALTALLY_LEGAL_PAGES=on and every required field has a value.
+    operator_name = models.CharField("Operator (legal name)", max_length=200, blank=True)
+    operator_address = models.TextField("Operator address", blank=True)
+    contact_email = models.EmailField("Contact email", blank=True)
+    privacy_contact_name = models.CharField(
+        "Data-protection contact", max_length=120, blank=True, help_text="Grievance officer, DPO or similar (optional)."
     )
-    governing_law = models.CharField(max_length=120, blank=True, help_text="e.g. 'the laws of India; courts in Pune'.")
+    privacy_contact_email = models.EmailField("Data-protection contact email", blank=True)
+    data_retention = models.CharField(
+        max_length=200, blank=True, help_text="How long personal data is kept, e.g. '12 months after the last pass'."
+    )
+    governing_law = models.CharField(max_length=120, blank=True, help_text="e.g. 'the laws of England and Wales'.")
     terms_changes_notice = models.CharField(
         max_length=200,
         blank=True,
-        help_text="How changes to the terms are announced, e.g. 'by email, 30 days ahead'.",
+        help_text="How changes to the terms are announced (optional), e.g. 'by email, 30 days ahead'.",
     )
     updated_at = models.DateTimeField(auto_now=True)
 
     LEGAL_FIELDS = (
-        "legal_entity_name",
-        "registered_address",
+        "operator_name",
+        "operator_address",
         "contact_email",
-        "grievance_officer_name",
-        "grievance_officer_email",
-        "demo_request_retention",
+        "privacy_contact_name",
+        "privacy_contact_email",
+        "data_retention",
         "governing_law",
         "terms_changes_notice",
+    )
+    REQUIRED_LEGAL_FIELDS = (
+        "operator_name",
+        "operator_address",
+        "contact_email",
+        "privacy_contact_email",
+        "data_retention",
+        "governing_law",
     )
 
     class Meta:
@@ -227,5 +238,5 @@ class PlatformSettings(models.Model):
         obj = cls.objects.filter(pk=1).first()
         return obj if obj is not None else cls(pk=1)
 
-    def empty_legal_fields(self) -> list[str]:
-        return [f for f in self.LEGAL_FIELDS if not (getattr(self, f) or "").strip()]
+    def missing_legal_fields(self) -> list[str]:
+        return [f for f in self.REQUIRED_LEGAL_FIELDS if not (getattr(self, f) or "").strip()]

@@ -109,7 +109,7 @@
     {% include "web/marketing/_field.html" with name="phone" label=_("Phone number") value=form.phone auto="tel" type="tel" %}
     <div><label class="label" for="business_type">{% trans "Business type" %}</label><select class="input" id="business_type" name="business_type">{% for v, l in business_types %}<option value="{{ v }}" {% if form.business_type == v %}selected{% endif %}>{{ l }}</option>{% endfor %}</select></div>
     <div><label class="label" for="message">{% trans "Message (optional)" %}</label><textarea class="input" id="message" name="message" rows="3" maxlength="1000">{{ form.message }}</textarea>{% if errors.message %}<p class="mk-err" role="alert">{{ errors.message }}</p>{% endif %}</div>
-    <p class="text-sm text-ink-soft">{% trans "We'll use these details only to contact you about a demo." %} <a class="link" href="{% url 'web:privacy' %}">{% trans "Privacy notice" %}</a></p>
+    <p class="text-sm text-ink-soft">{% trans "We'll use these details only to contact you about a demo." %} {% if legal_live %}<a class="link" href="{% url 'web:privacy' %}">{% trans "Privacy notice" %}</a>{% endif %}</p>
     <button class="btn-primary w-full" type="submit" data-testid="demo-submit"><span class="btn-spinner hidden" aria-hidden="true"></span><span data-label>{% trans "Request a demo" %}</span></button>
   </form>{% endif %}
   </div>

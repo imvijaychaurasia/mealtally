@@ -39,6 +39,7 @@ from mealtally.reports import services as reports
 from mealtally.tenancy import services as tenancy
 from mealtally.tenancy.models import Tenant
 
+from . import features
 from .access import home_url
 from .access import tenant_view
 from .copy import friendly
@@ -775,6 +776,7 @@ def report_statement(request, customer_id):
 @tenant_view(**ADMIN)
 @require_GET
 @safe_report
+@features.requires(features.fees)
 def report_fees(request):
     if request.role != Role.OWNER:  # D03.8: owner only, for the page, the CSV and the PDF alike
         raise PermissionDenied

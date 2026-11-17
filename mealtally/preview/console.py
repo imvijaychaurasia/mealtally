@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from datetime import timedelta
 
+from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_noop
@@ -165,6 +166,8 @@ def build_sidebar(slug: str, role: str, current: str, *, demo: bool):
         rows = []
         for name, url_name, roles, icon, preview, active in items:
             if role not in roles or (preview and not demo):
+                continue
+            if url_name == "web:report-fees" and not settings.MEALTALLY_PLATFORM_FEES:
                 continue
             rows.append(
                 {

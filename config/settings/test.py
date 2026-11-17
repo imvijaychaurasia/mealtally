@@ -36,3 +36,10 @@ STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
 }
+
+# Most tests exercise the operator setup (many restaurants, fees, the marketing site); the defaults of a self-hosted
+# single restaurant are covered explicitly in mealtally/web/tests/test_modes.py.
+MEALTALLY_MODE = "multi"
+MEALTALLY_PLATFORM_FEES = True
+MEALTALLY_MARKETING_SITE = True
+MEALTALLY_LEGAL_PAGES = True

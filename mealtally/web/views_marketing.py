@@ -4,11 +4,15 @@ from __future__ import annotations
 
 import re
 
+from django.conf import settings
 from django.core.cache import cache
+from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_POST
@@ -19,6 +23,7 @@ from mealtally.common.utils import normalize_phone
 from mealtally.tenancy.context import platform_context
 from mealtally.tenancy.models import DemoRequest
 
+from . import features
 from . import marketing
 from .access import home_url
 
@@ -71,7 +76,19 @@ def render_home(request, *, status=200, **extra):
 
 @require_GET
 def landing(request):
-    return render_home(request)
+    """The root URL. Marketing site when switched on; otherwise single mode goes straight to the restaurant and multi
+    mode shows the restaurant finder."""
+    if features.marketing():
+        return render_home(request)
+    if not features.multi():
+        from mealtally.tenancy.models import Tenant  # noqa: PLC0415
+
+        with platform_context():
+            tenant = Tenant.objects.exclude(status=Tenant.Status.DEACTIVATED).order_by("id").first()
+        if tenant is not None:
+            return redirect("web:tenant-home", slug=tenant.slug)
+        return render(request, "web/not_initialised.html", status=503)
+    return render(request, "web/root_finder.html", {"dashboard_url": dashboard_url(request.user)})
 
 
 def _clean(data) -> tuple[dict, dict]:
@@ -103,6 +120,7 @@ def _clean(data) -> tuple[dict, dict]:
 
 
 @require_POST
+@features.requires(features.marketing)
 def demo_request(request):
     if request.POST.get(HONEYPOT):  # a bot filled the hidden field: pretend it worked, store nothing
         return redirect(reverse("web:landing") + "?demo=sent#book-a-demo")
@@ -136,33 +154,49 @@ def demo_request(request):
     return redirect(reverse("web:landing") + "?demo=sent#book-a-demo")
 
 
-def _legal_ctx(request) -> dict:
-    """D03.9 §A3: approved legal pages; the details come from PlatformSettings (empty -> "Contact us", never [brackets])."""
-    from mealtally.billing import services as billing  # noqa: PLC0415
+def legal_pages_live() -> bool:
+    """The legal pages exist only when switched on AND every required field is filled (never filler text)."""
     from mealtally.tenancy.models import PlatformSettings  # noqa: PLC0415
 
-    cfg = PlatformSettings.load()
-    return {
-        "canonical": request.build_absolute_uri(request.path),
-        "legal": cfg,
-        "contact_href": f"mailto:{cfg.contact_email}" if cfg.contact_email else reverse("web:landing") + "#book-a-demo",
-        "platform_pct": billing.DEFAULT_PLATFORM_PCT.normalize(),
-        "gateway_pct": billing.DEFAULT_GATEWAY_PCT.normalize(),
-    }
+    if not settings.MEALTALLY_LEGAL_PAGES:
+        return False
+    with platform_context():
+        return not PlatformSettings.load().missing_legal_fields()
+
+
+def _legal_page(request, name: str, title: str):
+    import markdown  # noqa: PLC0415
+
+    from mealtally.tenancy.models import PlatformSettings  # noqa: PLC0415
+
+    if not legal_pages_live():
+        raise Http404
+    with platform_context():
+        cfg = PlatformSettings.load()
+    # values are HTML-escaped by the template engine before Markdown sees them
+    text = render_to_string(f"legal/{name}.md", {f: getattr(cfg, f) for f in PlatformSettings.LEGAL_FIELDS})
+    body = mark_safe(markdown.markdown(text, output_format="html"))  # noqa: S308 (repo template + escaped values)
+    return render(
+        request,
+        "web/legal_page.html",
+        {"body": body, "title": title, "canonical": request.build_absolute_uri(request.path)},
+    )
 
 
 @require_GET
 def privacy(request):
-    return render(request, "web/marketing/privacy.html", _legal_ctx(request))
+    return _legal_page(request, "privacy", _("Privacy notice"))
 
 
 @require_GET
 def terms(request):
-    return render(request, "web/marketing/terms.html", _legal_ctx(request))
+    return _legal_page(request, "terms", _("Terms of use"))
 
 
 @require_GET
 def robots(request):
+    if not features.marketing():  # an instance without a public site asks not to be indexed at all
+        return HttpResponse("User-agent: *\nDisallow: /\n", content_type="text/plain")
     lines = [
         "User-agent: *",
         "Allow: /$",
@@ -180,11 +214,11 @@ def robots(request):
 
 @require_GET
 def sitemap(request):
-    urls = [
-        request.build_absolute_uri(reverse("web:landing")),
-        request.build_absolute_uri(reverse("web:privacy")),
-        request.build_absolute_uri(reverse("web:terms")),
-    ]
+    if not features.marketing():
+        raise Http404
+    urls = [request.build_absolute_uri(reverse("web:landing"))]
+    if legal_pages_live():
+        urls += [request.build_absolute_uri(reverse("web:privacy")), request.build_absolute_uri(reverse("web:terms"))]
     body = "".join(f"<url><loc>{u}</loc></url>" for u in urls)
     xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{body}</urlset>'
     return HttpResponse(xml, content_type="application/xml")

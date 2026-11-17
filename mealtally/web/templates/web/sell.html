@@ -14,7 +14,7 @@
           <div><label class="label" for="new_name">{% trans "Name" %}</label><input class="input" id="new_name" name="new_name" value="{{ form.new_name }}"></div>
           <div><label class="label" for="new_phone">{% trans "Phone" %}</label><input class="input" id="new_phone" name="new_phone" type="tel" inputmode="tel" value="{{ form.new_phone }}"></div>
           <div><span class="label">{% trans "PIN" %}</span>
-            <label class="mr-4 inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="generate" checked> {% trans "Generate for me" %}</label>
+            <label class="me-4 inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="generate" checked> {% trans "Generate for me" %}</label>
             <label class="inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="own"> {% trans "Customer chooses" %}</label>
             <input class="input mt-1" name="new_pin" inputmode="numeric" maxlength="{{ pin_len }}" placeholder="{% blocktrans with n=pin_len %}{{ n }} digits (only if the customer chooses){% endblocktrans %}" aria-label="{% trans 'Customer chosen PIN' %}"></div>
         </div></details>

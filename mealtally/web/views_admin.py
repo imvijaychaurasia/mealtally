@@ -477,6 +477,7 @@ def settings_view(request):
                 timezone_name=d.get("timezone") or None,
                 country=d.get("country") or None,
                 currency=d.get("currency") or None,
+                default_language=d.get("default_language") or None,
                 display_name=d.get("display_name", ""),
                 address=d.get("address", ""),
                 contact_phone=d.get("contact_phone", ""),

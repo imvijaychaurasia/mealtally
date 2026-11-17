@@ -1,5 +1,5 @@
 {% load static i18n %}<!doctype html>
-<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="{{ theme }}" class="h-full bg-page">
+{% get_current_language as html_lang %}{% get_current_language_bidi as html_bidi %}<html lang="{{ html_lang|default:'en' }}" dir="{% if html_bidi %}rtl{% else %}ltr{% endif %}" data-theme="{{ theme }}" class="h-full bg-page">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -16,7 +16,7 @@
   {% block alpine %}{% endblock %}
 </head>
 <body class="shell-customer min-h-full font-sans text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
   <header class="no-print cust-top" data-testid="cust-top">
     <div class="cust-wrap flex items-center justify-between gap-3 py-2">
       <a class="flex min-h-12 min-w-0 items-center gap-2 font-bold text-primary" href="{% url 'web:me-home' tenant.slug %}"><span class="cust-mono" aria-hidden="true">{{ brand_name|slice:":1" }}</span><span class="truncate text-lg">{{ cfg.display_name|default:tenant.name }}</span></a>

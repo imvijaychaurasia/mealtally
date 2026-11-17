@@ -1,5 +1,5 @@
 {% load static i18n %}<!doctype html>
-<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="{{ theme }}" class="h-full bg-page">
+{% get_current_language as html_lang %}{% get_current_language_bidi as html_bidi %}<html lang="{{ html_lang|default:'en' }}" dir="{% if html_bidi %}rtl{% else %}ltr{% endif %}" data-theme="{{ theme }}" class="h-full bg-page">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
   <script src="{% static 'js/app.js' %}" defer></script>
 </head>
 <body class="min-h-full font-sans text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
   <div class="auth-page">
     <svg class="auth-blob" viewBox="0 0 600 600" aria-hidden="true" focusable="false"><path d="M437 98c70 52 123 140 96 217-26 77-131 143-226 154-96 11-181-33-224-110S-4 175 63 110 245 4 330 10c33 2 75 38 107 88z" class="fill-primary"/></svg>
     <div class="auth-card">
@@ -29,7 +29,7 @@
         </div>
         <p class="auth-powered max-lg:hidden">{% trans "Powered by Mealtally" %}</p>
       </aside>
-      <form method="post" action="{% url 'set_language' %}" class="auth-lang">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="btn-secondary min-h-11 px-3 text-sm" type="submit" data-testid="lang" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+      {% include "web/_language_picker.html" with picker_class="auth-lang" picker_id="authbase1" %}
       <main id="main" class="auth-panel">
         {% block panel %}{% endblock %}
       </main>

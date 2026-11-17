@@ -8,6 +8,8 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.views.decorators.http import require_GET
 
+from mealtally.common import country
+
 from . import data
 from . import util
 from .access import preview_view
@@ -105,7 +107,16 @@ def invoice_pdf(request, D, inv):
 def render_invoice_pdf(request, D, i):
     from weasyprint import HTML  # noqa: PLC0415 (heavy import, only when a PDF is requested)
 
-    html = render_to_string("preview/invoice_pdf.html", {"D": D, "i": i, "cfg": request.cfg, "tenant": request.tenant})
+    html = render_to_string(
+        "preview/invoice_pdf.html",
+        {
+            "D": D,
+            "i": i,
+            "cfg": request.cfg,
+            "tenant": request.tenant,
+            "licence_label": country.food_licence_label(request.tenant.country),
+        },
+    )
     resp = HttpResponse(HTML(string=html, base_url=None).write_pdf(), content_type="application/pdf")
     resp["Content-Disposition"] = f'attachment; filename="{i["id"]}.pdf"'
     return resp

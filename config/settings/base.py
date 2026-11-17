@@ -24,8 +24,26 @@ if READ_DOT_ENV_FILE:
 # ------------------------------------------------------------------------------
 DEBUG = env.bool("DJANGO_DEBUG", False)
 TIME_ZONE = "UTC"
-LANGUAGE_CODE = "en"
-LANGUAGES = [("en", "English"), ("hi", "हिन्दी")]
+LANGUAGE_CODE = env.str("MEALTALLY_DEFAULT_LANGUAGE", default="en")
+# Each language by its own name. English and Hindi are complete and reviewed; the rest are machine-drafted (fuzzy in
+# the .po files) and shown as "Beta" in the picker until a human reviews them. See TRANSLATING.md.
+LANGUAGES = [
+    ("en", "English"),
+    ("hi", "हिन्दी"),
+    ("mr", "मराठी"),
+    ("ta", "தமிழ்"),
+    ("te", "తెలుగు"),
+    ("bn", "বাংলা"),
+    ("gu", "ગુજરાતી"),
+    ("kn", "ಕನ್ನಡ"),
+    ("es", "Español"),
+    ("fr", "Français"),
+    ("pt-br", "Português (Brasil)"),
+    ("ar", "العربية"),
+    ("id", "Bahasa Indonesia"),
+]
+MEALTALLY_BETA_LANGUAGES = frozenset({"mr", "ta", "te", "bn", "gu", "kn", "es", "fr", "pt-br", "ar", "id"})
+LANGUAGE_COOKIE_NAME = "mealtally-language"
 LOCALE_PATHS = [BASE_DIR / "locale"]
 USE_I18N = True
 WHATSAPP_SUPPORT_NUMBER = env("MEALTALLY_WHATSAPP_SUPPORT_NUMBER", default="")  # blank = link hidden

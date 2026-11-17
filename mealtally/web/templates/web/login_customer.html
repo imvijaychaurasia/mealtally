@@ -6,7 +6,7 @@
 <form method="post" class="mt-6" data-submit-once novalidate>{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">
   {% if error %}<p class="auth-alert" role="alert"><svg class="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>{{ error }}</p>{% endif %}
   <label class="label" for="phone">{% trans "Phone number" %}</label>
-  <div class="auth-phone"><span class="auth-prefix" aria-hidden="true">+91</span><input class="input rounded-l-none" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" required value="{{ phone|default:'' }}"></div>
+  <div class="auth-phone"><span class="auth-prefix" aria-hidden="true">+91</span><input class="input rounded-s-none" id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" required value="{{ phone|default:'' }}"></div>
   <div class="mt-4"><label class="label mb-0" for="pin">{% trans "PIN" %}</label></div>
   <div class="pin-wrap" data-pin data-len="{{ cfg.customer_pin_length|default:6 }}"><div class="pin-cells" data-pin-cells aria-hidden="true"></div>
     <input class="input pin-input" id="pin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" required></div>

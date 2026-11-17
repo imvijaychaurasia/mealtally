@@ -17,7 +17,7 @@
       <button class="btn-primary mt-3" type="submit">{% trans "Save" %}</button></form></details>
   <details class="card"><summary class="cursor-pointer font-semibold">{% trans "Reset PIN" %}</summary>
     <form method="post" action="{% url 'web:admin-customer-action' tenant.slug customer.public_id 'reset-pin' %}" class="mt-3">{% csrf_token %}
-      <label class="mr-4 inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="generate" checked> {% trans "Generate" %}</label>
+      <label class="me-4 inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="generate" checked> {% trans "Generate" %}</label>
       <label class="inline-flex min-h-11 items-center gap-2"><input type="radio" name="pin_choice" value="own"> {% trans "Set a PIN" %}</label>
       <input class="input mt-1" name="pin" inputmode="numeric" aria-label="{% trans 'PIN' %}"><button class="btn-primary mt-3" type="submit">{% trans "Reset PIN" %}</button></form></details>
   <details class="card"><summary class="cursor-pointer font-semibold">{% if customer.status == 'BLOCKED' %}{% trans "Unblock customer" %}{% else %}{% trans "Block customer" %}{% endif %}</summary>

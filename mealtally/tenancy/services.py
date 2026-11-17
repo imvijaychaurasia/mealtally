@@ -135,9 +135,11 @@ def update_settings(
     timezone_name: str | None = None,
     country: str | None = None,
     currency: str | None = None,
+    default_language: str | None = None,
     **data,
 ) -> TenantSettings:
-    """OWNER only. Validates and audits; also changes the restaurant's timezone, country and currency when given.
+    """OWNER only. Validates and audits; also changes the restaurant's timezone, country, currency and default
+    language when given.
 
     Changing the currency does not convert existing amounts: they keep their minor units, so do it before selling.
     """
@@ -150,7 +152,18 @@ def update_settings(
     require(actor, Action.MANAGE_SETTINGS)
     row = TenantSettings.objects.select_for_update().get(tenant_id=actor.tenant_id)
     tenant = Tenant.objects.get(pk=actor.tenant_id)
-    tenant_before = {"timezone": tenant.timezone, "country": tenant.country, "currency": tenant.currency}
+    tenant_before = {
+        "timezone": tenant.timezone,
+        "country": tenant.country,
+        "currency": tenant.currency,
+        "default_language": tenant.default_language,
+    }
+    if default_language:
+        from django.conf import settings  # noqa: PLC0415
+
+        if default_language not in dict(settings.LANGUAGES):
+            raise ValidationFailed("Unknown language.", details={"field": "default_language"})
+        tenant.default_language = default_language
     for field, value, check in (("country", country, validate_country), ("currency", currency, validate_currency)):
         if value:
             try:
@@ -186,7 +199,7 @@ def update_settings(
         except (ZoneInfoNotFoundError, ValueError) as exc:
             raise ValidationFailed("Unknown timezone.", details={"field": "timezone"}) from exc
         tenant.timezone = timezone_name
-    tenant.save(update_fields=["timezone", "country", "currency", "updated_at"])
+    tenant.save(update_fields=["timezone", "country", "currency", "default_language", "updated_at"])
     audit.record(
         action="settings.update",
         tenant_id=actor.tenant_id,
@@ -199,6 +212,7 @@ def update_settings(
             "timezone": tenant.timezone,
             "country": tenant.country,
             "currency": tenant.currency,
+            "default_language": tenant.default_language,
         },
     )
     return row

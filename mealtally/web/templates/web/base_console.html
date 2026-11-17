@@ -1,5 +1,5 @@
 {% load static i18n %}<!doctype html>
-<html lang="{{ LANGUAGE_CODE|default:'en' }}" data-theme="{{ theme }}" class="h-full bg-page">
+{% get_current_language as html_lang %}{% get_current_language_bidi as html_bidi %}<html lang="{{ html_lang|default:'en' }}" dir="{% if html_bidi %}rtl{% else %}ltr{% endif %}" data-theme="{{ theme }}" class="h-full bg-page">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,10 +17,10 @@
   <script src="{% static 'vendor/alpine-csp.min.js' %}" defer></script>
 </head>
 <body class="shell-console {% if role == 'STAFF' %}sb-collapsed {% endif %}{% if station %}station {% endif %}min-h-full font-sans text-ink antialiased" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">{% trans "Skip to content" %}</a>
 
   {% block sidebar %}{% if sidebar %}
-  <aside class="console-sidebar no-print fixed inset-y-0 left-0 z-40 flex flex-col overflow-y-auto border-r border-side-ink/10 bg-side text-side-ink" data-testid="sidebar" aria-label="{% trans 'Main' %}">
+  <aside class="console-sidebar no-print fixed inset-y-0 start-0 z-40 flex flex-col overflow-y-auto border-e border-side-ink/10 bg-side text-side-ink" data-testid="sidebar" aria-label="{% trans 'Main' %}">
     <div class="border-b border-side-ink/10 px-4 py-4">
       <a class="flex items-center gap-2" href="{{ home_href }}" aria-label="Mealtally">
         <svg class="h-8 w-8 shrink-0" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" class="fill-primary"/><path d="M9 16.5l4.5 4.5L23 11" fill="none" class="stroke-on-primary" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -55,24 +55,24 @@
         {% if request.user.is_authenticated and tenant and role %}
         {% if help_articles %}
         <details class="relative" data-testid="help"><summary class="btn-secondary cursor-pointer list-none px-3" aria-label="{% trans 'Help' %}"><span class="font-bold" aria-hidden="true">?</span><span class="hidden sm:inline">{% trans "Help" %}</span></summary>
-          <div class="absolute right-0 z-30 mt-1 w-96 max-w-[92vw] rounded-xl border border-subtle bg-card p-3 shadow-lg"><p class="font-semibold">{% trans "Help" %}</p>
+          <div class="absolute end-0 z-30 mt-1 w-96 max-w-[92vw] rounded-xl border border-subtle bg-card p-3 shadow-lg"><p class="font-semibold">{% trans "Help" %}</p>
             <div class="mt-1 max-h-96 divide-y divide-subtle overflow-y-auto">{% for q, a in help_articles %}<details class="py-1"><summary class="min-h-11 cursor-pointer py-2 font-medium">{{ q }}</summary><p class="pb-2 text-sm text-ink-soft">{{ a }}</p></details>{% endfor %}</div>
             {% if whatsapp_number %}<a class="btn-primary mt-2 w-full" href="https://wa.me/{{ whatsapp_number }}" rel="noopener" data-testid="whatsapp">{% trans "Chat with us on WhatsApp" %}</a>{% endif %}</div></details>
         {% endif %}
-        <form method="post" action="{% url 'set_language' %}" class="no-print max-sm:hidden">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="btn-secondary whitespace-nowrap px-3" type="submit" data-testid="lang" lang="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
+        {% include "web/_language_picker.html" with picker_class="no-print max-sm:hidden" picker_id="baseconsole1" %}
         {% if role == "OWNER" or role == "MANAGER" %}
-        <details class="relative" data-testid="bell"><summary class="btn-secondary cursor-pointer list-none px-3" aria-label="{% trans 'Alerts' %}"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 004 0"/></svg>{% if console_alerts %}<span class="ml-0.5 rounded-full bg-tile-4 px-1.5 text-xs font-bold text-on-primary" data-alert-count>{{ console_alerts|length }}</span>{% endif %}</summary>
-          <div class="absolute right-0 z-30 mt-1 w-80 max-w-[90vw] rounded-xl border border-subtle bg-card p-2 shadow-lg"><p class="px-2 py-1 text-sm font-semibold">{% trans "Alerts" %}</p>
+        <details class="relative" data-testid="bell"><summary class="btn-secondary cursor-pointer list-none px-3" aria-label="{% trans 'Alerts' %}"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0112 0c0 6 2 7 2 7H4s2-1 2-7zM10 20a2 2 0 004 0"/></svg>{% if console_alerts %}<span class="ms-0.5 rounded-full bg-tile-4 px-1.5 text-xs font-bold text-on-primary" data-alert-count>{{ console_alerts|length }}</span>{% endif %}</summary>
+          <div class="absolute end-0 z-30 mt-1 w-80 max-w-[90vw] rounded-xl border border-subtle bg-card p-2 shadow-lg"><p class="px-2 py-1 text-sm font-semibold">{% trans "Alerts" %}</p>
             <ul class="divide-y divide-subtle">{% for a in console_alerts %}<li><a class="block px-2 py-2 text-sm hover:bg-soft" href="{{ a.url }}">{{ a.text }}</a></li>{% empty %}<li class="px-2 py-3 text-sm text-muted">{% trans "Nothing needs your attention." %}</li>{% endfor %}</ul></div></details>
         {% endif %}
         <details class="relative" data-testid="user-menu"><summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg border border-strong bg-card px-2 hover:bg-soft" aria-label="{% trans 'Account' %}">
           <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-on-primary" aria-hidden="true">{{ request.user.name|default:request.user.get_username|slice:":1"|upper }}</span>
-          <span class="hidden text-left leading-tight sm:block"><span class="block max-w-[10rem] truncate text-sm font-semibold" data-testid="who">{{ request.user.name|default:request.user.get_username }}</span><span class="block text-xs text-muted">{{ role|role_label }}</span></span></summary>
-          <div class="absolute right-0 z-30 mt-1 w-56 rounded-xl border border-subtle bg-card p-1 shadow-lg">
+          <span class="hidden text-start leading-tight sm:block"><span class="block max-w-[10rem] truncate text-sm font-semibold" data-testid="who">{{ request.user.name|default:request.user.get_username }}</span><span class="block text-xs text-muted">{{ role|role_label }}</span></span></summary>
+          <div class="absolute end-0 z-30 mt-1 w-56 rounded-xl border border-subtle bg-card p-1 shadow-lg">
             <p class="px-3 py-2 text-xs text-muted sm:hidden">{{ who }}</p>
             <a class="flex min-h-11 items-center rounded-lg px-3 hover:bg-track" href="{% url 'web:staff-password' tenant.slug %}">{% trans "Profile & password" %}</a>
-            <form method="post" action="{% url 'set_language' %}" class="sm:hidden">{% csrf_token %}<input type="hidden" name="next" value="{{ request.path }}"><input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'hi' %}en{% else %}hi{% endif %}"><button class="flex min-h-11 w-full items-center rounded-lg px-3 text-left hover:bg-track" type="submit">{% if LANGUAGE_CODE == 'hi' %}English{% else %}हिन्दी{% endif %}</button></form>
-            <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug|default:'' }}"><button class="flex min-h-11 w-full items-center rounded-lg px-3 text-left hover:bg-track" type="submit" data-testid="logout">{% trans "Log out" %}</button></form></div></details>
+            {% include "web/_language_picker.html" with picker_class="sm:hidden" picker_id="baseconsole2" %}
+            <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug|default:'' }}"><button class="flex min-h-11 w-full items-center rounded-lg px-3 text-start hover:bg-track" type="submit" data-testid="logout">{% trans "Log out" %}</button></form></div></details>
         {% endif %}
       </div>
     </header>

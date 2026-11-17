@@ -3,7 +3,7 @@
 {% block header %}{% endblock %}
 {% block content %}
 <div class="no-print flex flex-wrap items-center gap-2"><h1 class="text-xl font-bold">{% trans "Sticker labels" %} — {{ active.name }}, {{ day|date:"D j M" }}</h1>{% if pv_badge %}<span class="chip-preview">{% trans "Preview" %}</span>{% endif %}
-  <button class="btn-primary ml-auto" type="button" data-print>{% trans "Print" %}</button><a class="btn-secondary" href="{% url 'preview:kitchen' tenant.slug %}?date={{ day|date:'Y-m-d' }}&slot={{ active.key }}">{% trans "Close" %}</a></div>
+  <button class="btn-primary ms-auto" type="button" data-print>{% trans "Print" %}</button><a class="btn-secondary" href="{% url 'preview:kitchen' tenant.slug %}?date={{ day|date:'Y-m-d' }}&slot={{ active.key }}">{% trans "Close" %}</a></div>
 <div class="mt-3 grid grid-cols-2 gap-2" id="labels">
   {% for o in orders %}<div class="break-inside-avoid rounded-lg border-2 border-ink p-2 text-sm leading-tight" data-testid="label">
     <div class="flex items-center justify-between"><span class="font-bold">{{ o.customer }}</span><span class="chip-slate">{% for it in o.items|slice:":1" %}{{ it.diet }}{% endfor %}</span></div>

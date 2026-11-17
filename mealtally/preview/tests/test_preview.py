@@ -333,7 +333,7 @@ def test_no_inline_script_or_style_in_preview_templates():
 
 def test_hindi_toggle_translates_nav_and_customer_app(demo, clients):
     cust = clients["CUSTOMER"]
-    cust.cookies["django_language"] = "hi"
+    cust.cookies["mealtally-language"] = "hi"
     body = cust.get(f"/t/{SLUG}/me/meals").content.decode()
     for needle in (
         "मेरा खाना",
@@ -346,13 +346,13 @@ def test_hindi_toggle_translates_nav_and_customer_app(demo, clients):
         assert needle in body, needle
     assert 'lang="hi"' in body
     owner = clients["OWNER"]
-    owner.cookies["django_language"] = "hi"
+    owner.cookies["mealtally-language"] = "hi"
     nav = owner.get(f"/t/{SLUG}/admin/orders").content.decode()
     for needle in ("आज", "ऑर्डर", "किचन", "ग्राहक", "रिपोर्ट"):
         assert needle in nav, needle
     # the switch itself posts to Django's set_language and flips back
     resp = clients["CUSTOMER"].post("/i18n/setlang/", {"language": "en", "next": f"/t/{SLUG}/me/meals"})
-    assert resp.status_code == 302 and "django_language=en" in resp.cookies.output()
+    assert resp.status_code == 302 and "mealtally-language=en" in resp.cookies.output()
     assert "My meals" in clients["CUSTOMER"].get(f"/t/{SLUG}/me/meals").content.decode()
 
 
@@ -428,9 +428,10 @@ def test_fssai_is_obviously_fake_everywhere(demo, clients):
                 "C", (), {"display_name": "x", "address": "", "contact_phone": "", "food_licence_no": "00000000000000"}
             )(),
             "tenant": type("T", (), {"name": "x"})(),
+            "licence_label": "FSSAI licence number",
         },
     )
-    assert "FSSAI: 00000000000000" in pdf_html
+    assert "FSSAI licence number: 00000000000000" in pdf_html
 
 
 def test_driver_console_groups_delivered_stops_at_the_bottom(demo, clients):

@@ -2,6 +2,6 @@
 {% block content %}
 <section class="mx-auto max-w-lg"><h1 class="text-2xl font-bold">{% trans "Choose a restaurant" %}</h1>
   <ul class="mt-4 grid gap-3">{% for c in choices %}
-    <li><a class="card block min-h-16 hover:border-primary" href="{{ c.url }}"><span class="text-lg font-semibold">{{ c.name }}</span> <span class="chip-slate ml-2">{{ c.role }}</span></a></li>{% endfor %}
+    <li><a class="card block min-h-16 hover:border-primary" href="{{ c.url }}"><span class="text-lg font-semibold">{{ c.name }}</span> <span class="chip-slate ms-2">{{ c.role }}</span></a></li>{% endfor %}
   </ul></section>
 {% endblock %}

@@ -39,7 +39,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 COPY . /app
 COPY --from=css /out/app.css /app/mealtally/static/css/app.css
 RUN --mount=type=cache,target=/root/.cache/uv uv sync --locked --no-dev
-RUN cd /app && /opt/venv/bin/django-admin compilemessages --ignore=.venv
+# --use-fuzzy: Beta languages ship as machine-drafted (fuzzy) translations, see TRANSLATING.md
+RUN cd /app && /opt/venv/bin/django-admin compilemessages --use-fuzzy --ignore=.venv
 
 # --- dev: tests and tooling (the source is bind-mounted over /app by compose) --------------------------------------
 FROM build AS dev

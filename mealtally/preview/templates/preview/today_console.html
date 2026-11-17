@@ -27,10 +27,10 @@
 <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-5">
   <section class="card min-w-0 lg:col-span-3" data-testid="chart"><h2 class="font-semibold">{% trans "Last 12 months" %}</h2>
     <div class="mt-2">{% line_chart months %}</div>
-    <p class="mt-1 flex flex-wrap gap-x-4 text-sm text-ink-soft"><span><span class="mr-1 inline-block h-0.5 w-4 bg-primary align-middle"></span>{% trans "Revenue" %}</span><span><span class="mr-1 inline-block h-0.5 w-4 bg-tile-4 align-middle"></span>{% trans "Expenses" %}</span><span><span class="mr-1 inline-block h-0.5 w-4 bg-chart-3 align-middle"></span>{% trans "Profit" %}</span></p></section>
+    <p class="mt-1 flex flex-wrap gap-x-4 text-sm text-ink-soft"><span><span class="me-1 inline-block h-0.5 w-4 bg-primary align-middle"></span>{% trans "Revenue" %}</span><span><span class="me-1 inline-block h-0.5 w-4 bg-tile-4 align-middle"></span>{% trans "Expenses" %}</span><span><span class="me-1 inline-block h-0.5 w-4 bg-chart-3 align-middle"></span>{% trans "Profit" %}</span></p></section>
   <section class="card min-w-0 lg:col-span-2" data-testid="deliveries"><h2 class="font-semibold">{% trans "Today's deliveries" %}</h2>
     <div class="mt-2">{% donut_chart delivered pending %}</div>
-    <p class="mt-1 flex justify-center gap-x-4 text-sm text-ink-soft"><span><span class="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-primary"></span>{% trans "Delivered" %} {{ delivered }}</span><span><span class="mr-1 inline-block h-2.5 w-2.5 rounded-sm bg-chart-pending"></span>{% trans "Pending" %} {{ pending }}</span></p>
+    <p class="mt-1 flex justify-center gap-x-4 text-sm text-ink-soft"><span><span class="me-1 inline-block h-2.5 w-2.5 rounded-sm bg-primary"></span>{% trans "Delivered" %} {{ delivered }}</span><span><span class="me-1 inline-block h-2.5 w-2.5 rounded-sm bg-chart-pending"></span>{% trans "Pending" %} {{ pending }}</span></p>
     <dl class="mt-3 grid grid-cols-3 divide-x divide-subtle border-t border-subtle pt-3 text-center">
       <div><dt class="text-xs text-muted">{% trans "Home delivery" %}</dt><dd class="font-bold">{{ home.0 }} / {{ home.1 }}</dd></div>
       <div><dt class="text-xs text-muted">{% trans "Pick-up" %}</dt><dd class="font-bold">{{ pickup.0 }} / {{ pickup.1 }}</dd></div>

@@ -21,6 +21,7 @@ from mealtally.tenancy.context import TenancyState
 from mealtally.tenancy.context import begin
 from mealtally.tenancy.context import end
 from mealtally.tenancy.models import Tenant
+from mealtally.web.views_language import activate_preferred
 
 ANY_MEMBER = (*STAFF_ROLES, Role.CUSTOMER)
 
@@ -61,6 +62,7 @@ def tenant_view(*, roles=ANY_MEMBER, public=False, allow_forced=False):
             request.tenant = tenant
             # Templates render aware datetimes in the *current* timezone and money in the *current* currency: make both
             # the tenant's for this request only (never leaks into the next one).
+            activate_preferred(request, tenant)
             money_token = money.use(tenant.currency, tenant.country)
             try:
                 with timezone.override(tenant.zone):

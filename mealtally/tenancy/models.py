@@ -30,6 +30,12 @@ def default_currency() -> str:
     return settings.MEALTALLY_DEFAULT_CURRENCY
 
 
+def default_language() -> str:
+    from django.conf import settings  # noqa: PLC0415
+
+    return settings.MEALTALLY_DEFAULT_LANGUAGE
+
+
 def default_country() -> str:
     from django.conf import settings  # noqa: PLC0415
 
@@ -75,6 +81,8 @@ class Tenant(models.Model):
     currency = models.CharField(max_length=3, default=default_currency, validators=[validate_currency])
     # ISO 3166-1 alpha-2: phone region, tax-ID and food-licence labels, payment methods (mealtally.common.country)
     country = models.CharField(max_length=2, default=default_country, validators=[validate_country])
+    # language for people who haven't chosen one (MEALTALLY_DEFAULT_LANGUAGE for new restaurants)
+    default_language = models.CharField(max_length=10, default=default_language)
     is_test = models.BooleanField(
         default=False, help_text="e2e/perf tenants: hidden from platform lists and metrics by default."
     )

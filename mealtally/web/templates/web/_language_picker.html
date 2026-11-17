@@ -1,0 +1,5 @@
+{% load i18n %}<form method="post" action="{% url 'set_language' %}" class="{{ picker_class }}" data-language-picker>{% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}">
+  <label class="sr-only" for="lang-{{ picker_id|default:'main' }}">{% trans "Language" %}</label>
+  <select class="input min-h-11 w-auto py-1 pe-8 text-sm" id="lang-{{ picker_id|default:'main' }}" name="language" data-autosubmit data-testid="lang">{% for code, name, beta in language_choices %}<option value="{{ code }}" lang="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>{{ name }}{% if beta %} · {% trans "Beta" %}{% endif %}</option>{% endfor %}</select>
+  <noscript><button class="btn-secondary" type="submit">{% trans "Change" %}</button></noscript>
+</form>

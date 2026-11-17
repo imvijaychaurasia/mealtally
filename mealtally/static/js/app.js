@@ -338,3 +338,9 @@ document.addEventListener("keydown", function (e) {
     });
   }
 })();
+
+// language picker (and any other select marked data-autosubmit) submits its form on change; a noscript button covers no-JS
+document.addEventListener("change", function (e) {
+  var el = e.target;
+  if (el && el.matches && el.matches("[data-autosubmit]") && el.form) { el.form.requestSubmit ? el.form.requestSubmit() : el.form.submit(); }
+});

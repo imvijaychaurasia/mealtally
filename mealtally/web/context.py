@@ -153,6 +153,9 @@ def web(request):
         or settings.EMAIL_HOST not in ("", "localhost", "127.0.0.1"),
         "whatsapp_number": getattr(settings, "WHATSAPP_SUPPORT_NUMBER", ""),
         "legal_live": False,
+        "language_choices": [
+            (code, name, code in settings.MEALTALLY_BETA_LANGUAGES) for code, name in settings.LANGUAGES
+        ],
         "mode_multi": settings.MEALTALLY_MODE == "multi",
         "fees_on": settings.MEALTALLY_PLATFORM_FEES,
     }

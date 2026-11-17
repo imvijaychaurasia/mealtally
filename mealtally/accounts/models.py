@@ -41,6 +41,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_platform_admin = models.BooleanField(default=False, help_text="Platform-wide (cross-tenant) administrator.")
     date_joined = models.DateTimeField(default=timezone.now)
     must_change_password = models.BooleanField(default=False)
+    # chosen in the language picker; empty = the restaurant's default, then the browser's
+    preferred_language = models.CharField(max_length=10, blank=True)
 
     objects = UserManager()
 

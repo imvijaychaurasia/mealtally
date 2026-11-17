@@ -4,7 +4,7 @@ SHELL := /bin/bash
 COMPOSE ?= docker compose
 PROD := $(COMPOSE) -f compose.prod.yml
 
-.PHONY: help init up down logs demo test lint migrate backup restore upgrade screenshots shell
+.PHONY: help init up down logs demo test lint migrate backup restore upgrade screenshots shell messages
 
 help: ## List the targets
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-12s %s\n", $$1, $$2}'
@@ -48,6 +48,9 @@ upgrade: ## Production: pull the image in MEALTALLY_IMAGE, back up, then restart
 
 screenshots: ## Render docs/screenshots from a fresh `make demo` instance (needs Playwright)
 	@scripts/screenshots.sh
+
+messages: ## Extract strings into locale/*/django.po and compile the .mo files (commit both)
+	$(COMPOSE) --profile test run --rm --no-deps --entrypoint "" --user "$$(id -u):$$(id -g)" -e HOME=/tmp test sh -c "python manage.py makemessages --all --ignore=.venv --no-obsolete && python manage.py compilemessages --use-fuzzy --ignore=.venv"
 
 shell: ## Django shell in the web container
 	$(COMPOSE) exec web python manage.py shell

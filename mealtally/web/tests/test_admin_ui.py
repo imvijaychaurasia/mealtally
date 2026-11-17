@@ -193,6 +193,14 @@ def test_settings_save_and_validation(w, owner_c, u):
     assert b"Use a colour" in owner_c.post(u + "/admin/settings", {**data, "brand_color": "teal"}).content
     assert b"whole numbers" in owner_c.post(u + "/admin/settings", {**data, "redeem_cooldown_seconds": "x"}).content
     assert owner_c.get(u + "/admin/settings").status_code == 200
+    # the restaurant's default language: used by anyone who hasn't picked one on their device
+    assert b"Settings saved." in owner_c.post(u + "/admin/settings", {**data, "default_language": "ta"}).content
+    with w.ctx():
+        w.tenant.refresh_from_db()
+    assert w.tenant.default_language == "ta"
+    assert b"Unknown language" in owner_c.post(u + "/admin/settings", {**data, "default_language": "xx"}).content
+    page = Client().get(u + "/login/customer").content.decode()
+    assert 'lang="ta"' in page
 
 
 def test_reports_pages_csv_and_pdf(w, owner_c, manager_c, staff_c, u):

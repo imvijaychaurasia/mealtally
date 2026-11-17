@@ -3,7 +3,7 @@
 <h1 class="text-2xl font-bold">{% trans "Audit log" %}</h1>
 <form method="get" class="card mt-3 grid gap-3 sm:grid-cols-4">
   <div><label class="label" for="actor">{% trans "Who" %}</label><input class="input" id="actor" name="actor" value="{{ q.actor }}"></div>
-  <div><label class="label" for="action">{% trans "Action" %}</label><input class="input" id="action" name="action" value="{{ q.action }}" placeholder="payment, pass, ledger…"></div>
+  <div><label class="label" for="action">{% trans "Action" %}</label><input class="input" id="action" name="action" value="{{ q.action }}" placeholder="{% trans 'payment, pass, ledger…' %}"></div>
   <div><label class="label" for="start">{% trans "From" %}</label><input class="input" id="start" name="start" type="date" value="{{ q.start }}"></div>
   <div><label class="label" for="end">{% trans "To" %}</label><input class="input" id="end" name="end" type="date" value="{{ q.end }}"></div>
   <button class="btn-primary sm:col-span-4" type="submit">{% trans "Filter" %}</button></form>

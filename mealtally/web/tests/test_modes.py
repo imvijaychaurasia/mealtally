@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-
 import pytest
 from django.core.management import call_command
 
@@ -128,3 +127,61 @@ def test_mealtally_init_needs_an_email(defaults, monkeypatch):
     monkeypatch.delenv("MEALTALLY_ADMIN_EMAIL", raising=False)
     with pytest.raises(CommandError):
         call_command("mealtally_init")
+
+
+def test_plain_http_notice_for_admins_on_a_lan_address_until_dismissed(defaults):
+    defaults.MEALTALLY_BASE_URL = "http://192.168.1.20:8000"
+    w = World(slug="lan")
+    owner, staff = client_for(w.owner.user), client_for(w.staff.user)
+    u = f"/t/{w.tenant.slug}"
+    page = owner.get(u + "/admin/").content.decode()
+    assert 'data-testid="http-notice"' in page and "mkcert" in page
+    assert 'data-testid="http-notice"' not in staff.get(u + "/staff/").content.decode()
+    resp = owner.post("/dismiss-http-notice", {"next": u + "/admin/"})
+    assert resp.status_code == 302 and resp["Location"] == u + "/admin/"
+    assert 'data-testid="http-notice"' not in owner.get(u + "/admin/").content.decode()
+    assert owner.post("/dismiss-http-notice", {"next": "//evil.example.com"})["Location"] == "/"
+    for url in ("http://localhost:8000", "https://meals.example.com"):
+        defaults.MEALTALLY_BASE_URL = url
+        fresh = client_for(w.owner.user)
+        assert 'data-testid="http-notice"' not in fresh.get(u + "/admin/").content.decode()
+
+
+def _production_settings(base_url: str, trust_proxy: str = "false") -> dict:
+    import json
+    import os
+    import subprocess
+    import sys
+
+    env = {
+        **os.environ,
+        "DJANGO_SECRET_KEY": "x" * 50,
+        "MEALTALLY_BASE_URL": base_url,
+        "MEALTALLY_TRUST_PROXY": trust_proxy,
+        "DJANGO_SETTINGS_MODULE": "config.settings.production",
+    }
+    code = (
+        "import json, config.settings.production as s;"
+        "print(json.dumps({k: getattr(s, k, None) for k in ('ALLOWED_HOSTS', 'CSRF_TRUSTED_ORIGINS', "
+        "'SESSION_COOKIE_SECURE', 'CSRF_COOKIE_SECURE', 'SECURE_SSL_REDIRECT', 'SECURE_HSTS_SECONDS', "
+        "'SECURE_PROXY_SSL_HEADER', 'SESSION_COOKIE_NAME')}))"
+    )
+    out = subprocess.run([sys.executable, "-c", code], env=env, capture_output=True, text=True, check=True)  # noqa: S603
+    return json.loads(out.stdout.strip().splitlines()[-1])
+
+
+def test_production_settings_follow_the_base_url():
+    plain = _production_settings("http://192.168.1.20:8000")
+    assert plain["ALLOWED_HOSTS"][0] == "192.168.1.20" and plain["CSRF_TRUSTED_ORIGINS"] == ["http://192.168.1.20:8000"]
+    assert not plain["SESSION_COOKIE_SECURE"] and not plain["SECURE_SSL_REDIRECT"] and plain["SECURE_HSTS_SECONDS"] == 0
+    assert plain["SECURE_PROXY_SSL_HEADER"] is None and plain["SESSION_COOKIE_NAME"] == "mealtally-session"
+    tls = _production_settings("https://meals.example.com", trust_proxy="true")
+    assert tls["ALLOWED_HOSTS"][0] == "meals.example.com" and tls["CSRF_TRUSTED_ORIGINS"] == [
+        "https://meals.example.com"
+    ]
+    assert tls["SESSION_COOKIE_SECURE"] and tls["CSRF_COOKIE_SECURE"] and tls["SECURE_SSL_REDIRECT"]
+    assert tls["SECURE_HSTS_SECONDS"] == 31536000 and tls["SECURE_PROXY_SSL_HEADER"] == [
+        "HTTP_X_FORWARDED_PROTO",
+        "https",
+    ]
+    assert tls["SESSION_COOKIE_NAME"] == "__Secure-mealtally-session"

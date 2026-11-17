@@ -1,0 +1,6 @@
+{% load i18n %}{% if http_notice %}<div class="mb-4 rounded-xl border border-accent bg-accent-soft p-3 text-sm" role="status" data-testid="http-notice">
+  <p class="font-semibold">{% trans "This address uses plain HTTP." %}</p>
+  <p class="mt-1">{% trans "Phones only allow the camera and app install on HTTPS, so the counter's QR scan and installing the app won't work here. The 12-character code and name search still work." %}</p>
+  <p class="mt-1">{% trans "To fix it, put Caddy in front (automatic HTTPS), use Traefik with Let's Encrypt, or use a local certificate authority such as mkcert on a LAN. See docs/deploy.md." %}</p>
+  <form method="post" action="{% url 'web:dismiss-http-notice' %}" class="mt-2">{% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}"><button class="btn-secondary" type="submit">{% trans "Dismiss" %}</button></form>
+</div>{% endif %}

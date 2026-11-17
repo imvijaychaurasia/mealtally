@@ -212,6 +212,14 @@ def manifest(request):
     return HttpResponse(json.dumps(data), content_type="application/manifest+json")
 
 
+@require_POST
+def dismiss_http_notice(request):
+    """Hide the plain-HTTP notice for the rest of this session."""
+    request.session["http_notice_dismissed"] = True
+    nxt = request.POST.get("next", "/")
+    return redirect(nxt if nxt.startswith("/") and not nxt.startswith("//") else "/")
+
+
 @require_GET
 def service_worker(request):
     """Minimal SW: shows /offline/ only when a GET page load cannot reach the server at all (a network failure).

@@ -120,6 +120,14 @@ def customer_tabs(tenant, current: str, user):
     return tabs, show_qr
 
 
+def _plain_http_off_localhost() -> bool:
+    """True when people reach the instance over plain http:// on an address other than localhost."""
+    from urllib.parse import urlparse  # noqa: PLC0415
+
+    url = urlparse(settings.MEALTALLY_BASE_URL)
+    return url.scheme == "http" and url.hostname not in ("localhost", "127.0.0.1", "::1")
+
+
 def web(request):
     tenant = getattr(request, "tenant", None)
     role = getattr(request, "role", None)
@@ -148,6 +156,11 @@ def web(request):
         "mode_multi": settings.MEALTALLY_MODE == "multi",
         "fees_on": settings.MEALTALLY_PLATFORM_FEES,
     }
+    ctx["http_notice"] = (
+        (role in ("OWNER", "MANAGER") or bool(getattr(getattr(request, "user", None), "is_platform_admin", False)))
+        and _plain_http_off_localhost()
+        and not request.session.get("http_notice_dismissed")
+    )
     if settings.MEALTALLY_LEGAL_PAGES:
         from .views_marketing import legal_pages_live  # noqa: PLC0415
 

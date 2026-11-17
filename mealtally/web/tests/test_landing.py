@@ -122,6 +122,7 @@ def test_demo_request_needs_post_and_csrf_is_enforced(client):
 
     assert Client(enforce_csrf_checks=True).post("/demo-request", GOOD).status_code == 403
 
+
 def test_signed_in_users_get_a_dashboard_button_not_a_redirect(w, client, u):
     from mealtally.testing import PASSWORD
 

@@ -22,6 +22,7 @@ urlpatterns = [
     path("logout", pub.logout_view, name="logout"),
     path("offline/", pub.offline, name="offline"),
     path("sw.js", pub.service_worker, name="sw"),
+    path("dismiss-http-notice", pub.dismiss_http_notice, name="dismiss-http-notice"),
     path("manifest.webmanifest", pub.manifest, name="manifest"),
     # platform
     path("platform/", plat.dashboard, name="platform-dashboard"),

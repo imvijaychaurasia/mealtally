@@ -23,7 +23,7 @@ def test_platform_endpoints_require_platform_admin(w, root):
     assert APIClient().get("/api/v1/platform/tenants").status_code == 401
     assert login_as(w.owner.user).get("/api/v1/platform/tenants").status_code == 403
     resp = login_as(root).get("/api/v1/platform/tenants")
-    assert resp.status_code == 200 and "pilot" in [t["slug"] for t in resp.json()["results"]]
+    assert resp.status_code == 200 and "sample" in [t["slug"] for t in resp.json()["results"]]
 
 
 def test_platform_admin_creates_suspends_and_sets_fee_policy(root):

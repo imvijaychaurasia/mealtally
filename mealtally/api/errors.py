@@ -32,7 +32,7 @@ def envelope(code: str, message: str, details=None, status: int = 400) -> Respon
 def exception_handler(exc, context):
     if isinstance(exc, DomainError):
         # Undo any partial work done in this request's transaction -- unless the service already undid its own work
-        # (its savepoint) and deliberately wrote an audit row that must survive (D03.9: ``redeem.denied``).
+        # (its savepoint) and deliberately wrote an audit row that must survive (``redeem.denied``).
         if not getattr(exc, "keep_transaction", False):
             set_rollback()
         return envelope(exc.code, exc.message, exc.details, exc.status_code)

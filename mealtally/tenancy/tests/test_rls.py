@@ -26,8 +26,8 @@ pytestmark = pytest.mark.django_db
 
 TENANT_TABLES = [
     "plans_plan",
-    "plans_mealslot",  # D03.9
-    "plans_planmealslot",  # D03.9
+    "plans_mealslot",
+    "plans_planmealslot",
     "customers_customer",
     "passes_pass",
     "ledger_mealledgerentry",

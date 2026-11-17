@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: AGPL-3.0-only */
-/* Mealtally theme system (D03.5): the ONLY place raw colour values live.
+/* Mealtally theme system: the ONLY place raw colour values live.
  *
  * Templates, JS and Python use semantic utility classes (bg-primary, text-muted, bg-tile-1 ...) that read these variables.
  * A theme is a block under [data-theme="<name>"] on <html>. Tenant surfaces use the tenant's theme (masala | fresh | tally);
@@ -84,7 +84,7 @@
   --danger-bg: #FEECE6;
   --danger-ink: #8A2C0D;
   --chart-3: #4D7C0F;
-  --chart-pending: #B7791F; /* amber: "not done yet", never red (D03.9 QA-01 P2-17) */
+  --chart-pending: #B7791F; /* amber: "not done yet", never red */
 }
 
 /* ---- tally: platform identity (also the fallback for any page without a theme, e.g. Django admin) -------------- */

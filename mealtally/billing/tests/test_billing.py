@@ -268,7 +268,7 @@ def test_fee_statement_nets_charges_and_voids():
         assert len(stmt["entries"]) == 3  # +, +, - (the voided payment's charge and its reversal)
         with pytest.raises(NotAllowed):
             billing.fee_statement(actor=w.staff, year=now.year, month=now.month)
-        with pytest.raises(NotAllowed):  # D03.8: owner only
+        with pytest.raises(NotAllowed):  # owner only
             billing.fee_statement(actor=w.manager, year=now.year, month=now.month)
         with pytest.raises(ValidationFailed):
             billing.fee_statement(actor=w.owner, year=2026, month=13)

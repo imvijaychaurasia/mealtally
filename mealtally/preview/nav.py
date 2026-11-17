@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Registry-driven navigation for tenants that have the demo dataset (D03 section 3)."""
+"""Registry-driven navigation for tenants that have the demo dataset."""
 
 from __future__ import annotations
 
@@ -65,7 +65,7 @@ def _group(role, group, slug, current):
 
 
 def build_demo_nav(slug: str, role: str, current: str):
-    """Returns (top_items, tab_items). Mirrors D03 section 3."""
+    """Returns (top_items, tab_items)."""
 
     def one(key):
         return _item(BY_KEY[key], slug, current)

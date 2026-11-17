@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.9 QA-01 P1-2..P1-5: the preview dataset is built from the tenant's REAL customers, wallets, drivers and slots."""
+"""The preview dataset is built from the tenant's REAL customers, wallets, drivers and slots."""
 
 from __future__ import annotations
 
@@ -78,7 +78,7 @@ def test_a_customer_without_a_wallet_sees_no_wallet_anywhere(demo):  # noqa: F81
     home = c.get(f"/t/{SLUG}/me/").content.decode()
     assert 'data-testid="home-no-wallet"' in home and 'data-testid="home-wallet"' not in home
     assert reverse("preview:me-wallet", args=[SLUG]) not in home  # no Wallet tab
-    page = c.get(reverse("preview:me-wallet", args=[SLUG]))  # QA-02: no wallet page at all, back to Home
+    page = c.get(reverse("preview:me-wallet", args=[SLUG]))  # no wallet page at all, back to Home
     assert page.status_code == 302 and page["Location"] == f"/t/{SLUG}/me/"
     assert "Ask the restaurant about home delivery" in home
     order = c.get(reverse("preview:me-order", args=[SLUG])).content.decode()

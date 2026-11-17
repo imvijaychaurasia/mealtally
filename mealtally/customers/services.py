@@ -120,7 +120,7 @@ def set_status(*, actor: Actor, customer: Customer, status: str, reason: str = "
 
 
 def update_own_name(*, customer: Customer, full_name: str, address: str | None = None) -> Customer:
-    """A customer may change their own name and (D03.9) delivery address -- nothing else."""
+    """A customer may change their own name and delivery address -- nothing else."""
     full_name = (full_name or "").strip()
     if not full_name:
         raise ValidationFailed("Name is required.", details={"field": "full_name"})
@@ -194,7 +194,7 @@ def verify_pin(*, tenant_slug: str, phone: str, pin: str):
     return user
 
 
-# --- D02 ------------------------------------------------------------------------------------------
+# --- ------------------------------------------------------------------------------------------
 from datetime import timedelta  # noqa: E402
 
 from django.db.models import Count  # noqa: E402
@@ -231,7 +231,7 @@ def change_pin(*, customer: Customer, old_pin: str, new_pin: str, verified: bool
 def update_customer(
     *, actor: Actor, customer: Customer, full_name: str, notes: str = "", address: str | None = None
 ) -> Customer:
-    """Staff/manager/owner edit. ``address`` (D03.9 QA-01 P1-5) is left unchanged when None."""
+    """Staff/manager/owner edit. ``address`` is left unchanged when None."""
     require(actor, Action.EDIT_CUSTOMER)
     full_name = (full_name or "").strip()
     if not full_name:

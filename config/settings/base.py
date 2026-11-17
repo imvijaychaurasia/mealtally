@@ -54,7 +54,7 @@ USE_TZ = True
 # The application connects as a NON-superuser role (`mealtally_app`) so that
 # Postgres row-level security is enforced. Migrations / provisioning commands
 # run as the table-owner role (`mealtally_owner`, also non-superuser, FORCE RLS
-# applies to it) with an explicit platform context -- see ADR 0002.
+# applies to it) with an explicit platform context -- see docs/architecture.md.
 # DATABASE_URL / DATABASE_OWNER_URL override the role-based defaults (for a managed database, for example).
 _OWNER_MODE = env.bool("MEALTALLY_DB_OWNER_MODE", default=False)
 if _OWNER_MODE and os.getenv("DATABASE_OWNER_URL"):
@@ -211,7 +211,7 @@ CSRF_FAILURE_VIEW = "mealtally.web.errors.csrf_failure"
 # SECURITY
 # ------------------------------------------------------------------------------
 SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_HTTPONLY = False  # SPA/HTMX clients (D02) read the token cookie
+CSRF_COOKIE_HTTPONLY = False  # SPA/HTMX clients read the token cookie
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
@@ -311,7 +311,7 @@ CELERY_TASK_SOFT_TIME_LIMIT = 4 * 60
 CELERY_WORKER_SEND_TASK_EVENTS = True
 CELERY_TASK_SEND_SENT_EVENT = True
 CELERY_WORKER_HIJACK_ROOT_LOGGER = False
-# Static schedule (django-celery-beat 2.9 does not support Django 6.1; ADR 0006).
+# Static schedule (django-celery-beat 2.9 does not support Django 6.1).
 CELERY_BEAT_SCHEDULE = {
     "expire-and-activate-passes": {
         "task": "mealtally.passes.tasks.expire_and_activate_passes",
@@ -346,7 +346,7 @@ AXES_RESET_ON_SUCCESS = True
 AXES_USERNAME_CALLABLE = "mealtally.accounts.axes.get_username"
 AXES_ENABLED = env.bool("AXES_ENABLED", default=True)
 # W002: we call AxesProxyHandler explicitly in the JSON login views (no form middleware needed).
-# W006: lockout is per identity (not per IP) on purpose; see ADR 0005.
+# W006: lockout is per identity (not per IP) on purpose: rotating IPs can't bypass it.
 SILENCED_SYSTEM_CHECKS = ["axes.W002", "axes.W006"]
 
 # DJANGO REST FRAMEWORK
@@ -409,4 +409,4 @@ MEALTALLY_DEFAULT_CURRENCY = env.str("MEALTALLY_DEFAULT_CURRENCY", default="INR"
 MEALTALLY_DEFAULT_TIMEZONE = env.str("MEALTALLY_DEFAULT_TIMEZONE", default="Asia/Kolkata")
 MEALTALLY_DEFAULT_LANGUAGE = env.str("MEALTALLY_DEFAULT_LANGUAGE", default="en")
 
-# D03.9 §A2: landing-page pricing moved to PlatformSettings (platform admin, no restart); no environment variable.
+# landing-page pricing moved to PlatformSettings (platform admin, no restart); no environment variable.

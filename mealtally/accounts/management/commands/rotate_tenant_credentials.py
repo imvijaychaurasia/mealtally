@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.9 §D3: rotate a tenant's logins -- every staff member gets a new random password (and must change it at the next
+"""Rotate a tenant's logins -- every staff member gets a new random password (and must change it at the next
 login); the customers named with ``--customer-phone`` get a new PIN (also must-change).
 
 The new logins go to ``--out`` (mode 600, never printed). Every reset is audit-logged with the platform admin as actor.
 
-    python manage.py rotate_tenant_credentials --slug pilot-tiffin --out /app/.pilot-credentials.txt \\
+    python manage.py rotate_tenant_credentials --slug sample-tiffin --out /app/.rotated-credentials.txt \\
         --platform-admin admin@example.com --customer-phone +919999900001
 """
 

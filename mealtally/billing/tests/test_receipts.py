@@ -52,13 +52,13 @@ def test_receipt_html_and_pdf_content_and_void_watermark():
             "+911234567890",
             "29ABCDE1234F1Z5",
             "Thank you!",
-            "Pilot Tiffin (test)",
+            "Sample Tiffin (test)",
         )
         row.save()
         payment = Payment.objects.select_related("customer", "plan").get(pk=w.recorded.payment.pk)
         html = receipts.render_receipt_html(payment, print_view=True)
         for needle in (
-            "Pilot Tiffin (test)",
+            "Sample Tiffin (test)",
             "12 MG Road",
             "29ABCDE1234F1Z5",
             "R-000001",

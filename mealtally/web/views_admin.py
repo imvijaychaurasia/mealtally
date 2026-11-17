@@ -323,7 +323,7 @@ def plan_form(request, plan_id=None):
     return render(request, "web/admin_plan_form.html", ctx)
 
 
-# --- D03.9: meal times (OWNER) ---------------------------------------------------------------------------------
+# --- meal times (OWNER) ---------------------------------------------------------------------------------------
 def _parse_hhmm(raw: str):
     from datetime import datetime as _dt  # noqa: PLC0415
 
@@ -374,7 +374,7 @@ def meal_rules_banner(request):
 @tenant_view(**ADMIN)
 @require_POST
 def driver_assign(request):
-    """QA-01 P1-4: assign a delivery route to a driver (real data: the driver's console shows that route).
+    """Assign a delivery route to a driver (real data: the driver's console shows that route).
 
     Routes are the drivers' own ``Membership.route_name``; assigning a route that another driver has swaps the two.
     """
@@ -657,7 +657,7 @@ REFUSAL_LABELS = {
 @require_GET
 @safe_report
 def report_refused(request):
-    """D03.9 §B5: refused redemptions (``redeem.denied``) for spotting fraud: who tried, when, why, which channel."""
+    """Refused redemptions (``redeem.denied``) for spotting fraud: who tried, when, why, which channel."""
     from datetime import datetime as _dt  # noqa: PLC0415
     from datetime import time as _time  # noqa: PLC0415
 
@@ -805,7 +805,7 @@ def report_statement(request, customer_id):
 @safe_report
 @features.requires(features.fees)
 def report_fees(request):
-    if request.role != Role.OWNER:  # D03.8: owner only, for the page, the CSV and the PDF alike
+    if request.role != Role.OWNER:  # owner only, for the page, the CSV and the PDF alike
         raise PermissionDenied
     today = local_date(timezone.now(), request.tenant.timezone)
     year, month = _parse_month(request.GET.get("month"), today)

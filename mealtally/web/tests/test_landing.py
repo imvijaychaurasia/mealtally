@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.6 Part B: the public landing page, honest feature badges, the demo request form, SEO files and the legal drafts."""
+"""The public landing page, honest feature badges, the demo request form, SEO files and the legal drafts."""
 
 from __future__ import annotations
 
@@ -65,7 +65,7 @@ def test_rendered_badges_match_the_registry(client):
 
 
 def test_pricing_is_a_platform_setting_and_follows_the_fee_policy(client):
-    """D03.9 §A2: percentage by default, switchable to 'contact' in platform admin (no restart); the numbers are the
+    """Percentage by default, switchable to 'contact' in platform admin (no restart); the numbers are the
     default platform fee policy billing applies, so the page can't drift from what is charged."""
     from mealtally.billing import services as billing
     from mealtally.tenancy.models import PlatformSettings

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.4 console shell: sidebar IA per role and the alerts that feed the bell and the dashboard strip.
+"""Console shell: sidebar IA per role and the alerts that feed the bell and the dashboard strip.
 
 Template/presentation layer only: every item maps to an EXISTING view (real or preview); nothing here creates routes.
 """
@@ -34,7 +34,7 @@ GROUPS = [
                 "payments",
                 False,
                 {"report-fees"},
-            ),  # D03.7: managers do not see fee items
+            ),  # managers do not see fee items
             (gettext_noop("Staff & roles"), "web:admin-staff", (O,), "roles", False, {"admin-staff", "roles"}),
         ],
     ),

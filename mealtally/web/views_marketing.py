@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Public landing page, demo request form, privacy/terms drafts, sitemap and robots (D03.6 Part B). Platform-scoped: no tenant."""
+"""Public landing page, demo request form, privacy/terms drafts, sitemap and robots. Platform-scoped: no tenant."""
 
 from __future__ import annotations
 

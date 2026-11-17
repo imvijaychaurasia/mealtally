@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Short-lived, single-use QR identification tokens (D01 section 7)."""
+"""Short-lived, single-use QR identification tokens."""
 
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ def issue_token(*, customer, tenant) -> str:
 
 
 def issue_code(*, customer, tenant) -> str:
-    """Web QR payload: a short opaque code (12 base32 chars, 60 bits) held in Valkey for 90 s (ADR 0015).
+    """Web QR payload: a short opaque code (12 base32 chars, 60 bits) held in Valkey for 90 s.
 
     It carries nothing: the server looks it up. Single-use is enforced by ``claim_jti`` exactly as for signed tokens.
     """

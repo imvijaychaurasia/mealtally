@@ -7,7 +7,7 @@ from mealtally.tenancy.models import TenantScopedModel
 
 
 class MealSlot(TenantOwnedModel):
-    """D03.9: a serving window (Breakfast, Lunch, Dinner...) in the tenant's own timezone.
+    """A serving window (Breakfast, Lunch, Dinner...) in the tenant's own timezone.
 
     ``end_time < start_time`` means the window crosses midnight (e.g. 22:00-01:00); a meal served after midnight in that
     window belongs to the day the window opened. ``grace_minutes`` widens the window on both sides.
@@ -45,7 +45,7 @@ class Plan(TenantOwnedModel):
     validity_mode = models.CharField(max_length=16, choices=ValidityMode, default=ValidityMode.ROLLING_DAYS)
     validity_days = models.PositiveIntegerField(default=30, help_text="Used for ROLLING_DAYS.")
     max_meals_per_day = models.PositiveSmallIntegerField(null=True, blank=True, help_text="Blank = no daily cap.")
-    # D03.9 meal-time rules. No allowed slots = any time (the pre-D03.9 behaviour).
+    # Meal-time rules. No allowed slots = any time.
     allowed_slots = models.ManyToManyField(MealSlot, through="PlanMealSlot", blank=True, related_name="plans")
     max_meals_per_slot = models.PositiveSmallIntegerField(default=1, help_text="Per allowed meal slot, per day.")
     is_active = models.BooleanField(default=True)

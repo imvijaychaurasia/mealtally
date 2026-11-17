@@ -94,13 +94,13 @@ def per_meal(plan):
 
 @register.filter
 def phone(value):
-    """``+91 90000 30002`` (D03.9 P2-8/9). Full numbers only where the screen is allowed to show them."""
+    """``+91 90000 30002``. Full numbers only where the screen is allowed to show them."""
     return format_phone(value or "")
 
 
 @register.filter
 def phone_masked(value):
-    """The one staff-screen rule (D03.9 P2-9): ``••••• 0002``."""
+    """The one staff-screen rule: ``••••• 0002``."""
     return mask_phone(value or "")
 
 

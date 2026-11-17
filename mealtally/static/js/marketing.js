@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: AGPL-3.0-only */
-/* Public landing page (D03.6 B): menus, "Live only" filter, remembered tenant codes, gentle reveal on scroll, double-submit guard. */
+/* Public landing page: menus, "Live only" filter, remembered tenant codes, gentle reveal on scroll, double-submit guard. */
 (function () {
   "use strict";
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;

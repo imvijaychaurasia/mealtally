@@ -103,7 +103,7 @@ def me_home(request):
 
 
 def _qr_ctx(request, customer):
-    """One fresh 90 s code per render: the QR image and the typed-in fallback below it are the SAME code (D03.3)."""
+    """One fresh 90 s code per render: the QR image and the typed-in fallback below it are the SAME code."""
     code = qr.issue_code(customer=customer, tenant=request.tenant)
     svg = base64.b64encode(qr.render_svg(code)).decode()
     return {
@@ -181,7 +181,7 @@ def me_profile(request):
 @require_http_methods(["GET", "POST"])
 def me_pin(request):
     customer = require_customer(request)
-    # D02.1 #19: a forced first-login change right after a successful PIN login (same session, < 10 min) does not
+    # a forced first-login change right after a successful PIN login (same session, < 10 min) does not
     # ask for the current PIN again. Voluntary changes always do.
     fresh = time.time() - request.session.get("pin_login_at", 0) < PIN_LOGIN_GRACE_SECONDS
     skip_old = customer.must_change_pin and fresh
@@ -352,7 +352,7 @@ def me_account(request):
 @tenant_view()
 @require_POST
 def me_topup_check(request):
-    """D03.9 QA-01 P1-6: server-side check of a wallet top-up request (UTR = exactly 12 digits; amount within the
+    """Server-side check of a wallet top-up request (UTR = exactly 12 digits; amount within the
     restaurant's bounds). The wallet itself is still a preview, so nothing is stored."""
     require_customer(request)
     cfg = request.cfg

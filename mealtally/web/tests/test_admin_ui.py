@@ -176,7 +176,7 @@ def test_staff_management_shows_temp_password_once(w, owner_c, u):
 
 def test_settings_save_and_validation(w, owner_c, u):
     data = {
-        "display_name": "Pilot Tiffin (test)",
+        "display_name": "Sample Tiffin (test)",
         "address": "1 Road",
         "contact_phone": "+911",
         "brand_color": "#123456",

@@ -45,7 +45,7 @@ def test_customers_cannot_see_each_others_history(w, base):
     other, _ = make_customer(w.tenant, w.owner, name="Other")
     me = login_as(other.user).get(f"{base}/me").json()  # `me` works even with a temporary PIN
     assert me["active_pass"] is None and me["meals_remaining"] == 0
-    blocked = login_as(other.user).get(f"{base}/me/ledger")  # everything else needs the PIN change first (D02.1 Q2)
+    blocked = login_as(other.user).get(f"{base}/me/ledger")  # everything else needs the PIN change first
     assert blocked.status_code == 403 and blocked.json()["error"]["code"] == "CREDENTIAL_CHANGE_REQUIRED"
     with w.ctx():
         other.must_change_pin = False

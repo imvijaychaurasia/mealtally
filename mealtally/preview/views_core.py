@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Preview views: today, orders, kitchen, delivery, driver, holds, tiffin boxes (D03). No database writes anywhere."""
+"""Preview views: today, orders, kitchen, delivery, driver, holds, tiffin boxes. No database writes anywhere."""
 
 from __future__ import annotations
 
@@ -54,7 +54,7 @@ def _passes_30d(D) -> int:
 
 
 def _console_dashboard(request, D, real):
-    """D03.4 owner dashboard: KPI tiles, alerts, 12-month chart, delivery donut, portal / low wallets / shortcuts."""
+    """Owner dashboard: KPI tiles, alerts, 12-month chart, delivery donut, portal / low wallets / shortcuts."""
     import base64  # noqa: PLC0415
 
     from django.db.models import Count  # noqa: PLC0415
@@ -75,7 +75,7 @@ def _console_dashboard(request, D, real):
     )
     pass_meals = max(0, kinds.get("REDEEM", 0) - kinds.get("REVERSAL", 0))
     delivered30 = len([o for o in D["orders"] if -30 < o["off"] <= 0 and o["status"] in ("DELIVERED", "PICKED_UP")])
-    # QA-01 P1-2: "Active customers" = real customers with an active pass OR an active wallet, each counted once
+    # "Active customers" = real customers with an active pass OR an active wallet, each counted once
     from mealtally.common.country import format_phone  # noqa: PLC0415
     from mealtally.passes.models import Pass  # noqa: PLC0415
 
@@ -399,7 +399,7 @@ def _driver_memberships():
 @preview_view("driver")
 @require_GET
 def driver(request, D):
-    # QA-01 P1-4: each driver sees THEIR route (the owner previewing the console sees the first one)
+    # each driver sees THEIR route (the owner previewing the console sees the first one)
     mine = None
     if request.role == "DRIVER":
         from mealtally.accounts.models import Membership  # noqa: PLC0415

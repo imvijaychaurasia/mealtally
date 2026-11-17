@@ -206,14 +206,14 @@ def pass_has_redemptions(pass_: Pass) -> bool:
 # --- redeem --------------------------------------------------------------------------------------
 
 
-# Refusals worth an audit row (fraud spotting): the rule blocks plus "nothing to redeem" (D03.9 §B5).
+# Refusals worth an audit row (fraud spotting): the rule blocks plus "nothing to redeem".
 # COOLDOWN_CONFIRM_REQUIRED is a confirmation prompt, not a refusal, so it is not logged.
 RULE_CODES = frozenset({"MEAL_SLOT_CLOSED", "MEAL_SLOT_CAP_REACHED", "DAILY_CAP_REACHED"})
 DENIAL_CODES = RULE_CODES | {"NO_ACTIVE_PASS", "PASS_NOT_VALID_NOW", "NO_CREDITS", "TENANT_PAUSED", "CUSTOMER_BLOCKED"}
 
 
 def blocked_message(customer) -> str:
-    """'Blocked by the owner: <reason>' (QA-01 P2-11), from the latest block in the audit trail."""
+    """'Blocked by the owner: <reason>', from the latest block in the audit trail."""
     from mealtally.audit.models import AuditEvent  # noqa: PLC0415
 
     event = (
@@ -238,8 +238,8 @@ def _served_label(entry: MealLedgerEntry, tz) -> str:
 def check_meal_rules(*, pass_: Pass, tenant: Tenant, now: datetime) -> tuple[MealSlot | None, date]:
     """Raise if the pass's meal-time rules forbid a meal at ``now``; else return (slot, meal_date) for the entry.
 
-    Order: is an allowed slot open -> per-slot cap -> per-day cap. A pass with no allowed slots behaves exactly as
-    before D03.9 (only the optional daily cap applies). Read-only: callers hold the pass row lock when it matters.
+    Order: is an allowed slot open -> per-slot cap -> per-day cap. A pass with no allowed slots can be redeemed at any
+    time (only the optional daily cap applies). Read-only: callers hold the pass row lock when it matters.
     """
     tz = tenant.zone
     meal_date = local_date(now, tenant.timezone)
@@ -475,7 +475,7 @@ def reverse_redemption(
             window = timedelta(hours=tenant.settings.staff_reversal_window_hours)
             if now - entry.occurred_at >= window or entry.meal_date != local_date(now, tenant.timezone):
                 raise NotAllowed("Staff can only reverse today's redemptions inside the reversal window.")
-            # D03.9 §A1: the owner decides whether a counter may undo another staff member's meal (default: yes).
+            # the owner decides whether a counter may undo another staff member's meal (default: yes).
             if not tenant.settings.counter_can_reverse_others and entry.operator_id != getattr(actor.user, "pk", None):
                 raise NotAllowed(
                     _("Only the person who served this meal, a manager or the owner can undo it."),
@@ -611,7 +611,7 @@ def redeem_status(*, customer, now: datetime | None = None) -> dict:
     day = MealLedgerEntry.objects.filter(customer_id=customer.id, meal_date=today)
     out["meals_today"] = day.filter(entry_type=E.REDEEM).count() - day.filter(entry_type=E.REVERSAL).count()
     pass_ = passes.active_pass_for(customer.id)
-    out["pass"] = pass_  # shown even when blocked: the card tells the real meals left (QA-01 P2-11)
+    out["pass"] = pass_  # shown even when blocked: the card tells the real meals left
     if tenant.status != Tenant.Status.ACTIVE:
         return {**out, "state": "blocked", "code": "TENANT_PAUSED"}
     if customer.status != customer.Status.ACTIVE:

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03 preview modules: crawl every preview page as every role (default CI), role gating, tenant isolation, no real writes."""
+"""Preview modules: crawl every preview page as every role (default CI), role gating, tenant isolation, no real writes."""
 
 from __future__ import annotations
 
@@ -357,7 +357,7 @@ def test_hindi_toggle_translates_nav_and_customer_app(demo, clients):
     assert "My meals" in clients["CUSTOMER"].get(f"/t/{SLUG}/me/meals").content.decode()
 
 
-# ---- D03.1 polish -------------------------------------------------------------------------------------------------
+# ---- polish -------------------------------------------------------------------------------------------------
 def test_expenses_run_at_62_to_70_percent_of_revenue_and_every_screen_agrees():
     from datetime import date
 
@@ -444,7 +444,7 @@ def test_driver_console_groups_delivered_stops_at_the_bottom(demo, clients):
     assert "Delivered</span>" not in pending_block and "Mark delivered" in pending_block
 
 
-# ---- D03.2 final nits ------------------------------------------------------------------------------------------------
+# ---- final nits ------------------------------------------------------------------------------------------------
 def test_help_drawer_shows_articles_for_the_viewers_audience(demo, clients):
     def help_text(role):
         html = (

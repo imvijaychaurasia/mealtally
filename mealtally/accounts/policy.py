@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Role x action matrix (D01 section 6) -- the single source of authorisation truth."""
+"""Role x action matrix -- the single source of authorisation truth."""
 
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ MATRIX: dict[Action, frozenset[str]] = {
     Action.SUSPEND_CANCEL_PASS: frozenset({_O}),
     Action.REPORTS_FULL: frozenset({_O, _M}),
     Action.REPORTS_TODAY: frozenset({_O, _M, _S}),
-    Action.FEE_STATEMENT: frozenset({_O}),  # D03.8: the platform fee is between the owner and Mealtally
+    Action.FEE_STATEMENT: frozenset({_O}),  # the platform fee is between the owner and Mealtally
     Action.VIEW_OWN_HISTORY: frozenset({_C}),
     Action.VIEW_AUDIT: frozenset({_O, _M}),
     Action.BLOCK_CUSTOMER: frozenset({_O, _M}),

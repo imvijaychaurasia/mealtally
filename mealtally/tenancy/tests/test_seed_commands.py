@@ -13,10 +13,10 @@ pytestmark = pytest.mark.django_db
 
 
 def test_seed_demo_builds_five_realistic_states_and_is_idempotent(capsys):
-    w = World(slug="pilot-demo", buy_pass=False)
-    call_command("seed_demo", "--slug", "pilot-demo")
+    w = World(slug="sample-demo", buy_pass=False)
+    call_command("seed_demo", "--slug", "sample-demo")
     out = capsys.readouterr().out
-    assert out.count("DEMO CREDENTIALS") == 5 and "Pilot Tiffin (test)" in out
+    assert out.count("DEMO CREDENTIALS") == 5 and "Sample Tiffin (test)" in out
     with w.ctx():
         by_name = {c.full_name: c for c in Customer.objects.filter(full_name__startswith="Demo")}
         state = {
@@ -28,9 +28,9 @@ def test_seed_demo_builds_five_realistic_states_and_is_idempotent(capsys):
         assert state["Demo Near expiry"] == [("ACTIVE", 3)]
         assert state["Demo Expired"] == [("EXPIRED", 0)]
         assert state["Demo Queued"] == [("ACTIVE", 26), ("QUEUED", 0)]
-        assert tenancy.get_settings(w.tenant.id).display_name == "Pilot Tiffin (test)"
+        assert tenancy.get_settings(w.tenant.id).display_name == "Sample Tiffin (test)"
         assert ledger.find_mismatches() == []
-    call_command("seed_demo", "--slug", "pilot-demo")
+    call_command("seed_demo", "--slug", "sample-demo")
     assert "DEMO CREDENTIALS" not in capsys.readouterr().out
     with pytest.raises(CommandError):
         call_command("seed_demo", "--slug", "nope")

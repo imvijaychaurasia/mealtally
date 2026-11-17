@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Provisioning of database roles / privileges (idempotent). See ADR 0002."""
+"""Provisioning of database roles / privileges (idempotent). See docs/architecture.md."""
 
 from __future__ import annotations
 

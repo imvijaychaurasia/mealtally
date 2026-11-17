@@ -49,13 +49,13 @@ class DailyCapReached(StateConflict):
 
 
 class MealSlotClosed(StateConflict):
-    """D03.9: none of the pass's meal slots is being served right now."""
+    """None of the pass's meal slots is being served right now."""
 
     code = "MEAL_SLOT_CLOSED"
 
 
 class MealSlotCapReached(StateConflict):
-    """D03.9: the customer already had their meal(s) in this slot today."""
+    """The customer already had their meal(s) in this slot today."""
 
     code = "MEAL_SLOT_CAP_REACHED"
 

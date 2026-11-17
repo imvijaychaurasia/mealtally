@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Read-only reporting (D02 section 5.3). Every function checks the role and runs in the caller's tenant context."""
+"""Read-only reporting. Every function checks the role and runs in the caller's tenant context."""
 
 from __future__ import annotations
 

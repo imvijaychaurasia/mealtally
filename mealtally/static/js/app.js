@@ -226,7 +226,7 @@ document.addEventListener("click", function (e) {
   if (t) { window.print(); }
 });
 
-/* ---- D03.8 Show QR button: icon-only while scrolling down, label back on scroll up or at rest ---- */
+/* ---- Show QR button: icon-only while scrolling down, label back on scroll up or at rest ---- */
 (function () {
   var fab = document.querySelector("[data-fab]");
   if (!fab) { return; }
@@ -241,7 +241,7 @@ document.addEventListener("click", function (e) {
   }, { passive: true });
 })();
 
-/* ---- D03.7 station shell: live clock, auto-refresh (skipped while something is ticked), delivered group from the bar ---- */
+/* ---- station shell: live clock, auto-refresh (skipped while something is ticked), delivered group from the bar ---- */
 (function () {
   function clock() { document.querySelectorAll("[data-clock]").forEach(function (el) { el.textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); }); }
   clock(); window.setInterval(clock, 30000);
@@ -253,7 +253,7 @@ document.addEventListener("click", function (e) {
   window.addEventListener("hashchange", openDelivered); openDelivered();
 })();
 
-/* ---- D03.7 counter keyboard shortcuts: / focuses search, Enter redeems (or opens the first result), Esc clears ---- */
+/* ---- counter keyboard shortcuts: / focuses search, Enter redeems (or opens the first result), Esc clears ---- */
 document.addEventListener("keydown", function (e) {
   var q = document.getElementById("q");
   if (!q || !document.querySelector("[data-testid=counter-panes]")) { return; }
@@ -274,7 +274,7 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-/* ---- D03.6 sign-in screens: PIN cells, show/hide, double-submit guard, remembered choice ---------------------- */
+/* ---- sign-in screens: PIN cells, show/hide, double-submit guard, remembered choice ---------------------- */
 (function () {
   document.querySelectorAll("[data-pin]").forEach(function (box) {
     var input = box.querySelector("input");

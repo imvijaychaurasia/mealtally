@@ -22,7 +22,7 @@ def test_landing_go_and_pwa_assets(client):
         and b"Prepaid meal passes for restaurants" in r.content
         and b"Restaurant login" in r.content
     )
-    assert client.post("/go", {"code": " Pilot Tiffin "}).headers["Location"] == "/t/pilot-tiffin/"
+    assert client.post("/go", {"code": " Sample Tiffin "}).headers["Location"] == "/t/sample-tiffin/"
     assert client.post("/go", {"code": ""}).status_code == 400
     m = client.get("/manifest.webmanifest")
     assert (

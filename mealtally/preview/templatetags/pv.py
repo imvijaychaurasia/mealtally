@@ -162,7 +162,7 @@ def donut(values, labels):
 
 @register.simple_tag
 def line_chart(months):
-    """D03.4 dashboard: revenue / expenses / profit as three lines with L/K ticks. Colours come from theme tokens (classes)."""
+    """Dashboard chart: revenue / expenses / profit as three lines with L/K ticks. Colours come from theme tokens (classes)."""
     w, h, left, bottom = 640, 230, 46, 26
     ticks = nice_ticks(max(m["revenue_minor"] for m in months) / 100 * 1.02)
     top = ticks[-1] * 100

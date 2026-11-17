@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Feature registry (D03): one row per module. The nav reads it; flip ``status`` to "real" when a module is built (D04+)."""
+"""Feature registry: one row per module. The nav reads it; flip ``status`` to "real" when a module is built."""
 
 from __future__ import annotations
 
@@ -87,7 +87,7 @@ REGISTRY: list[Module] = [
         "fees",
         "Platform fee statement",
         "money",
-        (O,),  # D03.8: owner only
+        (O,),  # owner only
         "real",
         "web:report-fees",
         "What you owe the platform this month",

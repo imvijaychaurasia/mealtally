@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.9 QA-01 P2-12: the audit log in sentences people read ("Kajal Parmar reversed Mihir Desai's 1:38 PM meal ...").
+"""The audit log in sentences people read ("Kajal Parmar reversed Mihir Desai's 1:38 PM meal ...").
 
 Names instead of ids, money instead of minor units. The raw JSON stays available behind a "Details" toggle on the page.
 Lookups are batched per page (one query per object kind), never one per row.

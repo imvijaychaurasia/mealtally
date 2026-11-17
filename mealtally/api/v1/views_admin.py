@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""API parity for the D02 UI: everything a screen can do is also available as JSON (future mobile apps)."""
+"""API parity with the web UI: everything a screen can do is also available as JSON (future mobile apps)."""
 
 from __future__ import annotations
 

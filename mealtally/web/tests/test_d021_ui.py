@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D02.1 P1: navigation, console, sell, detail/list, customer app, QR code, platform pages."""
+"""Navigation, console, sell, detail/list, customer app, QR code, platform pages."""
 
 from __future__ import annotations
 
@@ -60,7 +60,7 @@ def test_one_role_based_nav_with_active_state_identity_and_bottom_tabs(w, owner_
 def test_customer_app_has_a_fixed_bottom_bar_and_no_duplicate_home(w, cust_c, u):
     settle(w)
     html = cust_c.get(u + "/me/").content.decode()
-    # D03.7: one consumer shell: no wallet or ordering means Home · Activity · Account, plus a Show QR action.
+    # one consumer shell: no wallet or ordering means Home · Activity · Account, plus a Show QR action.
     assert html.split('data-testid="tabbar"')[1].split("</nav>")[0].count("<li>") == 3
     for label in ("Home", "Activity", "Account"):
         assert label in html
@@ -303,10 +303,10 @@ def test_receipt_has_back_link_name_and_address(w, owner_c, u):
         from mealtally.tenancy import services as t
 
         t.update_settings(
-            actor=w.owner, display_name="Pilot Tiffin (test)", address="12 MG Road", contact_phone="+91 80 4000 0000"
+            actor=w.owner, display_name="Sample Tiffin (test)", address="12 MG Road", contact_phone="+91 80 4000 0000"
         )
     html = owner_c.get(f"{u}/receipt/{w.recorded.payment.public_id}").content.decode()
-    assert "data-back" in html and "Pilot Tiffin (test)" in html and "12 MG Road" in html and "080 4000 0000" in html
+    assert "data-back" in html and "Sample Tiffin (test)" in html and "12 MG Road" in html and "080 4000 0000" in html
 
 
 # --- 24-28 platform ----------------------------------------------------------------------------
@@ -403,12 +403,12 @@ def test_platform_dashboard_uses_display_names_and_links_to_the_detail_page():
     with w.ctx():
         from mealtally.tenancy import services as t
 
-        t.update_settings(actor=w.owner, display_name="Pilot Tiffin (test)")
+        t.update_settings(actor=w.owner, display_name="Sample Tiffin (test)")
     html = client_for(_admin()).get("/platform/").content.decode()
-    assert "Pilot Tiffin (test)" in html and "/platform/tenants/d021name" in html and "/t/d021name/" not in html
+    assert "Sample Tiffin (test)" in html and "/platform/tenants/d021name" in html and "/t/d021name/" not in html
 
 
-# --- D03.3 camera hotfix: the typed-in fallback ---------------------------------------------------------------------
+# --- camera hotfix: the typed-in fallback ---------------------------------------------------------------------
 def test_qr_screen_shows_the_same_12_char_code_as_the_qr_and_staff_can_type_it(w, cust_c, staff_c, u):
     import base64
 

@@ -46,7 +46,7 @@ LIVE_STATUSES = (Pass.Status.ACTIVE, Pass.Status.SUSPENDED)
 
 
 def compute_ends_at(*, validity_mode: str, validity_days: int, starts_at: datetime, tz_name: str) -> datetime:
-    """Last instant of the pass, in UTC (ADR 0008).
+    """Last instant of the pass, in UTC.
 
     ROLLING_DAYS: end of the tenant-local day ``validity_days - 1`` after the start date (purchase day = day 1).
     CALENDAR_MONTH: end of the tenant-local calendar month containing ``starts_at``.
@@ -192,7 +192,7 @@ def create_pass_for_payment(*, actor: Actor, tenant, settings_row, payment, cust
         "validity_mode": plan.validity_mode,
         "validity_days": plan.validity_days,
         "max_meals_per_day": plan.max_meals_per_day,
-        # D03.9: which meal slots, snapshotted (the slots' times stay live).
+        # which meal slots, snapshotted (the slots' times stay live).
         "allowed_slot_ids": sorted(plan.allowed_slots.values_list("id", flat=True)),
         "max_meals_per_slot": plan.max_meals_per_slot,
     }
@@ -288,7 +288,7 @@ def resume_pass(*, actor: Actor, pass_public_id, reason: str, now: datetime | No
 
 
 def promote_next(customer_id: int, *, now: datetime | None = None, actor=None) -> Pass | None:
-    """When a live pass ends early (cancel / void) the earliest QUEUED pass starts immediately (ADR 0011).
+    """When a live pass ends early (cancel / void) the earliest QUEUED pass starts immediately.
 
     ``starts_at`` becomes ``now``; ``ends_at`` is recomputed for its validity mode; later queued passes are
     re-chained behind it. Runs in the caller's transaction.

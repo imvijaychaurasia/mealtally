@@ -1,5 +1,5 @@
 {% extends "admin/base.html" %}
-{% comment %}D03.5: Django admin is the platform admin, so only its header takes the Mealtally colour. Nothing else is changed.{% endcomment %}
+{% comment %}Django admin is the platform admin, so only its header takes the Mealtally colour. Nothing else is changed.{% endcomment %}
 {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 {% block extrastyle %}{{ block.super }}<style>:root{--header-bg:{% theme_token "primary" "tally" %};--header-color:{% theme_token "on-primary" "tally" %};--header-branding-color:{% theme_token "on-primary" "tally" %};}</style>{% endblock %}
 {% block branding %}

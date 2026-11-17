@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Preview: wallet-plan customer app. The logged-in customer sees THEIR OWN wallet (D03.9 QA-01 P1-3), or none."""
+"""Preview: wallet-plan customer app. The logged-in customer sees THEIR OWN wallet, or none."""
 
 from __future__ import annotations
 
@@ -209,7 +209,7 @@ def order_online(request, D):
             "cats": cats,
             "rules": D["ck_rules"],
             "days": days,
-            # QA-01 P1-5: the cart defaults to the CUSTOMER's address (never the restaurant's); P1-3: wallet or not
+            # the cart defaults to the CUSTOMER's address (never the restaurant's), wallet or not
             "delivery_address": customer.address if customer else "",
             "has_wallet": bool(customer and customer.has_wallet),
         },

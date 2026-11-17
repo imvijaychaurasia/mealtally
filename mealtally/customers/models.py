@@ -21,9 +21,9 @@ class Customer(TenantOwnedModel):
     notes = models.TextField(blank=True)
     pin_hash = models.CharField(max_length=255, blank=True, help_text="Hashed customer login PIN.")
     must_change_pin = models.BooleanField(default=False)
-    # D03.9 (QA-01 P1-5): delivery address; staff, owner and the customer can edit it. The order cart defaults to it.
+    # delivery address; staff, owner and the customer can edit it. The order cart defaults to it.
     address = models.TextField(blank=True)
-    # D03.9 (QA-01 P1-3): only wallet subscribers have the (preview) wallet: Wallet tab, Home card and Order debits.
+    # only wallet subscribers have the (preview) wallet: Wallet tab, Home card and Order debits.
     has_wallet = models.BooleanField(default=False)
 
     class Meta:
@@ -34,7 +34,7 @@ class Customer(TenantOwnedModel):
         ]
         indexes = [
             models.Index(fields=["tenant", "full_name"]),
-            # trigram indexes: fast "contains" search on name / phone / code (ADR 0012)
+            # trigram indexes: fast "contains" search on name / phone / code
             GinIndex(OpClass(Upper("full_name"), name="gin_trgm_ops"), name="cust_name_trgm"),
             GinIndex(OpClass("phone_e164", name="gin_trgm_ops"), name="cust_phone_trgm"),
             GinIndex(OpClass(Upper("customer_code"), name="gin_trgm_ops"), name="cust_code_trgm"),

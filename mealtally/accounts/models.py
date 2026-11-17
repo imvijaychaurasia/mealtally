@@ -77,7 +77,7 @@ class Membership(TenantOwnedModel):
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="memberships")
     role = models.CharField(max_length=10, choices=Role)
     is_active = models.BooleanField(default=True)
-    # D03.9 (QA-01 P1-4): a DRIVER's own delivery route and vehicle (the owner reassigns on Delivery routes).
+    # a DRIVER's own delivery route and vehicle (the owner reassigns on Delivery routes).
     route_name = models.CharField(max_length=60, blank=True)
     vehicle = models.CharField(max_length=60, blank=True)
 

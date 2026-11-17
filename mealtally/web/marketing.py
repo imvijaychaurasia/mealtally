@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Public landing page content (D03.6 Part B). The feature grid is generated from the preview feature registry so a badge can
+"""Public landing page content. The feature grid is generated from the preview feature registry so a badge can
 never say "Live" for something the product does not do: a feature is Live only when EVERY registry module it needs is ``real``.
 """
 
@@ -199,7 +199,7 @@ TRUST = [
 
 
 def pricing() -> dict:
-    """D03.9 §A2: the mode is a PLATFORM SETTING (platform admin, no restart); the percentages are the default platform
+    """The mode is a PLATFORM SETTING (platform admin, no restart); the percentages are the default platform
     fee policy that billing applies to every new restaurant, so the page can never drift from what is charged."""
     from mealtally.tenancy.models import PlatformSettings  # noqa: PLC0415
 

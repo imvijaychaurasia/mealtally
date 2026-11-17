@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Seeded-data crawl (D02.1 section 4) -- runs in default CI.
+"""Seeded-data crawl -- runs in default CI.
 
-Loads ``seed_demo`` into a pilot-like tenant (back-dated payments, an expired pass, a queued pass, a void),
+Loads ``seed_demo`` into a realistic tenant (back-dated payments, an expired pass, a queued pass, a void),
 logs in as owner, staff, a demo customer and the platform admin, and GETs every navigable page and every report for the
 current and previous month. It asserts: 200, no server-error text, no x100 money (nothing above Rs 10,000 in demo data),
 and that every fee headline equals the sum of its lines.
@@ -31,7 +31,7 @@ from mealtally.testing import World
 from .conftest import client_for
 
 pytestmark = pytest.mark.django_db
-SLUG = "crawl-pilot"
+SLUG = "crawl-sample"
 MONEY = re.compile(r"₹([\d,]+)\.(\d{2})")
 FORBIDDEN = (
     "Server Error",
@@ -89,7 +89,7 @@ def crawl(client, starts, seen: set[str], limit=250) -> int:
 
 
 @pytest.fixture
-def pilot(capsys):
+def sample(capsys):
     w = World(slug=SLUG, buy_pass=False)
     call_command("seed_demo", "--slug", SLUG)
     capsys.readouterr()
@@ -116,8 +116,8 @@ def months(w):
     return [(y, m), (py, pm)]
 
 
-def test_every_page_for_every_role_renders_with_sane_money_and_consistent_fees(pilot):
-    w, demo, mid, admin = pilot
+def test_every_page_for_every_role_renders_with_sane_money_and_consistent_fees(sample):
+    w, demo, mid, admin = sample
     base = f"/t/{SLUG}"
     seen: set[str] = set()
     n = 0

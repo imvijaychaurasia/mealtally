@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Pilot reseed (D02 section 9): rename the pilot's display name and add 5 demo customers in different pass states.
+"""Sample data: rename a restaurant's display name and add 5 demo customers in different pass states.
 
 Idempotent. Demo PINs are generated and printed ONCE (customers must change them at first login).
 """
@@ -35,11 +35,11 @@ DEMO = (
 
 
 class Command(BaseCommand):
-    help = "Rename the pilot tenant's display name and add 5 demo customers with passes in different states."
+    help = "Rename a restaurant's display name and add 5 demo customers with passes in different states."
 
     def add_arguments(self, parser):
-        parser.add_argument("--slug", default="pilot-tiffin")
-        parser.add_argument("--display-name", default="Pilot Tiffin (test)")
+        parser.add_argument("--slug", default="sample-tiffin")
+        parser.add_argument("--display-name", default="Sample Tiffin (test)")
 
     def handle(self, *args, **opts):
         with platform_context():
@@ -56,7 +56,7 @@ class Command(BaseCommand):
             tenancy.update_settings(
                 actor=Actor(user=owner.user, role=Role.OWNER, tenant_id=tenant.id),
                 display_name=opts["display_name"],
-                # dummy contact details so receipts are reviewed with real-looking content (D02.1 #23)
+                # dummy contact details so receipts are reviewed with real-looking content
                 address=current.address or "12 MG Road, Indiranagar, Bengaluru 560038",
                 contact_phone=current.contact_phone or "+91 80 4000 0000",
             )

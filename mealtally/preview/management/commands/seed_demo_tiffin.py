@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03: create the demo tenant ``demo-tiffin`` ("Saffron Tiffins & Mess (Demo)") with REAL data through the real services.
+"""Create the demo tenant ``demo-tiffin`` ("Saffron Tiffins & Mess (Demo)") with REAL data through the real services.
 
 Real: plans, 25 pass customers in mixed states, ~45 days of back-dated redemptions (with a few undos and one adjustment),
 payments across Oct-Nov (cash + UPI with fake UTRs, one voided), and a staff roster. Preview data (orders, wallets, ...)
@@ -71,7 +71,7 @@ def _at(day, hh, mm):
 
 
 class Command(BaseCommand):
-    help = "Create/refresh the demo-tiffin tenant (real pass data) for the D03 prospect demo."
+    help = "Create/refresh the demo-tiffin tenant (real pass data) for demos."
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -96,13 +96,13 @@ class Command(BaseCommand):
             "--theme",
             default="",
             choices=["", "masala", "fresh", "tally"],
-            help="D03.5: tenant theme (default: masala).",
+            help="Tenant theme (default: masala).",
         )
         parser.add_argument(
             "--ui-shell",
             default="",
             choices=["", "classic", "console"],
-            help="D03.4: set the tenant's UI shell (default: leave as is).",
+            help="Set the tenant's UI shell (default: leave as is).",
         )
 
     # ------------------------------------------------------------------------------------------------------------
@@ -116,14 +116,14 @@ class Command(BaseCommand):
         if tenant is not None:
             self.stdout.write("demo-tiffin already exists; making sure the flags are set.")
             self._flags(tenant, opts)
-            with platform_context():  # D03.1: refresh demo-only data fixes (no schema change)
+            with platform_context():  # refresh demo-only data fixes (no schema change)
                 TenantSettings.objects.filter(tenant_id=tenant.id).update(food_licence_no=FAKE_FSSAI)
                 for (
                     _label,
                     _role,
                     email,
                     name,
-                ) in self.staff:  # D03.2: plain display names (the header already shows the role)
+                ) in self.staff:  # plain display names (the header already shows the role)
                     User.objects.filter(email=email).update(name=name)
             self._refresh_persona(tenant, opts)
             self._d039_roster(tenant)
@@ -227,7 +227,7 @@ class Command(BaseCommand):
             path.write_text("\n".join(lines) + "\n")
             path.chmod(0o600)
 
-    # D03.9 --------------------------------------------------------------------------------------------------------
+    # roster -------------------------------------------------------------------------------------------------------
     AREAS = {
         "saffron": (
             ["Kothrud", "Karve Nagar", "Erandwane", "Warje", "Bavdhan"],
@@ -241,7 +241,7 @@ class Command(BaseCommand):
     }
 
     def _d039_roster(self, tenant):
-        """Idempotent D03.9 demo data (QA-01 P1-2..P1-5, §B6): wallets for about half the customers, customer addresses,
+        """Idempotent demo data: wallets for about half the customers, customer addresses,
         a route + vehicle per driver, and explicit meal-time rules on the demo plans (also on passes already sold).
         Never touches the ledger; never overwrites an address, route or rule someone has already set."""
         from mealtally.accounts.models import Membership  # noqa: PLC0415
@@ -279,7 +279,7 @@ class Command(BaseCommand):
                 Pass.objects.filter(plan=plan, status__in=["ACTIVE", "QUEUED"], allowed_slot_ids=[]).update(
                     allowed_slot_ids=ids, max_meals_per_slot=1
                 )
-        self.stdout.write("D03.9 roster: wallets, addresses, driver routes and meal-time rules set.")
+        self.stdout.write("Roster: wallets, addresses, driver routes and meal-time rules set.")
 
     def _flags(self, tenant, opts=None):
         with platform_context():

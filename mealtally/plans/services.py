@@ -73,7 +73,7 @@ def rule_summary(plan: Plan) -> str:
     )
 
 
-# --- D02: plan management (OWNER / MANAGER). Editing never touches sold passes (they hold a snapshot). ----
+# --- plan management (OWNER / MANAGER). Editing never touches sold passes (they hold a snapshot). ----
 from mealtally.accounts.policy import Action  # noqa: E402
 from mealtally.accounts.policy import Actor  # noqa: E402
 from mealtally.accounts.policy import require  # noqa: E402
@@ -119,7 +119,7 @@ def _snapshot(plan: Plan) -> dict:
 
 
 def save_plan(*, actor: Actor, plan: Plan | None = None, allowed_slots=None, **data) -> Plan:
-    """Create/update a plan. ``allowed_slots`` (ids or rows; None = leave as is) sets the D03.9 meal-time rule."""
+    """Create/update a plan. ``allowed_slots`` (ids or rows; None = leave as is) sets the meal-time rule."""
     require(actor, Action.MANAGE_PLANS)
     data = _validate({k: v for k, v in data.items() if k in _FIELDS})
     before = None
@@ -144,7 +144,7 @@ def save_plan(*, actor: Actor, plan: Plan | None = None, allowed_slots=None, **d
     return plan
 
 
-# --- D03.9: meal slots (OWNER) ---------------------------------------------------------------------------------------
+# --- meal slots (OWNER) ---------------------------------------------------------------------------------------------
 _SLOT_FIELDS = ("name", "name_hi", "start_time", "end_time", "grace_minutes", "is_active", "sort_order")
 
 

@@ -17,7 +17,7 @@ from mealtally.tenancy.models import TenantSettings
 
 from .models import Payment
 
-# D03.9 QA-01 P2-8: what a person reads, not the internal code ("Upi Manual")
+# what a person reads, not the internal code ("Upi Manual")
 METHOD_LABELS = {
     "CASH": "Cash",
     "UPI_MANUAL": "UPI",

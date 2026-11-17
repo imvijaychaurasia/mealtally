@@ -24,7 +24,7 @@ CREDENTIAL_CHANGE_REQUIRED = "CREDENTIAL_CHANGE_REQUIRED"
 
 
 def enforce_credential_change(user, role, tenant_id) -> None:
-    """D02.1 Q2: while a temporary password / PIN is still in force, nothing but the change itself works."""
+    """While a temporary password / PIN is still in force, nothing but the change itself works."""
     from mealtally.customers.models import Customer  # noqa: PLC0415
 
     if role == Role.CUSTOMER:

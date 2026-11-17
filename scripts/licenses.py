@@ -35,6 +35,10 @@ VENDORED_JS = [
     ("@zxing/library", "0.23", "Apache-2.0", "https://github.com/zxing-js/library"),
     ("@zxing/browser", "0.2.1", "MIT", "https://github.com/zxing-js/browser"),
 ]
+FONT_ROW = (
+    "| Plus Jakarta Sans | SIL Open Font License 1.1 | `mealtally/static/fonts/` (licence alongside); outlined in the"
+    " wordmark | https://github.com/tokotype/PlusJakartaSans |"
+)
 
 
 def norm(name: str) -> str:
@@ -116,6 +120,12 @@ def main() -> int:
             "| Package | Version | Licence | Source |",
             "|---|---|---|---|",
             *[f"| {n} | {v} | {lic} | {url} |" for n, v, lic, url in rows],
+            "",
+            "## Fonts",
+            "",
+            "| Font | Licence | Where | Source |",
+            "|---|---|---|---|",
+            FONT_ROW,
             "",
             "## Logo and icons",
             "",

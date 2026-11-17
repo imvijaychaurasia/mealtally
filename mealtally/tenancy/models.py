@@ -107,7 +107,7 @@ class Tenant(models.Model):
         max_length=10,
         choices=UiShell,
         default=UiShell.CONSOLE,
-        help_text="D03.4: which app shell staff see. Flip here (no deploy) to switch a restaurant between the two.",
+        help_text="Which app shell staff see. Flip here (no deploy) to switch a restaurant between the two.",
     )
 
     class Theme(models.TextChoices):
@@ -119,7 +119,7 @@ class Tenant(models.Model):
         max_length=10,
         choices=Theme,
         default=Theme.MASALA,
-        help_text="D03.5: colour theme for this restaurant's screens (platform screens are always Mealtally).",
+        help_text="Colour theme for this restaurant's screens (platform screens are always Mealtally).",
     )
     show_preview_badges = models.BooleanField(default=True, help_text="Show the 'Preview' badge on Preview modules.")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -173,7 +173,7 @@ class TenantSettings(TenantOwnedModel):
     tenant = models.OneToOneField("tenancy.Tenant", on_delete=models.PROTECT, related_name="settings")
     redeem_cooldown_seconds = models.PositiveIntegerField(default=120)
     staff_reversal_window_hours = models.PositiveIntegerField(default=12)
-    # D03.9 §A1 (Vijay's decision: yes): counters may reverse other staff members' redemptions inside the window.
+    # counters may reverse other staff members' redemptions inside the window.
     counter_can_reverse_others = models.BooleanField(default=True)
     max_queued_passes = models.PositiveSmallIntegerField(default=1)
     customer_pin_length = models.PositiveSmallIntegerField(default=6)
@@ -188,11 +188,11 @@ class TenantSettings(TenantOwnedModel):
     tax_id = models.CharField("Tax ID", max_length=32, blank=True, help_text="GSTIN in India, VAT number in the EU/UK.")
     food_licence_no = models.CharField("Food business licence", max_length=40, blank=True, help_text="FSSAI in India.")
     allow_self_signup = models.BooleanField(default=False)
-    tagline = models.CharField(max_length=120, blank=True, help_text="D03.6: one line shown on the sign-in screens.")
-    # D03.9 (QA-01 P1-6): wallet top-up bounds.
+    tagline = models.CharField(max_length=120, blank=True, help_text="One line shown on the sign-in screens.")
+    # wallet top-up bounds.
     topup_min_minor = models.PositiveBigIntegerField(default=10_000)  # Rs 100
     topup_max_minor = models.PositiveBigIntegerField(default=5_000_000)  # Rs 50,000
-    # D03.9 §B6: the one-time "Set meal times and daily limits for your plans" banner was dismissed.
+    # the one-time "Set meal times and daily limits for your plans" banner was dismissed.
     meal_rules_banner_dismissed = models.BooleanField(default=False)
 
     class Meta:
@@ -200,7 +200,7 @@ class TenantSettings(TenantOwnedModel):
 
 
 class DemoRequest(models.Model):
-    """D03.6: a 'Book a demo' enquiry from the public landing page. Platform-scoped: no tenant, outside tenant RLS."""
+    """A 'Book a demo' enquiry from the public landing page. Platform-scoped: no tenant, outside tenant RLS."""
 
     class BusinessType(models.TextChoices):
         TIFFIN = "tiffin", "Tiffin service"

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.4 console shell: the sidebar is behind a per-tenant switch, every sidebar link works for every role in BOTH shells."""
+"""Console shell: the sidebar is behind a per-tenant switch, every sidebar link works for every role in BOTH shells."""
 
 from __future__ import annotations
 
@@ -52,7 +52,7 @@ def home(role):
 
 def test_console_is_the_default_and_flipping_the_setting_restores_the_old_shell(demo, clients):  # noqa: F811
     owner = clients["OWNER"]
-    console = owner.get(f"/t/{SLUG}/admin/today").content.decode()  # D03.5: console is the default for every tenant
+    console = owner.get(f"/t/{SLUG}/admin/today").content.decode()  # console is the default for every tenant
     assert (
         'data-testid="sidebar"' in console
         and 'data-testid="tile-customers"' in console
@@ -76,7 +76,7 @@ def test_every_navigation_link_works_for_every_role_in_both_shells(demo, clients
         resp = clients[role].get(home(role))
         assert resp.status_code == 200, (role, shell)
         links = hrefs(resp.content.decode(), shell)
-        if shell == "console" and role in ("CHEF", "DRIVER"):  # D03.7 station shell: no sidebar by design
+        if shell == "console" and role in ("CHEF", "DRIVER"):  # station shell: no sidebar by design
             assert 'data-testid="sidebar"' not in resp.content.decode(), role
             links = (
                 re.findall(r'href="(/t/[^"#]+)', resp.content.decode().split('data-testid="station-bar"')[-1])
@@ -136,7 +136,7 @@ def test_sidebar_shows_each_role_only_what_it_may_use(demo, clients):  # noqa: F
     for role in (
         "CHEF",
         "DRIVER",
-    ):  # D03.7: the station shell has no sidebar, only a slim top bar (and a bar for drivers)
+    ):  # the station shell has no sidebar, only a slim top bar (and a bar for drivers)
         page = clients[role].get(home(role)).content.decode()
         assert 'data-testid="sidebar"' not in page and 'data-testid="station-role"' in page
 

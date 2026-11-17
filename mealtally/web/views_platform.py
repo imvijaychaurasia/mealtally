@@ -219,7 +219,7 @@ def tenant_fee_policy(request, slug):
 @platform_view
 @require_POST
 def tenant_flags(request, slug):
-    """D03: platform-admin-only toggles for the preview modules (badge visibility, demo dataset)."""
+    """Platform-admin-only toggles for the preview modules (badge visibility, demo dataset)."""
     from mealtally.audit import services as audit  # noqa: PLC0415
     from mealtally.tenancy.context import platform_context  # noqa: PLC0415
 

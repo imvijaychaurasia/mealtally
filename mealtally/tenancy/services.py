@@ -92,7 +92,7 @@ def get_settings(tenant_id: int) -> TenantSettings:
     return TenantSettings.objects.get(tenant_id=tenant_id)
 
 
-# --- D02 -------------------------------------------------------------------------------------------
+# --- -------------------------------------------------------------------------------------------
 import re  # noqa: E402
 
 from mealtally.accounts.policy import Action  # noqa: E402
@@ -123,10 +123,10 @@ _SETTINGS_FIELDS = {
     "staff_reversal_window_hours": int,
     "max_queued_passes": int,
     "allow_self_signup": bool,
-    "counter_can_reverse_others": bool,  # D03.9 §A1
-    "topup_min_minor": int,  # D03.9 QA-01 P1-6
+    "counter_can_reverse_others": bool,
+    "topup_min_minor": int,
     "topup_max_minor": int,
-    "meal_rules_banner_dismissed": bool,  # D03.9 §B6
+    "meal_rules_banner_dismissed": bool,
 }
 
 

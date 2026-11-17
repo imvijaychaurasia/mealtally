@@ -7,7 +7,7 @@ third-party UIs need more and ONLY they get it, by URL prefix:
 * Django admin (``/platform/admin/``): inline ``style`` attributes.
 * Swagger UI (``/api/v1/docs/``): inline bootstrap script + styles.
 
-Nothing else is relaxed (ADR 0013).
+Nothing else is relaxed.
 """
 
 from __future__ import annotations
@@ -48,11 +48,11 @@ class ScopedCSPMiddleware:
 
 
 class PermissionsPolicyMiddleware:
-    """D03.9 §D2: the app owns the camera permission. ``camera=(self)`` ONLY on the counter scan page (the staff
+    """The app owns the camera permission. ``camera=(self)`` ONLY on the counter scan page (the staff
     console, the one page with the live QR scanner); every other page sends ``camera=()``. The driver's photo proof uses
     a file input with ``capture``, which needs no camera permission. Microphone and geolocation are off everywhere.
 
-    NOTE: Traefik's entrypoint ``security-headers`` middleware OVERWRITES this header today (verified with curl, D03.9),
+    NOTE: a reverse proxy that sets its own ``Permissions-Policy`` replaces this header,
     so the edge value is what browsers see until the edge stops setting Permissions-Policy for Mealtally.
     """
 

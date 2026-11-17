@@ -65,7 +65,7 @@ def split_by_option(orders):
     return [{"label": k, "qty": v} for k, v in groups.items()]
 
 
-EXPENSE_RATIO = 0.66  # D03.1: a healthy tiffin business runs expenses at 62-70% of revenue (30-38% margin)
+EXPENSE_RATIO = 0.66  # a healthy tiffin business runs expenses at 62-70% of revenue (30-38% margin)
 
 
 def money_series(D, passes_minor: int):

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.5 theme system: tokens, WCAG AA contrast for every pair, no raw colours in templates, compact money, theme switching."""
+"""Theme system: tokens, WCAG AA contrast for every pair, no raw colours in templates, compact money, theme switching."""
 
 from __future__ import annotations
 
@@ -521,7 +521,7 @@ def test_d038c_driver_numbering_list_and_summary_agree(demo, clients):  # noqa: 
     from mealtally.preview.tests.test_preview import tid
     from mealtally.tenancy.context import tenant_context as _tc
 
-    with _tc(tid()):  # D03.9: the driver page is built from the tenant's roster, and shows driver 1's own route
+    with _tc(tid()):  # the driver page is built from the tenant's roster, and shows driver 1's own route
         D = pvdata.for_tenant(Tenant.objects.get(slug=SLUG))
     route = D["routes"][0]["name"]
     todays = sorted(

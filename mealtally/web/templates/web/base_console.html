@@ -23,8 +23,8 @@
   <aside class="console-sidebar no-print fixed inset-y-0 start-0 z-40 flex flex-col overflow-y-auto border-e border-side-ink/10 bg-side text-side-ink" data-testid="sidebar" aria-label="{% trans 'Main' %}">
     <div class="border-b border-side-ink/10 px-4 py-4">
       <a class="flex items-center gap-2" href="{{ home_href }}" aria-label="Mealtally">
-        <svg class="h-8 w-8 shrink-0" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" class="fill-primary"/><path d="M9 16.5l4.5 4.5L23 11" fill="none" class="stroke-on-primary" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span class="sb-label font-display text-lg font-extrabold tracking-tight text-side-ink">Mealtally <span class="text-side-label">Mealtally</span></span>
+        <img class="h-8 w-8 shrink-0" src="{% static 'brand/icon.svg' %}" alt="" width="32" height="32">
+        <span class="sb-label font-display text-lg font-extrabold tracking-tight text-side-ink">Mealtally</span>
       </a>
       <div class="sb-tenant mt-3 flex items-center gap-2 rounded-xl bg-side-ink/10 p-2" data-testid="sidebar-tenant">
         <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-side-active text-sm font-bold text-side-active-ink" aria-hidden="true">{{ cfg.display_name|default:tenant.name|slice:":1" }}</span>

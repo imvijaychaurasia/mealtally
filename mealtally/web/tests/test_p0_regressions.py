@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D02.1 P0 regressions: money x100, fee totals vs lines, audit-log 500, unbranded error pages."""
+"""Regressions: money x100, fee totals vs lines, audit-log 500, unbranded error pages."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ pytestmark = pytest.mark.django_db
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
-# ---- P0-1 money ------------------------------------------------------------------------------------------
+# ---- money ------------------------------------------------------------------------------------------
 @pytest.mark.parametrize(
     ("minor", "text"),
     [
@@ -89,7 +89,7 @@ def test_1500_rupee_plan_reads_1500_everywhere_not_150000():
             assert "₹1,500.00" in body, name
 
 
-# ---- P0-2 fee totals == lines -------------------------------------------------------------------------------
+# ---- fee totals == lines -------------------------------------------------------------------------------
 def _months_back(tenant, n):
     y, m = fees.local_month(tenant)
     for _ in range(n):
@@ -153,7 +153,7 @@ def test_every_fee_headline_agrees_dashboard_statement_platform():
         assert reports.platform_totals([row])["fees_month_minor"] == stmt["total_fee_minor"]
 
 
-# ---- P0-3 audit log 500 ----------------------------------------------------------------------------------
+# ---- audit log 500 ----------------------------------------------------------------------------------
 def test_audit_log_renders_with_seed_demo_data_including_system_events(capsys):
     w = World(slug="p03audit", buy_pass=False)
     call_command("seed_demo", "--slug", w.tenant.slug)
@@ -164,7 +164,7 @@ def test_audit_log_renders_with_seed_demo_data_including_system_events(capsys):
     assert client_for(w.owner.user).get(f"/t/{w.tenant.slug}/admin/audit", {"action": "pass"}).status_code == 200
 
 
-# ---- P0-4 branded error pages + trailing slashes ------------------------------------------------------------
+# ---- branded error pages + trailing slashes ------------------------------------------------------------
 def test_unknown_urls_get_a_branded_404_without_a_tenant(client):
     r = client.get("/definitely/not/here")
     body = r.content.decode()
@@ -182,7 +182,7 @@ def test_api_404_is_json_not_html(client):
 
 
 def test_branded_500_page_html_and_json(monkeypatch):
-    import mealtally.web.views_marketing as views  # the landing page lives here since D03.6
+    import mealtally.web.views_marketing as views  # the landing page lives here
 
     monkeypatch.setattr(views, "render", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("boom")))
     c = Client(raise_request_exception=False)
@@ -228,10 +228,10 @@ def test_trailing_slash_variants_redirect_to_the_canonical_url():
     assert owner.get(u + "/admin/nonexistent/").status_code == 404  # truly unknown stays a (branded) 404
 
 
-# ---- D03.3 camera hotfix --------------------------------------------------------------------------------------------
+# ---- camera hotfix --------------------------------------------------------------------------------------------
 def test_permissions_policy_allows_camera_only_on_the_counter_scan_page(w, staff_c, owner_c, u):
     on = staff_c.get(f"{u}/staff/")["Permissions-Policy"]
-    assert on == "camera=(self), microphone=(), geolocation=()"  # D03.9 §D2: exactly the directive's value
+    assert on == "camera=(self), microphone=(), geolocation=()"  # exactly the directive's value
     assert staff_c.get(f"{u}/staff/sell")["Permissions-Policy"].startswith("camera=()")  # no scanner on sell
     assert staff_c.get(f"{u}/staff/today")["Permissions-Policy"].startswith("camera=()")
     for path in (f"{u}/admin/", f"{u}/staff-not-a-page", "/", "/healthz", f"{u}/driver/"):

@@ -25,7 +25,7 @@ class Pass(TenantOwnedModel):
     validity_mode = models.CharField(max_length=16, choices=Plan.ValidityMode)
     validity_days = models.PositiveIntegerField()
     max_meals_per_day = models.PositiveSmallIntegerField(null=True, blank=True)
-    # D03.9 meal-time rules, snapshotted from the plan at sale (slot times stay live: the owner edits Lunch once).
+    # Meal-time rules, snapshotted from the plan at sale (slot times stay live: the owner edits Lunch once).
     allowed_slot_ids = ArrayField(models.BigIntegerField(), default=list, blank=True, help_text="Empty = any time.")
     max_meals_per_slot = models.PositiveSmallIntegerField(default=1)
 

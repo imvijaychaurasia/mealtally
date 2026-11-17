@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""THE platform-fee reporting function (ADR 0015). It becomes an invoice, so there is exactly one implementation.
+"""THE platform-fee reporting function. It becomes an invoice, so there is exactly one implementation.
 
-Binding rule (D02.1 P0-2):
+Binding rule:
 * a **charge** belongs to the tenant-local month of the payment's ``received_at``;
 * a **void reversal** belongs to the tenant-local month of the payment's ``voided_at``.
 

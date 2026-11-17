@@ -3,7 +3,7 @@
 # Nightly custom-format dump of the application database; prunes dumps older than N days.
 # Run once immediately with:  docker exec mealtally-backup /usr/local/bin/backup-loop.sh --once
 #
-# D03.9: a night is never silently lost. When the loop starts (container start, host reboot) and the newest dump is
+# a night is never silently lost. When the loop starts (container start, host reboot) and the newest dump is
 # older than MAX_AGE_HOURS, it takes a catch-up dump at once (15-16 Nov 2026 were missed because the host and then the
 # stack were down at 02:00 IST). It logs every dump and the next scheduled time, so `docker logs mealtally-backup` shows it.
 set -o errexit -o nounset -o pipefail

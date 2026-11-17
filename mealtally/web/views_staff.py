@@ -139,7 +139,7 @@ def _duration(seconds: int) -> str:
 
 
 def cooldown_text(ago_seconds: int, limit_seconds: int) -> str:
-    """QA-01 P2-10: 'Already redeemed 1 minute ago (limit 2 minutes) — give another meal?' from the real setting."""
+    """'Already redeemed 1 minute ago (limit 2 minutes) — give another meal?' from the real setting."""
     ago = _("less than a minute") if ago_seconds < 60 else _duration((ago_seconds // 60) * 60)  # noqa: PLR2004
     return _("Already redeemed %(ago)s ago (limit %(limit)s) — give another meal?") % {
         "ago": ago,
@@ -305,7 +305,7 @@ def sell_search(request):
 
 
 def _sell_get_redirect(request):
-    """D03.9 P2-7: Back/refresh on a sell step (GET) goes to the sell form, noting a sale this person just made."""
+    """Back/refresh on a sell step (GET) goes to the sell form, noting a sale this person just made."""
     from datetime import timedelta  # noqa: PLC0415
 
     from django.shortcuts import redirect  # noqa: PLC0415

@@ -43,7 +43,7 @@ def test_rolling_days_ends_at_end_of_last_local_day():
     rec = buy(w.tenant, w.owner, w.customer, w.plan, now=ist(2026, 11, 12, 10, 0))
     p = rec.pass_
     assert p.status == "ACTIVE" and p.meals_remaining == 30 and p.starts_at == ist(2026, 11, 12, 10, 0)
-    # purchase day is day 1 (ADR 0011): 12 Nov + 29 days = 11 Dec, to the last microsecond of that tenant-local day
+    # purchase day is day 1: 12 Nov + 29 days = 11 Dec, to the last microsecond of that tenant-local day
     assert p.ends_at.astimezone(IST) == datetime(2026, 12, 11, 23, 59, 59, 999999, tzinfo=IST)
     with w.ctx():
         e = MealLedgerEntry.objects.get(pass_ref=p)
@@ -53,7 +53,7 @@ def test_rolling_days_ends_at_end_of_last_local_day():
 def test_calendar_month_runs_to_month_end_and_grants_full_credits_mid_month():
     w = World(buy_pass=False, plan_kwargs={"validity_mode": "CALENDAR_MONTH"})
     p = buy(w.tenant, w.owner, w.customer, w.plan, now=ist(2026, 11, 25, 12, 0)).pass_
-    assert p.meals_remaining == 30  # no proration (product decision, flagged for D02 copy)
+    assert p.meals_remaining == 30  # no proration (product decision)
     assert p.ends_at.astimezone(IST) == datetime(2026, 11, 30, 23, 59, 59, 999999, tzinfo=IST)
 
 
@@ -99,7 +99,7 @@ def test_calendar_plan_queued_behind_rolling_pass_starts_on_the_next_first():
     cal = make_plan(w.tenant, name="Calendar", validity_mode="CALENDAR_MONTH")
     buy(w.tenant, w.owner, w.customer, w.plan, now=ist(2026, 11, 12, 10, 0))  # rolling, ends Dec 12
     q = buy(w.tenant, w.owner, w.customer, cal, now=ist(2026, 11, 13, 10, 0)).pass_
-    assert q.starts_at == ist(2027, 1, 1, 0, 0)  # next 1st after the prior pass ends (ADR 0008)
+    assert q.starts_at == ist(2027, 1, 1, 0, 0)  # next 1st after the prior pass ends
     assert q.ends_at.astimezone(IST).date().isoformat() == "2027-01-31"
 
 

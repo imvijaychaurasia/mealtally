@@ -169,7 +169,7 @@ def web(request):
         from .views_marketing import legal_pages_live  # noqa: PLC0415
 
         ctx["legal_live"] = legal_pages_live()
-    if tenant and not request.path.startswith("/platform"):  # platform surfaces are always tally (D03.5)
+    if tenant and not request.path.startswith("/platform"):  # platform surfaces are always tally
         ctx["theme"] = themes.theme_for(tenant)
         ctx["theme_color"] = themes.tokens(ctx["theme"])["primary"]
     cfg = ctx["cfg"]
@@ -199,17 +199,15 @@ def web(request):
         if role == "OWNER" and cfg is not None and not cfg.meal_rules_banner_dismissed:
             from mealtally.plans.models import Plan  # noqa: PLC0415
 
-            # D03.9 §B6: one-time nudge while any active plan has no meal-time rule and no daily limit
+            # one-time nudge while any active plan has no meal-time rule and no daily limit
             ctx["meal_rules_banner"] = Plan.objects.filter(
                 is_active=True, allowed_slots__isnull=True, max_meals_per_day__isnull=True
             ).exists()
-        if role == "CUSTOMER":  # D03.7: one consumer app shell for customers, never the admin frame
+        if role == "CUSTOMER":  # one consumer app shell for customers, never the admin frame
             ctx["shell_template"] = "web/base_customer.html"
             ctx["cust_tabs"], ctx["show_qr"] = customer_tabs(tenant, current, user)
             ctx["pv_nav"] = False
-        if (
-            tenant.ui_shell == "console" and role != "CUSTOMER"
-        ):  # D03.4: the console shell; customers keep the app layout
+        if tenant.ui_shell == "console" and role != "CUSTOMER":  # the console shell; customers keep the app layout
             from mealtally.preview import console  # noqa: PLC0415
 
             ctx["shell_template"] = "web/base_console.html"
@@ -217,7 +215,7 @@ def web(request):
             ctx["pv_nav"] = False
             if role in ("OWNER", "MANAGER") and tenant.has_demo_dataset:
                 ctx["console_alerts"] = console.alerts(request)
-            if role in ("CHEF", "DRIVER"):  # D03.7 station shell: device-first, no sidebar, large type
+            if role in ("CHEF", "DRIVER"):  # station shell: device-first, no sidebar, large type
                 ctx["sidebar"] = []
                 ctx["station"] = True
                 if role == "DRIVER" and tenant.has_demo_dataset:

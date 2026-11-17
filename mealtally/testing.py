@@ -93,7 +93,7 @@ class World:
         ui_shell="classic",
     ):
         self.tenant = make_tenant(slug, timezone_name=timezone_name, **(tenant_settings or {}))
-        if ui_shell != "console":  # the product default is console (D03.5); most UI tests exercise the classic fallback
+        if ui_shell != "console":  # the product default is console; most UI tests exercise the classic fallback
             with platform_context():
                 type(self.tenant).objects.filter(pk=self.tenant.pk).update(ui_shell=ui_shell)
             self.tenant.ui_shell = ui_shell

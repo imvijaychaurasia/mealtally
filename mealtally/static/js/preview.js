@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: AGPL-3.0-only */
-/* Preview-mode interactions (D03). Vanilla + event delegation; no inline script/style (CSP), no network, no writes. */
+/* Preview-mode interactions. Vanilla + event delegation; no inline script/style (CSP), no network, no writes. */
 (function () {
   "use strict";
   var $ = function (s, r) { return (r || document).querySelector(s); };

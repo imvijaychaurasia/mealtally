@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""D03.9 web layer: §A1 reversal policy, §B screens (meal times, plan rule, counter card, override, refused report,
-banner, customer rule line) and the QA-01 P1-5/P1-6/P2 fixes. Time-dependent cases run on a frozen clock."""
+"""Web layer of the meal rules: reversal policy, meal-time screens (meal times, plan rule, counter card, override,
+refused report, banner, customer rule line), customer addresses and wallet top-up checks. Time-dependent cases run on a frozen clock."""
 
 from __future__ import annotations
 
@@ -215,7 +215,7 @@ def test_policies_section_saves_reversal_policy_and_topup_bounds(w, owner_c, u):
     assert "largest top-up" in bad.content.decode()
 
 
-# --- QA-01 P1-5 / P1-6 ------------------------------------------------------------------------------------------------
+# --- ------------------------------------------------------------------------------------------------
 def test_staff_and_the_customer_can_edit_the_delivery_address(w, staff_c, cust_c, u):
     with w.ctx():
         w.customer.must_change_pin = False
@@ -250,7 +250,7 @@ def test_topup_is_checked_on_the_server(w, cust_c, u, amount, utr, ok):
     assert ('data-testid="topup-ok"' in html) is ok and ('data-testid="topup-errors"' in html) is (not ok)
 
 
-# --- QA-01 P2 ---------------------------------------------------------------------------------------------------------
+# --- ---------------------------------------------------------------------------------------------------------
 def test_back_onto_a_sell_step_goes_to_the_sell_form_with_a_note(w, staff_c, u):
     assert staff_c.get(u + "/staff/sell/confirm")["Location"] == u + "/staff/sell"
     from mealtally.testing import buy
@@ -336,7 +336,7 @@ def test_landing_header_says_dashboard_and_never_wraps(w, owner_c):
 
 
 def test_no_chart_series_uses_the_danger_colour():
-    """QA-01 P2-17: charts use data colours; danger/red is only for errors."""
+    """Charts use data colours; danger/red is only for errors."""
     root = Path(__file__).resolve().parents[2]
     tags = (root / "preview" / "templatetags" / "pv.py").read_text()
     for fn in re.findall(r"def (\w*(?:chart|donut|bar|line)\w*)\(", tags):
@@ -392,7 +392,7 @@ def test_rotate_tenant_credentials_resets_staff_and_named_customer_pins(w, tmp_p
 
     with platform_context():
         User.objects.create_superuser(email="d039-rot@example.test", password="Sup3r-Secret-Pw!")
-    out = tmp_path / "pilot.txt"
+    out = tmp_path / "rotated.txt"
     call_command(
         "rotate_tenant_credentials",
         "--slug",

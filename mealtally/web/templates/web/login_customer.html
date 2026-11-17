@@ -10,7 +10,7 @@
   <div class="mt-4"><label class="label mb-0" for="pin">{% trans "PIN" %}</label></div>
   <div class="pin-wrap" data-pin data-len="{{ cfg.customer_pin_length|default:6 }}"><div class="pin-cells" data-pin-cells aria-hidden="true"></div>
     <input class="input pin-input" id="pin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" required></div>
-  {# D03.9 P2-13: Show comes AFTER the PIN in the tab order (phone -> PIN -> Show -> Log in) #}
+  {# Show comes AFTER the PIN in the tab order (phone -> PIN -> Show -> Log in) #}
   <div class="flex justify-end"><button type="button" class="min-h-11 px-1 text-sm font-semibold text-primary underline" data-reveal="pin" data-testid="pin-show" aria-controls="pin" aria-pressed="false" data-show="{% trans 'Show' %}" data-hide="{% trans 'Hide' %}">{% trans "Show" %}</button></div>
   <button class="btn-primary mt-6 w-full" type="submit" data-testid="login-submit"><span class="btn-spinner hidden" aria-hidden="true"></span><span data-label>{% trans "Log in" %}</span></button>
   <p class="mt-4 text-sm text-ink-soft">{% trans "Forgot your PIN? Ask at the counter, and staff can reset it." %}</p>

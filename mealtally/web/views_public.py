@@ -225,7 +225,7 @@ def dismiss_http_notice(request):
 def service_worker(request):
     """Minimal SW: shows /offline/ only when a GET page load cannot reach the server at all (a network failure).
 
-    Any response the server gives -- 200, 302, 404, 405, 500 -- is shown as it is: never "You're offline" (D03.9 P2-7).
+    Any response the server gives -- 200, 302, 404, 405, 500 -- is shown as it is: never "You're offline".
     POST navigations (form resubmits on Back) are left entirely to the browser. Nothing is cached but the offline page.
     """
     js = (

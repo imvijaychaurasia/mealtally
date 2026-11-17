@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Write the deterministic preview dataset (relative to today) as JSON, e.g. for review or fixtures (D03 section 1)."""
+"""Write the deterministic preview dataset (relative to today) as JSON, e.g. for review or fixtures."""
 
 import json
 from datetime import date

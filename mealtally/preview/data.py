@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Deterministic demo dataset for the preview modules (D03). Pure Python, no database.
+"""Deterministic demo dataset for the preview modules. Pure Python, no database.
 
 ``build(today, roster)`` is seeded: same inputs -> same data, and every date is relative to ``today`` so the demo always
 looks current. Nothing here ever touches a real ledger.
 
-D03.9 (QA-01 P1-2/3/4): the ``roster`` is the tenant's REAL data -- its customers (name, phone, address, wallet flag), its
+The ``roster`` is the tenant's REAL data -- its customers (name, phone, address, wallet flag), its
 meal slots and its drivers' routes -- so every name, address and route the preview pages show exists in that tenant.
 Only customers flagged ``has_wallet`` are wallet subscribers. Without a roster (unit tests, the platform plans page) the
 built-in demo names are used. Cached per (day, persona, roster).
@@ -928,7 +928,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         "menu_link",
     ]
 
-    def who(i):  # bell entries name real subscribers (QA-01 P1-2: no invented names)
+    def who(i):  # bell entries name real subscribers, never invented names
         return subs[i % len(subs)]["name"] if subs else "a customer"
 
     lead_driver = D["routes"][0]["driver"].split(" ")[0] if D["routes"] else "The driver"
@@ -943,7 +943,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         (f"Driver {lead_driver} marked 12 stops delivered", 300),
         ("Weekly menu published", 420),
         ("Order #5%d skipped — low wallet" % ((order_no - 7) % 100), 480),
-        (f"Rating 5★ from {who(0)}", 600),
+        (f"5-star rating from {who(0)}", 600),
         ("Expense added: LPG ×2 ₹4,400", 700),
         ("New top-up request from Harsh Mehta", 820),
         ("Invoice INV-%s-0003 viewed" % prev_first.strftime("%y%m"), 900),

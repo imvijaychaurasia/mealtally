@@ -102,7 +102,7 @@ def _fix_phone_only(s: str) -> str:
 
 
 def _walk(x, fix=_fix):
-    if isinstance(x, pv.Real):  # the tenant's own records are never rewritten (D03.9)
+    if isinstance(x, pv.Real):  # the tenant's own records are never rewritten
         return x
     if isinstance(x, str):
         return fix(x)

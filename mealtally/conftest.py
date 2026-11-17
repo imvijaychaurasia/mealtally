@@ -23,7 +23,7 @@ from mealtally.tenancy.rls import APPEND_ONLY_TABLES
 
 _ADMIN: dict = {}
 
-# D03.9 §D1: every test runs on a frozen clock (the 14 Nov Hindi-toggle failure only happened after 11:00 IST).
+# every test runs on a frozen clock (the 14 Nov Hindi-toggle failure only happened after 11:00 IST).
 # Monday 16 Nov 2026, 10:00 IST; the clock ticks from there, so durations still work. Tests that need another moment
 # nest their own ``time_machine.travel``; ``@pytest.mark.real_clock`` opts out (none needs it today).
 FROZEN_AT = datetime(2026, 11, 16, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))

@@ -66,7 +66,7 @@ def get_user_or_404(pk: int) -> User:
         raise NotFound("User not found.") from exc
 
 
-# --- D02: passwords, staff management -------------------------------------------------------------
+# --- passwords, staff management -------------------------------------------------------------
 import secrets  # noqa: E402
 
 from django.contrib.auth.password_validation import validate_password  # noqa: E402

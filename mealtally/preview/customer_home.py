@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Customer Home extras for demo tenants (D03.7): wallet, today's meal, coming up and alerts, from the preview dataset."""
+"""Customer Home extras for demo tenants: wallet, today's meal, coming up and alerts, from the preview dataset."""
 
 from __future__ import annotations
 
@@ -13,10 +13,10 @@ from .views_me import _next_meal
 def summary(request) -> dict:
     D = data.for_tenant(request.tenant)
     s = _me(D, request)
-    if s is None:  # QA-01 P1-3: not a wallet subscriber -> no wallet card, no deliveries
+    if s is None:  # not a wallet subscriber -> no wallet card, no deliveries
         return {"D": D, "no_wallet": True}
     plan = D["wplan"][s["plan"]]
-    # QA-01 P2-15: only meals still to come; today's delivered/picked-up meal belongs in Activity
+    # only meals still to come; today's delivered/picked-up meal belongs in Activity
     done = ("DELIVERED", "PICKED_UP", "CANCELLED", "SKIPPED", "SKIPPED_HOLD")
     now = timezone.localtime().replace(tzinfo=None)
     upcoming = [

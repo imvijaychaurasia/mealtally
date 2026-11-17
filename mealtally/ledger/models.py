@@ -43,7 +43,7 @@ class MealLedgerEntry(TenantAppendOnlyModel):
         "self", null=True, blank=True, on_delete=models.PROTECT, related_name="reversal"
     )  # OneToOne == UNIQUE: an entry can be reversed at most once
     idempotency_key = models.TextField()
-    # D03.9: the meal slot a REDEEM was served in (NULL without slot rules, and for every other entry type).
+    # the meal slot a REDEEM was served in (NULL without slot rules, and for every other entry type).
     meal_slot = models.ForeignKey(
         "plans.MealSlot", null=True, blank=True, on_delete=models.PROTECT, related_name="+", db_index=False
     )

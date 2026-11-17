@@ -5,7 +5,7 @@
 @source "../../preview/templatetags";
 @source "../../static/js";
 
-/* D03.5: semantic tokens only. The values live in static/css/themes.css under [data-theme="..."]; nothing here (or in any
+/* semantic tokens only. The values live in static/css/themes.css under [data-theme="..."]; nothing here (or in any
    template) may contain a raw colour. `inline` makes utilities read the CSS variable directly, so a theme switch is instant. */
 @theme inline {
   --color-page: var(--page);
@@ -86,7 +86,7 @@
 
 [x-cloak] { display: none !important; }
 
-/* ---- D03.4 console shell (tokens only) ------------------------------------------------------------------- */
+/* ---- console shell (tokens only) ------------------------------------------------------------------- */
 .console-sidebar { width: 260px; }
 .console-main { padding-inline-start: 0; }
 @media (min-width: 1024px) {
@@ -106,7 +106,7 @@
   body.sb-open .console-sidebar { transform: translateX(0); }
 }
 
-/* ---- D03.6 sign-in screens (split panel) ------------------------------------------------------------------ */
+/* ---- sign-in screens (split panel) ------------------------------------------------------------------ */
 @utility auth-page { @apply relative isolate flex min-h-screen items-start justify-center overflow-hidden bg-page px-4 py-5 sm:items-center sm:py-10; }
 @utility auth-blob { @apply pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[56rem] w-[56rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-[0.07]; }
 @utility auth-card { @apply relative grid w-full max-w-[1080px] overflow-hidden rounded-3xl border border-subtle bg-card lg:grid-cols-2; box-shadow: var(--shadow-card); }
@@ -139,7 +139,7 @@
 @media (prefers-reduced-motion: reduce) { .btn-spinner { animation: none; } }
 @utility auth-link { @apply min-h-11 inline-flex items-center font-semibold text-primary underline underline-offset-2; }
 
-/* ---- D03.6 Part B: public landing page ---------------------------------------------------------------------- */
+/* ---- Part B: public landing page ---------------------------------------------------------------------- */
 @utility mk-wrap { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
 @utility mk-header { @apply sticky top-0 z-40 border-b border-subtle bg-card; }
 @utility mk-navlink { @apply inline-flex min-h-11 items-center rounded-lg px-3 text-sm font-semibold text-ink-soft hover:bg-track hover:text-ink; }
@@ -162,7 +162,7 @@
 @utility mk-laptop { @apply mx-auto w-full max-w-[640px] overflow-hidden rounded-t-2xl border-[10px] border-b-[18px] border-ink bg-ink; box-shadow: var(--shadow-card); }
 @utility mk-phone { @apply mx-auto w-full max-w-[280px] overflow-hidden rounded-[2.2rem] border-[10px] border-ink bg-ink; box-shadow: var(--shadow-card); }
 
-/* ---- D03.7 customer app shell ------------------------------------------------------------------------------ */
+/* ---- customer app shell ------------------------------------------------------------------------------ */
 @utility cust-wrap { @apply mx-auto w-full max-w-3xl px-4 lg:max-w-5xl; }
 @utility cust-top { @apply sticky top-0 z-30 border-b border-subtle bg-card; padding-top: env(safe-area-inset-top); }
 @utility cust-mono { @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary text-lg font-extrabold text-on-primary; }

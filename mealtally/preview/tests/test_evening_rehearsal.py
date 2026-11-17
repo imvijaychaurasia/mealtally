@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Evening rehearsal of the demo script with the clock frozen (D03.8 follow-up). Read-only for the demo tenants: it runs on a test
+"""Evening rehearsal of the demo script with the clock frozen. Read-only for the demo tenants: it runs on a test
 database seeded exactly like demo-tiffin / e2e-tiffin, and patches ``django.utils.timezone.now`` (not the server clock).
 
     pytest mealtally/preview/tests/test_evening_rehearsal.py -s -k rehearsal      # prints one JSON line per (time, step)

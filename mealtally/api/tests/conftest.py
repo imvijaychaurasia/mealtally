@@ -15,8 +15,8 @@ def login_as(user) -> APIClient:
 
 @pytest.fixture
 def w(db):
-    world = World(slug="pilot")
-    with world.ctx():  # the seeded customer has already changed the temporary PIN (D02.1 Q2 enforces it otherwise)
+    world = World(slug="sample")
+    with world.ctx():  # the seeded customer has already changed the temporary PIN (otherwise every request is refused)
         world.customer.must_change_pin = False
         world.customer.save()
     return world

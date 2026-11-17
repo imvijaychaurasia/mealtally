@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Theme tokens (D03.5). The single source of truth is ``static/css/themes.css``.
+"""Theme tokens. The single source of truth is ``static/css/themes.css``.
 
 This module parses it so that Python surfaces (PDFs, the PWA manifest, the Django admin header, the contrast test)
 read the same values and never hard-code colours.

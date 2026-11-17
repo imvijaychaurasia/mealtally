@@ -71,7 +71,7 @@ def test_update_settings_validation_audit_and_timezone():
         row = tenancy.update_settings(
             actor=w.owner,
             timezone_name="Asia/Dubai",
-            display_name="Pilot Tiffin (test)",
+            display_name="Sample Tiffin (test)",
             brand_color="#112233",
             redeem_cooldown_seconds=60,
             allow_self_signup=True,
@@ -80,7 +80,7 @@ def test_update_settings_validation_audit_and_timezone():
             receipt_footer="Hi",
         )
         assert row.brand_color == "#112233" and row.allow_self_signup and row.max_queued_passes == 2
-        assert tenancy.get_settings(w.tenant.id).display_name == "Pilot Tiffin (test)"
+        assert tenancy.get_settings(w.tenant.id).display_name == "Sample Tiffin (test)"
         assert AuditEvent.objects.filter(action="settings.update").count() == 1
         from mealtally.tenancy.models import Tenant
 
@@ -164,7 +164,7 @@ def test_plan_management_roles_validation_and_snapshot_independence():
         assert plan.max_meals_per_day == 1
         plans.save_plan(
             actor=w.owner, plan=w.plan, price_minor=999900, meals_per_cycle=99
-        )  # edit the plan the pilot pass was sold from
+        )  # edit the plan the first pass was sold from
         from mealtally.passes.models import Pass
 
         p = Pass.objects.get(pk=w.pass_.pk)

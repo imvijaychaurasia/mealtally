@@ -13,7 +13,7 @@ from .models import TenantSettings
 @admin.register(Tenant)
 class TenantAdmin(PlatformModelAdmin):
     list_display = ("id", "slug", "name", "status", "ui_shell", "theme", "has_demo_dataset", "timezone", "created_at")
-    list_editable = ("ui_shell", "theme")  # flip a restaurant between shells straight from the list (D03.4)
+    list_editable = ("ui_shell", "theme")  # flip a restaurant between shells straight from the list
     list_filter = ("status", "ui_shell", "theme")
     search_fields = ("slug", "name")
     readonly_fields = ("public_id",)
@@ -31,7 +31,7 @@ class TenantSettingsAdmin(PlatformModelAdmin):
 
 @admin.register(DemoRequest)
 class DemoRequestAdmin(PlatformModelAdmin):
-    """D03.6: demo enquiries from the landing page (platform admins only)."""
+    """Demo enquiries from the landing page (platform admins only)."""
 
     list_display = ("created_at", "business_name", "city", "business_type", "name", "phone", "handled")
     list_editable = ("handled",)
@@ -42,7 +42,7 @@ class DemoRequestAdmin(PlatformModelAdmin):
 
 @admin.register(PlatformSettings)
 class PlatformSettingsAdmin(PlatformModelAdmin):
-    """D03.9: landing-page pricing and legal-page details. Every change is audit-logged (before/after)."""
+    """Landing-page pricing and legal-page details. Every change is audit-logged (before/after)."""
 
     fieldsets = (
         ("Landing-page pricing", {"fields": ("marketing_pricing_mode", "pricing_headline", "pricing_footnote")}),

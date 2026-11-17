@@ -33,7 +33,7 @@ dependencies = [
   "psycopg[c]==3.3.8",
   "redis==8.1.0",
   "segno",
-  "sentry-sdk==2.74.0",
+  "sentry-sdk==2.75.0",
   "weasyprint",
   "whitenoise==6.12.0",
 ]

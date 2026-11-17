@@ -26,7 +26,7 @@ dependencies = [
   "djangorestframework==3.18.3",
   "drf-spectacular==0.30.0",
   "drf-spectacular-sidecar",
-  "gunicorn==26.2.0",
+  "gunicorn==27.0.1",
   "hiredis==3.5.0",
   "markdown==3.9",
   "packaging",

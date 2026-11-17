@@ -57,7 +57,7 @@ screenshots: ## Render docs/screenshots from a fresh `make demo` instance (needs
 	@scripts/screenshots.sh
 
 messages: ## Extract strings into locale/*/django.po and compile the .mo files (commit both)
-	$(COMPOSE) --profile test run --rm --no-deps --entrypoint "" --user "$$(id -u):$$(id -g)" -e HOME=/tmp test sh -c "python manage.py makemessages --all --ignore=.venv --no-obsolete && python manage.py compilemessages --use-fuzzy --ignore=.venv"
+	$(COMPOSE) --profile test run --rm --no-deps --entrypoint "" --user "$$(id -u):$$(id -g)" -e HOME=/tmp test sh -c "python manage.py makemessages --all --ignore=.venv --no-obsolete --no-fuzzy-matching && python manage.py compilemessages --use-fuzzy --ignore=.venv"
 
 shell: ## Django shell in the web container
 	$(COMPOSE) exec web python manage.py shell

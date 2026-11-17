@@ -377,7 +377,7 @@ def test_test_tenants_are_hidden_by_default_and_excluded_from_totals():
     html = admin.get("/platform/").content.decode()
     assert "d021real" in html and "d021test" not in html
     shown = admin.get("/platform/", {"show_test": "1"}).content.decode()
-    assert "d021test" in shown and "Hide test tenants" in shown
+    assert "d021test" in shown and "Hide test restaurants" in shown
     t_hidden = int(re.search(r'data-testid="pt-tenants">(\d+)', html).group(1))
     t_shown = int(re.search(r'data-testid="pt-tenants">(\d+)', shown).group(1))
     assert t_shown == t_hidden + 1 and real

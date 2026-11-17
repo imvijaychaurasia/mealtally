@@ -271,7 +271,7 @@ def test_platform_screens_and_onboarding(w):
             "owner_email": "uma@ui.example.com",
         },
     )
-    assert b"Tenant created" in ok.content and b'data-testid="owner-password"' in ok.content
+    assert b"Restaurant created" in ok.content and b'data-testid="owner-password"' in ok.content
     dup = c.post(
         "/platform/onboard/",
         {

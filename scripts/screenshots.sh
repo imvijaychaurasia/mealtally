@@ -10,7 +10,7 @@ port=$(grep -E '^MEALTALLY_PORT=' .env | cut -d= -f2 || true)
 base=${E2E_BASE_URL:-http://localhost:${port:-8000}}
 
 make demo > /dev/null
-rm -rf docs/screenshots && mkdir -p docs/screenshots
+mkdir -p docs/screenshots  # overwritten in place: the counter's "redeemed" shot needs an open meal time
 docker run --rm --network host --user "$(id -u):$(id -g)" -e HOME=/tmp -v "$PWD:/w" -w /w \
   -e E2E_BASE_URL="$base" -e E2E_ADMIN_LOGIN -e E2E_ADMIN_PASSWORD "$image" \
   sh -c "pip install -q --user --no-warn-script-location playwright==1.55.0 pillow==11.3.0 pytest==8.4.2 \

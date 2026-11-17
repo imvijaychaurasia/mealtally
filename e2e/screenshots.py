@@ -247,7 +247,9 @@ def gallery():
         "",
     ]
     for role, title in TITLES.items():
+        # every capture on disk, in the order taken (a state that couldn't be produced this run keeps its last image)
         names = [n for r, n in taken if r == role]
+        names += sorted({f.name.rsplit("-", 1)[0] for f in (OUT / role).glob("*.webp")} - set(names))
         if not names:
             continue
         lines += [f"## {title}", ""]

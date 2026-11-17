@@ -96,7 +96,7 @@ def test_theme_values_are_the_agreed_ones_and_the_card_is_always_white():
         "#E3F4EE",
         "#C2410C",
     )
-    assert (b["page"], b["primary"], b["tile-4"], b["side-label"]) == ("#F8FAFC", "#1D4ED8", "#BE123C", "#B45309")
+    assert (b["page"], b["primary"], b["tile-4"], b["side-label"]) == ("#FFF8EE", "#1F7A4D", "#B4232A", "#8A4E06")
     assert all(t["card"] == "#FFFFFF" for t in (m, f, b))  # QR and its code are never on a tinted background
     assert m["chart-3"] == m["accent"] and f["chart-3"] == "#4D7C0F" and b["chart-3"] == b["tile-2"]
 
@@ -192,7 +192,7 @@ def test_default_theme_is_masala_and_tenant_pages_carry_it_while_platform_pages_
     assert 'data-theme="fresh"' in owner.get(f"/t/{SLUG}/admin/today").content.decode()
     assert 'name="theme-color" content="#0E7C66"' in owner.get(f"/t/{SLUG}/admin/today").content.decode()
     manifest = anon_json(anon, "/manifest.webmanifest?theme=fresh")
-    assert manifest["theme_color"] == "#0E7C66" and anon_json(anon, "/manifest.webmanifest")["theme_color"] == "#1D4ED8"
+    assert manifest["theme_color"] == "#0E7C66" and anon_json(anon, "/manifest.webmanifest")["theme_color"] == "#1F7A4D"
 
 
 def anon_json(client, url):

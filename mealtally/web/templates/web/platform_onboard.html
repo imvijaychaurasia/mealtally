@@ -1,6 +1,6 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
-<section class="mx-auto max-w-xl"><h1 class="text-2xl font-bold">{% trans "Onboard a tenant" %}</h1>
+<section class="mx-auto max-w-xl"><h1 class="text-2xl font-bold">{% trans "Onboard a restaurant" %}</h1>
   <form method="post" class="card mt-3 grid gap-3">{% csrf_token %}
     {% if error %}<p class="rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
     <div><label class="label" for="name">{% trans "Restaurant name" %}</label><input class="input" id="name" name="name" required value="{{ form.name }}"></div>
@@ -9,6 +9,6 @@
     <div><label class="label" for="owner_name">{% trans "Owner name" %}</label><input class="input" id="owner_name" name="owner_name" required value="{{ form.owner_name }}"></div>
     <div><label class="label" for="owner_email">{% trans "Owner email" %}</label><input class="input" id="owner_email" name="owner_email" type="email" value="{{ form.owner_email }}"></div>
     <div><label class="label" for="owner_phone">{% trans "Owner phone (optional)" %}</label><input class="input" id="owner_phone" name="owner_phone" type="tel" value="{{ form.owner_phone }}"></div>
-    <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="is_test" {% if form.is_test %}checked{% endif %}> {% trans "Test tenant (hidden from platform lists and metrics)" %}</label>
-    <button class="btn-primary" type="submit" data-testid="onboard">{% trans "Create tenant" %}</button></form></section>
+    <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="is_test" {% if form.is_test %}checked{% endif %}> {% trans "Test restaurant (hidden from platform lists and metrics)" %}</label>
+    <button class="btn-primary" type="submit" data-testid="onboard">{% trans "Create restaurant" %}</button></form></section>
 {% endblock %}

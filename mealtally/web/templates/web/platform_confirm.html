@@ -1,7 +1,7 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
-<section class="mx-auto max-w-lg"><h1 class="text-2xl font-bold">{% if action == 'suspend' %}{% trans "Suspend tenant" %}{% elif action == 'activate' %}{% trans "Activate tenant" %}{% else %}{% trans "Deactivate tenant" %}{% endif %}: {{ t.slug }}</h1>
-  <p class="mt-2 text-ink-soft">{% if action == 'suspend' %}{% trans "Staff and customers of this tenant will see a 'service paused' page until it is activated again." %}{% elif action == 'activate' %}{% trans "Service resumes immediately." %}{% else %}{% trans "Deactivating ends service for this tenant. Data is kept." %}{% endif %}</p>
+<section class="mx-auto max-w-lg"><h1 class="text-2xl font-bold">{% if action == 'suspend' %}{% trans "Suspend restaurant" %}{% elif action == 'activate' %}{% trans "Activate restaurant" %}{% else %}{% trans "Deactivate restaurant" %}{% endif %}: {{ t.slug }}</h1>
+  <p class="mt-2 text-ink-soft">{% if action == 'suspend' %}{% trans "Staff and customers of this restaurant will see a 'service paused' page until it is activated again." %}{% elif action == 'activate' %}{% trans "Service resumes immediately." %}{% else %}{% trans "Deactivating ends service for this restaurant. Data is kept." %}{% endif %}</p>
   <form method="post" class="card mt-3">{% csrf_token %}
     {% if error %}<p class="mb-3 rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
     <label class="label" for="reason">{% trans "Reason (required — written to the audit log)" %}</label><textarea class="input" id="reason" name="reason" rows="3" required></textarea>

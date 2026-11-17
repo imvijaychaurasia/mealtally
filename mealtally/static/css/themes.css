@@ -89,28 +89,29 @@
 
 /* ---- tally: platform identity (also the fallback for any page without a theme, e.g. Django admin) -------------- */
 :root:not([data-theme]), [data-theme="tally"] {
-  --page: #F8FAFC;
+  /* the Mealtally brand (assets/brand/BRAND.md): cream, tamarind, curry-leaf green, saffron; a light console sidebar */
+  --page: #FFF8EE;
   --card: #FFFFFF;
-  --subtle: #E2E8F0;
-  --ink: #0F172A;
-  --muted: #64748B;
-  --primary: #1D4ED8;
-  --primary-hover: #1E3A8A;
-  --accent: #F59E0B;
-  --on-accent: #0F172A;
+  --subtle: #EADFD2;
+  --ink: #2A1C14;
+  --muted: #7A6656;
+  --primary: #1F7A4D;
+  --primary-hover: #17603C;
+  --accent: #F2A007;
+  --on-accent: #2A1C14;
   --side-bg: #FFFFFF;
-  --side-ink: #334155;
-  --side-active-bg: #EFF6FF;
-  --side-active-ink: #1E3A8A;
-  --side-label: #B45309;
-  --tile-1: #1D4ED8;
-  --tile-2: #0F766E;
-  --tile-3: #047857;
-  --tile-4: #BE123C;
-  --warn-bg: #FEF3C7;
-  --warn-ink: #78350F;
-  --danger-bg: #FEE2E2;
-  --danger-ink: #991B1B;
+  --side-ink: #3B2A1F;
+  --side-active-bg: #FBEBC4;
+  --side-active-ink: #2A1C14;
+  --side-label: #8A4E06;
+  --tile-1: #1F7A4D;
+  --tile-2: #8A4E06;
+  --tile-3: #5B2A6E;
+  --tile-4: #B4232A;
+  --warn-bg: #FDF1D8;
+  --warn-ink: #7A4B00;
+  --danger-bg: #FBE4E2;
+  --danger-ink: #8E1B21;
   --chart-3: var(--tile-2);
   --chart-pending: var(--accent);
 }

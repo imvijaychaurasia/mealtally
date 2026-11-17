@@ -212,6 +212,7 @@ def web(request):
 
             ctx["shell_template"] = "web/base_console.html"
             ctx["sidebar"] = console.build_sidebar(tenant.slug, role, current, demo=tenant.has_demo_dataset)
+            ctx["sidebar_has_preview"] = any(it["preview"] for g in ctx["sidebar"] for it in g["items"])
             ctx["pv_nav"] = False
             if role in ("OWNER", "MANAGER") and tenant.has_demo_dataset:
                 ctx["console_alerts"] = console.alerts(request)

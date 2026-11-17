@@ -209,3 +209,10 @@ def test_scanner_page_still_loads_zxing_and_the_camera_header_in_the_console_she
         html.index('data-testid="scan-open"') > html.index("<main")
         and html.index('data-testid="scan-open"') - html.index("<main") < 1500
     )
+
+
+def test_preview_dot_is_explained(demo, clients):  # noqa: F811
+    html = clients["OWNER"].get(f"/t/{SLUG}/admin/").content.decode()
+    assert 'data-testid="preview-dot"' in html and 'title="Preview: sample data"' in html
+    legend = html.split('data-testid="sidebar-legend"', 1)[1].split("</p>", 1)[0]
+    assert "Preview: sample data" in legend

@@ -36,10 +36,11 @@
       {% for g in sidebar %}
       {% if g.label %}<p class="sb-section mb-1 mt-5 px-3 text-xs font-bold uppercase tracking-wider text-side-label">{{ g.label }}</p>{% elif not forloop.first %}<hr class="my-3 border-side-ink/10">{% endif %}
       <ul class="grid gap-0.5">
-        {% for it in g.items %}<li><a title="{{ it.label }}" aria-label="{{ it.label }}" class="sb-link flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors duration-150 {% if it.active %}bg-side-active font-semibold text-side-active-ink{% else %}text-side-ink hover:bg-side-ink/10{% endif %}" href="{{ it.url }}" {% if it.active %}aria-current="page"{% endif %} title="{{ it.label }}" data-sb-link>
-          {% include "web/_icon.html" with name=it.icon %}<span class="sb-label min-w-0 flex-1 truncate">{{ it.label }}</span>{% if role == "STAFF" %}<span class="rail-label" aria-hidden="true">{{ it.short }}</span>{% endif %}{% if it.preview and pv_badge %}<span class="sb-label h-2 w-2 shrink-0 rounded-full bg-primary" title="{% trans 'Preview' %}"><span class="sr-only">{% trans "Preview" %}</span></span>{% endif %}</a></li>{% endfor %}
+        {% for it in g.items %}<li><a title="{{ it.label }}{% if it.preview and pv_badge %} · {% trans "Preview: sample data" %}{% endif %}" aria-label="{{ it.label }}{% if it.preview and pv_badge %} ({% trans "Preview: sample data" %}){% endif %}" class="sb-link flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors duration-150 {% if it.active %}bg-side-active font-semibold text-side-active-ink{% else %}text-side-ink hover:bg-side-ink/10{% endif %}" href="{{ it.url }}" {% if it.active %}aria-current="page"{% endif %} title="{{ it.label }}" data-sb-link>
+          {% include "web/_icon.html" with name=it.icon %}<span class="sb-label min-w-0 flex-1 truncate">{{ it.label }}</span>{% if role == "STAFF" %}<span class="rail-label" aria-hidden="true">{{ it.short }}</span>{% endif %}{% if it.preview and pv_badge %}<span class="sb-label h-2 w-2 shrink-0 rounded-full bg-primary" title="{% trans 'Preview: sample data' %}" data-testid="preview-dot" aria-hidden="true"></span>{% endif %}</a></li>{% endfor %}
       </ul>
       {% endfor %}
+      {% if sidebar_has_preview and pv_badge %}<p class="sb-label mt-6 flex items-center gap-2 px-3 text-xs text-side-label" data-testid="sidebar-legend"><span class="h-2 w-2 shrink-0 rounded-full bg-primary" aria-hidden="true"></span>{% trans "Preview: sample data" %}</p>{% endif %}
     </nav>
   </aside>
   <div id="sb-scrim" class="no-print fixed inset-0 z-30 hidden bg-ink/40 lg:hidden" data-sb-scrim></div>

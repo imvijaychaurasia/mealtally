@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from functools import wraps
 
+from django.shortcuts import redirect
 from django.shortcuts import render
 
 from mealtally.accounts.models import Role
@@ -27,6 +28,8 @@ def preview_view(key: str, *, public: bool = False, roles=None):
                 return render(request, "web/not_found.html", {"slug": request.tenant.slug}, status=404)
             request.pv_module = module
             if not request.tenant.has_demo_dataset:
+                if key == "me-wallet":  # customers of a restaurant without the Preview modules have no wallet
+                    return redirect("web:me-home", request.tenant.slug)
                 return render(
                     request, "preview/coming_soon.html", {"module": module, "title": module.title if module else ""}
                 )

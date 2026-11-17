@@ -36,6 +36,12 @@ def default_language() -> str:
     return settings.MEALTALLY_DEFAULT_LANGUAGE
 
 
+def default_demo_dataset() -> bool:
+    from django.conf import settings  # noqa: PLC0415
+
+    return settings.MEALTALLY_DEMO_DATASET
+
+
 def default_country() -> str:
     from django.conf import settings  # noqa: PLC0415
 
@@ -87,7 +93,9 @@ class Tenant(models.Model):
         default=False, help_text="e2e/perf tenants: hidden from platform lists and metrics by default."
     )
     has_demo_dataset = models.BooleanField(
-        default=False, help_text="D03: serve the deterministic preview dataset for not-yet-built modules."
+        default=default_demo_dataset,
+        help_text="Show the Preview modules (wallet, orders, kitchen, delivery, ...) with sample data. Off unless "
+        "MEALTALLY_DEMO_DATASET is on or the restaurant was created by `make demo`.",
     )
 
     class UiShell(models.TextChoices):
@@ -112,7 +120,7 @@ class Tenant(models.Model):
         default=Theme.MASALA,
         help_text="D03.5: colour theme for this restaurant's screens (platform screens are always Mealtally).",
     )
-    show_preview_badges = models.BooleanField(default=True, help_text="D03: show the 'Preview' badge on preview pages.")
+    show_preview_badges = models.BooleanField(default=True, help_text="Show the 'Preview' badge on Preview modules.")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

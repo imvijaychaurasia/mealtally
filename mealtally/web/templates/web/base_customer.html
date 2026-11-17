@@ -22,7 +22,7 @@
       <a class="flex min-h-12 min-w-0 items-center gap-2 font-bold text-primary" href="{% url 'web:me-home' tenant.slug %}"><span class="cust-mono" aria-hidden="true">{{ brand_name|slice:":1" }}</span><span class="truncate text-lg">{{ cfg.display_name|default:tenant.name }}</span></a>
       <nav class="hidden items-center gap-1 lg:flex" aria-label="{% trans 'Main' %}" data-testid="cust-toprow">{% for t in cust_tabs %}<a class="cust-toplink {% if t.active %}cust-toplink-on{% endif %}" href="{{ t.url }}" {% if t.active %}aria-current="page"{% endif %}>{{ t.label }}</a>{% endfor %}</nav>
       <div class="flex items-center gap-2">
-        {% if show_qr %}<a class="btn-primary hidden min-h-12 whitespace-nowrap lg:inline-flex" href="{% url 'web:me-qr' tenant.slug %}" data-testid="show-qr-top">{% include "web/_icon.html" with name="qr" %}{% trans "Show QR" %}</a>{% endif %}
+        {% if show_qr and request.resolver_match.url_name != "me-wallet" %}<a class="btn-primary hidden min-h-12 whitespace-nowrap lg:inline-flex" href="{% url 'web:me-qr' tenant.slug %}" data-testid="show-qr-top">{% include "web/_icon.html" with name="qr" %}{% trans "Show QR" %}</a>{% endif %}
         <a class="btn-secondary min-h-12 px-3" href="{% url 'web:me-activity' tenant.slug %}" aria-label="{% trans 'Notifications' %}" data-testid="cust-bell">{% include "web/_icon.html" with name="bell" %}</a>
         <a class="cust-avatar" href="{% url 'web:me-account' tenant.slug %}" aria-label="{% trans 'Account' %}" data-testid="cust-avatar">{{ who|slice:":1" }}<span class="sr-only" data-testid="who">{{ who }}</span></a>
       </div>

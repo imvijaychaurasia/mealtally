@@ -77,8 +77,9 @@ def test_a_customer_without_a_wallet_sees_no_wallet_anywhere(demo):  # noqa: F81
     home = c.get(f"/t/{SLUG}/me/").content.decode()
     assert 'data-testid="home-no-wallet"' in home and 'data-testid="home-wallet"' not in home
     assert reverse("preview:me-wallet", args=[SLUG]) not in home  # no Wallet tab
-    page = c.get(reverse("preview:me-wallet", args=[SLUG])).content.decode()
-    assert 'data-testid="no-wallet"' in page and "Ask the restaurant about home delivery" in page
+    page = c.get(reverse("preview:me-wallet", args=[SLUG]))  # QA-02: no wallet page at all, back to Home
+    assert page.status_code == 302 and page["Location"] == f"/t/{SLUG}/me/"
+    assert "Ask the restaurant about home delivery" in home
     order = c.get(reverse("preview:me-order", args=[SLUG])).content.decode()
     assert "Paid from your wallet" not in order and "Pay on delivery or at the counter" in order
 
@@ -159,3 +160,13 @@ def test_each_persona_cooks_a_different_menu():
     ta = {r["name"]: r["qty"] for r in util.cooking_plan(pvdata.day_orders(a, day))}
     tb = {r["name"]: r["qty"] for r in util.cooking_plan(pvdata.day_orders(b, day))}
     assert ta and ta != tb
+
+
+def test_qa02_wallet_header_has_no_qr_button_and_staff_list_says_counter(demo, clients):  # noqa: F811
+    D = dataset()
+    page = customer_client(D["subscribers"][0]["name"]).get(reverse("preview:me-wallet", args=[SLUG])).content.decode()
+    assert 'data-testid="wallet"' in page or "wallet" in page.lower()
+    assert 'data-testid="show-qr-top"' not in page and 'data-testid="show-qr"' not in page
+    staff = clients["OWNER"].get(f"/t/{SLUG}/admin/staff").content.decode()
+    assert '<span class="chip-slate" data-testid="staff-role">Counter</span>' in staff
+    assert ">STAFF<" not in staff

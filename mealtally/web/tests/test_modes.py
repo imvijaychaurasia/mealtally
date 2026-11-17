@@ -185,3 +185,13 @@ def test_production_settings_follow_the_base_url():
         "https",
     ]
     assert tls["SESSION_COOKIE_NAME"] == "__Secure-mealtally-session"
+
+
+@pytest.mark.django_db
+def test_preview_modules_are_off_for_new_restaurants(settings):
+    from mealtally.tenancy.models import Tenant
+
+    settings.MEALTALLY_DEMO_DATASET = False
+    assert Tenant(slug="a", name="A").has_demo_dataset is False
+    settings.MEALTALLY_DEMO_DATASET = True
+    assert Tenant(slug="b", name="B").has_demo_dataset is True

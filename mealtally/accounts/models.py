@@ -5,6 +5,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from mealtally.common.country import normalize_phone
 from mealtally.tenancy.models import TenantOwnedModel
@@ -13,12 +14,12 @@ from .managers import UserManager
 
 
 class Role(models.TextChoices):
-    OWNER = "OWNER"
-    MANAGER = "MANAGER"
-    STAFF = "STAFF"
-    CHEF = "CHEF"  # preview roles (D03): kitchen console only
-    DRIVER = "DRIVER"  # driver console only
-    CUSTOMER = "CUSTOMER"
+    OWNER = "OWNER", _("Owner")
+    MANAGER = "MANAGER", _("Manager")
+    STAFF = "STAFF", _("Counter")  # redeems meals and sells passes at the counter
+    CHEF = "CHEF", _("Chef")  # Preview role: kitchen console only
+    DRIVER = "DRIVER", _("Driver")  # Preview role: driver console only
+    CUSTOMER = "CUSTOMER", _("Customer")
 
 
 ROLE_RANK = {Role.OWNER: 6, Role.MANAGER: 5, Role.STAFF: 4, Role.CHEF: 3, Role.DRIVER: 2, Role.CUSTOMER: 1}

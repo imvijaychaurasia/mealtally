@@ -6,6 +6,7 @@ from datetime import datetime
 from datetime import timedelta
 
 from django.http import Http404
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.utils import timezone
 from django.views.decorators.http import require_GET
@@ -116,8 +117,8 @@ def _upi(request, D):
 @require_GET
 def wallet(request, D):
     s = _me(D, request)
-    if s is None:
-        return _no_wallet(request, D)
+    if s is None:  # no wallet: there is nothing to show here, and Home explains how to get one
+        return redirect("web:me-home", request.tenant.slug)
     return render(
         request,
         "preview/me_wallet.html",

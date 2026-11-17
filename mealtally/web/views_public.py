@@ -94,7 +94,7 @@ def global_login(request):
         slug, (_name, role) = next(iter(by_slug.items()))
         return redirect(home_url(slug, role, demo=slug in demo_slugs))
     choices = [
-        {"slug": s, "name": n, "role": r, "url": home_url(s, r, demo=s in demo_slugs)}
+        {"slug": s, "name": n, "role": Role(r).label, "url": home_url(s, r, demo=s in demo_slugs)}
         for s, (n, r) in sorted(by_slug.items())
     ]
     return render(request, "web/tenant_picker.html", {"choices": choices})

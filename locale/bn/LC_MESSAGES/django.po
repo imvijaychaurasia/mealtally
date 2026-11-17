@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-17 12:28+0000\n"
+"POT-Creation-Date: 2026-11-17 13:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,56 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: mealtally/accounts/models.py:18
+#: mealtally/web/templates/web/platform_tenant.html:11
+#: mealtally/web/templatetags/mealtally_extras.py:57
+msgid "Owner"
+msgstr ""
+
+#: mealtally/accounts/models.py:19
+#: mealtally/web/templates/web/admin_staff.html:18
+#: mealtally/web/templatetags/mealtally_extras.py:58
+msgid "Manager"
+msgstr ""
+
+#: mealtally/accounts/models.py:20 mealtally/web/context.py:253
+#: mealtally/web/templatetags/mealtally_extras.py:59
+#, fuzzy
+msgid "Counter"
+msgstr "কাউন্টার"
+
+#: mealtally/accounts/models.py:21
+#: mealtally/web/templatetags/mealtally_extras.py:60
+msgid "Chef"
+msgstr ""
+
+#: mealtally/accounts/models.py:22 mealtally/preview/console.py:101
+#: mealtally/preview/templates/preview/order_detail.html:25
+#: mealtally/web/templates/web/_driver_assign.html:1
+#: mealtally/web/templatetags/mealtally_extras.py:61
+msgid "Driver"
+msgstr ""
+
+#: mealtally/accounts/models.py:23
+#: mealtally/preview/templates/preview/holds.html:12
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/invoices.html:6
+#: mealtally/preview/templates/preview/order_detail.html:23
+#: mealtally/preview/templates/preview/order_new.html:6
+#: mealtally/preview/templates/preview/orders.html:18
+#: mealtally/preview/templates/preview/subscription_new.html:7
+#: mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/preview/templates/preview/tiffin_boxes.html:5
+#: mealtally/preview/templates/preview/wallets.html:20
+#: mealtally/web/templates/web/receipt.html:14
+#: mealtally/web/templates/web/sell.html:8
+#: mealtally/web/templatetags/mealtally_extras.py:62
+#: mealtally/web/views_admin.py:702 mealtally/web/views_admin.py:760
+#: mealtally/web/views_admin.py:842
+#, fuzzy
+msgid "Customer"
+msgstr "গ্রাহক"
 
 #: mealtally/common/country.py:63
 #, fuzzy
@@ -33,7 +83,8 @@ msgstr "VAT নম্বর"
 msgid "Tax ID"
 msgstr "ট্যাক্স আইডি"
 
-#: mealtally/common/country.py:70 mealtally/preview/templates/preview/signup_wizard.html:9
+#: mealtally/common/country.py:70
+#: mealtally/preview/templates/preview/signup_wizard.html:9
 #, fuzzy
 msgid "FSSAI licence number"
 msgstr "FSSAI লাইসেন্স নম্বর"
@@ -58,273 +109,319 @@ msgstr "UPI"
 msgid "Bank transfer"
 msgstr "ব্যাংক ট্রান্সফার"
 
-#: mealtally/ledger/services.py:224
-#, python-format, fuzzy
+#: mealtally/ledger/services.py:225
+#, fuzzy, python-format
 msgid "Blocked by the owner: %(reason)s"
 msgstr "মালিক ব্লক করেছেন: %(reason)s"
 
-#: mealtally/ledger/services.py:224
+#: mealtally/ledger/services.py:225
 #, fuzzy
 msgid "Blocked by the owner."
 msgstr "মালিক ব্লক করেছেন।"
 
-#: mealtally/ledger/services.py:233 mealtally/web/labels.py:7 mealtally/web/labels.py:8 mealtally/web/labels.py:24 mealtally/web/views_admin.py:139
+#: mealtally/ledger/services.py:234 mealtally/web/labels.py:8
+#: mealtally/web/labels.py:9 mealtally/web/labels.py:25
+#: mealtally/web/views_admin.py:140
 #, fuzzy
 msgid "System"
 msgstr "সিস্টেম"
 
-#: mealtally/ledger/services.py:254
+#: mealtally/ledger/services.py:255
 #, fuzzy
 msgid "No meal time is set up for this pass."
 msgstr "এই পাসের জন্য কোনো খাবারের সময় ঠিক করা নেই।"
 
-#: mealtally/ledger/services.py:271
-#, python-format, fuzzy
+#: mealtally/ledger/services.py:272
+#, fuzzy, python-format
 msgid "Already had %(meal)s today (%(served)s)."
 msgstr "আজ %(meal)s ইতিমধ্যে নেওয়া হয়েছে (%(served)s)।"
 
-#: mealtally/ledger/services.py:278
-#, python-format, fuzzy
+#: mealtally/ledger/services.py:279
+#, fuzzy, python-format
 msgid "Already had %(n)d meal today"
 msgid_plural "Already had %(n)d meals today"
 msgstr[0] "আজ ইতিমধ্যে %(n)dটি খাবার নেওয়া হয়েছে"
 msgstr[1] "আজ ইতিমধ্যে %(n)dটি খাবার নেওয়া হয়েছে"
 
-#: mealtally/ledger/services.py:339
+#: mealtally/ledger/services.py:340
 #, fuzzy
 msgid "Only a manager or the owner can override the meal rules."
 msgstr "খাবারের নিয়ম শুধু ম্যানেজার বা মালিক এড়াতে পারেন।"
 
-#: mealtally/ledger/services.py:480
+#: mealtally/ledger/services.py:481
 #, fuzzy
-msgid "Only the person who served this meal, a manager or the owner can undo it."
+msgid ""
+"Only the person who served this meal, a manager or the owner can undo it."
 msgstr "যিনি এই খাবার দিয়েছেন, ম্যানেজার বা মালিকই শুধু এটি ফেরাতে পারেন।"
 
-#: mealtally/plans/meal_rules.py:114
+#: mealtally/plans/meal_rules.py:115
 msgid "today"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:116
+#: mealtally/plans/meal_rules.py:117
 msgid "tomorrow"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:128
+#: mealtally/plans/meal_rules.py:129
 #, python-format
 msgid "%(meal)s is served %(start)s–%(end)s"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:133
+#: mealtally/plans/meal_rules.py:134
 #, python-format
 msgid "Meals are served: %(list)s"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:133
+#: mealtally/plans/meal_rules.py:134
 msgid " or "
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:141
+#: mealtally/plans/meal_rules.py:142
 #, python-format
 msgid "Next: %(when)s."
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:149
+#: mealtally/plans/meal_rules.py:150
 msgid "Any time"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:151 mealtally/plans/meal_rules.py:180
+#: mealtally/plans/meal_rules.py:152 mealtally/plans/meal_rules.py:181
 #, python-format
 msgid "%(meal)s only"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:153 mealtally/plans/meal_rules.py:182
+#: mealtally/plans/meal_rules.py:154 mealtally/plans/meal_rules.py:183
 msgid " and "
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:155 mealtally/plans/meal_rules.py:159
+#: mealtally/plans/meal_rules.py:156 mealtally/plans/meal_rules.py:160
 #, python-format
 msgid "%(n)d meal per day"
 msgid_plural "%(n)d meals per day"
 msgstr[0] ""
 msgstr[1] ""
 
-#: mealtally/plans/meal_rules.py:157
+#: mealtally/plans/meal_rules.py:158
 #, python-format
 msgid "%(n)d meal per slot"
 msgid_plural "%(n)d meals per slot"
 msgstr[0] ""
 msgstr[1] ""
 
-#: mealtally/plans/meal_rules.py:161
+#: mealtally/plans/meal_rules.py:162
 msgid "no daily limit"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:188
+#: mealtally/plans/meal_rules.py:189
 #, python-format
 msgid "%(n)d meal a day"
 msgid_plural "%(n)d meals a day"
 msgstr[0] ""
 msgstr[1] ""
 
-#: mealtally/plans/meal_rules.py:194
+#: mealtally/plans/meal_rules.py:195
 #, python-format
 msgid "Now: %(meal)s until %(end)s"
 msgstr ""
 
-#: mealtally/plans/meal_rules.py:199
+#: mealtally/plans/meal_rules.py:200
 #, python-format
 msgid "Next: %(when)s"
 msgstr ""
 
-#: mealtally/preview/console.py:27 mealtally/preview/templates/preview/today_console.html:4 mealtally/web/context.py:64 mealtally/web/templates/web/admin_dashboard.html:3 mealtally/web/templates/web/admin_more.html:5 mealtally/web/templates/web/marketing/_header.html:9
+#: mealtally/preview/console.py:28
+#: mealtally/preview/templates/preview/today_console.html:4
+#: mealtally/web/context.py:65
+#: mealtally/web/templates/web/admin_dashboard.html:3
+#: mealtally/web/templates/web/admin_more.html:5
+#: mealtally/web/templates/web/marketing/_header.html:9
 #, fuzzy
 msgid "Dashboard"
 msgstr "ড্যাশবোর্ড"
 
-#: mealtally/preview/console.py:28 mealtally/web/templates/web/admin_meal_times.html:3 mealtally/web/templates/web/admin_settings.html:3
+#: mealtally/preview/console.py:29
+#: mealtally/web/templates/web/admin_meal_times.html:3
+#: mealtally/web/templates/web/admin_settings.html:3
 msgid "Business profile"
 msgstr ""
 
-#: mealtally/preview/console.py:30
+#: mealtally/preview/console.py:31
 msgid "Plan & platform fees"
 msgstr ""
 
-#: mealtally/preview/console.py:37
+#: mealtally/preview/console.py:38
 msgid "Staff & roles"
 msgstr ""
 
-#: mealtally/preview/console.py:41 mealtally/preview/templates/preview/planner.html:3 mealtally/web/templates/web/marketing/_header.html:18
+#: mealtally/preview/console.py:42
+#: mealtally/preview/templates/preview/planner.html:3
+#: mealtally/web/templates/web/marketing/_header.html:18
 msgid "Menu"
 msgstr ""
 
-#: mealtally/preview/console.py:43
+#: mealtally/preview/console.py:44
 msgid "Meal categories"
 msgstr ""
 
-#: mealtally/preview/console.py:45
+#: mealtally/preview/console.py:46
 msgid "Meal plans"
 msgstr ""
 
-#: mealtally/preview/console.py:55
+#: mealtally/preview/console.py:56
 msgid "Operations"
 msgstr ""
 
-#: mealtally/preview/console.py:57
+#: mealtally/preview/console.py:58
 msgid "Redeem counter"
 msgstr ""
 
-#: mealtally/preview/console.py:59 mealtally/preview/console.py:83 mealtally/preview/templates/preview/platform_plans.html:8 mealtally/web/context.py:58 mealtally/web/context.py:61 mealtally/web/templates/web/admin_customers.html:3 mealtally/web/templates/web/platform_dashboard.html:6 mealtally/web/templates/web/platform_dashboard.html:11 mealtally/web/templates/web/platform_tenant.html:9 mealtally/web/templates/web/staff_customers.html:3
+#: mealtally/preview/console.py:60 mealtally/preview/console.py:84
+#: mealtally/preview/templates/preview/platform_plans.html:8
+#: mealtally/web/context.py:59 mealtally/web/context.py:62
+#: mealtally/web/templates/web/admin_customers.html:3
+#: mealtally/web/templates/web/platform_dashboard.html:6
+#: mealtally/web/templates/web/platform_dashboard.html:11
+#: mealtally/web/templates/web/platform_tenant.html:9
+#: mealtally/web/templates/web/staff_customers.html:3
 #, fuzzy
 msgid "Customers"
 msgstr "গ্রাহক"
 
-#: mealtally/preview/console.py:67 mealtally/preview/templates/preview/subscription_detail.html:3 mealtally/preview/templates/preview/subscription_new.html:3 mealtally/preview/templates/preview/wallet_customer.html:14
+#: mealtally/preview/console.py:68
+#: mealtally/preview/templates/preview/subscription_detail.html:3
+#: mealtally/preview/templates/preview/subscription_new.html:3
+#: mealtally/preview/templates/preview/wallet_customer.html:14
 msgid "Subscriptions"
 msgstr ""
 
-#: mealtally/preview/console.py:75 mealtally/preview/nav.py:93 mealtally/web/context.py:56 mealtally/web/templates/web/_card.html:11 mealtally/web/templates/web/admin_customer.html:8 mealtally/web/templates/web/sell.html:2
+#: mealtally/preview/console.py:76 mealtally/preview/nav.py:94
+#: mealtally/web/context.py:57 mealtally/web/templates/web/_card.html:11
+#: mealtally/web/templates/web/admin_customer.html:8
+#: mealtally/web/templates/web/sell.html:2
 #, fuzzy
 msgid "Sell pass"
 msgstr "পাস বিক্রি"
 
-#: mealtally/preview/console.py:90 mealtally/preview/templates/preview/order_detail.html:3 mealtally/preview/templates/preview/today.html:29
+#: mealtally/preview/console.py:91
+#: mealtally/preview/templates/preview/order_detail.html:3
+#: mealtally/preview/templates/preview/today.html:29
 msgid "Orders"
 msgstr ""
 
-#: mealtally/preview/console.py:91
+#: mealtally/preview/console.py:92
 msgid "Kitchen"
 msgstr ""
 
-#: mealtally/preview/console.py:93
+#: mealtally/preview/console.py:94
 msgid "Delivery routes"
 msgstr ""
 
-#: mealtally/preview/console.py:100 mealtally/preview/templates/preview/order_detail.html:25 mealtally/web/templates/web/_driver_assign.html:1 mealtally/web/templatetags/mealtally_extras.py:60
-msgid "Driver"
-msgstr ""
-
-#: mealtally/preview/console.py:101 mealtally/preview/templates/preview/profit.html:3 mealtally/preview/templates/preview/profit.html:5 mealtally/preview/templates/preview/today.html:37 mealtally/preview/templates/preview/today.html:40 mealtally/preview/templates/preview/today_console.html:30
+#: mealtally/preview/console.py:102
+#: mealtally/preview/templates/preview/profit.html:3
+#: mealtally/preview/templates/preview/profit.html:5
+#: mealtally/preview/templates/preview/today.html:37
+#: mealtally/preview/templates/preview/today.html:40
+#: mealtally/preview/templates/preview/today_console.html:30
 msgid "Expenses"
 msgstr ""
 
-#: mealtally/preview/console.py:105
+#: mealtally/preview/console.py:106
 msgid "Finance"
 msgstr ""
 
-#: mealtally/preview/console.py:108
+#: mealtally/preview/console.py:109
 msgid "Receipts & payments"
 msgstr ""
 
-#: mealtally/preview/console.py:115
+#: mealtally/preview/console.py:116
 msgid "Wallet top-ups"
 msgstr ""
 
-#: mealtally/preview/console.py:116 mealtally/preview/templates/preview/invoice_detail.html:3 mealtally/preview/templates/preview/invoices.html:4 mealtally/web/views_customer.py:321
+#: mealtally/preview/console.py:117
+#: mealtally/preview/templates/preview/invoice_detail.html:3
+#: mealtally/preview/templates/preview/invoices.html:4
+#: mealtally/web/views_customer.py:322
 #, fuzzy
 msgid "Invoices"
 msgstr "ইনভয়েস"
 
-#: mealtally/preview/console.py:120
+#: mealtally/preview/console.py:121
 msgid "Insights"
 msgstr ""
 
-#: mealtally/preview/console.py:123 mealtally/web/context.py:62 mealtally/web/templates/web/admin_reports.html:3
+#: mealtally/preview/console.py:124 mealtally/web/context.py:63
+#: mealtally/web/templates/web/admin_reports.html:3
 #, fuzzy
 msgid "Reports"
 msgstr "রিপোর্ট"
 
-#: mealtally/preview/console.py:130 mealtally/web/context.py:72 mealtally/web/templates/web/admin_audit.html:3 mealtally/web/templates/web/admin_more.html:11
+#: mealtally/preview/console.py:131 mealtally/web/context.py:73
+#: mealtally/web/templates/web/admin_audit.html:3
+#: mealtally/web/templates/web/admin_more.html:11
 #, fuzzy
 msgid "Audit log"
 msgstr "অডিট লগ"
 
-#: mealtally/preview/console.py:134 mealtally/preview/console.py:136 mealtally/web/context.py:70 mealtally/web/templates/web/admin_more.html:9
+#: mealtally/preview/console.py:135 mealtally/preview/console.py:137
+#: mealtally/web/context.py:71 mealtally/web/templates/web/admin_more.html:9
 #, fuzzy
 msgid "Settings"
 msgstr "সেটিংস"
 
-#: mealtally/preview/console.py:138 mealtally/preview/templates/preview/today_console.html:41
+#: mealtally/preview/console.py:139
+#: mealtally/preview/templates/preview/today_console.html:41
 msgid "Customer portal"
 msgstr ""
 
-#: mealtally/preview/console.py:147 mealtally/preview/templates/preview/more.html:3
+#: mealtally/preview/console.py:148
+#: mealtally/preview/templates/preview/more.html:3
 msgid "All sections"
 msgstr ""
 
-#: mealtally/preview/console.py:206
+#: mealtally/preview/console.py:207
 #, python-format
 msgid "Tomorrow has %(n)s scheduled orders."
 msgstr ""
 
-#: mealtally/preview/console.py:215
+#: mealtally/preview/console.py:216
 #, python-format
 msgid "%(n)s top-up requests are waiting for your approval."
 msgstr ""
 
-#: mealtally/preview/console.py:224
+#: mealtally/preview/console.py:225
 #, python-format
 msgid "%(n)s meal passes end within 3 days."
 msgstr ""
 
-#: mealtally/preview/console.py:233
+#: mealtally/preview/console.py:234
 #, python-format
 msgid "%(n)s customers are running low on wallet balance."
 msgstr ""
 
-#: mealtally/preview/nav.py:100 mealtally/preview/templates/preview/more.html:5
+#: mealtally/preview/nav.py:101 mealtally/preview/templates/preview/more.html:5
 msgid "Money"
 msgstr ""
 
-#: mealtally/preview/nav.py:108 mealtally/preview/nav.py:128 mealtally/preview/templates/preview/me_meals.html:12 mealtally/preview/templates/preview/me_order.html:17 mealtally/preview/templates/preview/order_new.html:18 mealtally/preview/templates/preview/subscription_new.html:12 mealtally/web/context.py:73 mealtally/web/context.py:74 mealtally/web/templates/web/admin_more.html:3
+#: mealtally/preview/nav.py:109 mealtally/preview/nav.py:129
+#: mealtally/preview/templates/preview/me_meals.html:12
+#: mealtally/preview/templates/preview/me_order.html:17
+#: mealtally/preview/templates/preview/order_new.html:18
+#: mealtally/preview/templates/preview/subscription_new.html:12
+#: mealtally/web/context.py:74 mealtally/web/context.py:75
+#: mealtally/web/templates/web/admin_more.html:3
 #, fuzzy
 msgid "More"
 msgstr "আরও"
 
-#: mealtally/preview/templates/preview/_driver_stop_body.html:4 mealtally/preview/templates/preview/driver.html:12 mealtally/web/templates/web/me_home.html:58
+#: mealtally/preview/templates/preview/_driver_stop_body.html:4
+#: mealtally/preview/templates/preview/driver.html:12
+#: mealtally/web/templates/web/me_home.html:58
 #, fuzzy
 msgid "Call"
 msgstr "কল করুন"
 
-#: mealtally/preview/templates/preview/_driver_stop_body.html:5 mealtally/preview/templates/preview/driver.html:13
+#: mealtally/preview/templates/preview/_driver_stop_body.html:5
+#: mealtally/preview/templates/preview/driver.html:13
 msgid "Navigate"
 msgstr ""
 
@@ -356,7 +453,10 @@ msgstr ""
 msgid "Marked delivered — demo mode only"
 msgstr ""
 
-#: mealtally/preview/templates/preview/_driver_stop_body.html:10 mealtally/preview/templates/preview/driver.html:18 mealtally/preview/templates/preview/driver.html:22 mealtally/preview/templates/preview/today_console.html:33
+#: mealtally/preview/templates/preview/_driver_stop_body.html:10
+#: mealtally/preview/templates/preview/driver.html:18
+#: mealtally/preview/templates/preview/driver.html:22
+#: mealtally/preview/templates/preview/today_console.html:33
 msgid "Delivered"
 msgstr ""
 
@@ -388,7 +488,8 @@ msgstr ""
 msgid "Marked skipped — demo mode only"
 msgstr ""
 
-#: mealtally/preview/templates/preview/_driver_stop_body.html:11 mealtally/preview/templates/preview/driver.html:20
+#: mealtally/preview/templates/preview/_driver_stop_body.html:11
+#: mealtally/preview/templates/preview/driver.html:20
 msgid "Skipped"
 msgstr ""
 
@@ -396,12 +497,27 @@ msgstr ""
 msgid "Confirm skip"
 msgstr ""
 
-#: mealtally/preview/templates/preview/_head.html:3 mealtally/web/templates/web/me_home.html:5
+#: mealtally/preview/templates/preview/_head.html:3
+#: mealtally/web/templates/web/me_home.html:5
 #, fuzzy
 msgid "Rolling out next — shown with demo data"
 msgstr "শীঘ্রই আসছে — ডেমো ডেটা দিয়ে দেখানো"
 
-#: mealtally/preview/templates/preview/_head.html:3 mealtally/preview/templates/preview/_plans_tabs.html:3 mealtally/preview/templates/preview/invoice_detail.html:4 mealtally/preview/templates/preview/kitchen_labels.html:5 mealtally/preview/templates/preview/more.html:7 mealtally/preview/templates/preview/order_detail.html:4 mealtally/preview/templates/preview/platform_plans.html:5 mealtally/preview/templates/preview/signup_wizard.html:5 mealtally/preview/templates/preview/subscription_detail.html:4 mealtally/preview/templates/preview/today.html:26 mealtally/preview/templates/preview/wallet_customer.html:4 mealtally/web/templates/web/base_classic.html:52 mealtally/web/templates/web/base_console.html:39 mealtally/web/templates/web/me_home.html:5 mealtally/web/templates/web/sell.html:36
+#: mealtally/preview/templates/preview/_head.html:3
+#: mealtally/preview/templates/preview/_plans_tabs.html:3
+#: mealtally/preview/templates/preview/invoice_detail.html:4
+#: mealtally/preview/templates/preview/kitchen_labels.html:5
+#: mealtally/preview/templates/preview/more.html:7
+#: mealtally/preview/templates/preview/order_detail.html:4
+#: mealtally/preview/templates/preview/platform_plans.html:5
+#: mealtally/preview/templates/preview/signup_wizard.html:5
+#: mealtally/preview/templates/preview/subscription_detail.html:4
+#: mealtally/preview/templates/preview/today.html:26
+#: mealtally/preview/templates/preview/wallet_customer.html:4
+#: mealtally/web/templates/web/base_classic.html:52
+#: mealtally/web/templates/web/base_console.html:39
+#: mealtally/web/templates/web/me_home.html:5
+#: mealtally/web/templates/web/sell.html:36
 #, fuzzy
 msgid "Preview"
 msgstr "প্রিভিউ"
@@ -410,11 +526,14 @@ msgstr "প্রিভিউ"
 msgid "Billing model"
 msgstr ""
 
-#: mealtally/preview/templates/preview/_plans_tabs.html:2 mealtally/web/templates/web/marketing/home.html:31
+#: mealtally/preview/templates/preview/_plans_tabs.html:2
+#: mealtally/web/templates/web/marketing/home.html:31
 msgid "Meal pass"
 msgstr ""
 
-#: mealtally/preview/templates/preview/_plans_tabs.html:3 mealtally/preview/templates/preview/subscriptions.html:5 mealtally/web/context.py:111 mealtally/web/templates/web/me_home.html:45
+#: mealtally/preview/templates/preview/_plans_tabs.html:3
+#: mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/web/context.py:112 mealtally/web/templates/web/me_home.html:45
 #, fuzzy
 msgid "Wallet"
 msgstr "ওয়ালেট"
@@ -439,7 +558,9 @@ msgstr ""
 msgid "Map pin placeholder"
 msgstr ""
 
-#: mealtally/preview/templates/preview/branches.html:6 mealtally/preview/templates/preview/signup_wizard.html:9 mealtally/web/templates/web/admin_settings.html:24
+#: mealtally/preview/templates/preview/branches.html:6
+#: mealtally/preview/templates/preview/signup_wizard.html:9
+#: mealtally/web/templates/web/admin_settings.html:24
 msgid "Address"
 msgstr ""
 
@@ -475,7 +596,8 @@ msgstr ""
 msgid "Availability changed — demo mode only"
 msgstr ""
 
-#: mealtally/preview/templates/preview/cloud_kitchen.html:5 mealtally/preview/templates/preview/me_order.html:17
+#: mealtally/preview/templates/preview/cloud_kitchen.html:5
+#: mealtally/preview/templates/preview/me_order.html:17
 msgid "Sold out"
 msgstr ""
 
@@ -483,7 +605,9 @@ msgstr ""
 msgid "Rules"
 msgstr ""
 
-#: mealtally/preview/templates/preview/cloud_kitchen.html:6 mealtally/preview/templates/preview/me_order.html:27 mealtally/preview/templates/preview/order_new.html:27
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+#: mealtally/preview/templates/preview/me_order.html:27
+#: mealtally/preview/templates/preview/order_new.html:27
 msgid "Delivery fee"
 msgstr ""
 
@@ -499,7 +623,8 @@ msgstr ""
 msgid "Order ahead"
 msgstr ""
 
-#: mealtally/preview/templates/preview/cloud_kitchen.html:6 mealtally/web/templates/web/admin_plans.html:6
+#: mealtally/preview/templates/preview/cloud_kitchen.html:6
+#: mealtally/web/templates/web/admin_plans.html:6
 msgid "days"
 msgstr ""
 
@@ -539,12 +664,17 @@ msgstr ""
 msgid "Reject & refund"
 msgstr ""
 
-#: mealtally/preview/templates/preview/coming_soon.html:4 mealtally/web/templates/web/marketing/home.html:24 mealtally/web/templates/web/marketing/home.html:39 mealtally/web/templates/web/marketing/home.html:55
+#: mealtally/preview/templates/preview/coming_soon.html:4
+#: mealtally/web/templates/web/marketing/home.html:24
+#: mealtally/web/templates/web/marketing/home.html:39
+#: mealtally/web/templates/web/marketing/home.html:55
 msgid "Coming soon"
 msgstr ""
 
 #: mealtally/preview/templates/preview/coming_soon.html:5
-msgid "This part of Mealtally is rolling out next. Your meal-pass features are fully live."
+msgid ""
+"This part of Mealtally is rolling out next. Your meal-pass features are "
+"fully live."
 msgstr ""
 
 #: mealtally/preview/templates/preview/delivery.html:3
@@ -603,7 +733,8 @@ msgstr ""
 msgid "Next stop"
 msgstr ""
 
-#: mealtally/preview/templates/preview/driver.html:8 mealtally/preview/templates/preview/driver.html:14
+#: mealtally/preview/templates/preview/driver.html:8
+#: mealtally/preview/templates/preview/driver.html:14
 msgid "To deliver"
 msgstr ""
 
@@ -611,7 +742,9 @@ msgstr ""
 msgid "All stops delivered — nice work."
 msgstr ""
 
-#: mealtally/preview/templates/preview/driver.html:19 mealtally/preview/templates/preview/me_deliveries.html:4 mealtally/preview/templates/preview/order_detail.html:25
+#: mealtally/preview/templates/preview/driver.html:19
+#: mealtally/preview/templates/preview/me_deliveries.html:4
+#: mealtally/preview/templates/preview/order_detail.html:25
 msgid "Delivery photo"
 msgstr ""
 
@@ -639,25 +772,47 @@ msgstr ""
 msgid "Add expense"
 msgstr ""
 
-#: mealtally/preview/templates/preview/expenses.html:4 mealtally/preview/templates/preview/expenses.html:7 mealtally/preview/templates/preview/invoice_detail.html:8 mealtally/preview/templates/preview/invoice_pdf.html:14 mealtally/preview/templates/preview/order_new.html:10 mealtally/preview/templates/preview/orders.html:6 mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/templates/web/receipt.html:13 mealtally/web/views_admin.py:793 mealtally/web/views_admin.py:839 mealtally/web/views_platform.py:151
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/invoice_pdf.html:14
+#: mealtally/preview/templates/preview/order_new.html:10
+#: mealtally/preview/templates/preview/orders.html:6
+#: mealtally/web/templates/web/platform_tenant.html:45
+#: mealtally/web/templates/web/receipt.html:13 mealtally/web/views_admin.py:795
+#: mealtally/web/views_admin.py:841 mealtally/web/views_platform.py:152
 #, fuzzy
 msgid "Date"
 msgstr "তারিখ"
 
-#: mealtally/preview/templates/preview/expenses.html:4 mealtally/preview/templates/preview/expenses.html:6 mealtally/preview/templates/preview/expenses.html:7 mealtally/preview/templates/preview/expenses.html:10 mealtally/preview/templates/preview/me_order.html:9 mealtally/preview/templates/preview/menu.html:9
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:6
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/preview/templates/preview/expenses.html:10
+#: mealtally/preview/templates/preview/me_order.html:9
+#: mealtally/preview/templates/preview/menu.html:9
 msgid "Category"
 msgstr ""
 
-#: mealtally/preview/templates/preview/expenses.html:4 mealtally/preview/templates/preview/subscription_new.html:18 mealtally/preview/templates/preview/wallet_customer.html:6 mealtally/web/templates/web/_topup_fields.html:2
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/subscription_new.html:18
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+#: mealtally/web/templates/web/_topup_fields.html:2
 msgid "Amount (₹)"
 msgstr ""
 
-#: mealtally/preview/templates/preview/expenses.html:4 mealtally/preview/templates/preview/expenses.html:7 mealtally/web/templates/web/admin_customer.html:47 mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/templates/web/receipt.html:2 mealtally/web/views_admin.py:838 mealtally/web/views_platform.py:151
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/web/templates/web/admin_customer.html:47
+#: mealtally/web/templates/web/platform_tenant.html:45
+#: mealtally/web/templates/web/receipt.html:2 mealtally/web/views_admin.py:840
+#: mealtally/web/views_platform.py:152
 #, fuzzy
 msgid "Receipt"
 msgstr "রসিদ"
 
-#: mealtally/preview/templates/preview/expenses.html:4 mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/preview/templates/preview/expenses.html:4
+#: mealtally/preview/templates/preview/expenses.html:7
 msgid "Note"
 msgstr ""
 
@@ -681,7 +836,14 @@ msgstr ""
 msgid "Paid via"
 msgstr ""
 
-#: mealtally/preview/templates/preview/expenses.html:7 mealtally/preview/templates/preview/expenses.html:10 mealtally/preview/templates/preview/invoice_detail.html:8 mealtally/preview/templates/preview/invoice_pdf.html:14 mealtally/preview/templates/preview/me_wallet.html:8 mealtally/preview/templates/preview/subscription_new.html:18 mealtally/preview/templates/preview/wallet_customer.html:19 mealtally/web/templates/web/receipt.html:21
+#: mealtally/preview/templates/preview/expenses.html:7
+#: mealtally/preview/templates/preview/expenses.html:10
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/invoice_pdf.html:14
+#: mealtally/preview/templates/preview/me_wallet.html:8
+#: mealtally/preview/templates/preview/subscription_new.html:18
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/web/templates/web/receipt.html:21
 #, fuzzy
 msgid "Amount"
 msgstr "পরিমাণ"
@@ -694,7 +856,18 @@ msgstr ""
 msgid "Recurring rules"
 msgstr ""
 
-#: mealtally/preview/templates/preview/expenses.html:10 mealtally/web/templates/web/admin_customer.html:14 mealtally/web/templates/web/admin_customers.html:9 mealtally/web/templates/web/admin_meal_times.html:12 mealtally/web/templates/web/admin_meal_times.html:28 mealtally/web/templates/web/admin_plan_form.html:8 mealtally/web/templates/web/admin_staff.html:15 mealtally/web/templates/web/customer_new.html:6 mealtally/web/templates/web/me_account.html:7 mealtally/web/templates/web/me_profile.html:7 mealtally/web/templates/web/sell.html:14 mealtally/web/templates/web/staff_customers.html:6
+#: mealtally/preview/templates/preview/expenses.html:10
+#: mealtally/web/templates/web/admin_customer.html:14
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/admin_meal_times.html:12
+#: mealtally/web/templates/web/admin_meal_times.html:28
+#: mealtally/web/templates/web/admin_plan_form.html:8
+#: mealtally/web/templates/web/admin_staff.html:15
+#: mealtally/web/templates/web/customer_new.html:6
+#: mealtally/web/templates/web/me_account.html:7
+#: mealtally/web/templates/web/me_profile.html:7
+#: mealtally/web/templates/web/sell.html:14
+#: mealtally/web/templates/web/staff_customers.html:6
 #, fuzzy
 msgid "Name"
 msgstr "নাম"
@@ -719,14 +892,25 @@ msgstr ""
 msgid "Closed on"
 msgstr ""
 
-#: mealtally/preview/templates/preview/holds.html:7 mealtally/preview/templates/preview/holds.html:17 mealtally/preview/templates/preview/subscription_detail.html:14 mealtally/web/templates/web/_today.html:18 mealtally/web/templates/web/admin_customer.html:25 mealtally/web/templates/web/admin_customer.html:30 mealtally/web/templates/web/admin_customer.html:40 mealtally/web/templates/web/admin_customer.html:51 mealtally/web/templates/web/admin_customer.html:55 mealtally/web/views_admin.py:700
+#: mealtally/preview/templates/preview/holds.html:7
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+#: mealtally/web/templates/web/_today.html:18
+#: mealtally/web/templates/web/admin_customer.html:25
+#: mealtally/web/templates/web/admin_customer.html:30
+#: mealtally/web/templates/web/admin_customer.html:40
+#: mealtally/web/templates/web/admin_customer.html:51
+#: mealtally/web/templates/web/admin_customer.html:55
+#: mealtally/web/views_admin.py:702
 #, fuzzy
 msgid "Reason"
 msgstr "কারণ"
 
 #: mealtally/preview/templates/preview/holds.html:8
 #, python-format
-msgid "%(orders)s orders across %(slots)s slots will be skipped; %(customers)s customers notified."
+msgid ""
+"%(orders)s orders across %(slots)s slots will be skipped; %(customers)s "
+"customers notified."
 msgstr ""
 
 #: mealtally/preview/templates/preview/holds.html:9
@@ -749,16 +933,19 @@ msgstr ""
 msgid "Schedule a customer hold"
 msgstr ""
 
-#: mealtally/preview/templates/preview/holds.html:12 mealtally/preview/templates/preview/holds.html:17 mealtally/preview/templates/preview/invoices.html:6 mealtally/preview/templates/preview/order_detail.html:23 mealtally/preview/templates/preview/order_new.html:6 mealtally/preview/templates/preview/orders.html:18 mealtally/preview/templates/preview/subscription_new.html:7 mealtally/preview/templates/preview/subscriptions.html:5 mealtally/preview/templates/preview/tiffin_boxes.html:5 mealtally/preview/templates/preview/wallets.html:20 mealtally/web/templates/web/receipt.html:14 mealtally/web/templates/web/sell.html:8 mealtally/web/templatetags/mealtally_extras.py:61 mealtally/web/views_admin.py:700 mealtally/web/views_admin.py:758 mealtally/web/views_admin.py:840
-#, fuzzy
-msgid "Customer"
-msgstr "গ্রাহক"
-
-#: mealtally/preview/templates/preview/holds.html:13 mealtally/preview/templates/preview/holds.html:17 mealtally/preview/templates/preview/me_meals.html:18 mealtally/web/templates/web/admin_audit.html:7 mealtally/web/templates/web/report.html:5
+#: mealtally/preview/templates/preview/holds.html:13
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/me_meals.html:18
+#: mealtally/web/templates/web/admin_audit.html:7
+#: mealtally/web/templates/web/report.html:5
 msgid "From"
 msgstr ""
 
-#: mealtally/preview/templates/preview/holds.html:13 mealtally/preview/templates/preview/holds.html:17 mealtally/preview/templates/preview/me_meals.html:18 mealtally/web/templates/web/admin_audit.html:8 mealtally/web/templates/web/report.html:6
+#: mealtally/preview/templates/preview/holds.html:13
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/me_meals.html:18
+#: mealtally/web/templates/web/admin_audit.html:8
+#: mealtally/web/templates/web/report.html:6
 msgid "To"
 msgstr ""
 
@@ -770,7 +957,9 @@ msgstr ""
 msgid "Hold scheduled — demo mode only"
 msgstr ""
 
-#: mealtally/preview/templates/preview/holds.html:14 mealtally/preview/templates/preview/me_meals.html:18 mealtally/preview/templates/preview/subscription_detail.html:14
+#: mealtally/preview/templates/preview/holds.html:14
+#: mealtally/preview/templates/preview/me_meals.html:18
+#: mealtally/preview/templates/preview/subscription_detail.html:14
 msgid "Schedule hold"
 msgstr ""
 
@@ -778,7 +967,16 @@ msgstr ""
 msgid "Active and upcoming holds"
 msgstr ""
 
-#: mealtally/preview/templates/preview/holds.html:17 mealtally/preview/templates/preview/planner.html:5 mealtally/preview/templates/preview/subscription_detail.html:14 mealtally/preview/templates/preview/subscription_new.html:9 mealtally/preview/templates/preview/subscription_new.html:10 mealtally/preview/templates/preview/subscriptions.html:5 mealtally/preview/templates/preview/wallets.html:20 mealtally/web/templates/web/receipt.html:15 mealtally/web/templates/web/sell.html:22 mealtally/web/views_admin.py:727 mealtally/web/views_admin.py:758
+#: mealtally/preview/templates/preview/holds.html:17
+#: mealtally/preview/templates/preview/planner.html:5
+#: mealtally/preview/templates/preview/subscription_detail.html:14
+#: mealtally/preview/templates/preview/subscription_new.html:9
+#: mealtally/preview/templates/preview/subscription_new.html:10
+#: mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/preview/templates/preview/wallets.html:20
+#: mealtally/web/templates/web/receipt.html:15
+#: mealtally/web/templates/web/sell.html:22 mealtally/web/views_admin.py:729
+#: mealtally/web/views_admin.py:760
 #, fuzzy
 msgid "Plan"
 msgstr "প্ল্যান"
@@ -787,16 +985,22 @@ msgstr "প্ল্যান"
 msgid "Copy share link"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoice_detail.html:5 mealtally/web/templates/web/platform_tenant.html:38 mealtally/web/templates/web/receipt.html:24 mealtally/web/templates/web/report.html:10 mealtally/web/templates/web/sell_done.html:8
+#: mealtally/preview/templates/preview/invoice_detail.html:5
+#: mealtally/web/templates/web/platform_tenant.html:38
+#: mealtally/web/templates/web/receipt.html:24
+#: mealtally/web/templates/web/report.html:10
+#: mealtally/web/templates/web/sell_done.html:8
 #, fuzzy
 msgid "Download PDF"
 msgstr "PDF ডাউনলোড"
 
-#: mealtally/preview/templates/preview/invoice_detail.html:7 mealtally/preview/templates/preview/invoice_pdf.html:13
+#: mealtally/preview/templates/preview/invoice_detail.html:7
+#: mealtally/preview/templates/preview/invoice_pdf.html:13
 msgid "Opening wallet"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoice_detail.html:7 mealtally/preview/templates/preview/invoice_pdf.html:13
+#: mealtally/preview/templates/preview/invoice_detail.html:7
+#: mealtally/preview/templates/preview/invoice_pdf.html:13
 msgid "Top-ups"
 msgstr ""
 
@@ -804,23 +1008,34 @@ msgstr ""
 msgid "Meals & extras"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoice_detail.html:7 mealtally/preview/templates/preview/invoice_pdf.html:13
+#: mealtally/preview/templates/preview/invoice_detail.html:7
+#: mealtally/preview/templates/preview/invoice_pdf.html:13
 msgid "Closing wallet"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoice_detail.html:8 mealtally/preview/templates/preview/invoice_pdf.html:14 mealtally/preview/templates/preview/wallet_customer.html:19 mealtally/preview/templates/preview/website.html:9
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/invoice_pdf.html:14
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/preview/templates/preview/website.html:9
 msgid "Description"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoice_detail.html:8 mealtally/preview/templates/preview/invoice_pdf.html:14 mealtally/preview/templates/preview/order_detail.html:16 mealtally/web/templates/web/admin_customer.html:55
+#: mealtally/preview/templates/preview/invoice_detail.html:8
+#: mealtally/preview/templates/preview/invoice_pdf.html:14
+#: mealtally/preview/templates/preview/order_detail.html:16
+#: mealtally/web/templates/web/admin_customer.html:55
 msgid "Qty"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoice_detail.html:10 mealtally/preview/templates/preview/invoice_pdf.html:16 mealtally/preview/templates/preview/invoices.html:6 mealtally/preview/templates/preview/me_order.html:27
+#: mealtally/preview/templates/preview/invoice_detail.html:10
+#: mealtally/preview/templates/preview/invoice_pdf.html:16
+#: mealtally/preview/templates/preview/invoices.html:6
+#: mealtally/preview/templates/preview/me_order.html:27
 msgid "Total"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoice_pdf.html:12 mealtally/preview/templates/preview/invoices.html:6
+#: mealtally/preview/templates/preview/invoice_pdf.html:12
+#: mealtally/preview/templates/preview/invoices.html:6
 msgid "Invoice"
 msgstr ""
 
@@ -840,7 +1055,11 @@ msgstr ""
 msgid "Demo invoice generated from sample data. No tax calculation is shown."
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoices.html:4 mealtally/preview/templates/preview/order_detail.html:4 mealtally/preview/templates/preview/order_detail.html:20 mealtally/preview/templates/preview/subscription_detail.html:8 mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/preview/templates/preview/invoices.html:4
+#: mealtally/preview/templates/preview/order_detail.html:4
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/subscriptions.html:4
 msgid "Paid"
 msgstr ""
 
@@ -848,7 +1067,9 @@ msgstr ""
 msgid "Due"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoices.html:5 mealtally/preview/templates/preview/subscriptions.html:4 mealtally/web/templates/web/admin_customers.html:5
+#: mealtally/preview/templates/preview/invoices.html:5
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/web/templates/web/admin_customers.html:5
 msgid "Search"
 msgstr ""
 
@@ -860,7 +1081,16 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: mealtally/preview/templates/preview/invoices.html:6 mealtally/preview/templates/preview/order_detail.html:10 mealtally/preview/templates/preview/order_detail.html:20 mealtally/preview/templates/preview/orders.html:18 mealtally/preview/templates/preview/subscriptions.html:4 mealtally/preview/templates/preview/subscriptions.html:5 mealtally/web/templates/web/platform_dashboard.html:11 mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:793 mealtally/web/views_admin.py:841 mealtally/web/views_platform.py:151
+#: mealtally/preview/templates/preview/invoices.html:6
+#: mealtally/preview/templates/preview/order_detail.html:10
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/preview/templates/preview/orders.html:18
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/web/templates/web/platform_dashboard.html:11
+#: mealtally/web/templates/web/platform_tenant.html:45
+#: mealtally/web/views_admin.py:795 mealtally/web/views_admin.py:843
+#: mealtally/web/views_platform.py:152
 msgid "Status"
 msgstr ""
 
@@ -868,7 +1098,8 @@ msgstr ""
 msgid "Production date"
 msgstr ""
 
-#: mealtally/preview/templates/preview/kitchen.html:4 mealtally/preview/templates/preview/orders.html:6
+#: mealtally/preview/templates/preview/kitchen.html:4
+#: mealtally/preview/templates/preview/orders.html:6
 msgid "Go"
 msgstr ""
 
@@ -884,7 +1115,9 @@ msgstr ""
 msgid "Print labels"
 msgstr ""
 
-#: mealtally/preview/templates/preview/kitchen.html:6 mealtally/preview/templates/preview/menu.html:5 mealtally/preview/templates/preview/orders.html:9
+#: mealtally/preview/templates/preview/kitchen.html:6
+#: mealtally/preview/templates/preview/menu.html:5
+#: mealtally/preview/templates/preview/orders.html:9
 msgid "Meal slots"
 msgstr ""
 
@@ -900,7 +1133,12 @@ msgstr ""
 msgid "Packing list"
 msgstr ""
 
-#: mealtally/preview/templates/preview/kitchen.html:13 mealtally/preview/templates/preview/order_detail.html:24 mealtally/preview/templates/preview/order_new.html:21 mealtally/preview/templates/preview/orders.html:23 mealtally/preview/templates/preview/subscriptions.html:6 mealtally/preview/templates/preview/today_console.html:36
+#: mealtally/preview/templates/preview/kitchen.html:13
+#: mealtally/preview/templates/preview/order_detail.html:24
+#: mealtally/preview/templates/preview/order_new.html:21
+#: mealtally/preview/templates/preview/orders.html:23
+#: mealtally/preview/templates/preview/subscriptions.html:6
+#: mealtally/preview/templates/preview/today_console.html:36
 msgid "Pick-up"
 msgstr ""
 
@@ -912,11 +1150,15 @@ msgstr ""
 msgid "portions"
 msgstr ""
 
-#: mealtally/preview/templates/preview/kitchen.html:17 mealtally/preview/templates/preview/menu.html:9
+#: mealtally/preview/templates/preview/kitchen.html:17
+#: mealtally/preview/templates/preview/menu.html:9
 msgid "Dish"
 msgstr ""
 
-#: mealtally/preview/templates/preview/kitchen.html:17 mealtally/preview/templates/preview/me_order.html:10 mealtally/preview/templates/preview/menu.html:9 mealtally/preview/templates/preview/order_detail.html:16
+#: mealtally/preview/templates/preview/kitchen.html:17
+#: mealtally/preview/templates/preview/me_order.html:10
+#: mealtally/preview/templates/preview/menu.html:9
+#: mealtally/preview/templates/preview/order_detail.html:16
 msgid "Diet"
 msgstr ""
 
@@ -936,7 +1178,8 @@ msgstr ""
 msgid "Packed"
 msgstr ""
 
-#: mealtally/preview/templates/preview/kitchen.html:24 mealtally/preview/templates/preview/orders.html:21
+#: mealtally/preview/templates/preview/kitchen.html:24
+#: mealtally/preview/templates/preview/orders.html:21
 msgid "Allergy"
 msgstr ""
 
@@ -972,17 +1215,22 @@ msgstr ""
 msgid "Sticker labels"
 msgstr ""
 
-#: mealtally/preview/templates/preview/kitchen_labels.html:6 mealtally/web/templates/web/receipt.html:24
+#: mealtally/preview/templates/preview/kitchen_labels.html:6
+#: mealtally/web/templates/web/receipt.html:24
 #, fuzzy
 msgid "Print"
 msgstr "প্রিন্ট"
 
-#: mealtally/preview/templates/preview/kitchen_labels.html:6 mealtally/preview/templates/preview/me_order.html:23 mealtally/preview/templates/preview/me_order.html:25 mealtally/web/templates/web/staff_console.html:20
+#: mealtally/preview/templates/preview/kitchen_labels.html:6
+#: mealtally/preview/templates/preview/me_order.html:23
+#: mealtally/preview/templates/preview/me_order.html:25
+#: mealtally/web/templates/web/staff_console.html:20
 #, fuzzy
 msgid "Close"
 msgstr "বন্ধ করুন"
 
-#: mealtally/preview/templates/preview/kitchen_labels.html:13 mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/kitchen_labels.html:13
+#: mealtally/preview/templates/preview/subscription_detail.html:10
 msgid "stop"
 msgstr ""
 
@@ -994,7 +1242,9 @@ msgstr ""
 msgid "Delivery history"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_deliveries.html:4 mealtally/preview/templates/preview/order_detail.html:25 mealtally/web/templates/web/me_activity.html:9
+#: mealtally/preview/templates/preview/me_deliveries.html:4
+#: mealtally/preview/templates/preview/order_detail.html:25
+#: mealtally/web/templates/web/me_activity.html:9
 #, fuzzy
 msgid "Proof of delivery"
 msgstr "ডেলিভারির প্রমাণ"
@@ -1019,7 +1269,9 @@ msgstr ""
 msgid "My meals"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_meals.html:4 mealtally/preview/templates/preview/subscription_detail.html:9 mealtally/preview/templates/preview/wallet_customer.html:9
+#: mealtally/preview/templates/preview/me_meals.html:4
+#: mealtally/preview/templates/preview/subscription_detail.html:9
+#: mealtally/preview/templates/preview/wallet_customer.html:9
 msgid "Wallet balance"
 msgstr ""
 
@@ -1030,7 +1282,10 @@ msgid_plural "About %(n)s days of meals left"
 msgstr[0] ""
 msgstr[1] ""
 
-#: mealtally/preview/templates/preview/me_meals.html:5 mealtally/web/templates/web/marketing/home.html:42 mealtally/web/templates/web/me_home.html:7 mealtally/web/templates/web/me_home.html:48
+#: mealtally/preview/templates/preview/me_meals.html:5
+#: mealtally/web/templates/web/marketing/home.html:42
+#: mealtally/web/templates/web/me_home.html:7
+#: mealtally/web/templates/web/me_home.html:48
 #, fuzzy
 msgid "Top up"
 msgstr "টপ-আপ"
@@ -1059,7 +1314,9 @@ msgstr ""
 msgid "Quantity"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_meals.html:12 mealtally/preview/templates/preview/me_order.html:17 mealtally/preview/templates/preview/subscription_new.html:12
+#: mealtally/preview/templates/preview/me_meals.html:12
+#: mealtally/preview/templates/preview/me_order.html:17
+#: mealtally/preview/templates/preview/subscription_new.html:12
 msgid "Fewer"
 msgstr ""
 
@@ -1084,7 +1341,8 @@ msgstr ""
 msgid "%(n)s skips left this cycle"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_meals.html:17 mealtally/web/templates/web/me_account.html:16
+#: mealtally/preview/templates/preview/me_meals.html:17
+#: mealtally/web/templates/web/me_account.html:16
 #, fuzzy
 msgid "Vacation hold"
 msgstr "ছুটির বিরতি"
@@ -1093,7 +1351,8 @@ msgstr "ছুটির বিরতি"
 msgid "Going away? Pause meals for a date range — nothing is charged."
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_meals.html:20 mealtally/web/templates/web/me_home.html:49
+#: mealtally/preview/templates/preview/me_meals.html:20
+#: mealtally/web/templates/web/me_home.html:49
 #, fuzzy
 msgid "Coming up"
 msgstr "আসছে"
@@ -1106,7 +1365,9 @@ msgstr ""
 msgid "item"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:5 mealtally/preview/templates/preview/order_detail.html:4 mealtally/web/context.py:106
+#: mealtally/preview/templates/preview/me_order.html:5
+#: mealtally/preview/templates/preview/order_detail.html:4
+#: mealtally/web/context.py:107
 #, fuzzy
 msgid "Order"
 msgstr "অর্ডার"
@@ -1115,7 +1376,9 @@ msgstr "অর্ডার"
 msgid "Order anything from the kitchen, up to six days ahead."
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:6 mealtally/web/templates/web/base_customer.html:25 mealtally/web/templates/web/base_customer.html:32
+#: mealtally/preview/templates/preview/me_order.html:6
+#: mealtally/web/templates/web/base_customer.html:25
+#: mealtally/web/templates/web/base_customer.html:32
 #, fuzzy
 msgid "Show QR"
 msgstr "QR দেখান"
@@ -1124,7 +1387,8 @@ msgstr "QR দেখান"
 msgid "For which day?"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:9 mealtally/web/views_admin.py:103 mealtally/web/views_customer.py:317
+#: mealtally/preview/templates/preview/me_order.html:9
+#: mealtally/web/views_admin.py:104 mealtally/web/views_customer.py:318
 #, fuzzy
 msgid "All"
 msgstr "সব"
@@ -1157,11 +1421,15 @@ msgstr ""
 msgid "View cart"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:22 mealtally/preview/templates/preview/me_order.html:25
+#: mealtally/preview/templates/preview/me_order.html:22
+#: mealtally/preview/templates/preview/me_order.html:25
 msgid "Your cart"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:27 mealtally/preview/templates/preview/order_detail.html:15 mealtally/preview/templates/preview/order_new.html:15 mealtally/preview/templates/preview/order_new.html:27
+#: mealtally/preview/templates/preview/me_order.html:27
+#: mealtally/preview/templates/preview/order_detail.html:15
+#: mealtally/preview/templates/preview/order_new.html:15
+#: mealtally/preview/templates/preview/order_new.html:27
 msgid "Items"
 msgstr ""
 
@@ -1174,7 +1442,10 @@ msgstr ""
 msgid "Delivery or pickup"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:31 mealtally/preview/templates/preview/order_detail.html:24 mealtally/preview/templates/preview/orders.html:23 mealtally/preview/templates/preview/subscriptions.html:5
+#: mealtally/preview/templates/preview/me_order.html:31
+#: mealtally/preview/templates/preview/order_detail.html:24
+#: mealtally/preview/templates/preview/orders.html:23
+#: mealtally/preview/templates/preview/subscriptions.html:5
 msgid "Delivery"
 msgstr ""
 
@@ -1182,12 +1453,16 @@ msgstr ""
 msgid "Pickup"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:33 mealtally/preview/templates/preview/subscription_new.html:8 mealtally/web/templates/web/admin_customer.html:15 mealtally/web/templates/web/me_account.html:8
+#: mealtally/preview/templates/preview/me_order.html:33
+#: mealtally/preview/templates/preview/subscription_new.html:8
+#: mealtally/web/templates/web/admin_customer.html:15
+#: mealtally/web/templates/web/me_account.html:8
 #, fuzzy
 msgid "Delivery address"
 msgstr "ডেলিভারির ঠিকানা"
 
-#: mealtally/preview/templates/preview/me_order.html:33 mealtally/web/templates/web/me_account.html:8
+#: mealtally/preview/templates/preview/me_order.html:33
+#: mealtally/web/templates/web/me_account.html:8
 #, fuzzy
 msgid "Flat, building, street, area"
 msgstr "ফ্ল্যাট, বিল্ডিং, রাস্তা, এলাকা"
@@ -1216,7 +1491,8 @@ msgstr ""
 msgid "Order placed — demo mode only"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_order.html:37 mealtally/preview/templates/preview/order_new.html:30
+#: mealtally/preview/templates/preview/me_order.html:37
+#: mealtally/preview/templates/preview/order_new.html:30
 msgid "Place order"
 msgstr ""
 
@@ -1224,7 +1500,10 @@ msgstr ""
 msgid "My wallet"
 msgstr ""
 
-#: mealtally/preview/templates/preview/me_wallet.html:5 mealtally/preview/templates/preview/wallet_customer.html:19 mealtally/preview/templates/preview/wallets.html:20 mealtally/web/templates/web/admin_customer.html:55
+#: mealtally/preview/templates/preview/me_wallet.html:5
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/preview/templates/preview/wallets.html:20
+#: mealtally/web/templates/web/admin_customer.html:55
 msgid "Balance"
 msgstr ""
 
@@ -1329,7 +1608,10 @@ msgstr ""
 msgid "Allergens"
 msgstr ""
 
-#: mealtally/preview/templates/preview/menu.html:10 mealtally/preview/templates/preview/planner.html:7 mealtally/preview/templates/preview/wallet_customer.html:5 mealtally/web/templates/web/admin_plans.html:8
+#: mealtally/preview/templates/preview/menu.html:10
+#: mealtally/preview/templates/preview/planner.html:7
+#: mealtally/preview/templates/preview/wallet_customer.html:5
+#: mealtally/web/templates/web/admin_plans.html:8
 msgid "Edit"
 msgstr ""
 
@@ -1341,16 +1623,20 @@ msgstr ""
 msgid "Setup & settings"
 msgstr ""
 
-#: mealtally/preview/templates/preview/no_wallet.html:4 mealtally/web/templates/web/me_home.html:51
+#: mealtally/preview/templates/preview/no_wallet.html:4
+#: mealtally/web/templates/web/me_home.html:51
 #, fuzzy
 msgid "Ask the restaurant about home delivery"
 msgstr "হোম ডেলিভারির বিষয়ে রেস্তোরাঁকে জিজ্ঞেস করুন"
 
 #: mealtally/preview/templates/preview/no_wallet.html:5
-msgid "Home-delivery customers get a wallet here: meals are paid from it and you can top up by UPI. Your meal pass works at the counter as before."
+msgid ""
+"Home-delivery customers get a wallet here: meals are paid from it and you "
+"can top up by UPI. Your meal pass works at the counter as before."
 msgstr ""
 
-#: mealtally/preview/templates/preview/no_wallet.html:6 mealtally/web/templates/web/me_activity.html:13
+#: mealtally/preview/templates/preview/no_wallet.html:6
+#: mealtally/web/templates/web/me_activity.html:13
 #, fuzzy
 msgid "Back to Home"
 msgstr "হোমে ফিরুন"
@@ -1367,7 +1653,9 @@ msgstr ""
 msgid "Web push"
 msgstr ""
 
-#: mealtally/preview/templates/preview/notifications.html:6 mealtally/templates/account/password_reset.html:7 mealtally/web/templates/web/admin_staff.html:16
+#: mealtally/preview/templates/preview/notifications.html:6
+#: mealtally/templates/account/password_reset.html:7
+#: mealtally/web/templates/web/admin_staff.html:16
 msgid "Email"
 msgstr ""
 
@@ -1375,7 +1663,8 @@ msgstr ""
 msgid "via provider"
 msgstr ""
 
-#: mealtally/preview/templates/preview/notifications.html:7 mealtally/web/views_admin.py:700
+#: mealtally/preview/templates/preview/notifications.html:7
+#: mealtally/web/views_admin.py:702
 msgid "Message"
 msgstr ""
 
@@ -1383,12 +1672,14 @@ msgstr ""
 msgid "Placeholders"
 msgstr ""
 
-#: mealtally/preview/templates/preview/notifications.html:9 mealtally/web/templates/web/base_classic.html:31
+#: mealtally/preview/templates/preview/notifications.html:9
+#: mealtally/web/templates/web/base_classic.html:31
 #, fuzzy
 msgid "Recent notifications"
 msgstr "সাম্প্রতিক বিজ্ঞপ্তি"
 
-#: mealtally/preview/templates/preview/notifications.html:9 mealtally/web/templates/web/base_classic.html:31
+#: mealtally/preview/templates/preview/notifications.html:9
+#: mealtally/web/templates/web/base_classic.html:31
 #, fuzzy
 msgid "min ago"
 msgstr "মিনিট আগে"
@@ -1397,7 +1688,8 @@ msgstr "মিনিট আগে"
 msgid "Save templates"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_detail.html:4 mealtally/preview/templates/preview/order_new.html:22
+#: mealtally/preview/templates/preview/order_detail.html:4
+#: mealtally/preview/templates/preview/order_new.html:22
 msgid "Pay on delivery"
 msgstr ""
 
@@ -1409,7 +1701,8 @@ msgstr ""
 msgid "Preview — status changed in demo mode only"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_detail.html:16 mealtally/web/views_admin.py:793
+#: mealtally/preview/templates/preview/order_detail.html:16
+#: mealtally/web/views_admin.py:795
 msgid "Item"
 msgstr ""
 
@@ -1417,11 +1710,14 @@ msgstr ""
 msgid "Grand total"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_detail.html:19 mealtally/preview/templates/preview/subscriptions.html:4 mealtally/web/templates/web/sell.html:30
+#: mealtally/preview/templates/preview/order_detail.html:19
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/web/templates/web/sell.html:30
 msgid "Payment"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_detail.html:20 mealtally/web/templates/web/sell.html:31
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/web/templates/web/sell.html:31
 msgid "Method"
 msgstr ""
 
@@ -1433,11 +1729,13 @@ msgstr ""
 msgid "Cash / UPI"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_detail.html:20 mealtally/preview/templates/preview/today_console.html:33
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/preview/templates/preview/today_console.html:33
 msgid "Pending"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_detail.html:20 mealtally/web/templates/web/receipt.html:18
+#: mealtally/preview/templates/preview/order_detail.html:20
+#: mealtally/web/templates/web/receipt.html:18
 #, fuzzy
 msgid "Paid by"
 msgstr "পেমেন্টের মাধ্যম"
@@ -1450,16 +1748,23 @@ msgstr ""
 msgid "Assign driver"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_detail.html:25 mealtally/web/templates/web/_driver_assign.html:1
+#: mealtally/preview/templates/preview/order_detail.html:25
+#: mealtally/web/templates/web/_driver_assign.html:1
 msgid "Assign"
 msgstr ""
 
-#: mealtally/preview/templates/preview/order_new.html:3 mealtally/preview/templates/preview/orders.html:7 mealtally/preview/templates/preview/orders.html:25 mealtally/preview/templates/preview/today.html:4 mealtally/preview/templates/preview/today_console.html:5
+#: mealtally/preview/templates/preview/order_new.html:3
+#: mealtally/preview/templates/preview/orders.html:7
+#: mealtally/preview/templates/preview/orders.html:25
+#: mealtally/preview/templates/preview/today.html:4
+#: mealtally/preview/templates/preview/today_console.html:5
 msgid "New order"
 msgstr ""
 
 #: mealtally/preview/templates/preview/order_new.html:3
-msgid "Counter or on-demand order. Reads the one wallet ledger — the same balance everywhere."
+msgid ""
+"Counter or on-demand order. Reads the one wallet ledger — the same balance "
+"everywhere."
 msgstr ""
 
 #: mealtally/preview/templates/preview/order_new.html:7
@@ -1543,7 +1848,10 @@ msgstr ""
 msgid "Meal"
 msgstr ""
 
-#: mealtally/preview/templates/preview/orders.html:18 mealtally/preview/templates/preview/subscription_detail.html:8 mealtally/preview/templates/preview/wallet_customer.html:6 mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/preview/templates/preview/orders.html:18
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/wallet_customer.html:6
+#: mealtally/preview/templates/preview/wallet_customer.html:19
 msgid "Type"
 msgstr ""
 
@@ -1552,7 +1860,9 @@ msgid "No orders in this slot"
 msgstr ""
 
 #: mealtally/preview/templates/preview/orders.html:25
-msgid "Orders appear here when customers choose a meal or you add one at the counter."
+msgid ""
+"Orders appear here when customers choose a meal or you add one at the "
+"counter."
 msgstr ""
 
 #: mealtally/preview/templates/preview/orders.html:28
@@ -1561,7 +1871,9 @@ msgid "+ %(n)s more orders in this slot"
 msgstr ""
 
 #: mealtally/preview/templates/preview/payment_setup.html:3
-msgid "Where customers send money when they top up. Shown to them on the Wallet screen."
+msgid ""
+"Where customers send money when they top up. Shown to them on the Wallet "
+"screen."
 msgstr ""
 
 #: mealtally/preview/templates/preview/payment_setup.html:5
@@ -1597,7 +1909,9 @@ msgid "Instructions"
 msgstr ""
 
 #: mealtally/preview/templates/preview/payment_setup.html:8
-msgid "Pay by any UPI app to saffrontiffins@upi, then enter the 12-digit UTR in the app and attach a screenshot. We approve within 2 hours (9am–9pm)."
+msgid ""
+"Pay by any UPI app to saffrontiffins@upi, then enter the 12-digit UTR in the "
+"app and attach a screenshot. We approve within 2 hours (9am–9pm)."
 msgstr ""
 
 #: mealtally/preview/templates/preview/payment_setup.html:8
@@ -1620,7 +1934,12 @@ msgstr ""
 msgid "Weekly menu planner"
 msgstr ""
 
-#: mealtally/preview/templates/preview/planner.html:5 mealtally/web/templates/web/_auth_staff_form.html:5 mealtally/web/templates/web/admin_customers.html:6 mealtally/web/templates/web/login_customer.html:14 mealtally/web/templates/web/platform_tenant.html:36 mealtally/web/templates/web/report.html:8
+#: mealtally/preview/templates/preview/planner.html:5
+#: mealtally/web/templates/web/_auth_staff_form.html:5
+#: mealtally/web/templates/web/admin_customers.html:6
+#: mealtally/web/templates/web/login_customer.html:14
+#: mealtally/web/templates/web/platform_tenant.html:36
+#: mealtally/web/templates/web/report.html:8
 #, fuzzy
 msgid "Show"
 msgstr "দেখান"
@@ -1637,7 +1956,8 @@ msgstr ""
 msgid "Publish week"
 msgstr ""
 
-#: mealtally/preview/templates/preview/planner.html:6 mealtally/preview/templates/preview/today.html:29
+#: mealtally/preview/templates/preview/planner.html:6
+#: mealtally/preview/templates/preview/today.html:29
 msgid "Slot"
 msgstr ""
 
@@ -1645,7 +1965,9 @@ msgstr ""
 msgid "OR B"
 msgstr ""
 
-#: mealtally/preview/templates/preview/platform_plans.html:4 mealtally/web/templates/web/platform_dashboard.html:3 mealtally/web/templates/web/platform_tenant.html:3
+#: mealtally/preview/templates/preview/platform_plans.html:4
+#: mealtally/web/templates/web/platform_dashboard.html:3
+#: mealtally/web/templates/web/platform_tenant.html:3
 msgid "Platform"
 msgstr ""
 
@@ -1657,7 +1979,9 @@ msgstr ""
 msgid "What a restaurant pays you, and the limits that go with it."
 msgstr ""
 
-#: mealtally/preview/templates/preview/platform_plans.html:7 mealtally/preview/templates/preview/wallet_customer.html:18 mealtally/preview/templates/preview/wallet_plans.html:6
+#: mealtally/preview/templates/preview/platform_plans.html:7
+#: mealtally/preview/templates/preview/wallet_customer.html:18
+#: mealtally/preview/templates/preview/wallet_plans.html:6
 msgid "month"
 msgstr ""
 
@@ -1665,27 +1989,38 @@ msgstr ""
 msgid "Staff logins"
 msgstr ""
 
-#: mealtally/preview/templates/preview/platform_plans.html:8 mealtally/web/marketing.py:82
+#: mealtally/preview/templates/preview/platform_plans.html:8
+#: mealtally/web/marketing.py:83
 msgid "Branches"
 msgstr ""
 
-#: mealtally/preview/templates/preview/platform_plans.html:9 mealtally/web/templates/web/admin_plan_form.html:4
+#: mealtally/preview/templates/preview/platform_plans.html:9
+#: mealtally/web/templates/web/admin_plan_form.html:4
 msgid "Edit plan"
 msgstr ""
 
-#: mealtally/preview/templates/preview/profit.html:4 mealtally/preview/templates/preview/today.html:37 mealtally/preview/templates/preview/today.html:40 mealtally/preview/templates/preview/today_console.html:30
+#: mealtally/preview/templates/preview/profit.html:4
+#: mealtally/preview/templates/preview/today.html:37
+#: mealtally/preview/templates/preview/today.html:40
+#: mealtally/preview/templates/preview/today_console.html:30
 msgid "Profit"
 msgstr ""
 
-#: mealtally/preview/templates/preview/profit.html:4 mealtally/preview/templates/preview/today.html:37
+#: mealtally/preview/templates/preview/profit.html:4
+#: mealtally/preview/templates/preview/today.html:37
 msgid "Last 30 days"
 msgstr ""
 
-#: mealtally/preview/templates/preview/profit.html:5 mealtally/preview/templates/preview/today.html:37 mealtally/preview/templates/preview/today.html:40 mealtally/preview/templates/preview/today_console.html:30 mealtally/web/views_admin.py:719 mealtally/web/views_admin.py:727
+#: mealtally/preview/templates/preview/profit.html:5
+#: mealtally/preview/templates/preview/today.html:37
+#: mealtally/preview/templates/preview/today.html:40
+#: mealtally/preview/templates/preview/today_console.html:30
+#: mealtally/web/views_admin.py:721 mealtally/web/views_admin.py:729
 msgid "Revenue"
 msgstr ""
 
-#: mealtally/preview/templates/preview/profit.html:5 mealtally/web/templates/web/_today.html:6 mealtally/web/views_admin.py:718
+#: mealtally/preview/templates/preview/profit.html:5
+#: mealtally/web/templates/web/_today.html:6 mealtally/web/views_admin.py:720
 #, fuzzy
 msgid "Passes sold"
 msgstr "বিক্রি হওয়া পাস"
@@ -1702,7 +2037,8 @@ msgstr ""
 msgid "Margin"
 msgstr ""
 
-#: mealtally/preview/templates/preview/profit.html:6 mealtally/preview/templates/preview/today_console.html:28
+#: mealtally/preview/templates/preview/profit.html:6
+#: mealtally/preview/templates/preview/today_console.html:28
 msgid "Last 12 months"
 msgstr ""
 
@@ -1715,7 +2051,9 @@ msgid "Roles & permissions"
 msgstr ""
 
 #: mealtally/preview/templates/preview/roles.html:3
-msgid "Presets you can tweak per person. Existing staff logins are managed under Staff."
+msgid ""
+"Presets you can tweak per person. Existing staff logins are managed under "
+"Staff."
 msgstr ""
 
 #: mealtally/preview/templates/preview/roles.html:4
@@ -1742,11 +2080,14 @@ msgstr ""
 msgid "Your business"
 msgstr ""
 
-#: mealtally/preview/templates/preview/signup_wizard.html:8 mealtally/web/templates/web/marketing/home.html:107
+#: mealtally/preview/templates/preview/signup_wizard.html:8
+#: mealtally/web/templates/web/marketing/home.html:107
 msgid "Business name"
 msgstr ""
 
-#: mealtally/preview/templates/preview/signup_wizard.html:8 mealtally/web/templates/web/marketing/home.html:106 mealtally/web/templates/web/signup.html:6
+#: mealtally/preview/templates/preview/signup_wizard.html:8
+#: mealtally/web/templates/web/marketing/home.html:106
+#: mealtally/web/templates/web/signup.html:6
 msgid "Your name"
 msgstr ""
 
@@ -1766,15 +2107,20 @@ msgstr ""
 msgid "Your first plan"
 msgstr ""
 
-#: mealtally/preview/templates/preview/signup_wizard.html:10 mealtally/preview/templates/preview/wallet_plan_form.html:7
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+#: mealtally/preview/templates/preview/wallet_plan_form.html:7
 msgid "Plan name"
 msgstr ""
 
-#: mealtally/preview/templates/preview/signup_wizard.html:10 mealtally/web/templates/web/admin_plan_form.html:9
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+#: mealtally/web/templates/web/admin_plan_form.html:9
 msgid "Price (₹)"
 msgstr ""
 
-#: mealtally/preview/templates/preview/signup_wizard.html:10 mealtally/web/templates/web/admin_plan_form.html:10 mealtally/web/templates/web/receipt.html:16 mealtally/web/views_admin.py:633 mealtally/web/views_admin.py:758 mealtally/web/views_customer.py:318
+#: mealtally/preview/templates/preview/signup_wizard.html:10
+#: mealtally/web/templates/web/admin_plan_form.html:10
+#: mealtally/web/templates/web/receipt.html:16 mealtally/web/views_admin.py:635
+#: mealtally/web/views_admin.py:760 mealtally/web/views_customer.py:319
 #, fuzzy
 msgid "Meals"
 msgstr "খাবার"
@@ -1795,7 +2141,11 @@ msgstr ""
 msgid "Demo mode — no account created."
 msgstr ""
 
-#: mealtally/preview/templates/preview/signup_wizard.html:12 mealtally/web/templates/web/_auth_staff_form.html:10 mealtally/web/templates/web/login_customer.html:18 mealtally/web/templates/web/receipt.html:24 mealtally/web/templates/web/sell_preview.html:18
+#: mealtally/preview/templates/preview/signup_wizard.html:12
+#: mealtally/web/templates/web/_auth_staff_form.html:10
+#: mealtally/web/templates/web/login_customer.html:18
+#: mealtally/web/templates/web/receipt.html:24
+#: mealtally/web/templates/web/sell_preview.html:18
 #, fuzzy
 msgid "Back"
 msgstr "পিছনে"
@@ -1804,7 +2154,8 @@ msgstr "পিছনে"
 msgid "Next"
 msgstr ""
 
-#: mealtally/preview/templates/preview/signup_wizard.html:14 mealtally/web/templates/web/legal_page.html:4
+#: mealtally/preview/templates/preview/signup_wizard.html:14
+#: mealtally/web/templates/web/legal_page.html:4
 msgid "Back to home"
 msgstr ""
 
@@ -1812,24 +2163,43 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: mealtally/preview/templates/preview/site.html:5 mealtally/preview/templates/preview/site.html:9
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/site.html:9
 msgid "This week's menu"
 msgstr ""
 
-#: mealtally/preview/templates/preview/site.html:5 mealtally/preview/templates/preview/site.html:13 mealtally/preview/templates/preview/website.html:8 mealtally/web/context.py:65 mealtally/web/templates/web/admin_more.html:6 mealtally/web/templates/web/admin_plans.html:4 mealtally/web/templates/web/admin_settings.html:31
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/site.html:13
+#: mealtally/preview/templates/preview/website.html:8
+#: mealtally/web/context.py:66 mealtally/web/templates/web/admin_more.html:6
+#: mealtally/web/templates/web/admin_plans.html:4
+#: mealtally/web/templates/web/admin_settings.html:32
 #, fuzzy
 msgid "Plans"
 msgstr "প্ল্যান"
 
-#: mealtally/preview/templates/preview/site.html:5 mealtally/preview/templates/preview/site.html:14 mealtally/preview/templates/preview/website.html:8 mealtally/web/templates/web/marketing/_footer.html:5 mealtally/web/templates/web/marketing/_header.html:5 mealtally/web/templates/web/marketing/_header.html:20 mealtally/web/templates/web/marketing/home.html:61
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/site.html:14
+#: mealtally/preview/templates/preview/website.html:8
+#: mealtally/web/templates/web/marketing/_footer.html:5
+#: mealtally/web/templates/web/marketing/_header.html:5
+#: mealtally/web/templates/web/marketing/_header.html:20
+#: mealtally/web/templates/web/marketing/home.html:61
 msgid "How it works"
 msgstr ""
 
-#: mealtally/preview/templates/preview/site.html:5 mealtally/preview/templates/preview/website.html:8
+#: mealtally/preview/templates/preview/site.html:5
+#: mealtally/preview/templates/preview/website.html:8
 msgid "Contact"
 msgstr ""
 
-#: mealtally/preview/templates/preview/site.html:6 mealtally/templates/account/password_reset_from_key_done.html:5 mealtally/web/templates/web/_auth_staff_form.html:7 mealtally/web/templates/web/login_customer.html:15 mealtally/web/templates/web/marketing/_footer.html:7 mealtally/web/templates/web/marketing/_header.html:11 mealtally/web/templates/web/signup_done.html:5
+#: mealtally/preview/templates/preview/site.html:6
+#: mealtally/templates/account/password_reset_from_key_done.html:5
+#: mealtally/web/templates/web/_auth_staff_form.html:7
+#: mealtally/web/templates/web/login_customer.html:15
+#: mealtally/web/templates/web/marketing/_footer.html:7
+#: mealtally/web/templates/web/marketing/_header.html:11
+#: mealtally/web/templates/web/signup_done.html:5
 #, fuzzy
 msgid "Log in"
 msgstr "লগ ইন"
@@ -1838,7 +2208,8 @@ msgstr "লগ ইন"
 msgid "See plans"
 msgstr ""
 
-#: mealtally/preview/templates/preview/site.html:11 mealtally/preview/templates/preview/website.html:8
+#: mealtally/preview/templates/preview/site.html:11
+#: mealtally/preview/templates/preview/website.html:8
 msgid "Menu of the week"
 msgstr ""
 
@@ -1850,7 +2221,10 @@ msgstr ""
 msgid "or B"
 msgstr ""
 
-#: mealtally/preview/templates/preview/site.html:13 mealtally/preview/templates/preview/subscription_detail.html:8 mealtally/preview/templates/preview/wallet_customer.html:18 mealtally/preview/templates/preview/wallet_plans.html:6
+#: mealtally/preview/templates/preview/site.html:13
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/wallet_customer.html:18
+#: mealtally/preview/templates/preview/wallet_plans.html:6
 msgid "day"
 msgstr ""
 
@@ -1858,7 +2232,8 @@ msgstr ""
 msgid "a month"
 msgstr ""
 
-#: mealtally/preview/templates/preview/site.html:13 mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/site.html:13
+#: mealtally/preview/templates/preview/subscription_detail.html:10
 msgid "Mon–Sat"
 msgstr ""
 
@@ -1890,11 +2265,14 @@ msgstr ""
 msgid "Regular"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_detail.html:8 mealtally/preview/templates/preview/subscription_new.html:17
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/subscription_new.html:17
 msgid "Initial payment"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_detail.html:8 mealtally/preview/templates/preview/subscriptions.html:4 mealtally/preview/templates/preview/subscriptions.html:6
+#: mealtally/preview/templates/preview/subscription_detail.html:8
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/preview/templates/preview/subscriptions.html:6
 msgid "Unpaid"
 msgstr ""
 
@@ -1922,23 +2300,29 @@ msgstr ""
 msgid "Delivery days"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_detail.html:10 mealtally/preview/templates/preview/subscription_new.html:14
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:14
 msgid "Shipping"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_detail.html:10 mealtally/preview/templates/preview/subscription_new.html:14
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:14
 msgid "Self pick-up"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_detail.html:10 mealtally/preview/templates/preview/subscription_new.html:14 mealtally/preview/templates/preview/today_console.html:35
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:14
+#: mealtally/preview/templates/preview/today_console.html:35
 msgid "Home delivery"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_detail.html:10 mealtally/preview/templates/preview/subscription_new.html:13
+#: mealtally/preview/templates/preview/subscription_detail.html:10
+#: mealtally/preview/templates/preview/subscription_new.html:13
 msgid "Kitchen notes"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_detail.html:11 mealtally/preview/templates/preview/wallet_customer.html:17
+#: mealtally/preview/templates/preview/subscription_detail.html:11
+#: mealtally/preview/templates/preview/wallet_customer.html:17
 msgid "Recent orders"
 msgstr ""
 
@@ -1962,7 +2346,8 @@ msgstr ""
 msgid "All plans"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_new.html:4 mealtally/preview/templates/preview/subscriptions.html:3
+#: mealtally/preview/templates/preview/subscription_new.html:4
+#: mealtally/preview/templates/preview/subscriptions.html:3
 msgid "New subscription"
 msgstr ""
 
@@ -1978,7 +2363,8 @@ msgstr ""
 msgid "Add customer"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscription_new.html:8 mealtally/preview/templates/preview/wallet_customer.html:5
+#: mealtally/preview/templates/preview/subscription_new.html:8
+#: mealtally/preview/templates/preview/wallet_customer.html:5
 msgid "Add address"
 msgstr ""
 
@@ -2070,7 +2456,8 @@ msgstr ""
 msgid "Customers on a home-delivery or pick-up wallet plan."
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscriptions.html:4 mealtally/preview/templates/preview/wallets.html:19
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/preview/templates/preview/wallets.html:19
 msgid "Search name"
 msgstr ""
 
@@ -2078,7 +2465,10 @@ msgstr ""
 msgid "All statuses"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscriptions.html:4 mealtally/web/templates/web/_customer_rows.html:3 mealtally/web/templates/web/me_account.html:13 mealtally/web/templates/web/me_home.html:13
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/web/templates/web/_customer_rows.html:3
+#: mealtally/web/templates/web/me_account.html:13
+#: mealtally/web/templates/web/me_home.html:13
 #, fuzzy
 msgid "Active"
 msgstr "সক্রিয়"
@@ -2091,7 +2481,8 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-#: mealtally/preview/templates/preview/subscriptions.html:4 mealtally/web/labels.py:18 mealtally/web/views_customer.py:42
+#: mealtally/preview/templates/preview/subscriptions.html:4
+#: mealtally/web/labels.py:19 mealtally/web/views_customer.py:43
 #, fuzzy
 msgid "Expired"
 msgstr "মেয়াদ শেষ"
@@ -2133,7 +2524,8 @@ msgstr ""
 msgid "Return"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today.html:3 mealtally/web/templates/web/staff_console.html:38
+#: mealtally/preview/templates/preview/today.html:3
+#: mealtally/web/templates/web/staff_console.html:38
 #, fuzzy
 msgid "Today"
 msgstr "আজ"
@@ -2150,27 +2542,36 @@ msgstr ""
 msgid "Meal passes"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today.html:18 mealtally/web/templates/web/admin_dashboard.html:5
+#: mealtally/preview/templates/preview/today.html:18
+#: mealtally/web/templates/web/admin_dashboard.html:5
 msgid "Meals redeemed today"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today.html:19 mealtally/web/templates/web/admin_dashboard.html:6 mealtally/web/templates/web/platform_dashboard.html:11 mealtally/web/templates/web/platform_tenant.html:10
+#: mealtally/preview/templates/preview/today.html:19
+#: mealtally/web/templates/web/admin_dashboard.html:6
+#: mealtally/web/templates/web/platform_dashboard.html:11
+#: mealtally/web/templates/web/platform_tenant.html:10
 msgid "Active passes"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today.html:20 mealtally/web/templates/web/admin_dashboard.html:7 mealtally/web/views_admin.py:106
+#: mealtally/preview/templates/preview/today.html:20
+#: mealtally/web/templates/web/admin_dashboard.html:7
+#: mealtally/web/views_admin.py:107
 msgid "Expiring in 3 days"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today.html:21 mealtally/web/templates/web/admin_dashboard.html:8
+#: mealtally/preview/templates/preview/today.html:21
+#: mealtally/web/templates/web/admin_dashboard.html:8
 msgid "Passes sold this month"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today.html:22 mealtally/web/templates/web/admin_dashboard.html:9
+#: mealtally/preview/templates/preview/today.html:22
+#: mealtally/web/templates/web/admin_dashboard.html:9
 msgid "Revenue this month"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today.html:23 mealtally/web/templates/web/admin_dashboard.html:10
+#: mealtally/preview/templates/preview/today.html:23
+#: mealtally/web/templates/web/admin_dashboard.html:10
 msgid "Platform fee this month"
 msgstr ""
 
@@ -2230,7 +2631,9 @@ msgstr ""
 msgid "Orders, wallets, expenses and the chart below use demo data (Preview)."
 msgstr ""
 
-#: mealtally/preview/templates/preview/today_console.html:17 mealtally/web/templates/web/base_console.html:64 mealtally/web/templates/web/base_console.html:65
+#: mealtally/preview/templates/preview/today_console.html:17
+#: mealtally/web/templates/web/base_console.html:64
+#: mealtally/web/templates/web/base_console.html:65
 #, fuzzy
 msgid "Alerts"
 msgstr "সতর্কতা"
@@ -2239,7 +2642,10 @@ msgstr "সতর্কতা"
 msgid "Needs your attention"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today_console.html:22 mealtally/web/templates/web/_http_notice.html:5 mealtally/web/templates/web/base_classic.html:62 mealtally/web/templates/web/base_console.html:80
+#: mealtally/preview/templates/preview/today_console.html:22
+#: mealtally/web/templates/web/_http_notice.html:5
+#: mealtally/web/templates/web/base_classic.html:62
+#: mealtally/web/templates/web/base_console.html:80
 #, fuzzy
 msgid "Dismiss"
 msgstr "সরান"
@@ -2260,7 +2666,10 @@ msgstr ""
 msgid "Dine-in meals"
 msgstr ""
 
-#: mealtally/preview/templates/preview/today_console.html:41 mealtally/web/templates/web/marketing/home.html:24 mealtally/web/templates/web/marketing/home.html:31 mealtally/web/templates/web/marketing/home.html:55
+#: mealtally/preview/templates/preview/today_console.html:41
+#: mealtally/web/templates/web/marketing/home.html:24
+#: mealtally/web/templates/web/marketing/home.html:31
+#: mealtally/web/templates/web/marketing/home.html:55
 msgid "Live"
 msgstr ""
 
@@ -2300,7 +2709,8 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: mealtally/preview/templates/preview/wallet_customer.html:3 mealtally/preview/templates/preview/wallets.html:3
+#: mealtally/preview/templates/preview/wallet_customer.html:3
+#: mealtally/preview/templates/preview/wallets.html:3
 msgid "Wallets & top-ups"
 msgstr ""
 
@@ -2333,7 +2743,9 @@ msgid "e.g. Cash received"
 msgstr ""
 
 #: mealtally/preview/templates/preview/wallet_customer.html:7
-msgid "In the live product this becomes an append-only ledger entry with your name and the reason — it can never be edited."
+msgid ""
+"In the live product this becomes an append-only ledger entry with your name "
+"and the reason — it can never be edited."
 msgstr ""
 
 #: mealtally/preview/templates/preview/wallet_customer.html:7
@@ -2376,24 +2788,31 @@ msgstr ""
 msgid "Addresses"
 msgstr ""
 
-#: mealtally/preview/templates/preview/wallet_customer.html:19 mealtally/web/templates/web/admin_audit.html:10 mealtally/web/templates/web/admin_customer.html:55 mealtally/web/views_admin.py:700
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/web/templates/web/admin_audit.html:10
+#: mealtally/web/templates/web/admin_customer.html:55
+#: mealtally/web/views_admin.py:702
 msgid "When"
 msgstr ""
 
-#: mealtally/preview/templates/preview/wallet_customer.html:19 mealtally/web/templates/web/admin_customer.html:55
+#: mealtally/preview/templates/preview/wallet_customer.html:19
+#: mealtally/web/templates/web/admin_customer.html:55
 msgid "Source"
 msgstr ""
 
-#: mealtally/preview/templates/preview/wallet_customer.html:21 mealtally/web/context.py:48 mealtally/web/context.py:104
+#: mealtally/preview/templates/preview/wallet_customer.html:21
+#: mealtally/web/context.py:49 mealtally/web/context.py:105
 #, fuzzy
 msgid "Home"
 msgstr "হোম"
 
-#: mealtally/preview/templates/preview/wallet_plan_form.html:3 mealtally/preview/templates/preview/wallet_plans.html:3
+#: mealtally/preview/templates/preview/wallet_plan_form.html:3
+#: mealtally/preview/templates/preview/wallet_plans.html:3
 msgid "Wallet plans"
 msgstr ""
 
-#: mealtally/preview/templates/preview/wallet_plan_form.html:4 mealtally/preview/templates/preview/wallet_plans.html:5
+#: mealtally/preview/templates/preview/wallet_plan_form.html:4
+#: mealtally/preview/templates/preview/wallet_plans.html:5
 msgid "New wallet plan"
 msgstr ""
 
@@ -2441,12 +2860,17 @@ msgstr ""
 msgid "Save wallet plan"
 msgstr ""
 
-#: mealtally/preview/templates/preview/wallet_plan_form.html:16 mealtally/web/templates/web/_card.html:33 mealtally/web/templates/web/admin_plan_form.html:28 mealtally/web/templates/web/platform_confirm.html:8
+#: mealtally/preview/templates/preview/wallet_plan_form.html:16
+#: mealtally/web/templates/web/_card.html:33
+#: mealtally/web/templates/web/admin_plan_form.html:28
+#: mealtally/web/templates/web/platform_confirm.html:8
 msgid "Cancel"
 msgstr ""
 
 #: mealtally/preview/templates/preview/wallet_plans.html:3
-msgid "Pay-as-you-eat daily plans: customers top up a wallet and orders are placed at the cutoff."
+msgid ""
+"Pay-as-you-eat daily plans: customers top up a wallet and orders are placed "
+"at the cutoff."
 msgstr ""
 
 #: mealtally/preview/templates/preview/wallet_plans.html:6
@@ -2493,7 +2917,8 @@ msgstr ""
 msgid "Wallets"
 msgstr ""
 
-#: mealtally/preview/templates/preview/wallets.html:9 mealtally/preview/templates/preview/wallets.html:23
+#: mealtally/preview/templates/preview/wallets.html:9
+#: mealtally/preview/templates/preview/wallets.html:23
 msgid "Online payments"
 msgstr ""
 
@@ -2534,7 +2959,10 @@ msgid "Est. days left"
 msgstr ""
 
 #: mealtally/preview/templates/preview/wallets.html:23
-msgid "Customers will be able to top up their wallet by card, UPI or netbanking, and it credits automatically — no UTR to check. Connect Razorpay or Cashfree to switch it on."
+msgid ""
+"Customers will be able to top up their wallet by card, UPI or netbanking, "
+"and it credits automatically — no UTR to check. Connect Razorpay or Cashfree "
+"to switch it on."
 msgstr ""
 
 #: mealtally/preview/templates/preview/wallets.html:23
@@ -2558,7 +2986,8 @@ msgid "Domain"
 msgstr ""
 
 #: mealtally/preview/templates/preview/website.html:6
-msgid "Point a CNAME record at sites.tally.example. We issue the HTTPS certificate."
+msgid ""
+"Point a CNAME record at sites.tally.example. We issue the HTTPS certificate."
 msgstr ""
 
 #: mealtally/preview/templates/preview/website.html:6
@@ -2601,7 +3030,12 @@ msgstr ""
 msgid "Edit policies"
 msgstr ""
 
-#: mealtally/templates/account/logout.html:2 mealtally/templates/account/logout.html:5 mealtally/web/templates/web/base_classic.html:42 mealtally/web/templates/web/base_console.html:75 mealtally/web/templates/web/me_account.html:22 mealtally/web/templates/web/me_profile.html:12
+#: mealtally/templates/account/logout.html:2
+#: mealtally/templates/account/logout.html:5
+#: mealtally/web/templates/web/base_classic.html:42
+#: mealtally/web/templates/web/base_console.html:75
+#: mealtally/web/templates/web/me_account.html:22
+#: mealtally/web/templates/web/me_profile.html:12
 #, fuzzy
 msgid "Log out"
 msgstr "লগ আউট"
@@ -2614,7 +3048,8 @@ msgstr ""
 msgid "Are you sure you want to log out?"
 msgstr ""
 
-#: mealtally/templates/account/password_reset.html:2 mealtally/templates/account/password_reset.html:3
+#: mealtally/templates/account/password_reset.html:2
+#: mealtally/templates/account/password_reset.html:3
 msgid "Reset your password"
 msgstr ""
 
@@ -2626,19 +3061,23 @@ msgstr ""
 msgid "Send reset link"
 msgstr ""
 
-#: mealtally/templates/account/password_reset.html:11 mealtally/templates/account/password_reset_done.html:5
+#: mealtally/templates/account/password_reset.html:11
+#: mealtally/templates/account/password_reset_done.html:5
 msgid "Back to login"
 msgstr ""
 
-#: mealtally/templates/account/password_reset_done.html:2 mealtally/templates/account/password_reset_done.html:3
+#: mealtally/templates/account/password_reset_done.html:2
+#: mealtally/templates/account/password_reset_done.html:3
 msgid "Check your email"
 msgstr ""
 
 #: mealtally/templates/account/password_reset_done.html:4
-msgid "If that address has an account, we have sent a link to reset the password."
+msgid ""
+"If that address has an account, we have sent a link to reset the password."
 msgstr ""
 
-#: mealtally/templates/account/password_reset_from_key.html:2 mealtally/templates/account/password_reset_from_key.html:3
+#: mealtally/templates/account/password_reset_from_key.html:2
+#: mealtally/templates/account/password_reset_from_key.html:3
 msgid "Choose a new password"
 msgstr ""
 
@@ -2654,15 +3093,18 @@ msgstr ""
 msgid "New password"
 msgstr ""
 
-#: mealtally/templates/account/password_reset_from_key.html:10 mealtally/web/templates/web/_staff_password_form.html:7
+#: mealtally/templates/account/password_reset_from_key.html:10
+#: mealtally/web/templates/web/_staff_password_form.html:7
 msgid "Repeat new password"
 msgstr ""
 
-#: mealtally/templates/account/password_reset_from_key.html:13 mealtally/web/templates/web/_staff_password_form.html:8
+#: mealtally/templates/account/password_reset_from_key.html:13
+#: mealtally/web/templates/web/_staff_password_form.html:8
 msgid "Save password"
 msgstr ""
 
-#: mealtally/templates/account/password_reset_from_key_done.html:2 mealtally/templates/account/password_reset_from_key_done.html:3
+#: mealtally/templates/account/password_reset_from_key_done.html:2
+#: mealtally/templates/account/password_reset_from_key_done.html:3
 msgid "Password changed"
 msgstr ""
 
@@ -2678,646 +3120,722 @@ msgstr ""
 msgid "Django administration"
 msgstr ""
 
-#: mealtally/web/audit_text.py:87
+#: mealtally/web/audit_text.py:88
 #, python-format
 msgid "%(who)s reversed %(cust)s's %(time)s meal — reason: %(reason)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:89 mealtally/web/audit_text.py:97 mealtally/web/audit_text.py:107 mealtally/web/audit_text.py:115 mealtally/web/audit_text.py:121 mealtally/web/audit_text.py:129 mealtally/web/audit_text.py:152
+#: mealtally/web/audit_text.py:90 mealtally/web/audit_text.py:98
+#: mealtally/web/audit_text.py:108 mealtally/web/audit_text.py:116
+#: mealtally/web/audit_text.py:122 mealtally/web/audit_text.py:130
+#: mealtally/web/audit_text.py:153
 msgid "a customer"
 msgstr ""
 
-#: mealtally/web/audit_text.py:95
+#: mealtally/web/audit_text.py:96
 #, python-format
-msgid "%(who)s adjusted %(cust)s's pass by %(q)s meals (now %(left)s) — reason: %(reason)s"
+msgid ""
+"%(who)s adjusted %(cust)s's pass by %(q)s meals (now %(left)s) — reason: "
+"%(reason)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:103
+#: mealtally/web/audit_text.py:104
 #, python-format
 msgid "%(who)s recorded %(amount)s by %(method)s from %(cust)s%(receipt)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:111
+#: mealtally/web/audit_text.py:112
 #, python-format
 msgid "%(who)s voided %(receipt)s (%(amount)s, %(cust)s) — reason: %(reason)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:113
+#: mealtally/web/audit_text.py:114
 msgid "a payment"
 msgstr ""
 
-#: mealtally/web/audit_text.py:119
+#: mealtally/web/audit_text.py:120
 #, python-format
 msgid "%(who)s could not serve %(cust)s (%(channel)s): %(msg)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:122 mealtally/web/labels.py:22
+#: mealtally/web/audit_text.py:123 mealtally/web/labels.py:23
 #, fuzzy
 msgid "QR scan"
 msgstr "QR স্ক্যান"
 
-#: mealtally/web/audit_text.py:122 mealtally/web/templates/web/staff_console.html:37
+#: mealtally/web/audit_text.py:123
+#: mealtally/web/templates/web/staff_console.html:37
 #, fuzzy
 msgid "search"
 msgstr "খুঁজুন"
 
-#: mealtally/web/audit_text.py:127
+#: mealtally/web/audit_text.py:128
 #, python-format
-msgid "%(who)s overrode the meal rules for %(cust)s (%(msg)s) — reason: %(reason)s"
+msgid ""
+"%(who)s overrode the meal rules for %(cust)s (%(msg)s) — reason: %(reason)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:134
+#: mealtally/web/audit_text.py:135
 msgid "blocked"
 msgstr ""
 
-#: mealtally/web/audit_text.py:134
+#: mealtally/web/audit_text.py:135
 msgid "unblocked"
 msgstr ""
 
-#: mealtally/web/audit_text.py:138
+#: mealtally/web/audit_text.py:139
 #, python-format
 msgid "%(who)s added customer %(cust)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:141
+#: mealtally/web/audit_text.py:142
 #, python-format
 msgid "%(who)s updated %(cust)s (%(fields)s)"
 msgstr ""
 
-#: mealtally/web/audit_text.py:144
+#: mealtally/web/audit_text.py:145
 msgid "no change"
 msgstr ""
 
-#: mealtally/web/audit_text.py:148
+#: mealtally/web/audit_text.py:149
 #, python-format
 msgid "%(who)s: pass %(verb)s — %(plan)s for %(cust)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:157
+#: mealtally/web/audit_text.py:158
 msgid "settings"
 msgstr ""
 
-#: mealtally/web/audit_text.py:158
+#: mealtally/web/audit_text.py:159
 msgid "plan"
 msgstr ""
 
-#: mealtally/web/audit_text.py:159
+#: mealtally/web/audit_text.py:160
 msgid "new plan"
 msgstr ""
 
-#: mealtally/web/audit_text.py:160
+#: mealtally/web/audit_text.py:161
 msgid "meal time"
 msgstr ""
 
-#: mealtally/web/audit_text.py:161
+#: mealtally/web/audit_text.py:162
 msgid "new meal time"
 msgstr ""
 
-#: mealtally/web/audit_text.py:164
+#: mealtally/web/audit_text.py:165
 #, python-format
 msgid "%(who)s changed %(what)s%(name)s: %(fields)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:168
+#: mealtally/web/audit_text.py:169
 msgid "saved, no change"
 msgstr ""
 
-#: mealtally/web/audit_text.py:171
+#: mealtally/web/audit_text.py:172
 #, python-format
 msgid "%(who)s assigned %(route)s to %(driver)s"
 msgstr ""
 
-#: mealtally/web/audit_text.py:197
+#: mealtally/web/audit_text.py:198
 msgid "on"
 msgstr ""
 
-#: mealtally/web/audit_text.py:197
+#: mealtally/web/audit_text.py:198
 msgid "off"
 msgstr ""
 
-#: mealtally/web/context.py:49 mealtally/web/templates/web/me_qr.html:2
+#: mealtally/web/context.py:50 mealtally/web/templates/web/me_qr.html:2
 #, fuzzy
 msgid "My QR"
 msgstr "আমার QR"
 
-#: mealtally/web/context.py:50 mealtally/web/templates/web/me_history.html:3
+#: mealtally/web/context.py:51 mealtally/web/templates/web/me_history.html:3
 #, fuzzy
 msgid "History"
 msgstr "ইতিহাস"
 
-#: mealtally/web/context.py:51 mealtally/web/templates/web/admin_customer.html:43 mealtally/web/views_customer.py:320
+#: mealtally/web/context.py:52
+#: mealtally/web/templates/web/admin_customer.html:43
+#: mealtally/web/views_customer.py:321
 #, fuzzy
 msgid "Payments"
 msgstr "পেমেন্ট"
 
-#: mealtally/web/context.py:52 mealtally/web/templates/web/me_account.html:4 mealtally/web/templates/web/me_profile.html:3
+#: mealtally/web/context.py:53 mealtally/web/templates/web/me_account.html:4
+#: mealtally/web/templates/web/me_profile.html:3
 #, fuzzy
 msgid "Profile"
 msgstr "প্রোফাইল"
 
-#: mealtally/web/context.py:55 mealtally/web/templates/web/staff_console.html:2 mealtally/web/templates/web/staff_console.html:32
+#: mealtally/web/context.py:56 mealtally/web/templates/web/staff_console.html:2
+#: mealtally/web/templates/web/staff_console.html:32
 #, fuzzy
 msgid "Redeem"
 msgstr "রিডিম"
 
-#: mealtally/web/context.py:69 mealtally/web/templates/web/admin_more.html:8 mealtally/web/templates/web/admin_staff.html:3 mealtally/web/views_admin.py:700
+#: mealtally/web/context.py:70 mealtally/web/templates/web/admin_more.html:8
+#: mealtally/web/templates/web/admin_staff.html:3
+#: mealtally/web/views_admin.py:702
 #, fuzzy
 msgid "Staff"
 msgstr "কর্মী"
 
-#: mealtally/web/context.py:107 mealtally/web/templates/web/me_activity.html:3
+#: mealtally/web/context.py:108 mealtally/web/templates/web/me_activity.html:3
 #, fuzzy
 msgid "Activity"
 msgstr "কার্যকলাপ"
 
-#: mealtally/web/context.py:112 mealtally/web/context.py:237 mealtally/web/templates/web/base_console.html:68 mealtally/web/templates/web/base_customer.html:27 mealtally/web/templates/web/me_account.html:3
+#: mealtally/web/context.py:113 mealtally/web/context.py:236
+#: mealtally/web/templates/web/base_console.html:68
+#: mealtally/web/templates/web/base_customer.html:27
+#: mealtally/web/templates/web/me_account.html:3
 #, fuzzy
 msgid "Account"
 msgstr "অ্যাকাউন্ট"
 
-#: mealtally/web/context.py:181 mealtally/web/templates/web/marketing/home.html:8
+#: mealtally/web/context.py:182
+#: mealtally/web/templates/web/marketing/home.html:8
 #, fuzzy
 msgid "Prepaid meals, simplified."
 msgstr "প্রিপেইড খাবার, সহজভাবে।"
 
-#: mealtally/web/context.py:225
+#: mealtally/web/context.py:224
 #, fuzzy
 msgid "Stops"
 msgstr "স্টপ"
 
-#: mealtally/web/context.py:231 mealtally/web/templates/web/customer_created.html:5 mealtally/web/templates/web/me_activity.html:11
+#: mealtally/web/context.py:230
+#: mealtally/web/templates/web/customer_created.html:5
+#: mealtally/web/templates/web/me_activity.html:11
 #, fuzzy
 msgid "Done"
 msgstr "হয়ে গেছে"
 
-#: mealtally/web/context.py:254 mealtally/web/templates/web/marketing/_header.html:14 mealtally/web/templates/web/marketing/_header.html:22
+#: mealtally/web/context.py:253
+#: mealtally/web/templates/web/marketing/_header.html:14
+#: mealtally/web/templates/web/marketing/_header.html:22
 #, fuzzy
 msgid "Platform admin"
 msgstr "প্ল্যাটফর্ম অ্যাডমিন"
 
-#: mealtally/web/context.py:254 mealtally/web/templatetags/mealtally_extras.py:58
-#, fuzzy
-msgid "Counter"
-msgstr "কাউন্টার"
-
-#: mealtally/web/copy.py:6
+#: mealtally/web/copy.py:7
 msgid "This customer has no active pass. Sell a pass first."
 msgstr ""
 
-#: mealtally/web/copy.py:7
-msgid "The pass is not valid right now - it has expired or has not started yet."
-msgstr ""
-
 #: mealtally/web/copy.py:8
-msgid "No meals left on this pass."
+msgid ""
+"The pass is not valid right now - it has expired or has not started yet."
 msgstr ""
 
 #: mealtally/web/copy.py:9
-msgid "The daily meal limit for this pass has been reached."
+msgid "No meals left on this pass."
 msgstr ""
 
 #: mealtally/web/copy.py:10
-msgid "This customer was served a moment ago."
+msgid "The daily meal limit for this pass has been reached."
 msgstr ""
 
 #: mealtally/web/copy.py:11
-msgid "This QR code has expired. Ask the customer to refresh their QR."
+msgid "This customer was served a moment ago."
 msgstr ""
 
 #: mealtally/web/copy.py:12
-msgid "This QR code is not valid for this restaurant."
+msgid "This QR code has expired. Ask the customer to refresh their QR."
 msgstr ""
 
 #: mealtally/web/copy.py:13
-msgid "This QR code was already used. Ask the customer to refresh their QR."
+msgid "This QR code is not valid for this restaurant."
 msgstr ""
 
 #: mealtally/web/copy.py:14
-msgid "You can't do this here. Ask the owner if you think you should."
+msgid "This QR code was already used. Ask the customer to refresh their QR."
 msgstr ""
 
 #: mealtally/web/copy.py:15
-msgid "This restaurant is paused. Meals can't be redeemed right now."
+msgid "You can't do this here. Ask the owner if you think you should."
 msgstr ""
 
 #: mealtally/web/copy.py:16
-msgid "This meal was already undone."
+msgid "This restaurant is paused. Meals can't be redeemed right now."
 msgstr ""
 
 #: mealtally/web/copy.py:17
-msgid "Credits can only be restored on an active pass."
+msgid "This meal was already undone."
 msgstr ""
 
 #: mealtally/web/copy.py:18
-msgid "This customer already has the maximum number of queued passes."
+msgid "Credits can only be restored on an active pass."
 msgstr ""
 
 #: mealtally/web/copy.py:19
-msgid "The amount must equal the plan price."
+msgid "This customer already has the maximum number of queued passes."
 msgstr ""
 
 #: mealtally/web/copy.py:20
-msgid "This payment can no longer be voided (a meal was already redeemed, or the pass ended)."
+msgid "The amount must equal the plan price."
 msgstr ""
 
 #: mealtally/web/copy.py:21
-msgid "Too many attempts. Try again in 15 minutes, or ask the owner."
+msgid ""
+"This payment can no longer be voided (a meal was already redeemed, or the "
+"pass ended)."
 msgstr ""
 
 #: mealtally/web/copy.py:22
+msgid "Too many attempts. Try again in 15 minutes, or ask the owner."
+msgstr ""
+
+#: mealtally/web/copy.py:23
 msgid "Those details did not match. Please check and try again."
 msgstr ""
 
-#: mealtally/web/help.py:14
+#: mealtally/web/help.py:15
 msgid "How do I show my QR at the counter?"
 msgstr ""
 
-#: mealtally/web/help.py:15
-msgid "Open My QR and show the screen to the staff. The code refreshes by itself and each code works only once."
-msgstr ""
-
-#: mealtally/web/help.py:19
-msgid "How do I see how many meals I have left?"
+#: mealtally/web/help.py:16
+msgid ""
+"Open My QR and show the screen to the staff. The code refreshes by itself "
+"and each code works only once."
 msgstr ""
 
 #: mealtally/web/help.py:20
-msgid "Your Home screen shows meals left, days left and the date your pass ends."
+msgid "How do I see how many meals I have left?"
 msgstr ""
 
-#: mealtally/web/help.py:24
+#: mealtally/web/help.py:21
+msgid ""
+"Your Home screen shows meals left, days left and the date your pass ends."
+msgstr ""
+
+#: mealtally/web/help.py:25
 msgid "What happens when my pass ends?"
 msgstr ""
 
-#: mealtally/web/help.py:26
-msgid "Unused meals expire on the end date and cannot be carried forward. Renew at the counter and the new pass starts right after."
-msgstr ""
-
-#: mealtally/web/help.py:31
-msgid "How do I change my PIN?"
+#: mealtally/web/help.py:27
+msgid ""
+"Unused meals expire on the end date and cannot be carried forward. Renew at "
+"the counter and the new pass starts right after."
 msgstr ""
 
 #: mealtally/web/help.py:32
-msgid "Open Profile and choose Change PIN. If you forgot it, ask the counter staff to reset it for you."
+msgid "How do I change my PIN?"
 msgstr ""
 
-#: mealtally/web/help.py:37
+#: mealtally/web/help.py:33
+msgid ""
+"Open Profile and choose Change PIN. If you forgot it, ask the counter staff "
+"to reset it for you."
+msgstr ""
+
+#: mealtally/web/help.py:38
 msgid "How do I sell a pass?"
 msgstr ""
 
-#: mealtally/web/help.py:39
-msgid "Open Sell pass, find the customer (or add them), pick the plan and the payment method, then confirm. The receipt is ready straight away."
+#: mealtally/web/help.py:40
+msgid ""
+"Open Sell pass, find the customer (or add them), pick the plan and the "
+"payment method, then confirm. The receipt is ready straight away."
 msgstr ""
 
-#: mealtally/web/help.py:44
+#: mealtally/web/help.py:45
 msgid "How do I redeem a meal?"
 msgstr ""
 
-#: mealtally/web/help.py:46
-msgid "On Redeem, scan the customer's QR or type the last digits of their phone, then tap Redeem meal. You can undo for 30 seconds."
+#: mealtally/web/help.py:47
+msgid ""
+"On Redeem, scan the customer's QR or type the last digits of their phone, "
+"then tap Redeem meal. You can undo for 30 seconds."
 msgstr ""
 
-#: mealtally/web/help.py:51
+#: mealtally/web/help.py:52
 msgid "The card is red — what now?"
 msgstr ""
 
-#: mealtally/web/help.py:53
-msgid "The customer has no active pass. Tap Sell pass to renew; a new pass can queue to start when the current one ends."
+#: mealtally/web/help.py:54
+msgid ""
+"The customer has no active pass. Tap Sell pass to renew; a new pass can "
+"queue to start when the current one ends."
 msgstr ""
 
-#: mealtally/web/help.py:58
+#: mealtally/web/help.py:59
 msgid "A meal was redeemed by mistake"
 msgstr ""
 
-#: mealtally/web/help.py:60
-msgid "Tap Undo on the green card within 30 seconds, or use Reverse in Today's redemptions. Every reversal is recorded with your name."
+#: mealtally/web/help.py:61
+msgid ""
+"Tap Undo on the green card within 30 seconds, or use Reverse in Today's "
+"redemptions. Every reversal is recorded with your name."
 msgstr ""
 
-#: mealtally/web/help.py:65
+#: mealtally/web/help.py:66
 msgid "Who can see what?"
 msgstr ""
 
-#: mealtally/web/help.py:67
-msgid "Owners and managers see everything. Counter staff see Redeem, Sell and customer lookup. Chefs see the kitchen and drivers see their route."
+#: mealtally/web/help.py:68
+msgid ""
+"Owners and managers see everything. Counter staff see Redeem, Sell and "
+"customer lookup. Chefs see the kitchen and drivers see their route."
 msgstr ""
 
-#: mealtally/web/help.py:72
+#: mealtally/web/help.py:73
 msgid "How do I add a staff login?"
 msgstr ""
 
-#: mealtally/web/help.py:74
-msgid "Owners can open More → Staff, add a name and phone or email, and share the temporary password. They choose their own at first login."
+#: mealtally/web/help.py:75
+msgid ""
+"Owners can open More → Staff, add a name and phone or email, and share the "
+"temporary password. They choose their own at first login."
 msgstr ""
 
-#: mealtally/web/help.py:79
+#: mealtally/web/help.py:80
 msgid "What does the platform fee cover?"
 msgstr ""
 
-#: mealtally/web/help.py:81
-msgid "Money → Platform fee statement lists each payment, the fee on it and any reversals, month by month. It always adds up to the invoice."
+#: mealtally/web/help.py:82
+msgid ""
+"Money → Platform fee statement lists each payment, the fee on it and any "
+"reversals, month by month. It always adds up to the invoice."
 msgstr ""
 
-#: mealtally/web/help.py:86
+#: mealtally/web/help.py:87
 msgid "How do customers see their balance?"
 msgstr ""
 
-#: mealtally/web/help.py:88
-msgid "They log in with their phone and PIN. Their home screen shows meals left, validity and a QR for the counter."
+#: mealtally/web/help.py:89
+msgid ""
+"They log in with their phone and PIN. Their home screen shows meals left, "
+"validity and a QR for the counter."
 msgstr ""
 
-#: mealtally/web/labels.py:14 mealtally/web/views_customer.py:38
+#: mealtally/web/labels.py:15 mealtally/web/views_customer.py:39
 #, fuzzy
 msgid "Credits issued"
 msgstr "ক্রেডিট দেওয়া হয়েছে"
 
-#: mealtally/web/labels.py:15 mealtally/web/views_customer.py:39
+#: mealtally/web/labels.py:16 mealtally/web/views_customer.py:40
 #, fuzzy
 msgid "Meal redeemed"
 msgstr "খাবার রিডিম হয়েছে"
 
-#: mealtally/web/labels.py:16 mealtally/web/templates/web/_redeem_success.html:9
+#: mealtally/web/labels.py:17
+#: mealtally/web/templates/web/_redeem_success.html:9
 #, fuzzy
 msgid "Undo"
 msgstr "ফেরান"
 
-#: mealtally/web/labels.py:17
+#: mealtally/web/labels.py:18
 #, fuzzy
 msgid "Adjusted"
 msgstr "সমন্বয় করা"
 
-#: mealtally/web/labels.py:21
+#: mealtally/web/labels.py:22
 #, fuzzy
 msgid "Counter search"
 msgstr "কাউন্টার খোঁজ"
 
-#: mealtally/web/labels.py:23
+#: mealtally/web/labels.py:24
 #, fuzzy
 msgid "Device"
 msgstr "ডিভাইস"
 
-#: mealtally/web/labels.py:25
+#: mealtally/web/labels.py:26
 #, fuzzy
 msgid "Admin"
 msgstr "অ্যাডমিন"
 
-#: mealtally/web/marketing.py:23
+#: mealtally/web/marketing.py:24
 msgid "QR meal redemption"
 msgstr ""
 
-#: mealtally/web/marketing.py:24
-msgid "Scan a customer's QR or search by name or phone; the balance updates at once."
-msgstr ""
-
-#: mealtally/web/marketing.py:29
-msgid "Meal passes and renewals"
+#: mealtally/web/marketing.py:25
+msgid ""
+"Scan a customer's QR or search by name or phone; the balance updates at once."
 msgstr ""
 
 #: mealtally/web/marketing.py:30
+msgid "Meal passes and renewals"
+msgstr ""
+
+#: mealtally/web/marketing.py:31
 msgid "Sell a pass at the counter, queue a renewal and see what is left."
 msgstr ""
 
-#: mealtally/web/marketing.py:35
+#: mealtally/web/marketing.py:36
 msgid "₹ wallet and top-ups"
 msgstr ""
 
-#: mealtally/web/marketing.py:36
+#: mealtally/web/marketing.py:37
 msgid "Customers top up by UPI; each meal is debited from the wallet."
 msgstr ""
 
-#: mealtally/web/marketing.py:41
+#: mealtally/web/marketing.py:42
 msgid "Automatic daily orders"
 msgstr ""
 
-#: mealtally/web/marketing.py:42
-msgid "Orders are created for you at the cutoff, so nobody re-types the day's list."
-msgstr ""
-
-#: mealtally/web/marketing.py:47
-msgid "Kitchen prep and packing"
+#: mealtally/web/marketing.py:43
+msgid ""
+"Orders are created for you at the cutoff, so nobody re-types the day's list."
 msgstr ""
 
 #: mealtally/web/marketing.py:48
+msgid "Kitchen prep and packing"
+msgstr ""
+
+#: mealtally/web/marketing.py:49
 msgid "A cooking plan, packing lists and labels with allergen flags."
 msgstr ""
 
-#: mealtally/web/marketing.py:53
+#: mealtally/web/marketing.py:54
 msgid "Delivery routes and driver app"
 msgstr ""
 
-#: mealtally/web/marketing.py:54
+#: mealtally/web/marketing.py:55
 msgid "Plan stops, hand routes to drivers and collect photo proof of delivery."
 msgstr ""
 
-#: mealtally/web/marketing.py:59
+#: mealtally/web/marketing.py:60
 msgid "Holds and vacations"
 msgstr ""
 
-#: mealtally/web/marketing.py:60
+#: mealtally/web/marketing.py:61
 msgid "Customers pause meals; closures and holidays are handled in one place."
 msgstr ""
 
-#: mealtally/web/marketing.py:65
+#: mealtally/web/marketing.py:66
 msgid "Customer self-service"
 msgstr ""
 
-#: mealtally/web/marketing.py:66
+#: mealtally/web/marketing.py:67
 msgid "An installable web app (PWA): show the QR, see the balance and history."
 msgstr ""
 
-#: mealtally/web/marketing.py:68 mealtally/web/templates/web/admin_settings.html:40
+#: mealtally/web/marketing.py:69
+#: mealtally/web/templates/web/admin_settings.html:41
 msgid "Receipts"
 msgstr ""
 
-#: mealtally/web/marketing.py:68
+#: mealtally/web/marketing.py:69
 msgid "A numbered receipt for every payment, shareable as a PDF."
 msgstr ""
 
-#: mealtally/web/marketing.py:72
+#: mealtally/web/marketing.py:73
 msgid "Monthly invoices"
 msgstr ""
 
-#: mealtally/web/marketing.py:73
+#: mealtally/web/marketing.py:74
 msgid "Month-end invoices for wallet customers with a PDF to share."
 msgstr ""
 
-#: mealtally/web/marketing.py:75
+#: mealtally/web/marketing.py:76
 msgid "Expenses and profit"
 msgstr ""
 
-#: mealtally/web/marketing.py:75
+#: mealtally/web/marketing.py:76
 msgid "Record spend and see profit by month."
 msgstr ""
 
-#: mealtally/web/marketing.py:79
+#: mealtally/web/marketing.py:80
 msgid "Staff roles and permissions"
 msgstr ""
 
-#: mealtally/web/marketing.py:80
-msgid "Owner, manager, counter, chef and driver, each seeing only what they need."
+#: mealtally/web/marketing.py:81
+msgid ""
+"Owner, manager, counter, chef and driver, each seeing only what they need."
 msgstr ""
 
-#: mealtally/web/marketing.py:82
+#: mealtally/web/marketing.py:83
 msgid "Kitchens and pickup points under one business."
 msgstr ""
 
-#: mealtally/web/marketing.py:83 mealtally/web/templates/web/base_classic.html:30 mealtally/web/templates/web/base_customer.html:26
+#: mealtally/web/marketing.py:84
+#: mealtally/web/templates/web/base_classic.html:30
+#: mealtally/web/templates/web/base_customer.html:26
 #, fuzzy
 msgid "Notifications"
 msgstr "বিজ্ঞপ্তি"
 
-#: mealtally/web/marketing.py:83
+#: mealtally/web/marketing.py:84
 msgid "Alerts for low balances, expiring passes and new orders."
 msgstr ""
 
-#: mealtally/web/marketing.py:85 mealtally/web/templates/web/marketing/home.html:12
+#: mealtally/web/marketing.py:86
+#: mealtally/web/templates/web/marketing/home.html:12
 msgid "English and हिंदी"
 msgstr ""
 
-#: mealtally/web/marketing.py:85
+#: mealtally/web/marketing.py:86
 msgid "Switch the screens between English and Hindi in one tap."
 msgstr ""
 
-#: mealtally/web/marketing.py:96
+#: mealtally/web/marketing.py:97
 msgid "Tiffin services"
 msgstr ""
 
-#: mealtally/web/marketing.py:97
+#: mealtally/web/marketing.py:98
 msgid "Home delivery with a daily menu, routes and drivers."
 msgstr ""
 
-#: mealtally/web/marketing.py:102
+#: mealtally/web/marketing.py:103
 msgid "Mess and dine-in"
 msgstr ""
 
-#: mealtally/web/marketing.py:103
+#: mealtally/web/marketing.py:104
 msgid "Monthly meal passes redeemed with a QR scan at the counter."
 msgstr ""
 
-#: mealtally/web/marketing.py:108
+#: mealtally/web/marketing.py:109
 msgid "Cloud kitchens"
 msgstr ""
 
-#: mealtally/web/marketing.py:109
+#: mealtally/web/marketing.py:110
 msgid "Orders, prep and dispatch for kitchens without a dining room."
 msgstr ""
 
-#: mealtally/web/marketing.py:114
+#: mealtally/web/marketing.py:115
 msgid "Canteens and corporate meals"
 msgstr ""
 
-#: mealtally/web/marketing.py:115
+#: mealtally/web/marketing.py:116
 msgid "Prepaid meals for teams, with simple reports for the manager."
 msgstr ""
 
-#: mealtally/web/marketing.py:124
+#: mealtally/web/marketing.py:125
 msgid "Do customers need an app?"
 msgstr ""
 
-#: mealtally/web/marketing.py:126
-msgid "No. Customers use a web app in their phone browser and can add it to their home screen. There is nothing to download from an app store."
+#: mealtally/web/marketing.py:127
+msgid ""
+"No. Customers use a web app in their phone browser and can add it to their "
+"home screen. There is nothing to download from an app store."
 msgstr ""
 
-#: mealtally/web/marketing.py:130
+#: mealtally/web/marketing.py:131
 msgid "Does it work without internet at the counter?"
 msgstr ""
 
-#: mealtally/web/marketing.py:132
-msgid "No. The counter needs an internet connection to redeem a meal, because every redemption is checked against the live balance."
+#: mealtally/web/marketing.py:133
+msgid ""
+"No. The counter needs an internet connection to redeem a meal, because every "
+"redemption is checked against the live balance."
 msgstr ""
 
-#: mealtally/web/marketing.py:136
+#: mealtally/web/marketing.py:137
 msgid "Can I use both passes and wallets?"
 msgstr ""
 
-#: mealtally/web/marketing.py:138
-msgid "Yes. Meal passes (a fixed number of meals) are live today. Wallet subscriptions are shown in the product as a preview and are coming soon."
+#: mealtally/web/marketing.py:139
+msgid ""
+"Yes. Meal passes (a fixed number of meals) are live today. Wallet "
+"subscriptions are shown in the product as a preview and are coming soon."
 msgstr ""
 
-#: mealtally/web/marketing.py:142
+#: mealtally/web/marketing.py:143
 msgid "What happens to unused meals?"
 msgstr ""
 
-#: mealtally/web/marketing.py:144
-msgid "A pass has a validity period. When it ends, the remaining meals expire. The owner can queue a renewal or adjust meals with a reason, and every change goes into the audit log."
+#: mealtally/web/marketing.py:145
+msgid ""
+"A pass has a validity period. When it ends, the remaining meals expire. The "
+"owner can queue a renewal or adjust meals with a reason, and every change "
+"goes into the audit log."
 msgstr ""
 
-#: mealtally/web/marketing.py:148
+#: mealtally/web/marketing.py:149
 msgid "Can I use my own name and colours?"
 msgstr ""
 
-#: mealtally/web/marketing.py:150
-msgid "Your business name and address appear on the sign-in screens, receipts and the customer app, and you can pick one of three looks. Custom logos and brand colours are planned."
+#: mealtally/web/marketing.py:151
+msgid ""
+"Your business name and address appear on the sign-in screens, receipts and "
+"the customer app, and you can pick one of three looks. Custom logos and "
+"brand colours are planned."
 msgstr ""
 
-#: mealtally/web/marketing.py:154
+#: mealtally/web/marketing.py:155
 msgid "Is my data shared with other businesses?"
 msgstr ""
 
-#: mealtally/web/marketing.py:156
-msgid "No. Each business's data is kept separate, and the database itself enforces that, not just the application."
-msgstr ""
-
-#: mealtally/web/marketing.py:160
-msgid "Which payments are supported?"
+#: mealtally/web/marketing.py:157
+msgid ""
+"No. Each business's data is kept separate, and the database itself enforces "
+"that, not just the application."
 msgstr ""
 
 #: mealtally/web/marketing.py:161
-msgid "UPI (recorded by your team) and cash today. Online payment gateways are coming soon."
+msgid "Which payments are supported?"
 msgstr ""
 
-#: mealtally/web/marketing.py:164
+#: mealtally/web/marketing.py:162
+msgid ""
+"UPI (recorded by your team) and cash today. Online payment gateways are "
+"coming soon."
+msgstr ""
+
+#: mealtally/web/marketing.py:165
 msgid "Is there Hindi support?"
 msgstr ""
 
-#: mealtally/web/marketing.py:166
-msgid "Yes. Staff and customer screens can be switched between English and Hindi. We are still extending the Hindi coverage."
-msgstr ""
-
-#: mealtally/web/marketing.py:170
-msgid "How do I start?"
+#: mealtally/web/marketing.py:167
+msgid ""
+"Yes. Staff and customer screens can be switched between English and Hindi. "
+"We are still extending the Hindi coverage."
 msgstr ""
 
 #: mealtally/web/marketing.py:171
-msgid "Book a demo. We will walk you through it and set up your business, plans and logins for you."
+msgid "How do I start?"
 msgstr ""
 
-#: mealtally/web/marketing.py:177
-msgid "Your data stays yours"
+#: mealtally/web/marketing.py:172
+msgid ""
+"Book a demo. We will walk you through it and set up your business, plans and "
+"logins for you."
 msgstr ""
 
 #: mealtally/web/marketing.py:178
-msgid "Each business's data is isolated by the database itself, so one restaurant can never read another's."
+msgid "Your data stays yours"
 msgstr ""
 
-#: mealtally/web/marketing.py:181
+#: mealtally/web/marketing.py:179
+msgid ""
+"Each business's data is isolated by the database itself, so one restaurant "
+"can never read another's."
+msgstr ""
+
+#: mealtally/web/marketing.py:182
 msgid "An honest ledger"
 msgstr ""
 
-#: mealtally/web/marketing.py:183
-msgid "Meals and payments are written to an append-only ledger with a full audit trail. Mistakes are reversed, never erased."
+#: mealtally/web/marketing.py:184
+msgid ""
+"Meals and payments are written to an append-only ledger with a full audit "
+"trail. Mistakes are reversed, never erased."
 msgstr ""
 
-#: mealtally/web/marketing.py:186
+#: mealtally/web/marketing.py:187
 msgid "No double redemption"
 msgstr ""
 
-#: mealtally/web/marketing.py:186
+#: mealtally/web/marketing.py:187
 msgid "Even with two counters scanning at once, a meal is only redeemed once."
 msgstr ""
 
-#: mealtally/web/marketing.py:187
+#: mealtally/web/marketing.py:188
 msgid "Daily backups"
 msgstr ""
 
-#: mealtally/web/marketing.py:187
+#: mealtally/web/marketing.py:188
 msgid "The database is backed up every day."
 msgstr ""
 
-#: mealtally/web/marketing.py:189
+#: mealtally/web/marketing.py:190
 msgid "Privacy by design"
 msgstr ""
 
-#: mealtally/web/marketing.py:191
-msgid "Built with India's data protection law (the DPDP Act) in mind. We hold only what we need to run your meals."
+#: mealtally/web/marketing.py:192
+msgid ""
+"Built with India's data protection law (the DPDP Act) in mind. We hold only "
+"what we need to run your meals."
 msgstr ""
 
 #: mealtally/web/templates/web/_auth_staff_form.html:3
@@ -3328,7 +3846,8 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: mealtally/web/templates/web/_auth_staff_form.html:5 mealtally/web/templates/web/login_customer.html:14
+#: mealtally/web/templates/web/_auth_staff_form.html:5
+#: mealtally/web/templates/web/login_customer.html:14
 #, fuzzy
 msgid "Hide"
 msgstr "লুকান"
@@ -3350,8 +3869,9 @@ msgstr ""
 msgid "Valid until %(d)s"
 msgstr ""
 
-#: mealtally/web/templates/web/_card.html:8 mealtally/web/templates/web/me_home.html:26
-#, python-format, fuzzy
+#: mealtally/web/templates/web/_card.html:8
+#: mealtally/web/templates/web/me_home.html:26
+#, fuzzy, python-format
 msgid "Meals today: %(n)s"
 msgstr "আজকের খাবার: %(n)s"
 
@@ -3379,7 +3899,10 @@ msgstr ""
 msgid "Redeem 1 meal"
 msgstr ""
 
-#: mealtally/web/templates/web/_card.html:36 mealtally/web/templates/web/_today.html:19 mealtally/web/templates/web/admin_customer.html:25 mealtally/web/templates/web/platform_confirm.html:8
+#: mealtally/web/templates/web/_card.html:36
+#: mealtally/web/templates/web/_today.html:19
+#: mealtally/web/templates/web/admin_customer.html:25
+#: mealtally/web/templates/web/platform_confirm.html:8
 #, fuzzy
 msgid "Confirm"
 msgstr "নিশ্চিত করুন"
@@ -3388,11 +3911,16 @@ msgstr "নিশ্চিত করুন"
 msgid "Search for a customer or scan a QR code to begin."
 msgstr ""
 
-#: mealtally/web/templates/web/_customer_rows.html:1 mealtally/web/templates/web/_search_results.html:6 mealtally/web/templates/web/_staff_customer_rows.html:2 mealtally/web/templates/web/admin_customer.html:6 mealtally/web/views_admin.py:107
+#: mealtally/web/templates/web/_customer_rows.html:1
+#: mealtally/web/templates/web/_search_results.html:6
+#: mealtally/web/templates/web/_staff_customer_rows.html:2
+#: mealtally/web/templates/web/admin_customer.html:6
+#: mealtally/web/views_admin.py:108
 msgid "Blocked"
 msgstr ""
 
-#: mealtally/web/templates/web/_customer_rows.html:2 mealtally/web/templates/web/_staff_customer_rows.html:4
+#: mealtally/web/templates/web/_customer_rows.html:2
+#: mealtally/web/templates/web/_staff_customer_rows.html:4
 msgid "queued"
 msgstr ""
 
@@ -3404,7 +3932,8 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: mealtally/web/templates/web/_customer_rows.html:4 mealtally/web/templates/web/_staff_customer_rows.html:6
+#: mealtally/web/templates/web/_customer_rows.html:4
+#: mealtally/web/templates/web/_staff_customer_rows.html:6
 msgid "No customers found."
 msgstr ""
 
@@ -3413,7 +3942,8 @@ msgstr ""
 msgid "Balance %(b)s"
 msgstr ""
 
-#: mealtally/web/templates/web/_history_rows.html:12 mealtally/web/templates/web/me_activity.html:13
+#: mealtally/web/templates/web/_history_rows.html:12
+#: mealtally/web/templates/web/me_activity.html:13
 #, fuzzy
 msgid "Nothing here yet."
 msgstr "এখানে এখনও কিছু নেই।"
@@ -3429,13 +3959,24 @@ msgstr "এই ঠিকানা সাধারণ HTTP ব্যবহার 
 
 #: mealtally/web/templates/web/_http_notice.html:3
 #, fuzzy
-msgid "Phones only allow the camera and app install on HTTPS, so the counter's QR scan and installing the app won't work here. The 12-character code and name search still work."
-msgstr "ফোন শুধু HTTPS-এ ক্যামেরা ও অ্যাপ ইনস্টলের অনুমতি দেয়, তাই কাউন্টারের QR স্ক্যান আর অ্যাপ ইনস্টল এখানে কাজ করবে না। ১২ অক্ষরের কোড ও নাম দিয়ে খোঁজা এখনও কাজ করে।"
+msgid ""
+"Phones only allow the camera and app install on HTTPS, so the counter's QR "
+"scan and installing the app won't work here. The 12-character code and name "
+"search still work."
+msgstr ""
+"ফোন শুধু HTTPS-এ ক্যামেরা ও অ্যাপ ইনস্টলের অনুমতি দেয়, তাই কাউন্টারের QR স্ক্যান আর "
+"অ্যাপ ইনস্টল এখানে কাজ করবে না। ১২ অক্ষরের কোড ও নাম দিয়ে খোঁজা এখনও কাজ করে।"
 
 #: mealtally/web/templates/web/_http_notice.html:4
 #, fuzzy
-msgid "To fix it, put Caddy in front (automatic HTTPS), use Traefik with Let's Encrypt, or use a local certificate authority such as mkcert on a LAN. See docs/deploy.md."
-msgstr "ঠিক করতে সামনে Caddy বসান (স্বয়ংক্রিয় HTTPS), Let's Encrypt-সহ Traefik ব্যবহার করুন, বা LAN-এ mkcert-এর মতো স্থানীয় সার্টিফিকেট কর্তৃপক্ষ ব্যবহার করুন। docs/deploy.md দেখুন।"
+msgid ""
+"To fix it, put Caddy in front (automatic HTTPS), use Traefik with Let's "
+"Encrypt, or use a local certificate authority such as mkcert on a LAN. See "
+"docs/deploy.md."
+msgstr ""
+"ঠিক করতে সামনে Caddy বসান (স্বয়ংক্রিয় HTTPS), Let's Encrypt-সহ Traefik ব্যবহার "
+"করুন, বা LAN-এ mkcert-এর মতো স্থানীয় সার্টিফিকেট কর্তৃপক্ষ ব্যবহার করুন। docs/deploy."
+"md দেখুন।"
 
 #: mealtally/web/templates/web/_language_picker.html:2
 #, fuzzy
@@ -3443,6 +3984,7 @@ msgid "Language"
 msgstr "ভাষা"
 
 #: mealtally/web/templates/web/_language_picker.html:3
+#: mealtally/web/templates/web/admin_settings.html:29
 #, fuzzy
 msgid "Beta"
 msgstr "বিটা"
@@ -3468,7 +4010,9 @@ msgstr ""
 msgid "Copy PIN"
 msgstr ""
 
-#: mealtally/web/templates/web/_pin_slip.html:8 mealtally/web/templates/web/admin_staff.html:8 mealtally/web/templates/web/platform_onboarded.html:7
+#: mealtally/web/templates/web/_pin_slip.html:8
+#: mealtally/web/templates/web/admin_staff.html:8
+#: mealtally/web/templates/web/platform_onboarded.html:7
 msgid "Copied"
 msgstr ""
 
@@ -3507,12 +4051,17 @@ msgstr ""
 msgid "Active · %(n)s left"
 msgstr ""
 
-#: mealtally/web/templates/web/_search_results.html:8 mealtally/web/templates/web/me_account.html:13 mealtally/web/templates/web/me_home.html:36 mealtally/web/templates/web/sell_done.html:6 mealtally/web/templates/web/sell_preview.html:9
+#: mealtally/web/templates/web/_search_results.html:8
+#: mealtally/web/templates/web/me_account.html:13
+#: mealtally/web/templates/web/me_home.html:36
+#: mealtally/web/templates/web/sell_done.html:6
+#: mealtally/web/templates/web/sell_preview.html:9
 #, fuzzy
 msgid "Queued"
 msgstr "অপেক্ষায়"
 
-#: mealtally/web/templates/web/_search_results.html:9 mealtally/web/templates/web/_staff_customer_rows.html:4
+#: mealtally/web/templates/web/_search_results.html:9
+#: mealtally/web/templates/web/_staff_customer_rows.html:4
 msgid "No pass"
 msgstr ""
 
@@ -3532,7 +4081,8 @@ msgstr ""
 msgid "No match. Use “New customer” below."
 msgstr ""
 
-#: mealtally/web/templates/web/_staff_password_form.html:1 mealtally/web/templates/web/staff_password.html:2
+#: mealtally/web/templates/web/_staff_password_form.html:1
+#: mealtally/web/templates/web/staff_password.html:2
 msgid "Change your password"
 msgstr ""
 
@@ -3559,7 +4109,7 @@ msgid "Cash today"
 msgstr "আজকের নগদ"
 
 #: mealtally/web/templates/web/_today.html:9
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "%(counter)s meal today"
 msgid_plural "%(counter)s meals today"
 msgstr[0] "আজ %(counter)sটি খাবার"
@@ -3629,7 +4179,8 @@ msgstr ""
 msgid "payment, pass, ledger…"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_audit.html:9 mealtally/web/templates/web/me_activity.html:4
+#: mealtally/web/templates/web/admin_audit.html:9
+#: mealtally/web/templates/web/me_activity.html:4
 #, fuzzy
 msgid "Filter"
 msgstr "ফিল্টার"
@@ -3658,12 +4209,16 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customer.html:17 mealtally/web/templates/web/me_account.html:11 mealtally/web/templates/web/me_profile.html:9 mealtally/web/templates/web/platform_tenant.html:17
+#: mealtally/web/templates/web/admin_customer.html:17
+#: mealtally/web/templates/web/me_account.html:11
+#: mealtally/web/templates/web/me_profile.html:9
+#: mealtally/web/templates/web/platform_tenant.html:17
 #, fuzzy
 msgid "Save"
 msgstr "সেভ করুন"
 
-#: mealtally/web/templates/web/admin_customer.html:18 mealtally/web/templates/web/admin_customer.html:22
+#: mealtally/web/templates/web/admin_customer.html:18
+#: mealtally/web/templates/web/admin_customer.html:22
 msgid "Reset PIN"
 msgstr ""
 
@@ -3675,7 +4230,10 @@ msgstr ""
 msgid "Set a PIN"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customer.html:22 mealtally/web/templates/web/customer_new.html:8 mealtally/web/templates/web/login_customer.html:10 mealtally/web/templates/web/sell.html:16
+#: mealtally/web/templates/web/admin_customer.html:22
+#: mealtally/web/templates/web/customer_new.html:8
+#: mealtally/web/templates/web/login_customer.html:10
+#: mealtally/web/templates/web/sell.html:16
 #, fuzzy
 msgid "PIN"
 msgstr "PIN"
@@ -3692,7 +4250,9 @@ msgstr ""
 msgid "Adjust credits"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customer.html:28 mealtally/web/templates/web/admin_customer.html:55 mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/admin_customer.html:28
+#: mealtally/web/templates/web/admin_customer.html:55
+#: mealtally/web/templates/web/admin_customers.html:9
 msgid "Pass"
 msgstr ""
 
@@ -3704,7 +4264,8 @@ msgstr ""
 msgid "Adjust"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customer.html:33 mealtally/web/views_admin.py:727
+#: mealtally/web/templates/web/admin_customer.html:33
+#: mealtally/web/views_admin.py:729
 msgid "Passes"
 msgstr ""
 
@@ -3725,7 +4286,11 @@ msgstr ""
 msgid "No passes yet."
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customer.html:45 mealtally/web/templates/web/admin_customer.html:48 mealtally/web/templates/web/admin_customer.html:49 mealtally/web/templates/web/me_activity.html:11 mealtally/web/templates/web/me_payments.html:5
+#: mealtally/web/templates/web/admin_customer.html:45
+#: mealtally/web/templates/web/admin_customer.html:48
+#: mealtally/web/templates/web/admin_customer.html:49
+#: mealtally/web/templates/web/me_activity.html:11
+#: mealtally/web/templates/web/me_payments.html:5
 #, fuzzy
 msgid "Void"
 msgstr "বাতিল"
@@ -3734,7 +4299,8 @@ msgstr "বাতিল"
 msgid "Void payment"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customer.html:52 mealtally/web/templates/web/me_payments.html:8
+#: mealtally/web/templates/web/admin_customer.html:52
+#: mealtally/web/templates/web/me_payments.html:8
 #, fuzzy
 msgid "No payments yet."
 msgstr "এখনও কোনো পেমেন্ট নেই।"
@@ -3751,50 +4317,73 @@ msgstr ""
 msgid "By"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customers.html:3 mealtally/web/templates/web/customer_new.html:3 mealtally/web/templates/web/sell.html:12 mealtally/web/templates/web/sell_preview.html:5 mealtally/web/templates/web/staff_customers.html:3
+#: mealtally/web/templates/web/admin_customers.html:3
+#: mealtally/web/templates/web/customer_new.html:3
+#: mealtally/web/templates/web/sell.html:12
+#: mealtally/web/templates/web/sell_preview.html:5
+#: mealtally/web/templates/web/staff_customers.html:3
 #, fuzzy
 msgid "New customer"
 msgstr "নতুন গ্রাহক"
 
-#: mealtally/web/templates/web/admin_customers.html:9 mealtally/web/views_admin.py:758
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/views_admin.py:760
 msgid "Code"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customers.html:9 mealtally/web/templates/web/admin_staff.html:17 mealtally/web/templates/web/customer_new.html:7 mealtally/web/templates/web/me_account.html:9 mealtally/web/templates/web/me_profile.html:8 mealtally/web/templates/web/sell.html:15 mealtally/web/templates/web/staff_customers.html:6
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/admin_staff.html:17
+#: mealtally/web/templates/web/customer_new.html:7
+#: mealtally/web/templates/web/me_account.html:9
+#: mealtally/web/templates/web/me_profile.html:8
+#: mealtally/web/templates/web/sell.html:15
+#: mealtally/web/templates/web/staff_customers.html:6
 #, fuzzy
 msgid "Phone"
 msgstr "ফোন"
 
-#: mealtally/web/templates/web/admin_customers.html:9 mealtally/web/templates/web/staff_customers.html:6
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/staff_customers.html:6
 msgid "Meals left"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_customers.html:9 mealtally/web/templates/web/staff_customers.html:6
+#: mealtally/web/templates/web/admin_customers.html:9
+#: mealtally/web/templates/web/staff_customers.html:6
 msgid "Valid until"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_meal_times.html:3 mealtally/web/templates/web/admin_meal_times.html:4 mealtally/web/templates/web/admin_plan_form.html:19 mealtally/web/templates/web/admin_settings.html:31
+#: mealtally/web/templates/web/admin_meal_times.html:3
+#: mealtally/web/templates/web/admin_meal_times.html:4
+#: mealtally/web/templates/web/admin_plan_form.html:19
+#: mealtally/web/templates/web/admin_settings.html:32
 msgid "Meal times"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_meal_times.html:5
 #, python-format
-msgid "When each meal is served, in your restaurant's time (%(tz)s). A plan that is set to a meal time can only be redeemed while that meal is served. Grace minutes allow a little before the start and after the end. An end before the start (22:00–01:00) runs past midnight."
+msgid ""
+"When each meal is served, in your restaurant's time (%(tz)s). A plan that is "
+"set to a meal time can only be redeemed while that meal is served. Grace "
+"minutes allow a little before the start and after the end. An end before the "
+"start (22:00–01:00) runs past midnight."
 msgstr ""
 
 #: mealtally/web/templates/web/admin_meal_times.html:13
 msgid "Name in Hindi (optional)"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_meal_times.html:16 mealtally/web/templates/web/admin_meal_times.html:30
+#: mealtally/web/templates/web/admin_meal_times.html:16
+#: mealtally/web/templates/web/admin_meal_times.html:30
 msgid "Starts"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_meal_times.html:17 mealtally/web/templates/web/admin_meal_times.html:31
+#: mealtally/web/templates/web/admin_meal_times.html:17
+#: mealtally/web/templates/web/admin_meal_times.html:31
 msgid "Ends"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_meal_times.html:18 mealtally/web/templates/web/admin_meal_times.html:32
+#: mealtally/web/templates/web/admin_meal_times.html:18
+#: mealtally/web/templates/web/admin_meal_times.html:32
 msgid "Grace (min)"
 msgstr ""
 
@@ -3839,12 +4428,15 @@ msgstr ""
 msgid "Who did what, and when"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_plan_form.html:4 mealtally/web/templates/web/admin_plans.html:4
+#: mealtally/web/templates/web/admin_plan_form.html:4
+#: mealtally/web/templates/web/admin_plans.html:4
 msgid "New plan"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_plan_form.html:5
-msgid "Editing a plan never changes passes that were already sold — they keep the price, meals and dates they were sold with."
+msgid ""
+"Editing a plan never changes passes that were already sold — they keep the "
+"price, meals and dates they were sold with."
 msgstr ""
 
 #: mealtally/web/templates/web/admin_plan_form.html:12
@@ -3895,11 +4487,13 @@ msgstr ""
 msgid "Save plan"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_plans.html:5 mealtally/web/templates/web/admin_staff.html:9
+#: mealtally/web/templates/web/admin_plans.html:5
+#: mealtally/web/templates/web/admin_staff.html:9
 msgid "Inactive"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_plans.html:6 mealtally/web/templates/web/marketing/home.html:35
+#: mealtally/web/templates/web/admin_plans.html:6
+#: mealtally/web/templates/web/marketing/home.html:35
 msgid "meals"
 msgstr ""
 
@@ -3907,7 +4501,8 @@ msgstr ""
 msgid "end of month"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_reports.html:6 mealtally/web/views_admin.py:632
+#: mealtally/web/templates/web/admin_reports.html:6
+#: mealtally/web/views_admin.py:634
 msgid "Daily consumption"
 msgstr ""
 
@@ -3915,7 +4510,8 @@ msgstr ""
 msgid "Meals per day and per customer"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_reports.html:7 mealtally/web/views_admin.py:726
+#: mealtally/web/templates/web/admin_reports.html:7
+#: mealtally/web/views_admin.py:728
 msgid "Monthly subscriptions"
 msgstr ""
 
@@ -3923,7 +4519,8 @@ msgstr ""
 msgid "Passes sold, revenue, by plan, voids"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_reports.html:8 mealtally/web/views_admin.py:757
+#: mealtally/web/templates/web/admin_reports.html:8
+#: mealtally/web/views_admin.py:759
 msgid "Expired & unused"
 msgstr ""
 
@@ -3931,7 +4528,8 @@ msgstr ""
 msgid "Meals forfeited at pass end"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_reports.html:9 mealtally/web/views_admin.py:699
+#: mealtally/web/templates/web/admin_reports.html:9
+#: mealtally/web/views_admin.py:701
 msgid "Refused redemptions"
 msgstr ""
 
@@ -3939,7 +4537,8 @@ msgstr ""
 msgid "Meals the rules blocked: who, when, why"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_reports.html:10 mealtally/web/views_admin.py:836
+#: mealtally/web/templates/web/admin_reports.html:10
+#: mealtally/web/views_admin.py:838
 msgid "Platform fee statement"
 msgstr ""
 
@@ -3956,7 +4555,9 @@ msgid "Theme"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:9
-msgid "Choose the look of your restaurant's screens. It saves and applies to everyone as soon as you pick it."
+msgid ""
+"Choose the look of your restaurant's screens. It saves and applies to "
+"everyone as soon as you pick it."
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:21
@@ -3987,59 +4588,66 @@ msgstr ""
 msgid "Currency (set it before you sell: amounts are not converted)"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_settings.html:29 mealtally/web/templates/web/platform_onboard.html:8
-msgid "Timezone"
+#: mealtally/web/templates/web/admin_settings.html:29
+msgid "Default language (for people who haven't picked one)"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:30
-msgid "Policies"
+#: mealtally/web/templates/web/platform_onboard.html:8
+msgid "Timezone"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:31
-msgid "Meal times and daily limits are set per plan."
+msgid "Policies"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:32
-msgid "Double-scan guard (seconds)"
+msgid "Meal times and daily limits are set per plan."
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:33
-msgid "Staff can undo within (hours)"
+msgid "Double-scan guard (seconds)"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:34
-msgid "Counters may undo meals served by other staff (inside the window, with a reason)"
+msgid "Staff can undo within (hours)"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_settings.html:36
-msgid "Smallest wallet top-up (₹)"
+#: mealtally/web/templates/web/admin_settings.html:35
+msgid ""
+"Counters may undo meals served by other staff (inside the window, with a "
+"reason)"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:37
-msgid "Largest wallet top-up (₹)"
+msgid "Smallest wallet top-up (₹)"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:38
-msgid "Max queued passes per customer"
+msgid "Largest wallet top-up (₹)"
 msgstr ""
 
 #: mealtally/web/templates/web/admin_settings.html:39
+msgid "Max queued passes per customer"
+msgstr ""
+
+#: mealtally/web/templates/web/admin_settings.html:40
 msgid "Allow customers to sign themselves up"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_settings.html:41
+#: mealtally/web/templates/web/admin_settings.html:42
 msgid "Receipt footer text"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_settings.html:42
+#: mealtally/web/templates/web/admin_settings.html:43
 msgid "(optional; hidden on receipts when empty)"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_settings.html:43
+#: mealtally/web/templates/web/admin_settings.html:44
 msgid "(optional; no tax is calculated)"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_settings.html:44
+#: mealtally/web/templates/web/admin_settings.html:45
 msgid "Save profile"
 msgstr ""
 
@@ -4047,7 +4655,8 @@ msgstr ""
 msgid "Temporary password (shown only once)"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_staff.html:6 mealtally/web/templates/web/platform_onboarded.html:5
+#: mealtally/web/templates/web/admin_staff.html:6
+#: mealtally/web/templates/web/platform_onboarded.html:5
 msgid "Login"
 msgstr ""
 
@@ -4083,15 +4692,15 @@ msgstr ""
 msgid "Staff (redeem & sell)"
 msgstr ""
 
-#: mealtally/web/templates/web/admin_staff.html:18 mealtally/web/templatetags/mealtally_extras.py:57
-msgid "Manager"
-msgstr ""
-
 #: mealtally/web/templates/web/admin_staff.html:19
 msgid "Add staff member"
 msgstr ""
 
-#: mealtally/web/templates/web/auth_base.html:16 mealtally/web/templates/web/base_classic.html:19 mealtally/web/templates/web/base_console.html:20 mealtally/web/templates/web/base_customer.html:19 mealtally/web/templates/web/marketing/base.html:27
+#: mealtally/web/templates/web/auth_base.html:16
+#: mealtally/web/templates/web/base_classic.html:19
+#: mealtally/web/templates/web/base_console.html:20
+#: mealtally/web/templates/web/base_customer.html:19
+#: mealtally/web/templates/web/marketing/base.html:27
 #, fuzzy
 msgid "Skip to content"
 msgstr "মূল বিষয়ে যান"
@@ -4101,37 +4710,48 @@ msgstr "মূল বিষয়ে যান"
 msgid "Powered by Mealtally"
 msgstr "Mealtally দ্বারা চালিত"
 
-#: mealtally/web/templates/web/base_classic.html:34 mealtally/web/templates/web/base_classic.html:35 mealtally/web/templates/web/base_console.html:57 mealtally/web/templates/web/base_console.html:58
+#: mealtally/web/templates/web/base_classic.html:34
+#: mealtally/web/templates/web/base_classic.html:35
+#: mealtally/web/templates/web/base_console.html:57
+#: mealtally/web/templates/web/base_console.html:58
 #, fuzzy
 msgid "Help"
 msgstr "সাহায্য"
 
-#: mealtally/web/templates/web/base_classic.html:37 mealtally/web/templates/web/base_console.html:60
+#: mealtally/web/templates/web/base_classic.html:37
+#: mealtally/web/templates/web/base_console.html:60
 #, fuzzy
 msgid "Chat with us on WhatsApp"
 msgstr "WhatsApp-এ আমাদের সঙ্গে কথা বলুন"
 
-#: mealtally/web/templates/web/base_classic.html:47 mealtally/web/templates/web/base_console.html:23 mealtally/web/templates/web/base_customer.html:23
+#: mealtally/web/templates/web/base_classic.html:47
+#: mealtally/web/templates/web/base_console.html:23
+#: mealtally/web/templates/web/base_customer.html:23
 #, fuzzy
 msgid "Main"
 msgstr "প্রধান"
 
-#: mealtally/web/templates/web/base_classic.html:62 mealtally/web/templates/web/base_console.html:80
+#: mealtally/web/templates/web/base_classic.html:62
+#: mealtally/web/templates/web/base_console.html:80
 #, fuzzy
 msgid "Set meal times and daily limits for your plans."
 msgstr "আপনার প্ল্যানের জন্য খাবারের সময় ও দৈনিক সীমা ঠিক করুন।"
 
-#: mealtally/web/templates/web/base_classic.html:62 mealtally/web/templates/web/base_console.html:80
+#: mealtally/web/templates/web/base_classic.html:62
+#: mealtally/web/templates/web/base_console.html:80
 #, fuzzy
 msgid "Open plans"
 msgstr "প্ল্যান খুলুন"
 
-#: mealtally/web/templates/web/base_classic.html:64 mealtally/web/templates/web/base_console.html:82 mealtally/web/templates/web/base_customer.html:33
+#: mealtally/web/templates/web/base_classic.html:64
+#: mealtally/web/templates/web/base_console.html:82
+#: mealtally/web/templates/web/base_customer.html:33
 #, fuzzy
 msgid "Tabs"
 msgstr "ট্যাব"
 
-#: mealtally/web/templates/web/base_console.html:34 mealtally/web/templates/web/marketing/_header.html:4
+#: mealtally/web/templates/web/base_console.html:34
+#: mealtally/web/templates/web/marketing/_header.html:4
 #, fuzzy
 msgid "Sections"
 msgstr "বিভাগ"
@@ -4155,19 +4775,23 @@ msgstr "প্রোফাইল ও পাসওয়ার্ড"
 msgid "Customer created"
 msgstr ""
 
-#: mealtally/web/templates/web/customer_created.html:5 mealtally/web/templates/web/sell.html:4
+#: mealtally/web/templates/web/customer_created.html:5
+#: mealtally/web/templates/web/sell.html:4
 msgid "Sell a pass"
 msgstr ""
 
-#: mealtally/web/templates/web/customer_new.html:9 mealtally/web/templates/web/sell.html:17
+#: mealtally/web/templates/web/customer_new.html:9
+#: mealtally/web/templates/web/sell.html:17
 msgid "Generate for me"
 msgstr ""
 
-#: mealtally/web/templates/web/customer_new.html:10 mealtally/web/templates/web/sell.html:18
+#: mealtally/web/templates/web/customer_new.html:10
+#: mealtally/web/templates/web/sell.html:18
 msgid "Customer chooses"
 msgstr ""
 
-#: mealtally/web/templates/web/customer_new.html:11 mealtally/web/templates/web/sell.html:19
+#: mealtally/web/templates/web/customer_new.html:11
+#: mealtally/web/templates/web/sell.html:19
 msgid "Customer chosen PIN"
 msgstr ""
 
@@ -4175,22 +4799,26 @@ msgstr ""
 msgid "Create customer"
 msgstr ""
 
-#: mealtally/web/templates/web/error.html:16 mealtally/web/templates/web/not_found.html:5
+#: mealtally/web/templates/web/error.html:16
+#: mealtally/web/templates/web/not_found.html:5
 #, fuzzy
 msgid "Back to start"
 msgstr "শুরুতে ফিরুন"
 
-#: mealtally/web/templates/web/global_login.html:2 mealtally/web/templates/web/global_login.html:4
+#: mealtally/web/templates/web/global_login.html:2
+#: mealtally/web/templates/web/global_login.html:4
 #, fuzzy
 msgid "Sign in"
 msgstr "সাইন ইন"
 
 #: mealtally/web/templates/web/global_login.html:5
 #, fuzzy
-msgid "Platform administrators and restaurant staff: no restaurant code needed."
+msgid ""
+"Platform administrators and restaurant staff: no restaurant code needed."
 msgstr "প্ল্যাটফর্ম অ্যাডমিন ও রেস্তোরাঁর কর্মী: রেস্তোরাঁ কোড লাগবে না।"
 
-#: mealtally/web/templates/web/login_customer.html:2 mealtally/web/templates/web/login_customer.html:4
+#: mealtally/web/templates/web/login_customer.html:2
+#: mealtally/web/templates/web/login_customer.html:4
 #, fuzzy
 msgid "Customer login"
 msgstr "গ্রাহক লগইন"
@@ -4200,7 +4828,9 @@ msgstr "গ্রাহক লগইন"
 msgid "Use your phone number and PIN."
 msgstr "আপনার ফোন নম্বর ও PIN ব্যবহার করুন।"
 
-#: mealtally/web/templates/web/login_customer.html:8 mealtally/web/templates/web/marketing/home.html:109 mealtally/web/templates/web/signup.html:7
+#: mealtally/web/templates/web/login_customer.html:8
+#: mealtally/web/templates/web/marketing/home.html:109
+#: mealtally/web/templates/web/signup.html:7
 #, fuzzy
 msgid "Phone number"
 msgstr "ফোন নম্বর"
@@ -4210,7 +4840,8 @@ msgstr "ফোন নম্বর"
 msgid "Forgot your PIN? Ask at the counter, and staff can reset it."
 msgstr "PIN ভুলে গেছেন? কাউন্টারে জিজ্ঞেস করুন, কর্মীরা রিসেট করে দেবেন।"
 
-#: mealtally/web/templates/web/login_staff.html:2 mealtally/web/templates/web/login_staff.html:4
+#: mealtally/web/templates/web/login_staff.html:2
+#: mealtally/web/templates/web/login_staff.html:4
 #, fuzzy
 msgid "Staff login"
 msgstr "কর্মী লগইন"
@@ -4237,22 +4868,31 @@ msgid "Continue"
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/_footer.html:3
-msgid "Prepaid meal passes, wallets, kitchen and delivery for Indian tiffin and mess businesses."
+msgid ""
+"Prepaid meal passes, wallets, kitchen and delivery for Indian tiffin and "
+"mess businesses."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/_footer.html:4
 msgid "Footer"
 msgstr ""
 
-#: mealtally/web/templates/web/marketing/_footer.html:5 mealtally/web/templates/web/marketing/_header.html:5 mealtally/web/templates/web/marketing/_header.html:20
+#: mealtally/web/templates/web/marketing/_footer.html:5
+#: mealtally/web/templates/web/marketing/_header.html:5
+#: mealtally/web/templates/web/marketing/_header.html:20
 msgid "Features"
 msgstr ""
 
-#: mealtally/web/templates/web/marketing/_footer.html:5 mealtally/web/templates/web/marketing/_header.html:5 mealtally/web/templates/web/marketing/_header.html:20 mealtally/web/templates/web/marketing/home.html:78
+#: mealtally/web/templates/web/marketing/_footer.html:5
+#: mealtally/web/templates/web/marketing/_header.html:5
+#: mealtally/web/templates/web/marketing/_header.html:20
+#: mealtally/web/templates/web/marketing/home.html:78
 msgid "Pricing"
 msgstr ""
 
-#: mealtally/web/templates/web/marketing/_footer.html:5 mealtally/web/templates/web/marketing/_header.html:5 mealtally/web/templates/web/marketing/_header.html:20
+#: mealtally/web/templates/web/marketing/_footer.html:5
+#: mealtally/web/templates/web/marketing/_header.html:5
+#: mealtally/web/templates/web/marketing/_header.html:20
 msgid "FAQ"
 msgstr ""
 
@@ -4260,11 +4900,18 @@ msgstr ""
 msgid "Account and legal"
 msgstr ""
 
-#: mealtally/web/templates/web/marketing/_footer.html:7 mealtally/web/templates/web/marketing/_header.html:17 mealtally/web/templates/web/marketing/_header.html:24 mealtally/web/templates/web/marketing/home.html:10 mealtally/web/templates/web/marketing/home.html:88 mealtally/web/templates/web/marketing/home.html:99
+#: mealtally/web/templates/web/marketing/_footer.html:7
+#: mealtally/web/templates/web/marketing/_header.html:17
+#: mealtally/web/templates/web/marketing/_header.html:24
+#: mealtally/web/templates/web/marketing/home.html:10
+#: mealtally/web/templates/web/marketing/home.html:88
+#: mealtally/web/templates/web/marketing/home.html:99
 msgid "Book a demo"
 msgstr ""
 
-#: mealtally/web/templates/web/marketing/_footer.html:7 mealtally/web/templates/web/marketing/home.html:112 mealtally/web/views_marketing.py:188
+#: mealtally/web/templates/web/marketing/_footer.html:7
+#: mealtally/web/templates/web/marketing/home.html:112
+#: mealtally/web/views_marketing.py:189
 msgid "Privacy notice"
 msgstr ""
 
@@ -4276,7 +4923,9 @@ msgstr ""
 msgid "Made in India"
 msgstr ""
 
-#: mealtally/web/templates/web/marketing/_header.html:5 mealtally/web/templates/web/marketing/_header.html:20 mealtally/web/templates/web/marketing/home.html:19
+#: mealtally/web/templates/web/marketing/_header.html:5
+#: mealtally/web/templates/web/marketing/_header.html:20
+#: mealtally/web/templates/web/marketing/home.html:19
 msgid "Who it's for"
 msgstr ""
 
@@ -4289,11 +4938,15 @@ msgid "prepaid meal passes for tiffin and mess businesses"
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/base.html:7
-msgid "Prepaid meals, simplified. Meal passes, wallets, kitchen and delivery in one place for Indian tiffin services, messes, cloud kitchens and canteens."
+msgid ""
+"Prepaid meals, simplified. Meal passes, wallets, kitchen and delivery in one "
+"place for Indian tiffin services, messes, cloud kitchens and canteens."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/base.html:13
-msgid "Meal passes, wallets, kitchen and delivery in one place for Indian tiffin and mess businesses."
+msgid ""
+"Meal passes, wallets, kitchen and delivery in one place for Indian tiffin "
+"and mess businesses."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:7
@@ -4301,7 +4954,9 @@ msgid "Prepaid meal passes for restaurants & tiffin services"
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:9
-msgid "Passes, wallets, kitchen and delivery in one place. No more registers, spreadsheets or WhatsApp tallies."
+msgid ""
+"Passes, wallets, kitchen and delivery in one place. No more registers, "
+"spreadsheets or WhatsApp tallies."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:10
@@ -4333,7 +4988,9 @@ msgid "Two ways to sell meals"
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:32
-msgid "The customer pays once for a fixed number of meals. At the counter you scan their QR and the balance drops by one."
+msgid ""
+"The customer pays once for a fixed number of meals. At the counter you scan "
+"their QR and the balance drops by one."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:33
@@ -4348,7 +5005,9 @@ msgstr ""
 msgid "Get pass"
 msgstr ""
 
-#: mealtally/web/templates/web/marketing/home.html:36 mealtally/web/templates/web/staff_console.html:15 mealtally/web/templates/web/staff_console.html:17
+#: mealtally/web/templates/web/marketing/home.html:36
+#: mealtally/web/templates/web/staff_console.html:15
+#: mealtally/web/templates/web/staff_console.html:17
 #, fuzzy
 msgid "Scan QR"
 msgstr "QR স্ক্যান"
@@ -4374,7 +5033,9 @@ msgid "Wallet subscription"
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:40
-msgid "The customer tops up a ₹ balance. Orders are created every day at the cutoff and each meal is debited from the wallet."
+msgid ""
+"The customer tops up a ₹ balance. Orders are created every day at the cutoff "
+"and each meal is debited from the wallet."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:41
@@ -4472,7 +5133,9 @@ msgid "Pricing that grows with you"
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:85
-msgid "No setup fee, no monthly minimum. Talk to us for a plan that fits your kitchen."
+msgid ""
+"No setup fee, no monthly minimum. Talk to us for a plan that fits your "
+"kitchen."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:93
@@ -4480,7 +5143,9 @@ msgid "Questions, answered"
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:99
-msgid "Tell us about your kitchen and we will show you Mealtally with a demo restaurant, step by step."
+msgid ""
+"Tell us about your kitchen and we will show you Mealtally with a demo "
+"restaurant, step by step."
 msgstr ""
 
 #: mealtally/web/templates/web/marketing/home.html:101
@@ -4526,11 +5191,12 @@ msgid "My plans"
 msgstr "আমার প্ল্যান"
 
 #: mealtally/web/templates/web/me_account.html:13
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "%(n)s meals left · until %(d)s"
 msgstr "%(n)sটি খাবার বাকি · %(d)s পর্যন্ত"
 
-#: mealtally/web/templates/web/me_account.html:14 mealtally/web/templates/web/me_home.html:32
+#: mealtally/web/templates/web/me_account.html:14
+#: mealtally/web/templates/web/me_home.html:32
 #, fuzzy
 msgid "No active pass — pay at the counter to start"
 msgstr "কোনো সক্রিয় পাস নেই — শুরু করতে কাউন্টারে পেমেন্ট করুন"
@@ -4555,7 +5221,8 @@ msgstr "বিরতি নির্ধারণ করুন"
 msgid "Security"
 msgstr "নিরাপত্তা"
 
-#: mealtally/web/templates/web/me_account.html:17 mealtally/web/templates/web/me_profile.html:11
+#: mealtally/web/templates/web/me_account.html:17
+#: mealtally/web/templates/web/me_profile.html:11
 #, fuzzy
 msgid "Change PIN"
 msgstr "PIN বদলান"
@@ -4581,17 +5248,17 @@ msgid "Photo taken at the door (demo)"
 msgstr "দরজায় তোলা ছবি (ডেমো)"
 
 #: mealtally/web/templates/web/me_home.html:4
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Hello, %(name)s"
 msgstr "নমস্কার, %(name)s"
 
 #: mealtally/web/templates/web/me_home.html:7
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Your wallet is running low: about %(n)s days of meals left."
 msgstr "আপনার ওয়ালেটে টাকা কমে আসছে: প্রায় %(n)s দিনের খাবার বাকি।"
 
 #: mealtally/web/templates/web/me_home.html:8
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Your top-up of %(a)s is waiting for approval."
 msgstr "আপনার %(a)s টপ-আপ অনুমোদনের অপেক্ষায়।"
 
@@ -4601,53 +5268,55 @@ msgid "Suspended"
 msgstr "স্থগিত"
 
 #: mealtally/web/templates/web/me_home.html:16
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "%(l)s of %(t)s meals left"
 msgstr "%(t)sটির মধ্যে %(l)sটি খাবার বাকি"
 
 #: mealtally/web/templates/web/me_home.html:20
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "of %(t)s meals left"
 msgstr "%(t)sটির মধ্যে খাবার বাকি"
 
 #: mealtally/web/templates/web/me_home.html:23
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Valid until %(d)s · %(counter)s day left"
 msgid_plural "Valid until %(d)s · %(counter)s days left"
 msgstr[0] "%(d)s পর্যন্ত বৈধ · %(counter)s দিন বাকি"
 msgstr[1] "%(d)s পর্যন্ত বৈধ · %(counter)s দিন বাকি"
 
 #: mealtally/web/templates/web/me_home.html:24
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "%(counter)s meal will expire on %(d)s — renew at the counter"
 msgid_plural "%(counter)s meals will expire on %(d)s — renew at the counter"
 msgstr[0] "%(counter)sটি খাবারের মেয়াদ %(d)s-এ শেষ হবে — কাউন্টারে নবীকরণ করুন"
 msgstr[1] "%(counter)sটি খাবারের মেয়াদ %(d)s-এ শেষ হবে — কাউন্টারে নবীকরণ করুন"
 
 #: mealtally/web/templates/web/me_home.html:25
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Running low — %(counter)s meal left"
 msgid_plural "Running low — %(counter)s meals left"
 msgstr[0] "কমে আসছে — %(counter)sটি খাবার বাকি"
 msgstr[1] "কমে আসছে — %(counter)sটি খাবার বাকি"
 
-#: mealtally/web/templates/web/me_home.html:27 mealtally/web/templates/web/sell.html:27
+#: mealtally/web/templates/web/me_home.html:27
+#: mealtally/web/templates/web/sell.html:27
 #, fuzzy
 msgid "Valid until end of month · full meals"
 msgstr "মাসের শেষ পর্যন্ত বৈধ · পূর্ণ খাবার"
 
-#: mealtally/web/templates/web/me_home.html:28 mealtally/web/templates/web/me_home.html:33
+#: mealtally/web/templates/web/me_home.html:28
+#: mealtally/web/templates/web/me_home.html:33
 #, fuzzy
 msgid "No refund or carry-forward of unused meals."
 msgstr "অব্যবহৃত খাবারের কোনো ফেরত বা পরবর্তী মাসে নেওয়া নেই।"
 
 #: mealtally/web/templates/web/me_home.html:38
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Starts %(d)s · %(t)s meals"
 msgstr "%(d)s থেকে শুরু · %(t)sটি খাবার"
 
 #: mealtally/web/templates/web/me_home.html:42
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "%(n)s options to choose from"
 msgstr "বেছে নেওয়ার জন্য %(n)sটি বিকল্প"
 
@@ -4662,14 +5331,18 @@ msgid "Choose, skip or hold"
 msgstr "বেছে নিন, বাদ দিন বা বিরতি দিন"
 
 #: mealtally/web/templates/web/me_home.html:47
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "About %(n)s days of meals left"
 msgstr "প্রায় %(n)s দিনের খাবার বাকি"
 
 #: mealtally/web/templates/web/me_home.html:52
 #, fuzzy
-msgid "Home-delivery customers get a wallet here: meals are paid from it and you can top up by UPI."
-msgstr "হোম-ডেলিভারি গ্রাহকরা এখানে একটি ওয়ালেট পান: খাবারের দাম এখান থেকে কাটা হয় এবং আপনি UPI দিয়ে টপ-আপ করতে পারেন।"
+msgid ""
+"Home-delivery customers get a wallet here: meals are paid from it and you "
+"can top up by UPI."
+msgstr ""
+"হোম-ডেলিভারি গ্রাহকরা এখানে একটি ওয়ালেট পান: খাবারের দাম এখান থেকে কাটা হয় "
+"এবং আপনি UPI দিয়ে টপ-আপ করতে পারেন।"
 
 #: mealtally/web/templates/web/me_home.html:60
 #, fuzzy
@@ -4721,7 +5394,8 @@ msgstr "PIN সেভ করুন"
 msgid "Show this to the staff. It refreshes automatically."
 msgstr "এটি কর্মীদের দেখান। এটি নিজে থেকেই রিফ্রেশ হয়।"
 
-#: mealtally/web/templates/web/not_found.html:3 mealtally/web/views_platform.py:64
+#: mealtally/web/templates/web/not_found.html:3
+#: mealtally/web/views_platform.py:65
 #, fuzzy
 msgid "We couldn't find that page"
 msgstr "পাতাটি খুঁজে পাওয়া যায়নি"
@@ -4740,7 +5414,9 @@ msgid "Mealtally is running, but not set up yet"
 msgstr ""
 
 #: mealtally/web/templates/web/not_initialised.html:5
-msgid "Create the admin and the restaurant with this command on the server, then reload this page:"
+msgid ""
+"Create the admin and the restaurant with this command on the server, then "
+"reload this page:"
 msgstr ""
 
 #: mealtally/web/templates/web/not_initialised.html:7
@@ -4780,7 +5456,9 @@ msgid "Deactivate tenant"
 msgstr ""
 
 #: mealtally/web/templates/web/platform_confirm.html:4
-msgid "Staff and customers of this tenant will see a 'service paused' page until it is activated again."
+msgid ""
+"Staff and customers of this tenant will see a 'service paused' page until it "
+"is activated again."
 msgstr ""
 
 #: mealtally/web/templates/web/platform_confirm.html:4
@@ -4903,10 +5581,6 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:11 mealtally/web/templatetags/mealtally_extras.py:56
-msgid "Owner"
-msgstr ""
-
 #: mealtally/web/templates/web/platform_tenant.html:14
 msgid "Preview modules"
 msgstr ""
@@ -4939,12 +5613,14 @@ msgstr ""
 msgid "Effective from"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:24 mealtally/web/templates/web/platform_tenant.html:27
+#: mealtally/web/templates/web/platform_tenant.html:24
+#: mealtally/web/templates/web/platform_tenant.html:27
 #, python-format
 msgid "Platform %%"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:24 mealtally/web/templates/web/platform_tenant.html:28
+#: mealtally/web/templates/web/platform_tenant.html:24
+#: mealtally/web/templates/web/platform_tenant.html:28
 #, python-format
 msgid "Gateway %%"
 msgstr ""
@@ -4958,42 +5634,52 @@ msgid "Add new fee policy"
 msgstr ""
 
 #: mealtally/web/templates/web/platform_tenant.html:31
-msgid "Policies are effective-dated and never edited: a payment uses the latest policy in force when it was received."
+msgid ""
+"Policies are effective-dated and never edited: a payment uses the latest "
+"policy in force when it was received."
 msgstr ""
 
 #: mealtally/web/templates/web/platform_tenant.html:34
 msgid "Monthly fee statement"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:35 mealtally/web/templates/web/report.html:7
+#: mealtally/web/templates/web/platform_tenant.html:35
+#: mealtally/web/templates/web/report.html:7
 msgid "Month"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:37 mealtally/web/templates/web/report.html:9
+#: mealtally/web/templates/web/platform_tenant.html:37
+#: mealtally/web/templates/web/report.html:9
 msgid "Export CSV"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:40 mealtally/web/views_admin.py:826 mealtally/web/views_platform.py:172
+#: mealtally/web/templates/web/platform_tenant.html:40
+#: mealtally/web/views_admin.py:828 mealtally/web/views_platform.py:173
 msgid "Gross payments"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:41 mealtally/web/views_admin.py:827 mealtally/web/views_platform.py:173
+#: mealtally/web/templates/web/platform_tenant.html:41
+#: mealtally/web/views_admin.py:829 mealtally/web/views_platform.py:174
 msgid "Platform fee"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:42 mealtally/web/views_admin.py:828 mealtally/web/views_platform.py:174
+#: mealtally/web/templates/web/platform_tenant.html:42
+#: mealtally/web/views_admin.py:830 mealtally/web/views_platform.py:175
 msgid "Gateway fee"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:43 mealtally/web/views_admin.py:830 mealtally/web/views_platform.py:175
+#: mealtally/web/templates/web/platform_tenant.html:43
+#: mealtally/web/views_admin.py:832 mealtally/web/views_platform.py:176
 msgid "Net payable to platform"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:842 mealtally/web/views_platform.py:151
+#: mealtally/web/templates/web/platform_tenant.html:45
+#: mealtally/web/views_admin.py:844 mealtally/web/views_platform.py:152
 msgid "Base"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:844 mealtally/web/views_platform.py:151
+#: mealtally/web/templates/web/platform_tenant.html:45
+#: mealtally/web/views_admin.py:846 mealtally/web/views_platform.py:152
 msgid "Fee"
 msgstr ""
 
@@ -5001,7 +5687,8 @@ msgstr ""
 msgid "Reversed"
 msgstr ""
 
-#: mealtally/web/templates/web/platform_tenant.html:45 mealtally/web/views_admin.py:846 mealtally/web/views_platform.py:151
+#: mealtally/web/templates/web/platform_tenant.html:45
+#: mealtally/web/views_admin.py:848 mealtally/web/views_platform.py:152
 msgid "Net"
 msgstr ""
 
@@ -5013,7 +5700,8 @@ msgstr ""
 msgid "This page shows fees only — never the restaurant's customer data."
 msgstr ""
 
-#: mealtally/web/templates/web/receipt.html:6 mealtally/web/templates/web/receipt.html:10
+#: mealtally/web/templates/web/receipt.html:6
+#: mealtally/web/templates/web/receipt.html:10
 #, fuzzy
 msgid "VOID"
 msgstr "বাতিল"
@@ -5047,7 +5735,8 @@ msgstr "প্রিপেইড খাবার পাস · অব্যবহ
 msgid "No data for this period."
 msgstr ""
 
-#: mealtally/web/templates/web/root_finder.html:2 mealtally/web/templates/web/root_finder.html:4
+#: mealtally/web/templates/web/root_finder.html:2
+#: mealtally/web/templates/web/root_finder.html:4
 msgid "Find your restaurant"
 msgstr ""
 
@@ -5082,7 +5771,8 @@ msgstr ""
 msgid "%(e)s per meal"
 msgstr ""
 
-#: mealtally/web/templates/web/sell.html:27 mealtally/web/templates/web/sell_preview.html:6
+#: mealtally/web/templates/web/sell.html:27
+#: mealtally/web/templates/web/sell_preview.html:6
 #, python-format
 msgid "%(m)s meals"
 msgstr ""
@@ -5113,7 +5803,8 @@ msgstr ""
 msgid "Pass sold"
 msgstr ""
 
-#: mealtally/web/templates/web/sell_done.html:6 mealtally/web/templates/web/sell_preview.html:9
+#: mealtally/web/templates/web/sell_done.html:6
+#: mealtally/web/templates/web/sell_preview.html:9
 msgid "Active now"
 msgstr ""
 
@@ -5181,7 +5872,9 @@ msgid "You're signed up"
 msgstr ""
 
 #: mealtally/web/templates/web/signup_done.html:4
-msgid "To start your meal pass, please pay at the counter. Then log in to see your meals."
+msgid ""
+"To start your meal pass, please pay at the counter. Then log in to see your "
+"meals."
 msgstr ""
 
 #: mealtally/web/templates/web/staff_console.html:9
@@ -5191,8 +5884,12 @@ msgstr "ক্যামেরা পাওয়া যাচ্ছে না।
 
 #: mealtally/web/templates/web/staff_console.html:9
 #, fuzzy
-msgid "Camera blocked — allow camera for this site in Settings → Safari → Camera, or use manual entry"
-msgstr "ক্যামেরা ব্লক করা — Settings → Safari → Camera-তে এই সাইটের জন্য ক্যামেরা অনুমতি দিন, বা হাতে লিখুন"
+msgid ""
+"Camera blocked — allow camera for this site in Settings → Safari → Camera, "
+"or use manual entry"
+msgstr ""
+"ক্যামেরা ব্লক করা — Settings → Safari → Camera-তে এই সাইটের জন্য ক্যামেরা অনুমতি "
+"দিন, বা হাতে লিখুন"
 
 #: mealtally/web/templates/web/staff_console.html:9
 #, fuzzy
@@ -5254,7 +5951,7 @@ msgid "Search by phone, code or name"
 msgstr ""
 
 #: mealtally/web/templates/web/tenant_home.html:2
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Welcome to %(name)s"
 msgstr "%(name)s-এ স্বাগতম"
 
@@ -5264,7 +5961,7 @@ msgid "Welcome"
 msgstr "স্বাগতম"
 
 #: mealtally/web/templates/web/tenant_home.html:5
-#, python-format, fuzzy
+#, fuzzy, python-format
 msgid "Choose how you'd like to sign in to %(name)s."
 msgstr "%(name)s-এ কীভাবে সাইন ইন করবেন বেছে নিন।"
 
@@ -5278,7 +5975,8 @@ msgstr "আমি গ্রাহক"
 msgid "Check meals, show my QR, see history"
 msgstr "খাবার দেখুন, আমার QR দেখান, ইতিহাস দেখুন"
 
-#: mealtally/web/templates/web/tenant_home.html:9 mealtally/web/templates/web/tenant_home.html:13
+#: mealtally/web/templates/web/tenant_home.html:9
+#: mealtally/web/templates/web/tenant_home.html:13
 #, fuzzy
 msgid "Last time"
 msgstr "গতবার"
@@ -5302,363 +6000,360 @@ msgstr "নতুন গ্রাহক? অ্যাকাউন্ট তৈ�
 msgid "Choose a restaurant"
 msgstr ""
 
-#: mealtally/web/templatetags/mealtally_extras.py:59
-msgid "Chef"
-msgstr ""
-
-#: mealtally/web/themes.py:21
+#: mealtally/web/themes.py:22
 msgid "Masala kitchen"
 msgstr ""
 
-#: mealtally/web/themes.py:21
+#: mealtally/web/themes.py:22
 msgid "Warm cream, curry-leaf green and saffron: a classic Indian kitchen."
 msgstr ""
 
-#: mealtally/web/themes.py:22
+#: mealtally/web/themes.py:23
 msgid "Fresh market"
 msgstr ""
 
-#: mealtally/web/themes.py:22
+#: mealtally/web/themes.py:23
 msgid "Cool whites, herb teal and tomato red: clean and modern."
 msgstr ""
 
-#: mealtally/web/themes.py:23
+#: mealtally/web/themes.py:24
 msgid "Mealtally"
 msgstr ""
 
-#: mealtally/web/themes.py:23
+#: mealtally/web/themes.py:24
 msgid "The Mealtally platform look: calm blue on white."
 msgstr ""
 
-#: mealtally/web/views_admin.py:67
+#: mealtally/web/views_admin.py:68
 msgid "The two passwords do not match."
 msgstr ""
 
-#: mealtally/web/views_admin.py:104
+#: mealtally/web/views_admin.py:105
 msgid "With active pass"
 msgstr ""
 
-#: mealtally/web/views_admin.py:105 mealtally/web/views_admin.py:646
+#: mealtally/web/views_admin.py:106 mealtally/web/views_admin.py:648
 msgid "No active pass"
 msgstr ""
 
-#: mealtally/web/views_admin.py:127
+#: mealtally/web/views_admin.py:128
 msgid "Meals already redeemed — use Adjust credits"
 msgstr ""
 
-#: mealtally/web/views_admin.py:129
+#: mealtally/web/views_admin.py:130
 msgid "This pass has already ended"
 msgstr ""
 
-#: mealtally/web/views_admin.py:152
+#: mealtally/web/views_admin.py:153
 msgid "Suspend"
 msgstr ""
 
-#: mealtally/web/views_admin.py:152
+#: mealtally/web/views_admin.py:153
 msgid "Resume"
 msgstr ""
 
-#: mealtally/web/views_admin.py:152
+#: mealtally/web/views_admin.py:153
 msgid "Cancel pass"
 msgstr ""
 
-#: mealtally/web/views_admin.py:186 mealtally/web/views_customer.py:173 mealtally/web/views_customer.py:341
+#: mealtally/web/views_admin.py:187 mealtally/web/views_customer.py:174
+#: mealtally/web/views_customer.py:342
 #, fuzzy
 msgid "Saved."
 msgstr "সেভ হয়েছে।"
 
-#: mealtally/web/views_admin.py:194
+#: mealtally/web/views_admin.py:195
 msgid "Customer blocked."
 msgstr ""
 
-#: mealtally/web/views_admin.py:194
+#: mealtally/web/views_admin.py:195
 msgid "Customer unblocked."
 msgstr ""
 
-#: mealtally/web/views_admin.py:199
+#: mealtally/web/views_admin.py:200
 msgid "New PIN set. The customer must change it at next login."
 msgstr ""
 
-#: mealtally/web/views_admin.py:208
+#: mealtally/web/views_admin.py:209
 msgid "Credits adjusted."
 msgstr ""
 
-#: mealtally/web/views_admin.py:214
+#: mealtally/web/views_admin.py:215
 msgid "Pass updated."
 msgstr ""
 
-#: mealtally/web/views_admin.py:217
+#: mealtally/web/views_admin.py:218
 msgid "Payment voided."
 msgstr ""
 
-#: mealtally/web/views_admin.py:231
+#: mealtally/web/views_admin.py:232
 msgid "Enter a whole number."
 msgstr ""
 
-#: mealtally/web/views_admin.py:255
+#: mealtally/web/views_admin.py:256
 msgid "Check the numbers: whole numbers only (price may have minor)."
 msgstr ""
 
-#: mealtally/web/views_admin.py:332
+#: mealtally/web/views_admin.py:333
 msgid "Enter times as HH:MM, for example 12:30."
 msgstr ""
 
-#: mealtally/web/views_admin.py:356
+#: mealtally/web/views_admin.py:357
 msgid "Meal time saved."
 msgstr ""
 
-#: mealtally/web/views_admin.py:358
+#: mealtally/web/views_admin.py:359
 msgid "Enter whole minutes for grace."
 msgstr ""
 
-#: mealtally/web/views_admin.py:498
+#: mealtally/web/views_admin.py:500
 msgid "Settings saved."
 msgstr ""
 
-#: mealtally/web/views_admin.py:500
+#: mealtally/web/views_admin.py:502
 msgid "Enter whole numbers."
 msgstr ""
 
-#: mealtally/web/views_admin.py:542
+#: mealtally/web/views_admin.py:544
 #, python-format
 msgid "Theme changed to %(name)s"
 msgstr ""
 
-#: mealtally/web/views_admin.py:633
+#: mealtally/web/views_admin.py:635
 msgid "Date / customer"
 msgstr ""
 
-#: mealtally/web/views_admin.py:635
+#: mealtally/web/views_admin.py:637
 msgid "Total meals"
 msgstr ""
 
-#: mealtally/web/views_admin.py:643
+#: mealtally/web/views_admin.py:645
 msgid "Outside meal time"
 msgstr ""
 
-#: mealtally/web/views_admin.py:644
+#: mealtally/web/views_admin.py:646
 msgid "Already had this meal"
 msgstr ""
 
-#: mealtally/web/views_admin.py:645
+#: mealtally/web/views_admin.py:647
 msgid "Daily limit reached"
 msgstr ""
 
-#: mealtally/web/views_admin.py:647
+#: mealtally/web/views_admin.py:649
 msgid "Pass not valid now"
 msgstr ""
 
-#: mealtally/web/views_admin.py:648
+#: mealtally/web/views_admin.py:650
 msgid "No meals left"
 msgstr ""
 
-#: mealtally/web/views_admin.py:649
+#: mealtally/web/views_admin.py:651
 msgid "Customer blocked"
 msgstr ""
 
-#: mealtally/web/views_admin.py:650
+#: mealtally/web/views_admin.py:652
 msgid "Restaurant paused"
 msgstr ""
 
-#: mealtally/web/views_admin.py:700
+#: mealtally/web/views_admin.py:702
 msgid "Channel"
 msgstr ""
 
-#: mealtally/web/views_admin.py:702
+#: mealtally/web/views_admin.py:704
 msgid "Refused"
 msgstr ""
 
-#: mealtally/web/views_admin.py:720
+#: mealtally/web/views_admin.py:722
 msgid "Voids"
 msgstr ""
 
-#: mealtally/web/views_admin.py:758
+#: mealtally/web/views_admin.py:760
 msgid "Ended"
 msgstr ""
 
-#: mealtally/web/views_admin.py:758
+#: mealtally/web/views_admin.py:760
 msgid "Unused"
 msgstr ""
 
-#: mealtally/web/views_admin.py:760
+#: mealtally/web/views_admin.py:762
 msgid "Total meals forfeited"
 msgstr ""
 
-#: mealtally/web/views_admin.py:793
+#: mealtally/web/views_admin.py:795
 msgid "Kind"
 msgstr ""
 
-#: mealtally/web/views_admin.py:793
+#: mealtally/web/views_admin.py:795
 msgid "Detail"
 msgstr ""
 
-#: mealtally/web/views_admin.py:793
+#: mealtally/web/views_admin.py:795
 msgid "Amount / balance"
 msgstr ""
 
-#: mealtally/web/views_admin.py:829
+#: mealtally/web/views_admin.py:831
 msgid "Voids in month"
 msgstr ""
 
-#: mealtally/web/views_admin.py:843 mealtally/web/views_platform.py:151
+#: mealtally/web/views_admin.py:845 mealtally/web/views_platform.py:152
 msgid "%"
 msgstr ""
 
-#: mealtally/web/views_admin.py:845 mealtally/web/views_platform.py:151
+#: mealtally/web/views_admin.py:847 mealtally/web/views_platform.py:152
 msgid "Reversed (void)"
 msgstr ""
 
-#: mealtally/web/views_customer.py:40
+#: mealtally/web/views_customer.py:41
 #, fuzzy
 msgid "Meal undone"
 msgstr "খাবার ফেরানো হয়েছে"
 
-#: mealtally/web/views_customer.py:41
+#: mealtally/web/views_customer.py:42
 #, fuzzy
 msgid "Adjusted by restaurant"
 msgstr "রেস্তোরাঁ সমন্বয় করেছে"
 
-#: mealtally/web/views_customer.py:192
+#: mealtally/web/views_customer.py:193
 #, fuzzy
 msgid "The two PINs do not match."
 msgstr "দুটি PIN মিলছে না।"
 
-#: mealtally/web/views_customer.py:319
+#: mealtally/web/views_customer.py:320
 #, fuzzy
 msgid "Deliveries"
 msgstr "ডেলিভারি"
 
-#: mealtally/web/views_customer.py:362
+#: mealtally/web/views_customer.py:363
 #, fuzzy
 msgid "Enter the amount in whole units."
 msgstr "পূর্ণ এককে পরিমাণ লিখুন।"
 
-#: mealtally/web/views_customer.py:364
-#, python-format, fuzzy
+#: mealtally/web/views_customer.py:365
+#, fuzzy, python-format
 msgid "The amount must be between ₹%(lo)s and ₹%(hi)s."
 msgstr "পরিমাণ ₹%(lo)s থেকে ₹%(hi)s-এর মধ্যে হতে হবে।"
 
-#: mealtally/web/views_customer.py:367
+#: mealtally/web/views_customer.py:368
 #, fuzzy
 msgid "The UTR is the 12-digit number in your UPI app's payment details."
 msgstr "UTR হলো আপনার UPI অ্যাপের পেমেন্ট বিবরণে থাকা ১২ অঙ্কের নম্বর।"
 
-#: mealtally/web/views_marketing.py:101
+#: mealtally/web/views_marketing.py:102
 msgid "your name"
 msgstr ""
 
-#: mealtally/web/views_marketing.py:102
+#: mealtally/web/views_marketing.py:103
 msgid "your business name"
 msgstr ""
 
-#: mealtally/web/views_marketing.py:103
+#: mealtally/web/views_marketing.py:104
 msgid "your city"
 msgstr ""
 
-#: mealtally/web/views_marketing.py:106
+#: mealtally/web/views_marketing.py:107
 #, python-format
 msgid "Please enter %(what)s."
 msgstr ""
 
-#: mealtally/web/views_marketing.py:108
+#: mealtally/web/views_marketing.py:109
 msgid "That is too long."
 msgstr ""
 
-#: mealtally/web/views_marketing.py:112
+#: mealtally/web/views_marketing.py:113
 msgid "Enter a valid phone number."
 msgstr ""
 
-#: mealtally/web/views_marketing.py:114
+#: mealtally/web/views_marketing.py:115
 msgid "Choose a business type."
 msgstr ""
 
-#: mealtally/web/views_marketing.py:116
+#: mealtally/web/views_marketing.py:117
 msgid "Please keep the message under 1000 characters."
 msgstr ""
 
-#: mealtally/web/views_marketing.py:118
+#: mealtally/web/views_marketing.py:119
 msgid "Please leave links out of the message."
 msgstr ""
 
-#: mealtally/web/views_marketing.py:137
+#: mealtally/web/views_marketing.py:138
 msgid "Too many requests from this network. Please try again in an hour."
 msgstr ""
 
-#: mealtally/web/views_marketing.py:193
+#: mealtally/web/views_marketing.py:194
 msgid "Terms of use"
 msgstr ""
 
-#: mealtally/web/views_platform.py:65
+#: mealtally/web/views_platform.py:66
 msgid "Check the link, or head back to the start."
 msgstr ""
 
-#: mealtally/web/views_platform.py:165
+#: mealtally/web/views_platform.py:166
 msgid "TOTAL"
 msgstr ""
 
-#: mealtally/web/views_platform.py:212
+#: mealtally/web/views_platform.py:213
 msgid "Fee policy saved."
 msgstr ""
 
-#: mealtally/web/views_platform.py:214
+#: mealtally/web/views_platform.py:215
 msgid "Check the percentages (0-100) and the date."
 msgstr ""
 
-#: mealtally/web/views_platform.py:255
+#: mealtally/web/views_platform.py:256
 msgid "A reason is required."
 msgstr ""
 
-#: mealtally/web/views_public.py:52
+#: mealtally/web/views_public.py:53
 msgid "Enter your restaurant code."
 msgstr ""
 
-#: mealtally/web/views_public.py:90
+#: mealtally/web/views_public.py:91
 msgid "This account has no staff access to any restaurant."
 msgstr ""
 
-#: mealtally/web/views_public.py:147
+#: mealtally/web/views_public.py:148
 msgid "This account does not have staff access here."
 msgstr ""
 
-#: mealtally/web/views_staff.py:117 mealtally/web/views_staff.py:202
+#: mealtally/web/views_staff.py:118 mealtally/web/views_staff.py:203
 msgid "Customer not found."
 msgstr ""
 
-#: mealtally/web/views_staff.py:135
+#: mealtally/web/views_staff.py:136
 #, python-format
 msgid "%(n)d second"
 msgid_plural "%(n)d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: mealtally/web/views_staff.py:137
+#: mealtally/web/views_staff.py:138
 #, python-format
 msgid "%(n)d minute"
 msgid_plural "%(n)d minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: mealtally/web/views_staff.py:142
+#: mealtally/web/views_staff.py:143
 msgid "less than a minute"
 msgstr ""
 
-#: mealtally/web/views_staff.py:143
+#: mealtally/web/views_staff.py:144
 #, python-format
 msgid "Already redeemed %(ago)s ago (limit %(limit)s) — give another meal?"
 msgstr ""
 
-#: mealtally/web/views_staff.py:239
+#: mealtally/web/views_staff.py:240
 msgid "Undone at counter"
 msgstr ""
 
-#: mealtally/web/views_staff.py:334
+#: mealtally/web/views_staff.py:335
 msgid "Pick a customer or enter the new customer's name and phone."
 msgstr ""
 
-#: mealtally/web/views_staff.py:336
+#: mealtally/web/views_staff.py:337
 msgid "A reference (UTR / transaction ID) is required for non-cash payments."
 msgstr ""
 
-#: mealtally/web/views_staff.py:373
+#: mealtally/web/views_staff.py:374
 msgid "Please confirm the gap in coverage before selling."
 msgstr ""

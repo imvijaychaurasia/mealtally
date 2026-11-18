@@ -202,9 +202,9 @@ Mealtally's maintainer, Vijay Chaurasia, offers paid services for restaurants an
 
 Prices depend on how many restaurants you run and the support you need. Write to
 [imvijaychaurasia@gmail.com](mailto:imvijaychaurasia@gmail.com), or open a
-[hosting or support enquiry](../../issues/new?template=services.yml) on GitHub. The issue is public, so keep private
-details and your email address out of it. Vijay replies there; for private details, use the email address above. Paid
-hosting runs the same public releases as everyone else.
+[hosting or support enquiry](../../issues/new?template=services.yml) on GitHub. Keep private details out of the
+issue; Vijay replies on the issue; for private details, write to imvijaychaurasia@gmail.com. Paid hosting runs the same
+public releases as everyone else.
 
 ## Forking
 

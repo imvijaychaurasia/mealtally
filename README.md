@@ -9,6 +9,11 @@ under the AGPL-3.0.
 
 Mealtally is not affiliated with mealtally.com.
 
+## Project status
+
+Mealtally is at 0.x: the meal-pass features are ready for daily use, and settings or data formats can still change
+between releases. Read [docs/upgrading.md](docs/upgrading.md) before upgrading.
+
 ## Who it's for
 
 - **Messes and dine-in restaurants** selling monthly meal passes, redeemed at the counter.
@@ -180,6 +185,31 @@ Report vulnerabilities privately; see [SECURITY.md](SECURITY.md).
 Planned, roughly in this order: online payment gateways, notifications (email, SMS, WhatsApp), wallets and orders as
 working features, customer self sign-up with verification, mobile apps, and biometric sign-in on the counter device.
 None of this has a date.
+
+## Getting help
+
+- **Questions and setup help:** [GitHub Discussions](../../discussions), answered on a best-effort basis.
+- **Bugs:** open an issue with the bug template.
+- **Security problems:** report them privately, see [SECURITY.md](SECURITY.md).
+
+## Paid hosting and support
+
+Mealtally's maintainer, Vijay Chaurasia, offers paid services for restaurants and operators who want help:
+
+- **Cloud hosting:** a Mealtally instance run for you, with HTTPS, nightly backups and upgrades.
+- **Self-hosting support:** installing Mealtally on your own server, upgrades, backup checks and fixes.
+- **Commercial licence:** for uses the AGPL doesn't allow, see [COMMERCIAL.md](COMMERCIAL.md).
+
+Prices depend on how many restaurants you run and the support you need. Write to
+[imvijaychaurasia@gmail.com](mailto:imvijaychaurasia@gmail.com), or open a
+[hosting or support enquiry](../../issues/new?template=services.yml) on GitHub. Keep private details out of the
+issue; the reply comes by email. Paid hosting runs the same public releases as everyone else.
+
+## Forking
+
+You may fork Mealtally, change it and run it under the AGPL-3.0. If you let other people use your changed version,
+over a network or otherwise, share its source code under the same licence and give it your own name and logo
+([TRADEMARK.md](TRADEMARK.md)). Running an unchanged copy for your own restaurant needs no permission.
 
 ## Contributing
 

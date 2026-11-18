@@ -16,6 +16,11 @@ Please include:
 You can expect an answer within 5 working days. We'll agree a disclosure date with you, credit you in the release
 notes if you want, and publish a GitHub security advisory once a fix is released.
 
+## Questions
+
+For general questions, including how to run Mealtally securely, use [Discussions](../../discussions). Keep
+vulnerability details out of them.
+
 ## Supported versions
 
 Security fixes go into the latest `0.x` release and `main`. Until 1.0, upgrade to the latest release to get them.

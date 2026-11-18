@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+name: Hosting or support enquiry
+description: Ask about cloud hosting, self-hosting support or a commercial licence.
+labels: [services]
+body:
+  - type: markdown
+    attributes:
+      value: "**This issue is public. Don't post passwords, customer data or prices you were quoted; we reply by email.**"
+  - type: dropdown
+    id: need
+    attributes:
+      label: What you need
+      options:
+        - Cloud hosting
+        - Self-hosting support
+        - Commercial licence
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: restaurants
+    attributes:
+      label: Number of restaurants
+      placeholder: "1"
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country
+    validations:
+      required: true
+  - type: input
+    id: email
+    attributes:
+      label: Preferred contact email
+      description: Everyone can read this, like the rest of the issue.
+      placeholder: you@example.com
+    validations:
+      required: true

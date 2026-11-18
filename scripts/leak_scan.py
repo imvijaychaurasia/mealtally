@@ -51,12 +51,25 @@ PHONE = re.compile(r"\+?91[ -]?([6-9]\d{4})[ -]?(\d{5})\b")
 
 # The maintainer's contact address is published in exactly these files (sha256 prefix, as for the denylist). It is
 # removed from the line before the denylist check there, and nowhere else: the handle inside it stays blocked.
-ALLOWED_CONTACT = {"709bdf15f3e94ad0": {"COMMERCIAL.md", "CODE_OF_CONDUCT.md", "CLA.md"}}
+ALLOWED_CONTACT = {
+    "709bdf15f3e94ad0": {
+        "COMMERCIAL.md",
+        "CODE_OF_CONDUCT.md",
+        "CLA.md",
+        "README.md",
+        ".github/ISSUE_TEMPLATE/services.yml",
+    }
+}
+# GitHub needs absolute contact links, so these two exact addresses are allowed in the issue-template config only.
+ISSUE_CONFIG = ".github/ISSUE_TEMPLATE/config.yml"
+ALLOWED_LINKS = {"e9b5f2fe0cfb0beb": {ISSUE_CONFIG}, "007f24162bfacadf": {ISSUE_CONFIG}}
+LINK = re.compile(r"https://github\.com/\S+")
 EMAIL = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
 
 
 def _without_allowed_contact(line: str, rel: str) -> str:
-    return EMAIL.sub(lambda m: "" if rel in ALLOWED_CONTACT.get(_h(m.group(0).lower()), ()) else m.group(0), line)
+    line = EMAIL.sub(lambda m: "" if rel in ALLOWED_CONTACT.get(_h(m.group(0).lower()), ()) else m.group(0), line)
+    return LINK.sub(lambda m: "" if rel in ALLOWED_LINKS.get(_h(m.group(0)), ()) else m.group(0), line)
 
 
 def _h(text: str) -> str:

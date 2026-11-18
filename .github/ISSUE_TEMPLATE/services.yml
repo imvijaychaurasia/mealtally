@@ -5,7 +5,7 @@ labels: [services]
 body:
   - type: markdown
     attributes:
-      value: "**This issue is public. Don't post passwords, customer data or prices you were quoted; we reply by email.**"
+      value: "**This issue is public. Don't post passwords, customer data, prices or your email address. Vijay replies here; for private details, write to imvijaychaurasia@gmail.com.**"
   - type: dropdown
     id: need
     attributes:
@@ -28,13 +28,5 @@ body:
     id: country
     attributes:
       label: Country
-    validations:
-      required: true
-  - type: input
-    id: email
-    attributes:
-      label: Preferred contact email
-      description: Everyone can read this, like the rest of the issue.
-      placeholder: you@example.com
     validations:
       required: true

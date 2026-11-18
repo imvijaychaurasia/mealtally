@@ -40,6 +40,7 @@ from mealtally.plans.models import Plan
 from mealtally.reports import services as reports
 from mealtally.tenancy import services as tenancy
 from mealtally.tenancy.models import Tenant
+from mealtally.web.redirects import safe_next
 
 from . import features
 from .access import home_url
@@ -367,8 +368,9 @@ def meal_times(request):
 def meal_rules_banner(request):
     """Dismiss the one-time 'Set meal times and daily limits' banner (audited like any settings change)."""
     tenancy.update_settings(actor=request.actor, meal_rules_banner_dismissed=True)
+    home = home_url(request.tenant.slug, "OWNER")
     nxt = request.POST.get("next", "")
-    return redirect(nxt if nxt.startswith(f"/t/{request.tenant.slug}/") else home_url(request.tenant.slug, "OWNER"))
+    return redirect(safe_next(request, nxt, home) if nxt.startswith(f"/t/{request.tenant.slug}/") else home)
 
 
 @tenant_view(**ADMIN)

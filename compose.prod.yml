@@ -46,10 +46,9 @@ services:
       disable: true
 
   postgres:
-    image: ${MEALTALLY_POSTGRES_IMAGE:-mealtally-postgres:local}
-    build:
-      context: .
-      dockerfile: docker/postgres/Dockerfile
+    # the released database image, never built on the server (it would not be the image that was tested)
+    image: ${MEALTALLY_POSTGRES_IMAGE:?set MEALTALLY_POSTGRES_IMAGE in .env to a released image tag}
+    pull_policy: missing
     restart: unless-stopped
     env_file: .env
     volumes:
@@ -76,7 +75,8 @@ services:
 
   # Nightly pg_dump into ./backups (MEALTALLY_BACKUP_AT_UTC, kept MEALTALLY_BACKUP_RETENTION_DAYS days).
   backup:
-    image: ${MEALTALLY_POSTGRES_IMAGE:-mealtally-postgres:local}
+    image: ${MEALTALLY_POSTGRES_IMAGE:?set MEALTALLY_POSTGRES_IMAGE in .env to a released image tag}
+    pull_policy: missing
     restart: unless-stopped
     # write the dumps as the host user from .env (make init records it), not as root
     user: "${MEALTALLY_UID:-1000}:${MEALTALLY_GID:-1000}"

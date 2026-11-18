@@ -18,7 +18,7 @@ Production uses the released images and `compose.prod.yml`. You need the reposit
 the backup script and `.env.example`:
 
 ```bash
-git clone --branch v0.1.0 https://github.com/<owner>/mealtally.git
+git clone --branch v0.1.1 https://github.com/<owner>/mealtally.git
 ```
 
 ```bash
@@ -32,7 +32,8 @@ Edit `.env`:
 - `MEALTALLY_ADMIN_EMAIL`: your login.
 - `MEALTALLY_RESTAURANT_NAME`, and `MEALTALLY_DEFAULT_COUNTRY`, `MEALTALLY_DEFAULT_CURRENCY`, `MEALTALLY_DEFAULT_TIMEZONE`
   (required; without them `make init` asks, or stops when it has no terminal).
-- `MEALTALLY_IMAGE=ghcr.io/<owner>/mealtally:0.1.0` and `MEALTALLY_POSTGRES_IMAGE=ghcr.io/<owner>/mealtally-postgres:0.1.0`.
+- `MEALTALLY_IMAGE=ghcr.io/<owner>/mealtally:0.1.1` and `MEALTALLY_POSTGRES_IMAGE=ghcr.io/<owner>/mealtally-postgres:0.1.1`
+  (both required: production runs the published images and never builds them).
 
 Then:
 

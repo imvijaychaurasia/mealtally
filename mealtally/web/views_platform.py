@@ -38,6 +38,7 @@ from mealtally.tenancy.context import begin
 from mealtally.tenancy.context import end
 from mealtally.tenancy.models import Tenant
 from mealtally.tenancy.models import TenantSettings
+from mealtally.web.redirects import to_login
 
 from . import features
 from .copy import friendly
@@ -55,7 +56,7 @@ def platform_view(view):
     def wrapper(request, *args, **kwargs):
         user = request.user
         if not user.is_authenticated:
-            return redirect(f"{reverse('web:global-login')}?next={request.path}")
+            return to_login(request, reverse("web:global-login"))
         if not (user.is_active and user.is_platform_admin):
             return render(
                 request,

@@ -7,6 +7,23 @@ a step from you; [docs/upgrading.md](docs/upgrading.md) lists them.
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-18
+
+### Security
+
+- **Redirect targets are checked in one place.** CodeQL (`py/url-redirection`) flagged four redirects that take
+  their target from the request. One check was wrong: dismissing the plain-HTTP notice accepted a `next` address
+  starting with `/\`, which browsers read as `//` (another site). That form is CSRF-protected, so it could not be
+  triggered from another site, but the check is fixed. The other three were safe. All four now use Django's
+  `url_has_allowed_host_and_scheme`.
+
+### Fixed
+
+- `compose.prod.yml` no longer builds the database image on the server; it runs the published
+  `mealtally-postgres` image (`MEALTALLY_POSTGRES_IMAGE` is now required, see docs/upgrading.md). `make upgrade` pulls
+  it too.
+- Sign-in redirects keep the full address of the page (including its query) and encode it.
+
 ## [0.1.0] - 2026-11-17
 
 The first open-source release.

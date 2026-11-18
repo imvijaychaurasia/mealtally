@@ -370,10 +370,12 @@ def meal_rules_banner(request):
     tenancy.update_settings(actor=request.actor, meal_rules_banner_dismissed=True)
     home = home_url(request.tenant.slug, "OWNER")
     nxt = request.POST.get("next", "")
-    on_site = nxt.startswith(f"/t/{request.tenant.slug}/") and url_has_allowed_host_and_scheme(
+    # the check stays in the condition itself: code scanning doesn't follow a guard through a variable
+    if nxt.startswith(f"/t/{request.tenant.slug}/") and url_has_allowed_host_and_scheme(
         nxt, allowed_hosts={request.get_host()}, require_https=request.is_secure()
-    )
-    return redirect(nxt if on_site else home)
+    ):
+        return redirect(nxt)
+    return redirect(home)
 
 
 @tenant_view(**ADMIN)

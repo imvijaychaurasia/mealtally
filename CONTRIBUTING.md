@@ -4,6 +4,7 @@ Thanks for helping. Bug reports, fixes, translations and documentation are all w
 
 ## Before you start
 
+- **Questions:** ask in [Discussions](../../discussions). Issues are for bugs and specific changes.
 - **Bugs:** open an issue with the bug template. Say what you did, what you expected and what happened.
 - **Features:** open an issue first and describe the problem it solves for a restaurant. That saves you building
   something we can't merge.

@@ -2,3 +2,10 @@
 # Security reports go through Security -> Report a vulnerability (see SECURITY.md), which GitHub also offers
 # on the new-issue page once private vulnerability reporting is on.
 blank_issues_enabled: false
+contact_links:
+  - name: Questions and help
+    url: https://github.com/imvijaychaurasia/mealtally/discussions
+    about: Ask how to install, configure or use Mealtally.
+  - name: Paid hosting and support
+    url: https://github.com/imvijaychaurasia/mealtally#paid-hosting-and-support
+    about: Options for hosting, support and commercial licences.

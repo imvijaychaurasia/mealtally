@@ -93,11 +93,11 @@ def test_foreign_numbers_are_shown_internationally_and_bad_ones_rejected(restaur
     ("ctry", "tax", "licence", "methods"),
     [
         ("IN", "GSTIN", "FSSAI licence number", ["CASH", "UPI_MANUAL", "BANK_TRANSFER"]),
-        ("US", "Tax ID", "Food business licence", ["CASH", "BANK_TRANSFER"]),
-        ("GB", "VAT number", "Food business licence", ["CASH", "BANK_TRANSFER"]),
-        ("DE", "VAT number", "Food business licence", ["CASH", "BANK_TRANSFER"]),
-        ("AE", "Tax ID", "Food business licence", ["CASH", "BANK_TRANSFER"]),
-        ("JP", "Tax ID", "Food business licence", ["CASH", "BANK_TRANSFER"]),
+        ("US", "Tax ID", "Food licence number", ["CASH", "BANK_TRANSFER"]),
+        ("GB", "VAT number", "Food licence number", ["CASH", "BANK_TRANSFER"]),
+        ("DE", "VAT number", "Food licence number", ["CASH", "BANK_TRANSFER"]),
+        ("AE", "Tax ID", "Food licence number", ["CASH", "BANK_TRANSFER"]),
+        ("JP", "Tax ID", "Food licence number", ["CASH", "BANK_TRANSFER"]),
     ],
 )
 def test_country_drives_labels_and_payment_methods(ctry, tax, licence, methods):
@@ -138,7 +138,7 @@ def test_a_us_restaurant_sells_in_dollars_without_upi_or_a_gstin_check():
     receipt = owner.get(f"{u}/receipt/{rec.payment.public_id}").content.decode()
     assert "$1,500.00" in receipt and "Tax ID: 12-3456789" in receipt and "₹" not in receipt
     profile = owner.get(u + "/admin/settings").content.decode()
-    assert "Tax ID (optional" in profile and "Food business licence" in profile
+    assert "Tax ID (optional" in profile and "Food licence number" in profile
 
 
 @pytest.mark.django_db

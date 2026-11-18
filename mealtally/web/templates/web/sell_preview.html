@@ -3,7 +3,7 @@
 <section class="mx-auto max-w-lg"><h1 class="text-2xl font-bold">{% trans "Check and confirm" %}</h1>
   <div class="card mt-3 grid gap-2" data-testid="preview">
     <p><strong>{% if customer %}{{ customer.full_name }}{% else %}{{ form.new_name }}{% endif %}</strong> {% if customer %}({{ customer.customer_code }}){% else %}<span class="chip-slate">{% trans "New customer" %}</span>{% endif %}</p>
-    <p>{{ plan.name }} — {% blocktrans with m=plan.meals_per_cycle %}{{ m }} meals{% endblocktrans %}</p>
+    <p>{{ plan.name }} · {% blocktrans with m=plan.meals_per_cycle %}{{ m }} meals{% endblocktrans %}</p>
     <p class="text-2xl font-bold">{{ plan.price_minor|money }}</p>
     <p data-testid="preview-payment"><span class="chip-slate">{{ method_label }}</span>{% if form.reference %} <span class="text-sm text-ink-soft">{% trans "Ref" %}: {{ form.reference }}</span>{% endif %}</p>
     <p>{% if preview.status == 'ACTIVE' %}<span class="chip-active">{% trans "Active now" %}</span>{% else %}<span class="chip-soon">{% trans "Queued" %}</span>{% endif %}

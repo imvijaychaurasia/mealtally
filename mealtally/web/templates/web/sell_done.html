@@ -1,7 +1,7 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
 <section class="mx-auto max-w-lg">
-  <div class="no-print rounded-2xl bg-success-solid p-5 text-center text-on-primary" role="status" data-testid="sell-success"><p class="text-2xl font-bold">✓ {% trans "Pass sold" %}</p>
+  <div class="no-print rounded-2xl bg-success-solid p-5 text-center text-on-primary" role="status" data-testid="sell-success"><p class="text-2xl font-bold">{% trans "Pass sold" %}</p>
     <p class="mt-1">{{ customer.full_name }} · {{ plan.name }} · {{ payment.receipt_number }}</p>
     <p class="mt-1 text-sm">{% if pass.status == 'ACTIVE' %}{% trans "Active now" %}{% else %}{% trans "Queued" %}{% endif %}: {{ pass.starts_at|date:"j M Y" }} – {{ pass.ends_at|date:"j M Y" }}</p></div>
   <div class="no-print mt-4 grid grid-cols-2 gap-3"><a class="btn-secondary" href="{% url 'web:receipt' tenant.slug payment.public_id %}" target="_blank" rel="noopener">{% trans "Print receipt" %}</a>

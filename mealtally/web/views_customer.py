@@ -36,7 +36,7 @@ from .copy import friendly
 PAGE = 20
 PIN_LOGIN_GRACE_SECONDS = 600
 LABELS = {
-    "ISSUE": _("Credits issued"),
+    "ISSUE": _("Meals issued"),
     "REDEEM": _("Meal redeemed"),
     "REVERSAL": _("Meal undone"),
     "ADJUST": _("Adjusted by restaurant"),

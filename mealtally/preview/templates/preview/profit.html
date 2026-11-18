@@ -1,6 +1,6 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
-<a class="link text-sm" href="{% url 'preview:expenses' tenant.slug %}">← {% trans "Expenses" %}</a>
+<a class="link text-sm" href="{% url 'preview:expenses' tenant.slug %}">{% trans "Back to expenses" %}</a>
 {% include "preview/_head.html" with title=_("Profit") sub=_("Last 30 days") %}
 <div class="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4"><div class="card"><p class="text-sm text-muted">{% trans "Revenue" %}</p><p class="text-2xl font-bold">{{ m.revenue_minor|money }}</p><p class="text-xs text-muted">{% trans "Passes sold" %} {{ passes|money }} · {% trans "wallet debits" %} {{ wallet|money }}</p></div><div class="card"><p class="text-sm text-muted">{% trans "Expenses" %}</p><p class="text-2xl font-bold">{{ m.expense_minor|money }}</p></div><div class="card"><p class="text-sm text-muted">{% trans "Net profit" %}</p><p class="text-2xl font-bold" data-testid="net">{{ m.profit_minor|money }}</p></div><div class="card"><p class="text-sm text-muted">{% trans "Margin" %}</p><p class="text-2xl font-bold">{{ margin }}%</p></div></div>
 <section class="card mt-3"><h2 class="font-semibold">{% trans "Last 12 months" %}</h2><div class="mt-2">{% bar_chart months %}</div></section>

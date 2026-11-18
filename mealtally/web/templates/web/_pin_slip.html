@@ -2,9 +2,9 @@
 <div class="card mt-4 border-2 border-dashed border-strong text-center" id="slip" x-data="copyBtn" data-testid="pin-slip">
   <p class="font-semibold">{{ cfg.display_name|default:tenant.name }}</p>
   <p class="text-sm text-ink-soft">{{ customer.full_name }} · {{ customer.customer_code }} · {{ customer.phone_e164|phone }}</p>
-  <p class="mt-2 text-sm">{% trans "Your login PIN (shown only once)" %}</p>
+  <p class="mt-2 text-sm">{% trans "Your sign-in PIN (shown only once)" %}</p>
   <p class="my-1 font-mono text-4xl font-bold tracking-widest" data-testid="pin-value">{{ pin }}</p>
-  <p class="text-xs text-ink-soft">{% trans "Log in at" %} {{ request.scheme }}://{{ request.get_host }}{% url 'web:tenant-home' tenant.slug %}<br>{% trans "You will be asked to choose your own PIN the first time." %}</p>
+  <p class="text-xs text-ink-soft">{% trans "Sign in at" %} {{ request.scheme }}://{{ request.get_host }}{% url 'web:tenant-home' tenant.slug %}<br>{% trans "You will be asked to choose your own PIN the first time." %}</p>
   <div class="no-print mt-3 flex justify-center gap-2"><button type="button" class="btn-secondary" @click="copy" data-text="{{ pin }}"><span x-show="!done">{% trans "Copy PIN" %}</span><span x-show="done" x-cloak>{% trans "Copied" %}</span></button>
     <button type="button" class="btn-secondary" data-print>{% trans "Print slip" %}</button></div>
 </div>

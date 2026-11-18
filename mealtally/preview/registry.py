@@ -25,7 +25,7 @@ class Module:
 
 
 REGISTRY: list[Module] = [
-    Module("today", "Today", "top", OM, "real", "preview:today", "Orders, meals and money at a glance", "today"),
+    Module("today", "Today", "top", OM, "real", "preview:today", "Orders, meals and money today", "today"),
     Module("redeem", "Redeem", "top", OMS, "real", "web:staff-console", "Scan or search, redeem a meal", "redeem"),
     Module("sell", "Sell pass", "top", OMS, "real", "web:staff-sell", "Sell a meal pass at the counter", "sell"),
     Module("orders", "Orders", "top", OMS, "preview", "preview:orders", "Day board by slot with cutoff lock", "orders"),
@@ -46,7 +46,7 @@ REGISTRY: list[Module] = [
         (O, M, C),
         "preview",
         "preview:kitchen",
-        "Cooking plan, packing, labels, pickup",
+        "Cooking plan, packing, labels, pick-up",
         "kitchen",
     ),
     Module(
@@ -106,14 +106,14 @@ REGISTRY: list[Module] = [
         OM,
         "preview",
         "preview:holds",
-        "Vacation holds and business closures",
+        "Customer holds and restaurant closures",
         "holds",
     ),
     Module(
         "tiffin-boxes", "Tiffin boxes", "more", OM, "preview", "preview:tiffin-boxes", "Issue/return ledger", "delivery"
     ),
-    Module("branches", "Branches", "more", OM, "preview", "preview:branches", "Kitchens and pickup points", "branch"),
-    Module("staff", "Staff", "more", (O,), "real", "web:admin-staff", "Logins and password resets", "customers"),
+    Module("branches", "Branches", "more", OM, "preview", "preview:branches", "Kitchens and pick-up points", "branch"),
+    Module("staff", "Staff", "more", (O,), "real", "web:admin-staff", "Accounts and password resets", "customers"),
     Module(
         "roles",
         "Roles & permissions",
@@ -159,7 +159,7 @@ REGISTRY: list[Module] = [
         "Today's route and proof of delivery",
         "delivery",
     ),
-    Module("me-pass", "My pass", "none", (U,), "real", "web:me-home", "QR, balance and history", "qr"),
+    Module("me-pass", "My pass", "none", (U,), "real", "web:me-home", "QR, meals left and history", "qr"),
     Module(
         "language",
         "English / हिंदी",
@@ -167,7 +167,7 @@ REGISTRY: list[Module] = [
         (O, M, S, C, D, U),
         "real",
         "web:landing",
-        "Switch screens to Hindi",
+        "Choose your language",
         "web",
     ),
     Module("me-meals", "Meals", "me", (U,), "preview", "preview:me-meals", "Choose today's dish, skip, hold", "meals"),

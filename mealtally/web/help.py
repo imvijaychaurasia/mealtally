@@ -12,81 +12,81 @@ ARTICLES = [
     # --- customers ----------------------------------------------------------------------------------------------
     (
         CUSTOMER,
-        _("How do I show my QR at the counter?"),
+        _("Show your QR at the counter"),
         _("Open My QR and show the screen to the staff. The code refreshes by itself and each code works only once."),
     ),
     (
         CUSTOMER,
-        _("How do I see how many meals I have left?"),
+        _("See how many meals you have left"),
         _("Your Home screen shows meals left, days left and the date your pass ends."),
     ),
     (
         CUSTOMER,
-        _("What happens when my pass ends?"),
+        _("When your pass ends"),
         _(
             "Unused meals expire on the end date and cannot be carried forward. Renew at the counter and the new pass starts right after."
         ),
     ),
     (
         CUSTOMER,
-        _("How do I change my PIN?"),
+        _("Change your PIN"),
         _("Open Profile and choose Change PIN. If you forgot it, ask the counter staff to reset it for you."),
     ),
     # --- staff and owners ------------------------------------------------------------------------------------------
     (
         STAFF,
-        _("How do I sell a pass?"),
+        _("Sell a pass"),
         _(
             "Open Sell pass, find the customer (or add them), pick the plan and the payment method, then confirm. The receipt is ready straight away."
         ),
     ),
     (
         STAFF,
-        _("How do I redeem a meal?"),
+        _("Redeem a meal"),
         _(
             "On Redeem, scan the customer's QR or type the last digits of their phone, then tap Redeem meal. You can undo for 30 seconds."
         ),
     ),
     (
         STAFF,
-        _("The card is red — what now?"),
+        _("If the card is red"),
         _(
             "The customer has no active pass. Tap Sell pass to renew; a new pass can queue to start when the current one ends."
         ),
     ),
     (
         STAFF,
-        _("A meal was redeemed by mistake"),
+        _("If a meal was redeemed by mistake"),
         _(
-            "Tap Undo on the green card within 30 seconds, or use Reverse in Today's redemptions. Every reversal is recorded with your name."
+            "Tap Undo on the green card within 30 seconds, or tap Undo in Today's redemptions. Your name is recorded with each undo."
         ),
     ),
     (
         STAFF,
-        _("Who can see what?"),
+        _("What each role can see"),
         _(
             "Owners and managers see everything. Counter staff see Redeem, Sell and customer lookup. Chefs see the kitchen and drivers see their route."
         ),
     ),
     (
         OWNER,
-        _("How do I add a staff login?"),
+        _("Add a staff account"),
         _(
-            "Owners can open More → Staff, add a name and phone or email, and share the temporary password. They choose their own at first login."
+            "Owners open Staff under More, add a name and a phone number or email, and share the temporary password. Staff choose their own password the first time they sign in."
         ),
     ),
     (
         OWNER,
-        _("What does the platform fee cover?"),
+        _("What the platform fee statement shows"),
         _(
-            "Money → Platform fee statement lists each payment, the fee on it and any reversals, month by month. It always adds up to the invoice."
+            "The Platform fee statement under Money lists each payment, its fee and any reversals, month by month. It always adds up to the invoice."
         ),
     ),
     (
         OWNER,
-        _("How do customers see their balance?"),
+        _("How customers see their meals left"),
         _(
-            "They log in with their phone and PIN. Their home screen shows meals left, validity and a QR for the counter."
+            "They sign in with their phone number and PIN. Their home screen shows meals left, the end date and a QR code for the counter."
         ),
     ),
 ]

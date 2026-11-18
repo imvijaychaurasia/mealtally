@@ -67,7 +67,7 @@ def tax_id_label(country: str | None = None):
 
 
 def food_licence_label(country: str | None = None):
-    return _("FSSAI licence number") if (country or current_country()).upper() == "IN" else _("Food business licence")
+    return _("FSSAI licence number") if (country or current_country()).upper() == "IN" else _("Food licence number")
 
 
 # --- payments ---------------------------------------------------------------------------------------------------------

@@ -100,7 +100,7 @@ def _clean(data) -> tuple[dict, dict]:
     errors = {}
     for key, label, limit in (
         ("name", _("your name"), 120),
-        ("business_name", _("your business name"), 160),
+        ("business_name", _("your restaurant name"), 160),
         ("city", _("your city"), 80),
     ):
         if not form[key]:
@@ -112,7 +112,7 @@ def _clean(data) -> tuple[dict, dict]:
     except Exception:  # noqa: BLE001  (ValidationFailed)
         errors["phone"] = _("Enter a valid phone number.")
     if form["business_type"] not in DemoRequest.BusinessType.values:
-        errors["business_type"] = _("Choose a business type.")
+        errors["business_type"] = _("Choose a restaurant type.")
     if len(form["message"]) > 1000:  # noqa: PLR2004
         errors["message"] = _("Please keep the message under 1000 characters.")
     if form["message"] and re.search(r"https?://", form["message"]):

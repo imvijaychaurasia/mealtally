@@ -2,7 +2,7 @@
 {% block content %}
 <h1 class="text-2xl font-bold">{% trans "More" %}</h1>
 <ul class="mt-3 grid gap-3 sm:grid-cols-2">
-  <li><a class="card block hover:border-primary" href="{% url 'web:admin-dashboard' tenant.slug %}"><span class="font-semibold">{% trans "Dashboard" %}</span><span class="block text-sm text-ink-soft">{% trans "Today and this month at a glance" %}</span></a></li>
+  <li><a class="card block hover:border-primary" href="{% url 'web:admin-dashboard' tenant.slug %}"><span class="font-semibold">{% trans "Dashboard" %}</span><span class="block text-sm text-ink-soft">{% trans "Today and this month" %}</span></a></li>
   <li><a class="card block hover:border-primary" href="{% url 'web:admin-plans' tenant.slug %}"><span class="font-semibold">{% trans "Plans" %}</span><span class="block text-sm text-ink-soft">{% trans "Prices, meals and validity" %}</span></a></li>
   {% if role == 'OWNER' %}
   <li><a class="card block hover:border-primary" href="{% url 'web:admin-staff' tenant.slug %}"><span class="font-semibold">{% trans "Staff" %}</span><span class="block text-sm text-ink-soft">{% trans "Add staff, reset passwords" %}</span></a></li>

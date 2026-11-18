@@ -40,7 +40,7 @@ def test_redeem_success_replay_cooldown_and_undo(w, staff_c, u):
     ok = staff_c.post(u + "/staff/redeem", {"customer": w.customer.public_id, "idempotency_key": key})
     html = ok.content.decode()
     assert (
-        "Meal redeemed — 29 left" in html
+        "Meal redeemed. 29 left." in html
         and "HX-Trigger" in ok.headers
         and "mealtally:redeemed" in ok.headers["HX-Trigger"]
     )
@@ -52,7 +52,7 @@ def test_redeem_success_replay_cooldown_and_undo(w, staff_c, u):
     cd = staff_c.post(
         u + "/staff/redeem", {"customer": w.customer.public_id, "idempotency_key": str(uuid.uuid4())}
     ).content.decode()
-    assert 'data-testid="cooldown-modal"' in cd and "give another meal" in cd and "less than a minute ago" in cd
+    assert 'data-testid="cooldown-modal"' in cd and "Give another meal" in cd and "less than a minute ago" in cd
     confirmed = staff_c.post(
         u + "/staff/redeem",
         {"customer": w.customer.public_id, "idempotency_key": str(uuid.uuid4()), "confirm_additional": "1"},
@@ -132,15 +132,15 @@ def test_reverse_from_todays_list_follows_role_rules(w, staff_c, owner_c, u):
     assert "A reason is required" in r
     ok = owner_c.post(u + "/staff/reverse", {"entry": e.public_id, "reason": "wrong plate"}).content.decode()
     assert (
-        "Show reversals (1)" in ok and "0 meals today" in ok and "line-through" not in ok
+        "Show undone meals (1)" in ok and "0 meals today" in ok and "line-through" not in ok
     )  # reversed rows are hidden by default
     shown = owner_c.get(u + "/staff/today?undone=1").content.decode()
-    assert "undone" in shown and "Hide reversals" in shown
+    assert "undone" in shown and "Hide undone meals" in shown
 
 
 def test_sell_flow_new_customer_preview_confirm_receipt(w, staff_c, u):
     page = staff_c.get(u + "/staff/sell")
-    assert page.status_code == 200 and b"Monthly Meal Pass" in page.content
+    assert page.status_code == 200 and b"Monthly meal pass" in page.content
     base = {
         "new_name": "Walk In",
         "new_phone": "9812345678",

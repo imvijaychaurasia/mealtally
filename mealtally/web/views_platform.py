@@ -64,7 +64,7 @@ def platform_view(view):
                 {
                     "status": 404,
                     "title": _("We couldn't find that page"),
-                    "message": _("Check the link, or head back to the start."),
+                    "message": _("Check the link, or go back to the start."),
                 },
                 status=404,
             )
@@ -164,7 +164,7 @@ def tenant_fees_export(request, slug):
         ]
         for ln in m["lines"]
     ]
-    rows.append([_("TOTAL"), "", "", "", "", "", "", format_money(m["total_minor"])])
+    rows.append([_("Total"), "", "", "", "", "", "", format_money(m["total_minor"])])
     fmt = request.GET.get("format", "csv")
     name = f"fee-statement-{tenant.slug}-{m['month']}"
     if fmt == "pdf":

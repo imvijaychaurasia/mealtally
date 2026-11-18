@@ -1,6 +1,6 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
-{% include "preview/_head.html" with title=_("New order") sub=_("Counter or on-demand order. Reads the one wallet ledger — the same balance everywhere.") %}
+{% include "preview/_head.html" with title=_("New order") sub=_("Counter or on-demand order, paid from the customer's wallet.") %}
 <form class="mt-4 grid gap-4 lg:grid-cols-3" data-order-calc data-today="{{ today }}" data-fee="3000" autocomplete="off">
   <div class="grid gap-4 lg:col-span-2">
     <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Customer" %}</h2>
@@ -20,14 +20,14 @@
     <section class="card grid gap-3"><h2 class="font-semibold">{% trans "Delivery & payment" %}</h2>
       <div class="flex flex-wrap gap-4"><label class="flex min-h-11 items-center gap-2"><input type="radio" name="method" value="DELIVERY" checked> {% trans "Home delivery (₹30)" %}</label><label class="flex min-h-11 items-center gap-2"><input type="radio" name="method" value="PICKUP"> {% trans "Pick-up" %}</label></div>
       <div class="flex flex-wrap gap-4"><label class="flex min-h-11 items-center gap-2"><input type="radio" name="pay" value="WALLET" checked> {% trans "Charge wallet" %}</label><label class="flex min-h-11 items-center gap-2"><input type="radio" name="pay" value="COD"> {% trans "Pay on delivery" %}</label></div>
-      <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="override"> {% trans "Vendor override — allow negative balance" %}</label>
+      <label class="flex min-h-11 items-center gap-2"><input type="checkbox" name="override"> {% trans "Restaurant override: allow a negative balance" %}</label>
     </section>
   </div>
   <aside class="card h-fit lg:sticky lg:top-4"><h2 class="font-semibold">{% trans "Summary" %}</h2>
     <dl class="mt-2 grid gap-1"><div class="flex justify-between"><dt>{% trans "Items" %}</dt><dd data-items>—</dd></div><div class="flex justify-between"><dt>{% trans "Delivery fee" %}</dt><dd data-feeline>—</dd></div><div class="flex justify-between border-t border-subtle pt-1"><dt>{% trans "Order total" %}</dt><dd class="font-semibold" data-total>—</dd></div><div class="flex justify-between"><dt>{% trans "Current balance" %}</dt><dd data-cur>—</dd></div><div class="flex justify-between border-t border-subtle pt-1"><dt>{% trans "Balance after order" %}</dt><dd class="font-bold" data-proj>—</dd></div></dl>
-    <p class="mt-2 hidden rounded-lg bg-warn p-2 text-sm text-warn-ink" data-overdraw role="alert">{% trans "This will overdraw the wallet — placed on vendor authority." %}</p>
-    <p class="mt-2 hidden rounded-lg bg-danger p-2 text-sm text-danger-ink" data-over-limit role="alert">{% trans "Beyond the trust limit — needs the vendor override above." %}</p>
-    <button class="btn-primary mt-3 w-full" type="button" data-place data-pv="{% trans 'Preview — order not placed (demo mode only)' %}">{% trans "Place order" %}</button>
+    <p class="mt-2 hidden rounded-lg bg-warn p-2 text-sm text-warn-ink" data-overdraw role="alert">{% trans "This will overdraw the wallet. The restaurant accepts this." %}</p>
+    <p class="mt-2 hidden rounded-lg bg-danger p-2 text-sm text-danger-ink" data-over-limit role="alert">{% trans "Over the credit limit. Use the override above." %}</p>
+    <button class="btn-primary mt-3 w-full" type="button" data-place data-pv="{% trans 'Order placed.' %}">{% trans "Place order" %}</button>
     <p class="mt-2 text-xs text-muted" data-testid="paid-by">{% trans "Paid-by stamp will read" %}: {{ request.user.name|default:request.user.get_username }} · {{ role|title }}</p>
   </aside>
 </form>

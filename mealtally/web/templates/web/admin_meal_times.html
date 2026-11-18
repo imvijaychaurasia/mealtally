@@ -1,6 +1,6 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
-<p class="text-sm"><a class="link" href="{% url 'web:admin-settings' tenant.slug %}">{% trans "Business profile" %}</a> › {% trans "Meal times" %}</p>
+<p class="text-sm"><a class="link" href="{% url 'web:admin-settings' tenant.slug %}">{% trans "Back to restaurant profile" %}</a></p>
 <h1 class="text-2xl font-bold">{% trans "Meal times" %}</h1>
 <p class="mt-1 max-w-xl text-sm text-ink-soft">{% blocktrans with tz=tenant.timezone %}When each meal is served, in your restaurant's time ({{ tz }}). A plan that is set to a meal time can only be redeemed while that meal is served. Grace minutes allow a little before the start and after the end. An end before the start (22:00–01:00) runs past midnight.{% endblocktrans %}</p>
 {% if notice %}<p class="mt-2 max-w-xl rounded-lg bg-ok p-3 text-sm font-semibold text-ok-ink" role="status" data-testid="notice">{{ notice }}</p>{% endif %}

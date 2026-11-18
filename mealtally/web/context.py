@@ -179,7 +179,7 @@ def web(request):
         ctx["brand_address"] = getattr(cfg, "address", "") or ""
     else:
         ctx["brand_name"] = "Mealtally"
-        ctx["brand_tagline"] = _("Prepaid meals, simplified.")
+        ctx["brand_tagline"] = _("Prepaid meal passes.")
         ctx["brand_address"] = ""
     user = getattr(request, "user", None)
     match = getattr(request, "resolver_match", None)

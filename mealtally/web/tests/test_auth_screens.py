@@ -37,7 +37,9 @@ def test_tenant_entry_and_both_logins_use_the_split_panel_in_each_theme(w, clien
         )  # CSP: nothing inline
         assert 'data-testid="lang"' in html and html.count("<main") == 1
     entry = client.get(u + "/").content.decode()
-    assert entry.count("auth-tile") >= 2 and "I'm a customer" in entry.replace("&#x27;", "'") and "Staff login" in entry
+    assert (
+        entry.count("auth-tile") >= 2 and "I'm a customer" in entry.replace("&#x27;", "'") and "Staff sign-in" in entry
+    )
     cust = client.get(u + "/login/customer").content.decode()
     assert (
         "data-pin" in cust
@@ -56,7 +58,7 @@ def test_tenant_entry_and_both_logins_use_the_split_panel_in_each_theme(w, clien
 
 def test_platform_login_is_tally_with_no_tenant_branding(w, client):
     html = client.get("/login").content.decode()
-    assert 'data-theme="tally"' in html and "Mealtally" in html and "Prepaid meals, simplified." in html
+    assert 'data-theme="tally"' in html and "Mealtally" in html and "Prepaid meal passes." in html
     assert w.tenant.name not in html
 
 

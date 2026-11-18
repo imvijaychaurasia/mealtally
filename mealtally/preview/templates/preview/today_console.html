@@ -21,7 +21,7 @@
       <a class="min-w-0 flex-1 font-medium hover:underline" href="{{ a.url }}">{{ a.text }}</a>
       <button type="button" class="btn px-2 text-ink-soft hover:bg-card/60" data-dismiss aria-label="{% trans 'Dismiss' %}">{% include "web/_icon.html" with name="close" %}</button></li>{% endfor %}
   </ul>
-  <div class="{% if alerts %}hidden{% endif %}" data-alerts-empty>{% include "web/_empty.html" with icon="grid" title=_("All clear") text=_("Nothing needs your attention right now.") %}</div>
+  <div class="{% if alerts %}hidden{% endif %}" data-alerts-empty>{% include "web/_empty.html" with icon="grid" title=_("Nothing to review") text=_("Nothing needs your attention right now.") %}</div>
 </section>
 
 <div class="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-5">
@@ -45,7 +45,7 @@
     <p class="mt-2 text-xs text-muted">{% trans "Customers sign in with phone and PIN to see meals, QR and history." %}</p></section>
   <section class="card min-w-0" data-testid="low-wallets"><h2 class="font-semibold">{% trans "Low wallet balances" %}</h2>
     <ul class="mt-2 divide-y divide-subtle">{% for s in low %}<li class="flex items-center gap-2 py-2"><span class="min-w-0 flex-1"><a class="link block truncate text-sm" href="{% url 'preview:wallets-customer' tenant.slug s.id %}">{{ s.name }}</a><span class="block text-xs {{ s.balance_minor|money_class }}">{{ s.balance_minor|money }}</span></span>
-      <button type="button" class="btn-secondary min-h-9 px-3 text-sm" data-pv="{% trans 'Reminder sent — demo mode only' %}">{% trans "Remind" %}</button></li>{% empty %}<li>{% include "web/_empty.html" with icon="wallet" title=_("Wallets look healthy") text=_("Customers running low will show up here.") %}</li>{% endfor %}</ul></section>
+      <button type="button" class="btn-secondary min-h-9 px-3 text-sm" data-pv="{% trans 'Reminder sent.' %}">{% trans "Remind" %}</button></li>{% empty %}<li>{% include "web/_empty.html" with icon="wallet" title=_("No low wallets") text=_("Customers running low will show up here.") %}</li>{% endfor %}</ul></section>
   <section class="card min-w-0" data-testid="shortcuts"><h2 class="font-semibold">{% trans "Shortcuts" %}</h2>
     <div class="mt-2 grid grid-cols-2 gap-2">{% for label, url, icon in shortcuts %}<a class="btn-secondary justify-start gap-2 px-3 text-sm [&>svg]:h-5 [&>svg]:w-5" href="{{ url }}">{% include "web/_icon.html" with name=icon %}{{ label }}</a>{% endfor %}</div></section>
 </div>

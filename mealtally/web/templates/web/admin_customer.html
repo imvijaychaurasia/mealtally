@@ -23,7 +23,7 @@
   <details class="card"><summary class="cursor-pointer font-semibold">{% if customer.status == 'BLOCKED' %}{% trans "Unblock customer" %}{% else %}{% trans "Block customer" %}{% endif %}</summary>
     <form method="post" action="{% if customer.status == 'BLOCKED' %}{% url 'web:admin-customer-action' tenant.slug customer.public_id 'unblock' %}{% else %}{% url 'web:admin-customer-action' tenant.slug customer.public_id 'block' %}{% endif %}" class="mt-3">{% csrf_token %}
       <label class="label" for="blr">{% trans "Reason" %}</label><input class="input" id="blr" name="reason" required><button class="btn-danger mt-3" type="submit">{% trans "Confirm" %}</button></form></details>
-  <details class="card"><summary class="cursor-pointer font-semibold">{% trans "Adjust credits" %}</summary>
+  <details class="card"><summary class="cursor-pointer font-semibold">{% trans "Adjust meals" %}</summary>
     <form method="post" action="{% url 'web:admin-customer-action' tenant.slug customer.public_id 'adjust' %}" class="mt-3">{% csrf_token %}<input type="hidden" name="idempotency_key" value="{{ idem }}">
       <label class="label" for="adp">{% trans "Pass" %}</label><select class="input" id="adp" name="pass">{% for p in passes %}{% if p.status == 'ACTIVE' %}<option value="{{ p.public_id }}">{{ p.plan_name }} ({{ p.meals_remaining }})</option>{% endif %}{% endfor %}</select>
       <label class="label mt-2" for="adq">{% trans "Change (+/- meals)" %}</label><input class="input" id="adq" name="quantity" type="number" required>

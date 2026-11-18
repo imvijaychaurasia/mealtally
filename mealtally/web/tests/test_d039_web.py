@@ -315,7 +315,7 @@ def test_audit_log_reads_as_sentences_with_raw_data_behind_details(w, owner_c, u
         ledger.reverse_redemption(actor=w.manager, entry_public_id=res.entry.public_id, reason="wrong customer")
     html = owner_c.get(u + "/admin/audit").content.decode()
     who = w.manager.user.name or w.manager.user.email
-    assert f"{who} reversed {w.customer.full_name}&#x27;s" in html and "reason: wrong customer" in html
+    assert f"{who} reversed {w.customer.full_name}&#x27;s" in html and "Reason: wrong customer" in html
     assert "₹1,500.00" in html  # the sale, in rupees (never 150000 minor)
     assert 'data-testid="audit-raw"' in html and "<details" in html
 

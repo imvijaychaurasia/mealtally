@@ -1,7 +1,7 @@
 {% extends "web/auth_base.html" %}{% load i18n %}
-{% block title %}{% trans "Customer login" %} · {{ brand_name }}{% endblock %}
+{% block title %}{% trans "Customer sign-in" %} · {{ brand_name }}{% endblock %}
 {% block panel %}
-<h1 class="auth-title">{% trans "Customer login" %}</h1>
+<h1 class="auth-title">{% trans "Customer sign-in" %}</h1>
 <p class="auth-sub">{% trans "Use your phone number and PIN." %}</p>
 <form method="post" class="mt-6" data-submit-once novalidate>{% csrf_token %}<input type="hidden" name="next" value="{{ next }}">
   {% if error %}<p class="auth-alert" role="alert"><svg class="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>{{ error }}</p>{% endif %}
@@ -12,7 +12,7 @@
     <input class="input pin-input" id="pin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" required></div>
   {# Show comes AFTER the PIN in the tab order (phone -> PIN -> Show -> Log in) #}
   <div class="flex justify-end"><button type="button" class="min-h-11 px-1 text-sm font-semibold text-primary underline" data-reveal="pin" data-testid="pin-show" aria-controls="pin" aria-pressed="false" data-show="{% trans 'Show' %}" data-hide="{% trans 'Hide' %}">{% trans "Show" %}</button></div>
-  <button class="btn-primary mt-6 w-full" type="submit" data-testid="login-submit"><span class="btn-spinner hidden" aria-hidden="true"></span><span data-label>{% trans "Log in" %}</span></button>
+  <button class="btn-primary mt-6 w-full" type="submit" data-testid="login-submit"><span class="btn-spinner hidden" aria-hidden="true"></span><span data-label>{% trans "Sign in" %}</span></button>
   <p class="mt-4 text-sm text-ink-soft">{% trans "Forgot your PIN? Ask at the counter, and staff can reset it." %}</p>
 </form>
 <p class="mt-4"><a class="auth-link" href="{% url 'web:tenant-home' tenant.slug %}">{% trans "Back" %}</a></p>

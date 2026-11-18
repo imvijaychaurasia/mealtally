@@ -68,9 +68,9 @@ def test_receipt_html_and_pdf_content_and_void_watermark():
             w.customer.customer_code,
         ):
             assert needle in html, needle
-        assert "VOID" not in html.replace("voidnote", "")
+        assert "Void" not in html.replace("voidnote", "")
         pdf = receipts.render_receipt_pdf(payment)
         assert pdf[:5] == b"%PDF-" and len(pdf) > 2000
         billing.void_payment(actor=w.owner, payment_public_id=payment.public_id, reason="entered twice")
         voided = receipts.render_receipt_html(Payment.objects.select_related("customer", "plan").get(pk=payment.pk))
-        assert 'class="void">VOID' in voided and "entered twice" in voided
+        assert 'class="void">Void' in voided and "entered twice" in voided

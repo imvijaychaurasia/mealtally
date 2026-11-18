@@ -61,7 +61,7 @@ class Command(BaseCommand):
                 contact_phone=current.contact_phone or "+91 80 4000 0000",
             )
             actor = Actor(user=owner.user, role=Role.OWNER, tenant_id=tenant.id)
-            plan = Plan.objects.filter(name="Monthly Meal Pass", is_active=True).first()
+            plan = Plan.objects.filter(name="Monthly meal pass", is_active=True).first()
             now = timezone.now()
             self.stdout.write(f"Display name -> {opts['display_name']}")
             for name, phone in DEMO:

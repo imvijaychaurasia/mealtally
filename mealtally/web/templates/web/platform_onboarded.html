@@ -1,9 +1,9 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
-<section class="mx-auto max-w-xl"><div class="rounded-2xl bg-success-solid p-5 text-on-primary" role="status"><p class="text-2xl font-bold">✓ {% trans "Restaurant created" %}</p><p class="mt-1">{{ tenant.name }} — <a class="underline" href="{% url 'web:tenant-home' tenant.slug %}">/t/{{ tenant.slug }}/</a></p></div>
-  <div class="card mt-4 border-2 border-dashed border-strong" x-data="copyBtn" data-testid="owner-credentials"><p class="font-semibold">{% trans "Owner login (temporary password shown only once)" %}</p>
-    <p class="mt-1">{% trans "Login" %}: <strong data-testid="owner-login">{{ owner.get_username }}</strong></p><p class="my-1 font-mono text-2xl font-bold" data-testid="owner-password">{{ password }}</p>
-    <p class="text-sm text-ink-soft">{% trans "The owner must choose a new password at first login." %}</p>
+<section class="mx-auto max-w-xl"><div class="rounded-2xl bg-success-solid p-5 text-on-primary" role="status"><p class="text-2xl font-bold">{% trans "Restaurant created" %}</p><p class="mt-1">{{ tenant.name }} · <a class="underline" href="{% url 'web:tenant-home' tenant.slug %}">/t/{{ tenant.slug }}/</a></p></div>
+  <div class="card mt-4 border-2 border-dashed border-strong" x-data="copyBtn" data-testid="owner-credentials"><p class="font-semibold">{% trans "Owner sign-in (temporary password shown only once)" %}</p>
+    <p class="mt-1">{% trans "Sign-in" %}: <strong data-testid="owner-login">{{ owner.get_username }}</strong></p><p class="my-1 font-mono text-2xl font-bold" data-testid="owner-password">{{ password }}</p>
+    <p class="text-sm text-ink-soft">{% trans "The owner must choose a new password the first time they sign in." %}</p>
     <button type="button" class="btn-secondary mt-2" @click="copy" data-text="{{ password }}"><span x-show="!done">{% trans "Copy password" %}</span><span x-show="done" x-cloak>{% trans "Copied" %}</span></button></div>
   <a class="btn-secondary mt-4" href="{% url 'web:platform-dashboard' %}">{% trans "Back to platform" %}</a></section>
 {% endblock %}

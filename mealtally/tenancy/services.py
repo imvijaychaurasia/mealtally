@@ -281,7 +281,7 @@ def onboard_tenant(
         owner.save(update_fields=["must_change_password"])
         Plan.objects.create(  # the reference plan every new restaurant starts from
             tenant_id=tenant.id,
-            name="Monthly Meal Pass",
+            name="Monthly meal pass",
             price_minor=150000,
             meals_per_cycle=30,
             validity_mode=Plan.ValidityMode.ROLLING_DAYS,

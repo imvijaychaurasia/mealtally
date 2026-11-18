@@ -12,7 +12,7 @@ def actor_label(user) -> str:
 from django.utils.translation import gettext_lazy  # noqa: E402
 
 ENTRY_LABELS = {
-    "ISSUE": gettext_lazy("Credits issued"),
+    "ISSUE": gettext_lazy("Meals issued"),
     "REDEEM": gettext_lazy("Meal redeemed"),
     "REVERSAL": gettext_lazy("Undo"),
     "ADJUST": gettext_lazy("Adjusted"),

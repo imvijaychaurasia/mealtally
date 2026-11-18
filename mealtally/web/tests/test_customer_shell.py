@@ -61,7 +61,7 @@ def test_activity_filters_and_account(w, cust_c, u):
     for f in ("", "?f=meals", "?f=payments", "?f=bogus"):
         assert cust_c.get(u + "/me/activity" + f).status_code == 200
     html = cust_c.get(u + "/me/account").content.decode()
-    assert "Change PIN" in html and w.customer.customer_code in html and "Log out" in html
+    assert "Change PIN" in html and w.customer.customer_code in html and "Sign out" in html
     r = cust_c.post(u + "/me/account", {"full_name": "Asha K"})
     assert r.status_code == 200 and "Saved." in r.content.decode()
 
@@ -75,7 +75,7 @@ def test_themed_controls_have_no_browser_default_accent():
 
 def test_business_profile_title_matches_the_nav_label(w, owner_c, u):
     html = owner_c.get(u + "/admin/settings").content.decode()
-    assert "<h1" in html and "Business profile" in html.split("<h1")[1].split("</h1>")[0]
+    assert "<h1" in html and "Restaurant profile" in html.split("<h1")[1].split("</h1>")[0]
 
 
 def test_counter_role_shows_as_counter_not_staff(w, staff_c, u):
@@ -106,4 +106,4 @@ def test_counter_reversal_toggle_is_only_rendered_when_there_are_reversals(w, st
     )  # a live redemption is not a reversal
     owner_c.post(u + "/staff/reverse", {"entry": e.public_id, "reason": "oops"})
     html = owner_c.get(u + "/staff/today").content.decode()
-    assert html.count("toggle-reversals") == 1 and "Show reversals" in html and "Show 1 undone" not in html
+    assert html.count("toggle-reversals") == 1 and "Show undone meals" in html and "Show 1 undone" not in html

@@ -74,7 +74,7 @@ def test_qr_page_fragment_and_history_pagination(w, cust_c, u):
     first = cust_c.get(u + "/me/history").content.decode()
     assert "Meal redeemed" in first and 'hx-trigger="revealed"' in first and "page=2" in first
     more = cust_c.get(u + "/me/history?page=2", HTTP_HX_REQUEST="true").content.decode()
-    assert "Credits issued" in more and "<html" not in more and "revealed" not in more
+    assert "Meals issued" in more and "<html" not in more and "revealed" not in more
 
 
 def test_payments_profile_and_receipts_are_private(w, cust_c, u):

@@ -1,17 +1,17 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
-<a class="link text-sm" href="{% url 'preview:plans-wallet' tenant.slug %}">← {% trans "Wallet plans" %}</a>
+<a class="link text-sm" href="{% url 'preview:plans-wallet' tenant.slug %}">{% trans "Back to wallet plans" %}</a>
 {% include "preview/_head.html" with title=_("New wallet plan") %}
 {% include "preview/_plans_tabs.html" with here="wallet" %}
 <form class="mt-4 grid gap-4" autocomplete="off" data-testid="wallet-plan-form">
-  <section class="card grid gap-3 sm:grid-cols-4"><div class="sm:col-span-4"><label class="label" for="pn">{% trans "Plan name" %}</label><input class="input" id="pn" value="Home Tiffin — Lunch"></div>
+  <section class="card grid gap-3 sm:grid-cols-4"><div class="sm:col-span-4"><label class="label" for="pn">{% trans "Plan name" %}</label><input class="input" id="pn" value="Home tiffin, lunch only"></div>
     <div><label class="label" for="daily">{% trans "Daily rate (₹)" %}</label><input class="input" id="daily" type="number" min="0" value="80" data-rate></div>
-    <div><label class="label" for="weekly">{% trans "Weekly (₹) — auto ×7" %}</label><input class="input" id="weekly" type="number" value="560" data-rate-to data-mult="7"></div>
-    <div><label class="label" for="monthly">{% trans "Monthly (₹) — auto ×30" %}</label><input class="input" id="monthly" type="number" value="2400" data-rate-to data-mult="30"></div>
-    <div><label class="label" for="menu">{% trans "Linked menu" %}</label><select class="input" id="menu"><option>{% trans "Weekly menu — Lunch" %}</option></select></div></section>
+    <div><label class="label" for="weekly">{% trans "Weekly (₹), daily rate × 7" %}</label><input class="input" id="weekly" type="number" value="560" data-rate-to data-mult="7"></div>
+    <div><label class="label" for="monthly">{% trans "Monthly (₹), daily rate × 30" %}</label><input class="input" id="monthly" type="number" value="2400" data-rate-to data-mult="30"></div>
+    <div><label class="label" for="menu">{% trans "Linked menu" %}</label><select class="input" id="menu"><option>{% trans "Weekly lunch menu" %}</option></select></div></section>
   <section class="card"><h2 class="font-semibold">{% trans "Delivery days & dishes" %}</h2><p class="text-sm text-ink-soft">{% trans "Every delivery day needs at least one dish." %}</p>
-    <div class="mt-2 grid gap-2 sm:grid-cols-2" id="days">{% for i, d in days %}<div class="rounded-xl border border-subtle p-2" data-day="{{ i }}"><label class="flex min-h-11 items-center gap-2 font-medium"><input type="checkbox" data-daybox {% if i < 6 %}checked{% endif %}> {{ d }}</label><select class="input mt-1" aria-label="{{ d }} dish">{% if i == 2 or i == 5 %}<option value="">{% trans "— choose dish —" %}</option>{% endif %}{% for dsh in dishes|slice:":6" %}<option>{{ dsh.name }}</option>{% endfor %}</select></div>{% endfor %}</div>
-    <div class="mt-3 flex flex-wrap gap-2"><button class="btn-secondary" type="button" data-pv="{% trans 'Copied to all days — demo mode only' %}">{% trans "Copy Monday to all days" %}</button></div></section>
+    <div class="mt-2 grid gap-2 sm:grid-cols-2" id="days">{% for i, d in days %}<div class="rounded-xl border border-subtle p-2" data-day="{{ i }}"><label class="flex min-h-11 items-center gap-2 font-medium"><input type="checkbox" data-daybox {% if i < 6 %}checked{% endif %}> {{ d }}</label><select class="input mt-1" aria-label="{{ d }} dish">{% if i == 2 or i == 5 %}<option value="">{% trans "Choose dish" %}</option>{% endif %}{% for dsh in dishes|slice:":6" %}<option>{{ dsh.name }}</option>{% endfor %}</select></div>{% endfor %}</div>
+    <div class="mt-3 flex flex-wrap gap-2"><button class="btn-secondary" type="button" data-pv="{% trans 'Copied to all days.' %}">{% trans "Copy Monday to all days" %}</button></div></section>
   <p class="hidden rounded-xl bg-danger p-3 text-danger-ink" role="alert" id="plan-err" data-testid="plan-error"></p>
   <div class="flex gap-2"><button class="btn-primary" type="button" data-validate-days="#plan-err" data-testid="save-wallet-plan">{% trans "Save wallet plan" %}</button><a class="btn-secondary" href="{% url 'preview:plans-wallet' tenant.slug %}">{% trans "Cancel" %}</a></div>
 </form>

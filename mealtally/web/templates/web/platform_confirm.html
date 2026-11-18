@@ -4,7 +4,7 @@
   <p class="mt-2 text-ink-soft">{% if action == 'suspend' %}{% trans "Staff and customers of this restaurant will see a 'service paused' page until it is activated again." %}{% elif action == 'activate' %}{% trans "Service resumes immediately." %}{% else %}{% trans "Deactivating ends service for this restaurant. Data is kept." %}{% endif %}</p>
   <form method="post" class="card mt-3">{% csrf_token %}
     {% if error %}<p class="mb-3 rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
-    <label class="label" for="reason">{% trans "Reason (required — written to the audit log)" %}</label><textarea class="input" id="reason" name="reason" rows="3" required></textarea>
+    <label class="label" for="reason">{% trans "Reason (required, saved in the audit log)" %}</label><textarea class="input" id="reason" name="reason" rows="3" required></textarea>
     <div class="mt-4 flex gap-3"><button class="btn-danger" type="submit" data-testid="confirm-status">{% trans "Confirm" %}</button><a class="btn-secondary" href="{% url 'web:platform-tenant' t.slug %}">{% trans "Cancel" %}</a></div>
   </form></section>
 {% endblock %}

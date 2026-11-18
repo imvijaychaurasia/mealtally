@@ -1,7 +1,7 @@
 {% extends "preview/base.html" %}{% load i18n static %}
 {% block pv_content %}
 <div class="flex flex-wrap items-center justify-between gap-2">{% include "preview/_head.html" with title=_("Driver console") sub=route.name %}
-  <label class="flex min-h-11 items-center gap-2 rounded-full border border-strong bg-card px-3"><input type="checkbox" checked data-pv="{% trans 'Duty status — demo mode only' %}"> <span class="font-medium">{% trans "On duty" %}</span></label></div>
+  <label class="flex min-h-11 items-center gap-2 rounded-full border border-strong bg-card px-3"><input type="checkbox" checked data-pv="{% trans 'Duty status changed.' %}"> <span class="font-medium">{% trans "On duty" %}</span></label></div>
 <section class="card mt-3"><p class="font-semibold">{{ route.driver }} · {{ route.vehicle }}</p><p class="text-sm text-ink-soft">{{ day|date:"D j M" }} · {% trans "Lunch" %} · <span data-testid="day-summary">{{ done }} {% trans "of" %} {{ total }} {% trans "delivered" %}</span></p>
   <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-track"><div class="h-2 rounded-full bg-primary" data-w="{% widthratio done total 100 %}"></div></div></section>
 <ol class="mt-3 grid grid-cols-1 gap-3">
@@ -13,7 +13,7 @@
   <a class="btn-secondary min-h-12 min-w-12 shrink-0 px-3" href="https://www.google.com/maps/search/?api=1&amp;query={{ o.address|urlencode }}" rel="noopener" aria-label="{% trans 'Navigate' %} {{ o.customer }}">{% include "web/_icon.html" with name="navigate" %}</a></summary>
   <div class="border-t border-subtle px-4 pb-4 pt-2"><p class="text-sm text-ink-soft">{{ o.address }}</p><span class="chip-amber mt-1" data-chip>{% trans "To deliver" %}</span>
   {% include "preview/_driver_stop_body.html" %}</div></details></li>{% endif %}
-{% empty %}<li class="card text-ink-soft">{% trans "All stops delivered — nice work." %}</li>{% endfor %}
+{% empty %}<li class="card text-ink-soft">{% trans "All stops delivered." %}</li>{% endfor %}
 </ol>
 {% if delivered %}<details class="card mt-3" id="delivered-group" data-testid="delivered-group"><summary class="flex min-h-11 cursor-pointer items-center justify-between font-semibold">{% trans "Delivered" %} ({{ delivered|length }})<span class="chip-green">{{ delivered|length }}</span></summary>
   <ul class="mt-2 divide-y divide-subtle">{% for o in delivered %}<li class="flex items-center gap-3 py-2"><span class="chip-slate">{{ o.stop }}</span><span class="min-w-0 flex-1"><span class="block truncate font-medium">{{ o.customer }}</span><span class="block truncate text-xs text-muted">{{ o.address }}</span></span><img class="h-10 w-14 rounded border border-subtle" src="{% static 'preview/pod-tiffin.svg' %}" alt="{% trans 'Delivery photo' %}"></li>{% endfor %}</ul></details>{% endif %}

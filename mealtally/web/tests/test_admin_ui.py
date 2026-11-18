@@ -43,7 +43,7 @@ def test_customer_list_filters_htmx_and_detail(w, owner_c, u):
         not in owner_c.get(u + "/admin/customers", {"status": "blocked"}).content.decode().split("<tbody")[1]
     )
     d = owner_c.get(f"{u}/admin/customers/{w.customer.public_id}")
-    assert d.status_code == 200 and b"Monthly Meal Pass" in d.content and b"R-000001" in d.content
+    assert d.status_code == 200 and b"Monthly meal pass" in d.content and b"R-000001" in d.content
     assert owner_c.get(f"{u}/admin/customers/00000000-0000-0000-0000-000000000000").status_code == 404
 
 
@@ -59,7 +59,7 @@ def test_customer_actions_edit_block_pin_adjust_pass_void(w, owner_c, manager_c,
     assert b"New PIN set" in r.content and b"736105" in r.content
     assert b"New PIN set" in act(owner_c, u, w, "reset-pin", pin_choice="generate").content
     assert (
-        b"Credits adjusted."
+        b"Meals adjusted."
         in act(
             owner_c,
             u,
@@ -108,7 +108,7 @@ def test_customer_actions_edit_block_pin_adjust_pass_void(w, owner_c, manager_c,
 
 
 def test_plans_crud_and_snapshot_note(w, owner_c, u):
-    assert b"Monthly Meal Pass" in owner_c.get(u + "/admin/plans").content
+    assert b"Monthly meal pass" in owner_c.get(u + "/admin/plans").content
     form = owner_c.get(u + "/admin/plans/new").content.decode()
     assert "never changes passes" in form.replace("\n", " ")
     ok = owner_c.post(

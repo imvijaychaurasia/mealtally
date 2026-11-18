@@ -1,6 +1,6 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
-<a class="link text-sm" href="{% url 'preview:subscriptions' tenant.slug %}">← {% trans "Subscriptions" %}</a>
+<a class="link text-sm" href="{% url 'preview:subscriptions' tenant.slug %}">{% trans "Back to subscriptions" %}</a>
 {% include "preview/_head.html" with title=_("New subscription") %}
 <form class="mt-4 grid gap-4 lg:grid-cols-3" autocomplete="off">
   <div class="grid gap-4 lg:col-span-2">

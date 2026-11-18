@@ -14,13 +14,13 @@
     {% if can_override %}
     <form class="mt-3 grid gap-2" hx-post="{% url 'web:staff-redeem' tenant.slug %}" hx-target="#console-card" hx-swap="innerHTML" hx-disabled-elt="find button" data-testid="override-form">
       <input type="hidden" name="customer" value="{{ customer.public_id }}"><input type="hidden" name="idempotency_key" value="{{ key }}"><input type="hidden" name="confirm_additional" value="1">
-      <label class="label" for="override-reason">{% trans "Serve anyway — reason (saved in the audit log)" %}</label>
+      <label class="label" for="override-reason">{% trans "Reason for serving anyway (saved in the audit log)" %}</label>
       <input class="input" id="override-reason" name="override_reason" required minlength="3" maxlength="200" placeholder="{% trans 'e.g. missed lunch, approved by owner' %}">
       <button class="btn-secondary" type="submit" data-testid="override">{% trans "Override and serve 1 meal" %}</button>
     </form>
     {% else %}<p class="mt-3 font-semibold text-ink" data-testid="ask-manager">{% trans "Ask a manager" %}</p>{% endif %}
   {% elif not error and status.state != 'blocked' %}
-    {% if status.state == 'cooldown' %}<p class="mt-3 font-semibold text-warn-ink">{% trans "Served a moment ago — redeeming again needs confirmation." %}</p>{% endif %}
+    {% if status.state == 'cooldown' %}<p class="mt-3 font-semibold text-warn-ink">{% trans "Served a moment ago. Redeeming again needs confirmation." %}</p>{% endif %}
     <form class="mt-3" hx-post="{% url 'web:staff-redeem' tenant.slug %}" hx-target="#console-card" hx-swap="innerHTML" hx-disabled-elt="find button">
       <input type="hidden" name="customer" value="{{ customer.public_id }}"><input type="hidden" name="idempotency_key" value="{{ key }}">
       <button class="btn-primary btn-lg" type="submit" data-testid="redeem">{% trans "Redeem 1 meal" %}</button>

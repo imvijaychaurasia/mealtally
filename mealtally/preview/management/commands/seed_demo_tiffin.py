@@ -167,7 +167,7 @@ class Command(BaseCommand):
                 brand_color="#c2410c",
                 address=personas.GREEN_ADDRESS if self.persona == "green" else personas.OLD_ADDRESS,
                 contact_phone=personas.GREEN_PHONE if self.persona == "green" else "+91 20 4000 1101",
-                receipt_footer="Thank you — see you tomorrow!",
+                receipt_footer="See you tomorrow.",
                 food_licence_no=FAKE_FSSAI,
             )
             lunch = self._plans(tenant)
@@ -290,15 +290,15 @@ class Command(BaseCommand):
                 Tenant.objects.filter(pk=tenant.pk).update(theme=opts["theme"])
 
     def _plans(self, tenant):
-        base = Plan.objects.get(name="Monthly Meal Pass")
+        base = Plan.objects.get(name="Monthly meal pass")
         green = self.persona == "green"
-        base.name = "Monthly Bowl Pass — Lunch" if green else "Monthly Meal Pass — Lunch"
+        base.name = "Monthly bowl pass, lunch only" if green else "Monthly pass, lunch only"
         if green:
             base.price_minor = 220000
         base.save(update_fields=["name", "price_minor", "updated_at"] if green else ["name", "updated_at"])
         ld = Plan.objects.create(
             tenant_id=tenant.id,
-            name="Monthly Bowl Pass — Lunch + Dinner" if green else "Monthly Meal Pass — Lunch + Dinner",
+            name="Monthly bowl pass, lunch and dinner" if green else "Monthly pass, lunch and dinner",
             price_minor=340000 if green else 280000,
             meals_per_cycle=60,
             validity_mode=Plan.ValidityMode.ROLLING_DAYS,
@@ -307,7 +307,7 @@ class Command(BaseCommand):
         )
         trial = Plan.objects.create(
             tenant_id=tenant.id,
-            name="Weekly Bowl Trial" if green else "Weekly Trial Pass",
+            name="Weekly bowl trial" if green else "Weekly trial pass",
             price_minor=52000 if green else 40000,
             meals_per_cycle=7,
             validity_mode=Plan.ValidityMode.ROLLING_DAYS,
@@ -425,7 +425,7 @@ class Command(BaseCommand):
                     actor=owner_actor,
                     pass_public_id=rec.pass_.public_id,
                     quantity=2,
-                    reason="Goodwill — late delivery on 3 days",
+                    reason="Goodwill: late delivery on 3 days",
                     idempotency_key="d03:adj:7",
                     now=timezone.now() - timedelta(days=2),
                 )

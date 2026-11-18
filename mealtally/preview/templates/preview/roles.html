@@ -1,8 +1,8 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
-{% include "preview/_head.html" with title=_("Roles & permissions") sub=_("Presets you can tweak per person. Existing staff logins are managed under Staff.") %}
-<div class="mt-3 flex flex-wrap items-center gap-2">{% for p in presets %}<a class="btn-secondary {% if p == preset %}border-primary text-primary{% endif %}" href="?preset={{ p|urlencode }}" data-testid="preset">{{ p }}</a>{% endfor %}<a class="link ms-auto" href="{% url 'web:admin-staff' tenant.slug %}">{% trans "Manage staff logins" %}</a></div>
+{% include "preview/_head.html" with title=_("Roles & permissions") sub=_("Presets you can change per person. Existing staff accounts are managed under Staff.") %}
+<div class="mt-3 flex flex-wrap items-center gap-2">{% for p in presets %}<a class="btn-secondary {% if p == preset %}border-primary text-primary{% endif %}" href="?preset={{ p|urlencode }}" data-testid="preset">{{ p }}</a>{% endfor %}<a class="link ms-auto" href="{% url 'web:admin-staff' tenant.slug %}">{% trans "Manage staff accounts" %}</a></div>
 <div class="mt-3 overflow-x-auto rounded-2xl border border-subtle bg-card"><table class="w-full" data-testid="matrix"><thead class="bg-soft"><tr><th class="th">{% trans "Module" %}</th>{% for a in acts %}<th class="th text-center">{{ a }}</th>{% endfor %}</tr></thead><tbody class="divide-y divide-subtle">
-{% for m in modules %}<tr><th scope="row" class="td text-start font-medium">{{ m }}</th>{% with row=matrix|getitem:m %}{% for v in row %}<td class="td text-center"><input class="h-5 w-5" type="checkbox" {% if v %}checked{% endif %} aria-label="{{ m }} — {{ forloop.counter }}" data-pv></td>{% endfor %}{% endwith %}</tr>{% endfor %}</tbody></table></div>
+{% for m in modules %}<tr><th scope="row" class="td text-start font-medium">{{ m }}</th>{% with row=matrix|getitem:m %}{% for v in row %}<td class="td text-center"><input class="h-5 w-5" type="checkbox" {% if v %}checked{% endif %} aria-label="{{ m }}, {{ forloop.counter }}" data-pv></td>{% endfor %}{% endwith %}</tr>{% endfor %}</tbody></table></div>
 <p class="mt-3"><button class="btn-primary" type="button" data-pv>{% trans "Save preset" %}</button></p>
 {% endblock %}

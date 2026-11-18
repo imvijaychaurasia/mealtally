@@ -29,7 +29,7 @@ dependencies = [
   "drf-spectacular-sidecar",
   "gunicorn==27.0.1",
   "hiredis==3.5.0",
-  "markdown==3.9",
+  "markdown==3.11.3",
   "packaging",
   "phonenumbers==9.0.16",
   "psycopg[c]==3.3.9",

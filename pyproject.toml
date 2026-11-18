@@ -50,7 +50,7 @@ dev = [
   "pytest==9.2.0",
   "pytest-cov",
   "pytest-django==4.14.0",
-  "ruff==0.17.4",
+  "ruff==0.17.5",
   "time-machine==3.6.0",
   "werkzeug[watchdog]==3.1.9",
 ]

@@ -15,7 +15,7 @@ classifiers = [
 ]
 dependencies = [
   "argon2-cffi==25.1.0",
-  "babel==2.17.0",
+  "babel==2.18.0",
   "celery==5.7.0",
   "django==6.1.3",
   "django-allauth==65.22.1",

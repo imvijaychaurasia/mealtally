@@ -7,6 +7,25 @@ a step from you; [docs/upgrading.md](docs/upgrading.md) lists them.
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-18
+
+### Changed
+
+- Plain, consistent wording across the staff, customer, platform, marketing, help and Preview screens, receipts, the
+  audit log and the demo data. One word per thing: restaurant, sign in, undo, meals left, plan and pass.
+- Hindi stays complete and Beta. Changed core strings in the other Beta languages are re-drafted for review.
+- New restaurants get a default plan named "Monthly meal pass". Existing restaurants keep their plan names.
+- Active and Preview pills no longer show a symbol before the word.
+- The services enquiry form no longer asks for an email address.
+
+### Added
+
+- `docs/glossary.md` for translators, and a test that keeps banned wording out of the translation catalogue.
+
+### Fixed
+
+- `make messages` passed an option Django doesn't have. Fuzzy matching is now turned off in a small command.
+
 ## [0.1.1] - 2026-11-18
 
 ### Security

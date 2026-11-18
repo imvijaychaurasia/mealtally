@@ -308,14 +308,16 @@ def test_django_admin_header_uses_the_tally_primary(demo):  # noqa: F811
     assert "--header-bg" in html and themes.tokens("tally")["primary"] in html
 
 
-def test_the_font_is_self_hosted_and_status_chips_pair_an_icon_with_a_word():
+def test_the_font_is_self_hosted_and_status_chips_use_icons_only_where_needed():
     css = (ROOT / "static" / "css" / "themes.css").read_text()
     assert "Plus Jakarta Sans" in css and "../fonts/plus-jakarta-sans-latin-wght.woff2" in css and "http" not in css
     assert (ROOT / "static" / "fonts" / "plus-jakarta-sans-latin-wght.woff2").stat().st_size > 10_000
     assert (ROOT / "static" / "fonts" / "PlusJakartaSans-OFL.txt").exists()  # OFL licence shipped with the font
     tw = (ROOT / "web" / "tailwind" / "input.css").read_text()
-    for chip in ("chip-active", "chip-soon", "chip-expired", "chip-void", "chip-preview"):
+    for chip in ("chip-soon", "chip-expired", "chip-void"):
         assert re.search(rf"@utility {chip} \{{[^\n]*&::before \{{ content:", tw), chip
+    for chip in ("chip-active", "chip-preview"):  # the word and colour are enough; no decorative symbol
+        assert not re.search(rf"@utility {chip} \{{[^\n]*&::before", tw), chip
     assert "prefers-reduced-motion" in tw and "tabular-nums" in tw
 
 

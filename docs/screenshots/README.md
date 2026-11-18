@@ -23,9 +23,9 @@ wide, phone 390 px. Screens marked "Preview" show modules that are not working f
 
 - Receipt: [desktop](counter/receipt-desktop.webp) · [mobile](counter/receipt-mobile.webp)
 - Redeem search: [desktop](counter/redeem-search-desktop.webp) · [mobile](counter/redeem-search-mobile.webp)
-- Redeem success: [desktop](counter/redeem-success-desktop.webp)
-- Sell pass: [desktop](counter/sell-pass-desktop.webp) · [mobile](counter/sell-pass-mobile.webp)
 - Redeem blocked by meal rule: [desktop](counter/redeem-blocked-by-meal-rule-desktop.webp) · [mobile](counter/redeem-blocked-by-meal-rule-mobile.webp)
+- Sell pass: [desktop](counter/sell-pass-desktop.webp) · [mobile](counter/sell-pass-mobile.webp)
+- Redeem success: [desktop](counter/redeem-success-desktop.webp)
 
 ## Chef (Preview)
 

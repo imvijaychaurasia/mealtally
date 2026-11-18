@@ -72,12 +72,12 @@
 @utility chip-amber { @apply chip bg-warn text-warn-ink; }
 @utility chip-red { @apply chip bg-danger text-danger-ink; }
 @utility chip-slate { @apply chip; background: var(--chip-expired-bg); color: var(--chip-expired-ink); }
-/* status chips: always an icon AND a word, identical in every theme */
-@utility chip-active { @apply chip; background: var(--chip-active-bg); color: var(--chip-active-ink); &::before { content: "\2713"; } }
+/* status chips: a word and a colour (plus an icon except on Active), identical in every theme */
+@utility chip-active { @apply chip; background: var(--chip-active-bg); color: var(--chip-active-ink); }
 @utility chip-soon { @apply chip; background: var(--chip-soon-bg); color: var(--chip-soon-ink); &::before { content: "\25D4"; } }
 @utility chip-expired { @apply chip; background: var(--chip-expired-bg); color: var(--chip-expired-ink); &::before { content: "\25CB"; } }
 @utility chip-void { @apply chip; background: var(--chip-void-bg); color: var(--chip-void-ink); &::before { content: "\2715"; } }
-@utility chip-preview { @apply chip bg-transparent; border: 1px solid var(--chip-preview-line); color: var(--chip-preview-ink); &::before { content: "\25C7"; } }
+@utility chip-preview { @apply chip bg-transparent; border: 1px solid var(--chip-preview-line); color: var(--chip-preview-ink); }
 @utility link { @apply font-medium text-primary underline underline-offset-2 hover:text-primary-hover; }
 @utility th { @apply px-3 py-2 text-start text-xs font-semibold uppercase tracking-wide text-muted; }
 @utility td { @apply px-3 py-2 text-sm text-ink; }

@@ -243,7 +243,7 @@ def test_scanner_video_has_the_attributes_ios_safari_needs_and_error_hooks(w, st
     video = html[html.index("<video") : html.index("</video>")]
     for attr in ("playsinline", "muted", "autoplay"):
         assert attr in video, attr
-    for hook in ("data-err-denied", "data-err-none", "Settings → Safari → Camera"):
+    for hook in ("data-err-denied", "data-err-none", "in your browser settings"):
         assert hook in html, hook
     js = (__import__("pathlib").Path(__file__).resolve().parents[2] / "static" / "js" / "app.js").read_text()
     assert 'facingMode: { ideal: "environment" }' in js and "exact" not in js.split('Alpine.data("scanner"')[1]

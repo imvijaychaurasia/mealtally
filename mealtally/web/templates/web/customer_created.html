@@ -1,6 +1,6 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
-<section class="mx-auto max-w-lg"><div class="no-print rounded-2xl bg-success-solid p-5 text-center text-on-primary" role="status"><p class="text-2xl font-bold">✓ {% trans "Customer created" %}</p></div>
+<section class="mx-auto max-w-lg"><div class="no-print rounded-2xl bg-success-solid p-5 text-center text-on-primary" role="status"><p class="text-2xl font-bold">{% trans "Customer created" %}</p></div>
   {% include "web/_pin_slip.html" %}
   <div class="no-print mt-4 grid grid-cols-2 gap-3"><a class="btn-primary" href="{% url 'web:staff-sell' tenant.slug %}?customer={{ customer.public_id }}">{% trans "Sell a pass" %}</a><a class="btn-secondary" href="{% url 'web:staff-console' tenant.slug %}">{% trans "Done" %}</a></div></section>
 {% endblock %}

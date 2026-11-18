@@ -3,8 +3,8 @@
 <h1 class="text-2xl font-bold">{% trans "Staff" %}</h1>
 {% if error %}<p class="mt-2 rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
 {% if new_password %}<div class="card mt-3 border-2 border-dashed border-strong" x-data="copyBtn" data-testid="temp-password-box"><p class="font-semibold">{% trans "Temporary password (shown only once)" %}</p>
-  <p class="text-sm">{% trans "Login" %}: <strong data-testid="new-login">{{ new_login }}</strong></p><p class="my-1 font-mono text-2xl font-bold" data-testid="temp-password">{{ new_password }}</p>
-  <p class="text-sm text-ink-soft">{% trans "They must choose a new password at first login." %}</p>
+  <p class="text-sm">{% trans "Sign-in" %}: <strong data-testid="new-login">{{ new_login }}</strong></p><p class="my-1 font-mono text-2xl font-bold" data-testid="temp-password">{{ new_password }}</p>
+  <p class="text-sm text-ink-soft">{% trans "They must choose a new password the first time they sign in." %}</p>
   <button type="button" class="btn-secondary mt-2" @click="copy" data-text="{{ new_password }}"><span x-show="!done">{% trans "Copy" %}</span><span x-show="done" x-cloak>{% trans "Copied" %}</span></button></div>{% endif %}
 <ul class="mt-3 grid gap-3">{% for m in members %}<li class="card flex flex-wrap items-center justify-between gap-2"><div><p class="font-semibold">{{ m.user.name|default:m.user.get_username }} <span class="chip-slate" data-testid="staff-role">{{ m.get_role_display }}</span> {% if not m.is_active %}<span class="chip-void">{% trans "Inactive" %}</span>{% endif %}</p>
   <p class="text-sm text-ink-soft">{{ m.user.email|default:m.user.phone_e164 }}</p></div>

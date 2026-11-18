@@ -2,7 +2,7 @@
 {% block content %}
 {% if tenant.has_demo_dataset %}{% include "preview/_plans_tabs.html" with here="pass" %}{% endif %}
 <h1 class="text-2xl font-bold">{% if plan %}{% trans "Edit plan" %}{% else %}{% trans "New plan" %}{% endif %}</h1>
-<p class="mt-1 text-sm text-ink-soft">{% trans "Editing a plan never changes passes that were already sold — they keep the price, meals and dates they were sold with." %}</p>
+<p class="mt-1 text-sm text-ink-soft">{% trans "Editing a plan never changes passes already sold. They keep the price, meals and dates they were sold with." %}</p>
 <form method="post" class="card mt-3 grid max-w-xl gap-3" x-data="planForm" data-price="{{ v.price_major }}" data-meals="{{ v.meals_per_cycle }}" data-mode="{{ v.validity_mode }}">{% csrf_token %}
   {% if error %}<p class="rounded-lg bg-danger p-3 text-sm font-semibold text-danger-ink" role="alert">{{ error }}</p>{% endif %}
   <div><label class="label" for="name">{% trans "Name" %}</label><input class="input" id="name" name="name" required value="{{ v.name }}"></div>

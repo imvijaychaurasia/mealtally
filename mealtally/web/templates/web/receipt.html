@@ -3,11 +3,11 @@
 {% if inline_css %}<style>{% theme_css tenant %}{{ inline_css|safe }}</style>{% else %}<link rel="stylesheet" href="{% static 'css/themes.css' %}">
 <link rel="stylesheet" href="{% static 'css/receipt.css' %}">{% endif %}</head>
 <body><div class="wrap">
-  {% if voided %}<div class="void">{% trans "VOID" %}</div>{% endif %}
+  {% if voided %}<div class="void">{% trans "Void" %}</div>{% endif %}
   <h1>{{ business_name }}</h1>
   <div class="sub">{% if cfg.address %}{{ cfg.address }}<br>{% endif %}{% if contact_phone %}{% trans "Phone:" %} {{ contact_phone }}{% endif %}{% if cfg.tax_id %} · {{ tax_label }}: {{ cfg.tax_id }}{% endif %}{% if licence %} · {{ licence_label }}: {{ licence }}{% endif %}</div>
   <hr>
-  {% if voided %}<div class="voidnote">{% trans "VOID" %}{% if payment.void_reason %} — {{ payment.void_reason }}{% endif %}</div>{% endif %}
+  {% if voided %}<div class="voidnote">{% trans "Void" %}{% if payment.void_reason %}: {{ payment.void_reason }}{% endif %}</div>{% endif %}
   <table>
     <tr><td class="k">{% trans "Receipt no" %}</td><td class="v">{{ payment.receipt_number }}</td></tr>
     <tr><td class="k">{% trans "Date" %}</td><td class="v">{{ received_at|date:"j M Y, g:i A" }}</td></tr>
@@ -21,5 +21,5 @@
   <table><tr><td class="k total">{% trans "Amount" %}</td><td class="v total">{{ payment.amount_minor|money }}</td></tr></table>
   <hr>
   <div class="foot">{% trans "Prepaid meal pass · No refund or carry-forward of unused meals" %}{% if cfg.receipt_footer %}<br>{{ cfg.receipt_footer }}{% endif %}</div>
-  {% if print_view %}<div class="actions"><button type="button" data-back>← {% trans "Back" %}</button> <a href="{% url 'web:receipt-pdf' tenant.slug payment.public_id %}">{% trans "Download PDF" %}</a> <button type="button" data-print>{% trans "Print" %}</button></div><script src="{% static 'js/app.js' %}"></script>{% endif %}
+  {% if print_view %}<div class="actions"><button type="button" data-back>{% trans "Back" %}</button> <a href="{% url 'web:receipt-pdf' tenant.slug payment.public_id %}">{% trans "Download PDF" %}</a> <button type="button" data-print>{% trans "Print" %}</button></div><script src="{% static 'js/app.js' %}"></script>{% endif %}
 </div></body></html>

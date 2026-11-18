@@ -20,7 +20,7 @@ def test_landing_go_and_pwa_assets(client):
     assert (
         r.status_code == 200
         and b"Prepaid meal passes for restaurants" in r.content
-        and b"Restaurant login" in r.content
+        and b"Restaurant sign-in" in r.content
     )
     assert client.post("/go", {"code": " Sample Tiffin "}).headers["Location"] == "/t/sample-tiffin/"
     assert client.post("/go", {"code": ""}).status_code == 400
@@ -43,7 +43,9 @@ def test_tenant_home_two_entry_points_unknown_slug_and_paused(w, client, u):
     import html as _html
 
     assert (
-        r.status_code == 200 and "I'm a customer" in _html.unescape(r.content.decode()) and b"Staff login" in r.content
+        r.status_code == 200
+        and "I'm a customer" in _html.unescape(r.content.decode())
+        and b"Staff sign-in" in r.content
     )
     assert client.get("/t/nope-nope/").status_code == 404 and b"couldn" in client.get("/t/nope-nope/").content
     tenancy.set_status(tenant=w.tenant, status="SUSPENDED")

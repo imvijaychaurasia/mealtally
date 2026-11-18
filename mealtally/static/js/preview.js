@@ -4,7 +4,7 @@
   "use strict";
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-  var DEFAULT_MSG = "Preview — saved in demo mode only";
+  var DEFAULT_MSG = "Saved.";
 
   function toast(msg) {
     var host = $("#pv-toast");
@@ -45,7 +45,7 @@
       var missing = [];
       $$("[data-day]").forEach(function (d) { var on = $("[data-daybox]", d).checked, sel = $("select", d); if (on && !sel.value) missing.push($("label", d).textContent.trim()); });
       var err = $(vd.dataset.validateDays);
-      if (missing.length) { err.textContent = missing.join(", ") + " " + (missing.length > 1 ? "have" : "has") + " no dish yet \u2014 add at least one dish to every delivery day before saving."; err.classList.remove("hidden"); }
+      if (missing.length) { err.textContent = missing.join(", ") + " " + (missing.length > 1 ? "have" : "has") + " no dish yet. Add at least one dish to every delivery day before saving."; err.classList.remove("hidden"); }
       else { err.classList.add("hidden"); toast(DEFAULT_MSG); }
       return;
     }
@@ -85,7 +85,7 @@
       panes.forEach(function (p, i) { p.classList.toggle("hidden", i !== nxt); });
       bars.forEach(function (b, i) { cls(b, i <= nxt ? "bg-primary" : "bg-track", i <= nxt ? "bg-track" : "bg-primary"); });
       $("[data-wiz=next]", root).textContent = nxt === panes.length - 1 ? "Finish (demo)" : "Next";
-      if (wz.dataset.wiz === "next" && cur === panes.length - 1) toast("Demo mode — no account created");
+      if (wz.dataset.wiz === "next" && cur === panes.length - 1) toast("Demo only. No account was created.");
       return;
     }
     var tab = e.target.closest && e.target.closest("[data-tab]");
@@ -110,7 +110,7 @@
       var item = mv.closest("[data-sort-item]"), list = item.parentNode;
       if (mv.dataset.move === "up" && item.previousElementSibling) list.insertBefore(item, item.previousElementSibling);
       if (mv.dataset.move === "down" && item.nextElementSibling) list.insertBefore(item.nextElementSibling, item);
-      renumber(list); toast("Stop order changed — " + DEFAULT_MSG.toLowerCase());
+      renumber(list); toast("Stop order changed.");
       return;
     }
     var cp = e.target.closest && e.target.closest("[data-copy]");
@@ -146,7 +146,7 @@
     var r = over.getBoundingClientRect();
     over.parentNode.insertBefore(dragging, e.clientY < r.top + r.height / 2 ? over : over.nextSibling);
   });
-  document.addEventListener("dragend", function () { if (dragging) { dragging.classList.remove("opacity-50"); renumber(dragging.parentNode); toast("Stop order changed — " + DEFAULT_MSG.toLowerCase()); dragging = null; } });
+  document.addEventListener("dragend", function () { if (dragging) { dragging.classList.remove("opacity-50"); renumber(dragging.parentNode); toast("Stop order changed."); dragging = null; } });
 
   /* live text filter + status chips */
   document.addEventListener("input", function (e) {
@@ -174,7 +174,7 @@
     var ph = e.target.closest && e.target.closest("[data-photo]");
     if (ph && ph.files && ph.files[0]) {
       var reader = new FileReader(), img = $(ph.dataset.photo);
-      reader.onload = function () { img.src = reader.result; img.classList.remove("hidden"); toast("Photo attached (stays on this device in the demo)"); };
+      reader.onload = function () { img.src = reader.result; img.classList.remove("hidden"); toast("Photo attached."); };
       reader.readAsDataURL(ph.files[0]);
     }
     var mc = e.target.closest && e.target.closest("[data-check-row]");
@@ -236,7 +236,7 @@
       var date = $("[name=date]", f).value, slot = $("[name=slot]", f), end = slot.selectedOptions[0].dataset.end;
       var closed = date < f.dataset.today || (date === f.dataset.today && new Date(Date.now() + 19800000 + new Date().getTimezoneOffset() * 60000).toTimeString().slice(0, 5) > end);
       var msg = $("[data-closed]", f); msg.classList.toggle("hidden", !closed);
-      msg.textContent = closed ? slot.selectedOptions[0].textContent.split("(")[0].trim() + " orders for " + date + " closed at " + end + " — pick another slot or date." : "";
+      msg.textContent = closed ? slot.selectedOptions[0].textContent.split("(")[0].trim() + " orders for " + date + " closed at " + end + ". Pick another slot or date." : "";
       $("[data-place]", f).disabled = closed;
     }
     f.addEventListener("input", calc); f.addEventListener("change", calc); f.addEventListener("pv:change", calc);

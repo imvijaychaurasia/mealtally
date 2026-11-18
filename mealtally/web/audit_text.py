@@ -85,7 +85,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
     customer = obj.get("customer") or (obj.get("name") if obj.get("kind") == "customer" else "")
     a = event.action
     if a == "ledger.reverse":
-        return _("%(who)s reversed %(cust)s's %(time)s meal — reason: %(reason)s") % {
+        return _("%(who)s reversed %(cust)s's %(time)s meal. Reason: %(reason)s.") % {
             "who": who,
             "cust": customer or _("a customer"),
             "time": _time(obj.get("at"), tz),
@@ -93,7 +93,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
         }
     if a == "ledger.adjust":
         q = after.get("quantity", 0)
-        return _("%(who)s adjusted %(cust)s's pass by %(q)s meals (now %(left)s) — reason: %(reason)s") % {
+        return _("%(who)s adjusted %(cust)s's pass by %(q)s meals (now %(left)s). Reason: %(reason)s.") % {
             "who": who,
             "cust": customer or _("a customer"),
             "q": f"{q:+d}" if isinstance(q, int) else q,
@@ -109,7 +109,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
             "receipt": f" ({obj['name']})" if obj.get("name") else "",
         }
     if a == "payment.void":
-        return _("%(who)s voided %(receipt)s (%(amount)s, %(cust)s) — reason: %(reason)s") % {
+        return _("%(who)s voided %(receipt)s (%(amount)s, %(cust)s). Reason: %(reason)s.") % {
             "who": who,
             "receipt": obj.get("name") or _("a payment"),
             "amount": _major(obj.get("amount")),
@@ -125,7 +125,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
         }
     if a == "redeem.override":
         entry = obj
-        return _("%(who)s overrode the meal rules for %(cust)s (%(msg)s) — reason: %(reason)s") % {
+        return _("%(who)s overrode the meal rules for %(cust)s (%(msg)s). Reason: %(reason)s.") % {
             "who": who,
             "cust": entry.get("customer") or _("a customer"),
             "msg": before.get("message", before.get("code", "")),
@@ -134,7 +134,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
     if a == "customer.set_status":
         verb = _("blocked") if after.get("status") == "BLOCKED" else _("unblocked")
         reason = after.get("reason") or ""
-        return f"{who} {verb} {customer or _('a customer')}" + (f" — {_('reason')}: {reason}" if reason else "")
+        return f"{who} {verb} {customer or _('a customer')}" + (f". {_('Reason')}: {reason}." if reason else "")
     if a in ("customer.create", "customer.self_signup"):
         return _("%(who)s added customer %(cust)s") % {"who": who, "cust": customer or after.get("full_name", "")}
     if a in ("customer.update", "customer.update_own_name"):
@@ -146,7 +146,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
         }
     if a.startswith("pass."):
         verb = a.split(".", 1)[1].replace("_", " ")
-        return _("%(who)s: pass %(verb)s — %(plan)s for %(cust)s") % {
+        return _("%(who)s: pass %(verb)s. %(plan)s for %(cust)s.") % {
             "who": who,
             "verb": verb,
             "plan": obj.get("name", ""),
@@ -176,7 +176,7 @@ def summarize(event, lookups: dict, tz) -> str:  # noqa: C901, PLR0911, PLR0912
         }
     # generic fallback: readable keys, money for *_minor, names for ids
     parts = [_field(k, before.get(k) if isinstance(before, dict) else None, v, lookups) for k, v in after.items()]
-    return f"{who}: {a.replace('.', ' ').replace('_', ' ')}" + (f" — {'; '.join(parts)}" if parts else "")
+    return f"{who}: {a.replace('.', ' ').replace('_', ' ')}" + (f": {'; '.join(parts)}" if parts else "")
 
 
 def _as_uuid(value):
@@ -203,7 +203,11 @@ def _field(key: str, old, new, lookups=None) -> str:
     label = key.replace("_minor", "").replace("_", " ")
     if old is None or old == new:
         return f"{label}: {_show(key, new, lookups)}"
-    return f"{label}: {_show(key, old, lookups)} → {_show(key, new, lookups)}"
+    return _("%(label)s: from %(old)s to %(new)s") % {
+        "label": label,
+        "old": _show(key, old, lookups),
+        "new": _show(key, new, lookups),
+    }
 
 
 def raw(event) -> str:

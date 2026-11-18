@@ -1,17 +1,17 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
-{% include "preview/_head.html" with title=_("Holds & closures") sub=_("Customer vacation holds and whole-business closures.") %}
+{% include "preview/_head.html" with title=_("Holds & closures") sub=_("Customer holds and restaurant closures.") %}
 <div class="mt-4 grid gap-4 lg:grid-cols-2">
-  <section class="card"><h2 class="font-semibold">{% trans "Business closure" %}</h2>
+  <section class="card"><h2 class="font-semibold">{% trans "Restaurant closure" %}</h2>
     <div class="mt-2 grid gap-3"><div><label class="label" for="closure">{% trans "Closed on" %}</label><select class="input" id="closure" data-closure="#impact">{% for o in options %}<option value="{{ o.iso }}" data-orders="{{ o.orders }}" data-slots="{{ o.slots }}" data-customers="{{ o.customers }}">{{ o.date|date:"l, j F" }}</option>{% endfor %}</select></div>
       <div><label class="label" for="reason">{% trans "Reason" %}</label><input class="input" id="reason" value="Staff day out"></div>
       <p class="rounded-xl bg-warn p-3 font-medium text-warn-ink" id="impact" data-testid="impact">{% with o=options.0 %}{% blocktrans with orders=o.orders slots=o.slots customers=o.customers %}{{ orders }} orders across {{ slots }} slots will be skipped; {{ customers }} customers notified.{% endblocktrans %}{% endwith %}</p>
-      <button class="btn-primary" type="button" data-pv="{% trans 'Closure scheduled — demo mode only' %}">{% trans "Schedule closure" %}</button></div>
-    <h3 class="mt-4 text-sm font-semibold text-ink-soft">{% trans "Past closures" %}</h3><ul class="mt-1 text-sm">{% for c in closures %}<li>{{ c.date|date:"j M" }} — {{ c.reason }} · {{ c.orders }} {% trans "orders skipped" %}</li>{% endfor %}</ul></section>
+      <button class="btn-primary" type="button" data-pv="{% trans 'Closure scheduled.' %}">{% trans "Schedule closure" %}</button></div>
+    <h3 class="mt-4 text-sm font-semibold text-ink-soft">{% trans "Past closures" %}</h3><ul class="mt-1 text-sm">{% for c in closures %}<li>{{ c.date|date:"j M" }} · {{ c.reason }} · {{ c.orders }} {% trans "orders skipped" %}</li>{% endfor %}</ul></section>
   <section class="card"><h2 class="font-semibold">{% trans "Schedule a customer hold" %}</h2>
     <div class="mt-2 grid gap-3"><div><label class="label" for="hsub">{% trans "Customer" %}</label><select class="input" id="hsub">{% for s in subs %}<option>{{ s.name }}</option>{% endfor %}</select></div>
     <div class="grid grid-cols-2 gap-3"><div><label class="label" for="hs">{% trans "From" %}</label><input class="input" type="date" id="hs"></div><div><label class="label" for="he">{% trans "To" %}</label><input class="input" type="date" id="he"></div></div>
-    <div><label class="label" for="hr">{% trans "Reason (optional)" %}</label><input class="input" id="hr"></div><button class="btn-primary" type="button" data-pv="{% trans 'Hold scheduled — demo mode only' %}">{% trans "Schedule hold" %}</button></div></section>
+    <div><label class="label" for="hr">{% trans "Reason (optional)" %}</label><input class="input" id="hr"></div><button class="btn-primary" type="button" data-pv="{% trans 'Hold scheduled.' %}">{% trans "Schedule hold" %}</button></div></section>
 </div>
 <section class="card mt-4"><h2 class="font-semibold">{% trans "Active and upcoming holds" %}</h2>
   <table class="mt-2 w-full"><thead><tr><th class="th">{% trans "Customer" %}</th><th class="th">{% trans "Plan" %}</th><th class="th">{% trans "From" %}</th><th class="th">{% trans "To" %}</th><th class="th">{% trans "Reason" %}</th></tr></thead><tbody class="divide-y divide-subtle">{% for h in holds %}<tr data-row><td class="td font-medium">{{ h.customer }}</td><td class="td">{{ h.plan }}</td><td class="td">{{ h.start|date:"j M" }}</td><td class="td">{{ h.end|date:"j M" }}</td><td class="td">{{ h.reason }}</td></tr>{% endfor %}</tbody></table></section>

@@ -39,7 +39,7 @@ def test_landing_renders_every_section_in_tally_with_one_h1_and_nothing_inline(c
     assert not re.search(
         r"<script(?![^>]*(\bsrc=|application/ld\+json))", html
     )  # CSP: no inline scripts (JSON-LD is data)
-    assert "Prepaid meal passes for restaurants" in html and "Restaurant login" in html and 'rel="canonical"' in html
+    assert "Prepaid meal passes for restaurants" in html and "Restaurant sign-in" in html and 'rel="canonical"' in html
     assert 'name="description"' in html and 'property="og:title"' in html and "twitter:card" in html
     assert "ratingValue" not in html and "aggregateRating" not in html  # honesty: no rating fields in the JSON-LD
     assert "SoftwareApplication" in html and "Organization" in html
@@ -51,7 +51,7 @@ def test_feature_badges_come_from_the_registry_and_never_overclaim():
     for keys, _icon, title, _text in marketing.FEATURES:
         expect = "live" if all(BY_KEY[k].status == "real" for k in keys) else "soon"
         assert rows[title]["status"] == expect, title
-    assert rows["QR meal redemption"]["status"] == "live" and rows["₹ wallet and top-ups"]["status"] == "soon"
+    assert rows["QR meal redemption"]["status"] == "live" and rows["Wallet and top-ups"]["status"] == "soon"
     assert marketing.status_for("no-such-module") == "soon" and marketing.status_for() == "soon"
     html = marketing.features.__module__  # sanity: module import works
     assert html
@@ -72,7 +72,9 @@ def test_pricing_is_a_platform_setting_and_follows_the_fee_policy(client):
 
     html = client.get("/").content.decode()
     pct, gw = f"{billing.DEFAULT_PLATFORM_PCT.normalize():f}", f"{billing.DEFAULT_GATEWAY_PCT.normalize():f}"
-    assert 'data-pricing-mode="percentage"' in html and f"{pct}% of subscription revenue" in html and f"+{gw}%" in html
+    assert (
+        'data-pricing-mode="percentage"' in html and f"{pct}% of pass and wallet revenue" in html and f"+{gw}%" in html
+    )
     assert (pct, gw) == ("12", "10")
     PlatformSettings(
         marketing_pricing_mode="contact", pricing_headline="Simple pricing", pricing_footnote="GST extra."

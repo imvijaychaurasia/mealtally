@@ -2,9 +2,9 @@
 {% block head_scripts %}{{ block.super }}<script src="{% static 'js/order.js' %}" defer></script>{% endblock %}
 {% block pv_content %}
 <div data-order data-min="{{ rules.min_cart_minor|raw_amount }}" data-fee="{{ rules.delivery_fee_minor|raw_amount }}" data-free="{{ rules.free_above_minor|raw_amount }}" data-unit="{% trans 'items' %}" data-one="{% trans 'item' %}">
-{% include "preview/_head.html" with title=_("Order") sub=_("Order anything from the kitchen, up to six days ahead.") %}
+{% include "preview/_head.html" with title=_("Order") sub=_("Order from the restaurant up to six days ahead.") %}
 {% if show_qr %}<a class="btn-secondary mt-2 min-h-12 lg:hidden" href="{% url 'web:me-qr' tenant.slug %}" data-testid="show-qr-link">{% include "web/_icon.html" with name="qr" %}{% trans "Show QR" %}</a>{% endif %}
-<div class="mt-3 flex gap-2 overflow-x-auto pb-1" role="group" aria-label="{% trans 'For which day?' %}" data-testid="date-chips">{% for d in days %}<button type="button" class="ord-date" data-day-chip="{{ d|date:'D j M' }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"><span class="text-xs font-semibold">{{ d|date:"D" }}</span><span class="text-lg font-bold">{{ d|date:"j" }}</span></button>{% endfor %}</div>
+<div class="mt-3 flex gap-2 overflow-x-auto pb-1" role="group" aria-label="{% trans 'Day' %}" data-testid="date-chips">{% for d in days %}<button type="button" class="ord-date" data-day-chip="{{ d|date:'D j M' }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"><span class="text-xs font-semibold">{{ d|date:"D" }}</span><span class="text-lg font-bold">{{ d|date:"j" }}</span></button>{% endfor %}</div>
 <div class="sticky top-[4.5rem] z-20 -mx-4 mt-3 border-b border-subtle bg-page px-4 py-2" data-testid="order-filters">
   <div class="flex gap-2 overflow-x-auto" role="group" aria-label="{% trans 'Category' %}"><button type="button" class="mk-chip min-h-11 ord-cat" data-cat="" aria-pressed="true">{% trans "All" %}</button>{% for c in cats %}<button type="button" class="mk-chip min-h-11 ord-cat whitespace-nowrap" data-cat="{{ c }}" aria-pressed="false">{{ c }}</button>{% endfor %}</div>
   <div class="mt-2 flex gap-2 overflow-x-auto" role="group" aria-label="{% trans 'Diet' %}"><button type="button" class="mk-chip min-h-11 ord-diet" data-diet="" aria-pressed="true">{% trans "Any diet" %}</button><button type="button" class="mk-chip min-h-11 ord-diet" data-diet="VEG" aria-pressed="false">{% trans "Veg" %}</button><button type="button" class="mk-chip min-h-11 ord-diet whitespace-nowrap" data-diet="NONVEG" aria-pressed="false">{% trans "Non-veg" %}</button><button type="button" class="mk-chip min-h-11 ord-diet" data-diet="VEGAN" aria-pressed="false">{% trans "Vegan" %}</button></div>
@@ -27,14 +27,14 @@
     <div class="mt-3 grid gap-1 text-sm"><p class="flex justify-between"><span>{% trans "Items" %}</span><span data-sub>₹0</span></p><p class="flex justify-between"><span>{% trans "Delivery fee" %}</span><span data-fee>₹0</span></p><p class="flex justify-between text-lg font-bold"><span>{% trans "Total" %}</span><span data-total>₹0</span></p></div>
     <p class="mt-2 rounded-xl bg-warn p-3 text-sm font-semibold text-warn-ink hidden" data-free-note></p>
     <p class="mt-2 rounded-xl bg-danger p-3 text-sm font-semibold text-danger-ink hidden" data-min-note role="alert">{% blocktrans with m=rules.min_cart_minor|money_consumer %}Minimum cart is {{ m }}.{% endblocktrans %}</p>
-    <fieldset class="mt-4 grid grid-cols-2 gap-2"><legend class="sr-only">{% trans "Delivery or pickup" %}</legend>
+    <fieldset class="mt-4 grid grid-cols-2 gap-2"><legend class="sr-only">{% trans "Delivery or pick-up" %}</legend>
       <label class="flex min-h-12 cursor-pointer items-center gap-2 rounded-xl border border-strong px-3 has-[:checked]:border-primary has-[:checked]:bg-soft"><input type="radio" name="how" value="delivery" checked data-how>{% trans "Delivery" %}</label>
-      <label class="flex min-h-12 cursor-pointer items-center gap-2 rounded-xl border border-strong px-3 has-[:checked]:border-primary has-[:checked]:bg-soft"><input type="radio" name="how" value="pickup" data-how>{% trans "Pickup" %}</label></fieldset>
+      <label class="flex min-h-12 cursor-pointer items-center gap-2 rounded-xl border border-strong px-3 has-[:checked]:border-primary has-[:checked]:bg-soft"><input type="radio" name="how" value="pickup" data-how>{% trans "Pick-up" %}</label></fieldset>
     <label class="label mt-3" for="addr">{% trans "Delivery address" %}</label><textarea class="input" id="addr" rows="2" required data-testid="cart-address" placeholder="{% trans 'Flat, building, street, area' %}">{{ delivery_address }}</textarea>
     {% if not delivery_address %}<p class="mt-1 text-sm font-semibold text-warn-ink" data-testid="cart-address-missing">{% trans "Add your delivery address. You can save it in Account." %}</p>{% endif %}
     <label class="label mt-3" for="note">{% trans "Notes for the kitchen" %}</label><input class="input" id="note" placeholder="{% trans 'Less spicy, no onion…' %}">
-    <p class="mt-3 text-sm text-ink-soft">{% if has_wallet %}{% trans "Paid from your wallet. The kitchen approves each order." %}{% else %}{% trans "Pay on delivery or at the counter. The kitchen approves each order." %}{% endif %}</p>
-    <button type="button" class="btn-primary btn-lg mt-3 w-full" data-place-order data-pv="{% trans 'Order placed — demo mode only' %}" data-testid="place-order">{% trans "Place order" %}</button>
+    <p class="mt-3 text-sm text-ink-soft">{% if has_wallet %}{% trans "Paid from your wallet. The restaurant approves each order." %}{% else %}{% trans "Pay on delivery or at the counter. The restaurant approves each order." %}{% endif %}</p>
+    <button type="button" class="btn-primary btn-lg mt-3 w-full" data-place-order data-pv="{% trans 'Order placed.' %}" data-testid="place-order">{% trans "Place order" %}</button>
   </div>
 </div>
 </div>

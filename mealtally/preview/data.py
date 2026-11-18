@@ -139,15 +139,15 @@ LOCALITIES = ["Kothrud", "Karve Nagar", "Erandwane", "Warje", "Baner", "Aundh", 
 STREETS = ["Lane 3", "Shivaji Society", "Gandhi Nagar", "Om Residency", "Sai Park", "Ganesh Apartments", "Rutu Heights"]
 
 WALLET_PLANS = [
-    {"id": "HT-L", "name": "Home Tiffin — Lunch", "daily_minor": 8000, "slots": ["LUNCH"], "jain": False},
+    {"id": "HT-L", "name": "Home tiffin, lunch only", "daily_minor": 8000, "slots": ["LUNCH"], "jain": False},
     {
         "id": "HT-LD",
-        "name": "Home Tiffin — Lunch + Dinner",
+        "name": "Home tiffin, lunch and dinner",
         "daily_minor": 15000,
         "slots": ["LUNCH", "DINNER"],
         "jain": False,
     },
-    {"id": "JAIN", "name": "Jain Thali", "daily_minor": 9500, "slots": ["LUNCH"], "jain": True},
+    {"id": "JAIN", "name": "Jain thali", "daily_minor": 9500, "slots": ["LUNCH"], "jain": True},
 ]
 PLAN = {p["id"]: p for p in WALLET_PLANS}
 
@@ -238,7 +238,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     D["branches"] = [
         {
             "id": 1,
-            "name": "Kothrud Kitchen",
+            "name": "Kothrud kitchen",
             "main": True,
             "pickup": True,
             "lat": 18.5074,
@@ -249,7 +249,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         },
         {
             "id": 2,
-            "name": "Baner Pickup Point",
+            "name": "Baner pick-up point",
             "main": False,
             "pickup": True,
             "lat": 18.5590,
@@ -352,7 +352,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                     10: "Extra salad, no curd",
                     15: "Ring bell twice",
                     18: "Leave with security",
-                    23: "Allergic to nuts — please check",
+                    23: "Allergic to nuts. Please check.",
                 }.get(n, ""),
                 "allergy": "nuts" if n == 23 else "",
                 "stop": 0,
@@ -570,7 +570,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                         "dt": dt,
                         "type": "DEBIT",
                         "amount_minor": o["amount_minor"],
-                        "desc": f"{o['plan'].split(' — ')[0]} · {D['slot'][o['slot']]['name']}",
+                        "desc": f"{o['plan'].split(', ')[0]} · {D['slot'][o['slot']]['name']}",
                         "source": f"Order #{o['no']}",
                         "order_no": o["no"],
                         "bal_minor": bal,
@@ -636,7 +636,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 "notes": "",
                 "allergy": "",
                 "pod": False,
-                "created_by": "Counter staff — Seema Pawar",
+                "created_by": "Counter staff: Seema Pawar",
                 "created_dt": datetime.combine(today, time(10, 40)),
                 "cutoff_dt": None,
                 "start_dt": None,
@@ -694,7 +694,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 rows.append(
                     {
                         "date": d,
-                        "desc": f"{D['slot'][o['slot']]['name']} — " + ", ".join(i["name"] for i in o["items"][:3]),
+                        "desc": f"{D['slot'][o['slot']]['name']}: " + ", ".join(i["name"] for i in o["items"][:3]),
                         "qty": o["qty"],
                         "amount_minor": o["amount_minor"],
                     }
@@ -810,7 +810,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
                 }.get(cat, "Weekly purchase"),
                 "paid_via": ["Cash", "UPI", "Bank"][i % 3],
                 "receipt": i % 3 != 2,
-                "branch": "Kothrud Kitchen",
+                "branch": "Kothrud kitchen",
             }
         )
     expenses.sort(key=lambda e: e["date"], reverse=True)
@@ -873,7 +873,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         {
             "key": "topup_approved",
             "name": "Top-up approved",
-            "text": "We received {amount}. New balance: {wallet_balance}. Thank you!",
+            "text": "We received {amount}. New balance: {wallet_balance}.",
             "ch": {"in_app": 1, "push": 1, "email": 1, "whatsapp": 1, "sms": 0},
         },
         {
@@ -891,12 +891,12 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         {
             "key": "pass_expiring",
             "name": "Pass expiring",
-            "text": "{meals_left} meals on your pass expire on {expiry_date} — renew at the counter.",
+            "text": "{meals_left} meals on your pass expire on {expiry_date}. Renew at the counter.",
             "ch": {"in_app": 1, "push": 1, "email": 0, "whatsapp": 1, "sms": 0},
         },
         {
             "key": "closure",
-            "name": "Business closure",
+            "name": "Restaurant closure",
             "text": "We will be closed on {date} ({reason}). Orders are skipped without charge.",
             "ch": {"in_app": 1, "push": 1, "email": 1, "whatsapp": 1, "sms": 1},
         },
@@ -934,7 +934,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     lead_driver = D["routes"][0]["driver"].split(" ")[0] if D["routes"] else "The driver"
     bell = [
         (f"Top-up request ₹1,000 from {who(8)}", 12),
-        ("Order #5%d delivered — POD attached" % (order_no % 100), 25),
+        ("Order #5%d delivered. Photo proof attached." % (order_no % 100), 25),
         (f"Low wallet: {who(2)} (₹60 left)", 48),
         (f"Top-up ₹500 approved for {who(10)}", 90),
         (f"Hold started: {who(3)}", 130),
@@ -942,7 +942,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         (f"New subscription: {who(11)}", 260),
         (f"Driver {lead_driver} marked 12 stops delivered", 300),
         ("Weekly menu published", 420),
-        ("Order #5%d skipped — low wallet" % ((order_no - 7) % 100), 480),
+        ("Order #5%d skipped: low wallet" % ((order_no - 7) % 100), 480),
         (f"5-star rating from {who(0)}", 600),
         ("Expense added: LPG ×2 ₹4,400", 700),
         ("New top-up request from Harsh Mehta", 820),
@@ -1055,16 +1055,16 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
     # ---- website, platform, help --------------------------------------------------------------------------------------------------
     D["website"] = {
         "hero_title": "Ghar jaisa khana, roz.",
-        "hero_sub": "Fresh home-style tiffins from our Kothrud kitchen — delivered to your door or ready for pick-up.",
-        "about": "Saffron Tiffins has been cooking for Pune's students and working families since 2016. Small batches, low oil, no shortcuts.",
+        "hero_sub": "Home-style tiffins from our Kothrud kitchen, delivered or ready for pick-up.",
+        "about": "Saffron Tiffins has been cooking for students and working families in Pune since 2016.",
         "how": [
             ("Pick a plan", "Monthly passes or a home-delivery wallet."),
             ("Choose your meal", "Pick today's dish before the cutoff."),
-            ("We cook & deliver", "Fresh, packed, on time — with photo proof."),
+            ("We cook & deliver", "Packed and delivered on time, with photo proof."),
         ],
         "themes": ["Saffron", "Teal"],
         "domain": "saffrontiffins.example.com",
-        "seo_title": "Saffron Tiffins & Mess — Kothrud, Pune",
+        "seo_title": "Saffron Tiffins & Mess, Kothrud, Pune",
         "policies": [
             "No refunds on delivered meals; unused wallet balance is refundable on request.",
             "Meals can be skipped until the slot's cutoff.",
@@ -1105,7 +1105,7 @@ def build(today: date, roster=None) -> dict:  # noqa: C901, PLR0912, PLR0915
         {"key": "route", "label": "Create your first delivery route", "weight": 15, "done": False, "href": "delivery"},
         {
             "key": "profile",
-            "label": "Business info (FSSAI no., logo, WhatsApp)",
+            "label": "Restaurant details (FSSAI no., logo, WhatsApp)",
             "weight": 15,
             "done": False,
             "href": "settings",

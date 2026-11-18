@@ -99,7 +99,7 @@ def test_sidebar_shows_each_role_only_what_it_may_use(demo, clients):  # noqa: F
     items, sections = sidebar_labels(clients["OWNER"].get(home("OWNER")).content.decode())
     expected = (
         "Dashboard",
-        "Business profile",
+        "Restaurant profile",
         "Plan & platform fees",
         "Staff & roles",
         "Meal categories",
@@ -127,7 +127,7 @@ def test_sidebar_shows_each_role_only_what_it_may_use(demo, clients):  # noqa: F
     assert ops[0] == "Redeem counter"  # the differentiator sits at the top of OPERATIONS
     mgr, _ = sidebar_labels(clients["MANAGER"].get(home("MANAGER")).content.decode())
     assert (
-        not {"Staff & roles", "Business profile", "Settings"} & set(mgr)
+        not {"Staff & roles", "Restaurant profile", "Settings"} & set(mgr)
         and "Orders" in mgr
         and "Customer portal" in mgr
     )

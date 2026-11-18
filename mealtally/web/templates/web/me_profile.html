@@ -9,6 +9,6 @@
     <button class="btn-primary mt-4" type="submit">{% trans "Save" %}</button>
   </form>
   <div class="mt-4 flex flex-wrap gap-2"><a class="btn-secondary" href="{% url 'web:me-pin' tenant.slug %}">{% trans "Change PIN" %}</a>
-    <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug }}"><button class="btn-secondary" type="submit">{% trans "Log out" %}</button></form></div>
+    <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug }}"><button class="btn-secondary" type="submit">{% trans "Sign out" %}</button></form></div>
 </section>
 {% endblock %}

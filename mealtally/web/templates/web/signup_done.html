@@ -1,6 +1,6 @@
 {% extends "web/base.html" %}{% load i18n %}
 {% block content %}
 <section class="mx-auto max-w-md py-8 text-center"><h1 class="text-2xl font-bold">{% trans "You're signed up" %}</h1>
-  <p class="mt-3 text-ink-soft">{% trans "To start your meal pass, please pay at the counter. Then log in to see your meals." %}</p>
-  <a class="btn-primary mt-6" href="{% url 'web:login-customer' tenant.slug %}">{% trans "Log in" %}</a></section>
+  <p class="mt-3 text-ink-soft">{% trans "To start your meal pass, pay at the counter. Then sign in to see your meals." %}</p>
+  <a class="btn-primary mt-6" href="{% url 'web:login-customer' tenant.slug %}">{% trans "Sign in" %}</a></section>
 {% endblock %}

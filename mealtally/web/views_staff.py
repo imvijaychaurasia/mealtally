@@ -141,7 +141,7 @@ def _duration(seconds: int) -> str:
 def cooldown_text(ago_seconds: int, limit_seconds: int) -> str:
     """'Already redeemed 1 minute ago (limit 2 minutes) — give another meal?' from the real setting."""
     ago = _("less than a minute") if ago_seconds < 60 else _duration((ago_seconds // 60) * 60)  # noqa: PLR2004
-    return _("Already redeemed %(ago)s ago (limit %(limit)s) — give another meal?") % {
+    return _("Already redeemed %(ago)s ago (limit %(limit)s). Give another meal?") % {
         "ago": ago,
         "limit": _duration(limit_seconds),
     }

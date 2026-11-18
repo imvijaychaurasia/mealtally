@@ -289,7 +289,7 @@ def test_public_site_and_platform_preview_pages(demo):
     anon = Client()
     resp = anon.get(f"/t/{SLUG}/site")
     check("/site", resp)
-    assert "Menu of the week" in resp.content.decode() and "Log in" in resp.content.decode()
+    assert "Menu of the week" in resp.content.decode() and "Sign in" in resp.content.decode()
     assert anon.get(f"/t/{SLUG}/site?theme=teal").status_code == 200
     check("/signup", anon.get("/signup"))
     with platform_context():
@@ -455,17 +455,17 @@ def test_help_drawer_shows_articles_for_the_viewers_audience(demo, clients):
         return html[html.index('data-testid="help"') :]
 
     cust = help_text("CUSTOMER")
-    assert "How do I show my QR at the counter?" in cust and "How do I change my PIN?" in cust
-    for staff_only in ("How do I add a staff login?", "How do I sell a pass?", "platform fee", "Who can see what?"):
+    assert "Show your QR at the counter" in cust and "Change your PIN" in cust
+    for staff_only in ("Add a staff account", "Sell a pass", "platform fee", "What each role can see"):
         assert staff_only not in cust, staff_only
     counter = help_text("STAFF")
-    assert "How do I sell a pass?" in counter and "How do I redeem a meal?" in counter
-    assert "How do I add a staff login?" not in counter and "What does the platform fee cover?" not in counter
-    assert "How do I show my QR at the counter?" not in counter
+    assert "Sell a pass" in counter and "Redeem a meal" in counter
+    assert "Add a staff account" not in counter and "What the platform fee statement shows" not in counter
+    assert "Show your QR at the counter" not in counter
     for role in ("OWNER", "MANAGER"):
         owner = help_text(role)
-        assert "How do I add a staff login?" in owner and "How do I sell a pass?" in owner
-        assert "How do I show my QR at the counter?" not in owner
+        assert "Add a staff account" in owner and "Sell a pass" in owner
+        assert "Show your QR at the counter" not in owner
 
 
 def test_source_labels_and_undo_label_are_human(demo, clients):

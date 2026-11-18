@@ -22,19 +22,19 @@ FEATURES = [
         ("redeem",),
         "redeem",
         _("QR meal redemption"),
-        _("Scan a customer's QR or search by name or phone; the balance updates at once."),
+        _("Scan a customer's QR or search by name or phone. Meals left update at once."),
     ),
     (
         ("sell", "plans"),
         "sell",
         _("Meal passes and renewals"),
-        _("Sell a pass at the counter, queue a renewal and see what is left."),
+        _("Sell a pass at the counter and queue the renewal."),
     ),
     (
         ("wallets",),
         "wallet",
-        _("₹ wallet and top-ups"),
-        _("Customers top up by UPI; each meal is debited from the wallet."),
+        _("Wallet and top-ups"),
+        _("Customers top up a wallet and each meal is debited from it."),
     ),
     (
         ("orders",),
@@ -52,19 +52,19 @@ FEATURES = [
         ("delivery",),
         "delivery",
         _("Delivery routes and driver app"),
-        _("Plan stops, hand routes to drivers and collect photo proof of delivery."),
+        _("Plan routes for drivers and collect photo proof of delivery."),
     ),
     (
         ("holds",),
         "holds",
         _("Holds and vacations"),
-        _("Customers pause meals; closures and holidays are handled in one place."),
+        _("Customers pause meals, and you schedule closures and holidays."),
     ),
     (
         ("me-pass",),
         "profile",
         _("Customer self-service"),
-        _("An installable web app (PWA): show the QR, see the balance and history."),
+        _("An installable web app where customers show their QR and see their meals left."),
     ),
     (("sell",), "invoice", _("Receipts"), _("A numbered receipt for every payment, shareable as a PDF.")),
     (
@@ -78,12 +78,12 @@ FEATURES = [
         ("staff",),
         "roles",
         _("Staff roles and permissions"),
-        _("Owner, manager, counter, chef and driver, each seeing only what they need."),
+        _("Each staff role sees only the screens it needs."),
     ),
-    (("branches",), "branch", _("Branches"), _("Kitchens and pickup points under one business.")),
+    (("branches",), "branch", _("Branches"), _("Kitchens and pick-up points under one restaurant.")),
     (("notifications",), "bell", _("Notifications"), _("Alerts for low balances, expiring passes and new orders.")),
 ]
-HINDI = (("language",), "web", _("English and हिंदी"), _("Switch the screens between English and Hindi in one tap."))
+HINDI = (("language",), "web", _("Multiple languages"), _("Staff and customers choose their own screen language."))
 
 
 def features() -> list[dict]:
@@ -95,7 +95,7 @@ def audiences() -> list[dict]:
     return [
         {
             "title": _("Tiffin services"),
-            "text": _("Home delivery with a daily menu, routes and drivers."),
+            "text": _("Home delivery with a daily menu and driver routes."),
             "status": status_for("redeem", "delivery", "wallets"),
             "icon": "delivery",
         },
@@ -107,13 +107,13 @@ def audiences() -> list[dict]:
         },
         {
             "title": _("Cloud kitchens"),
-            "text": _("Orders, prep and dispatch for kitchens without a dining room."),
+            "text": _("Orders and prep for kitchens without a dining room."),
             "status": status_for("cloud-kitchen"),
             "icon": "store",
         },
         {
             "title": _("Canteens and corporate meals"),
-            "text": _("Prepaid meals for teams, with simple reports for the manager."),
+            "text": _("Prepaid meals for teams, with reports for the manager."),
             "status": status_for("redeem", "sell", "reports"),
             "icon": "customers",
         },
@@ -122,75 +122,69 @@ def audiences() -> list[dict]:
 
 FAQ = [
     (
-        _("Do customers need an app?"),
+        _("Customers don't need to install an app"),
         _(
-            "No. Customers use a web app in their phone browser and can add it to their home screen. There is nothing to download from an app store."
+            "Customers use a web app in their phone browser and can add it to their home screen. There is nothing to download from an app store."
         ),
     ),
     (
-        _("Does it work without internet at the counter?"),
+        _("The counter needs an internet connection"),
         _(
-            "No. The counter needs an internet connection to redeem a meal, because every redemption is checked against the live balance."
+            "Redeeming a meal needs a connection, because each redemption is checked against the meals left on the pass."
         ),
     ),
     (
-        _("Can I use both passes and wallets?"),
+        _("Passes and wallets"),
         _(
-            "Yes. Meal passes (a fixed number of meals) are live today. Wallet subscriptions are shown in the product as a preview and are coming soon."
+            "Meal passes (a fixed number of meals) work today. Wallet subscriptions appear in the product as a preview and are coming soon."
         ),
     ),
     (
-        _("What happens to unused meals?"),
+        _("Unused meals"),
         _(
-            "A pass has a validity period. When it ends, the remaining meals expire. The owner can queue a renewal or adjust meals with a reason, and every change goes into the audit log."
+            "A pass has an end date. When it ends, the remaining meals expire. The owner can queue a renewal or adjust meals with a reason, and each change goes into the audit log."
         ),
     ),
     (
-        _("Can I use my own name and colours?"),
+        _("Your name and colours"),
         _(
-            "Your business name and address appear on the sign-in screens, receipts and the customer app, and you can pick one of three looks. Custom logos and brand colours are planned."
+            "Your restaurant name and address appear on the sign-in screens, receipts and the customer app. You can pick one of three themes. Custom logos and brand colours are planned."
         ),
     ),
     (
-        _("Is my data shared with other businesses?"),
-        _(
-            "No. Each business's data is kept separate, and the database itself enforces that, not just the application."
-        ),
+        _("Your data is not shared with other restaurants"),
+        _("Each restaurant's data is kept separate, and the database enforces this as well as the application."),
     ),
     (
-        _("Which payments are supported?"),
-        _("UPI (recorded by your team) and cash today. Online payment gateways are coming soon."),
+        _("Supported payments"),
+        _("Your team records cash and other manual payments today. Online payment gateways are coming soon."),
     ),
     (
-        _("Is there Hindi support?"),
-        _(
-            "Yes. Staff and customer screens can be switched between English and Hindi. We are still extending the Hindi coverage."
-        ),
+        _("Languages"),
+        _("Staff and customers can choose their screen language. Languages still being reviewed are marked Beta."),
     ),
     (
-        _("How do I start?"),
-        _("Book a demo. We will walk you through it and set up your business, plans and logins for you."),
+        _("Getting started"),
+        _("Book a demo. We will show you the product and set up your restaurant, plans and staff accounts."),
     ),
 ]
 
 TRUST = [
     (
-        _("Your data stays yours"),
-        _("Each business's data is isolated by the database itself, so one restaurant can never read another's."),
+        _("Separate data for each restaurant"),
+        _("The database keeps each restaurant's data apart, so one restaurant can't read another's."),
     ),
     (
-        _("An honest ledger"),
+        _("Append-only ledger"),
         _(
-            "Meals and payments are written to an append-only ledger with a full audit trail. Mistakes are reversed, never erased."
+            "Meals and payments go into an append-only ledger with an audit trail. Mistakes are corrected with a new entry, not erased."
         ),
     ),
     (_("No double redemption"), _("Even with two counters scanning at once, a meal is only redeemed once.")),
     (_("Daily backups"), _("The database is backed up every day.")),
     (
-        _("Privacy by design"),
-        _(
-            "Built with India's data protection law (the DPDP Act) in mind. We hold only what we need to run your meals."
-        ),
+        _("Privacy"),
+        _("We hold only the data needed to run your meal service."),
     ),
 ]
 

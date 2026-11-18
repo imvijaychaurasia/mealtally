@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Mealtally: {% trans "prepaid meal passes for tiffin and mess businesses" %}{% endblock %}</title>
-  <meta name="description" content="{% block description %}{% trans 'Prepaid meals, simplified. Meal passes, wallets, kitchen and delivery in one place for Indian tiffin services, messes, cloud kitchens and canteens.' %}{% endblock %}">
+  <title>{% block title %}Mealtally: {% trans "prepaid meal passes for restaurants" %}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{% trans 'Sell prepaid meal passes and keep count of the meals each customer has left.' %}{% endblock %}">
   <link rel="canonical" href="{{ canonical }}">
   {% block robots %}{% endblock %}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mealtally">
   <meta property="og:title" content="{% block ogtitle %}Mealtally: prepaid meals, simplified{% endblock %}">
-  <meta property="og:description" content="{% trans 'Meal passes, wallets, kitchen and delivery in one place for Indian tiffin and mess businesses.' %}">
+  <meta property="og:description" content="{% trans 'Prepaid meal passes for restaurants and tiffin services.' %}">
   <meta property="og:url" content="{{ canonical }}">
   <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'img/og-hero.png' %}">
   <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">

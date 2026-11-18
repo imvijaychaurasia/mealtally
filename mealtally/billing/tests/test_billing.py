@@ -115,7 +115,7 @@ def test_record_payment_creates_payment_fee_pass_and_audit_atomically():
     rec = pay(w, method="UPI_MANUAL", reference="UTR123456")
     assert rec.payment.status == "RECORDED" and rec.payment.reference == "UTR123456"
     assert rec.pass_.status == "ACTIVE" and rec.pass_.meals_remaining == 30 and rec.pass_.payment_id == rec.payment.id
-    assert (rec.pass_.plan_name, rec.pass_.price_minor, rec.pass_.meals_total) == ("Monthly Meal Pass", 150000, 30)
+    assert (rec.pass_.plan_name, rec.pass_.price_minor, rec.pass_.meals_total) == ("Monthly meal pass", 150000, 30)
     with w.ctx():
         ev = AuditEvent.objects.get(action="payment.record")
         assert ev.after["pass"] == str(rec.pass_.public_id) and ev.actor_id == w.staff.user.pk

@@ -49,7 +49,7 @@ def make_actor(tenant, role=Role.OWNER, **kwargs) -> Actor:
 
 
 def make_plan(tenant, **kwargs) -> Plan:
-    defaults = {"name": "Monthly Meal Pass", "price_minor": 150000, "meals_per_cycle": 30, "validity_days": 30}
+    defaults = {"name": "Monthly meal pass", "price_minor": 150000, "meals_per_cycle": 30, "validity_days": 30}
     defaults.update(kwargs)
     with tenant_context(tenant.id):
         return plans.create_plan(tenant_id=tenant.id, **defaults)

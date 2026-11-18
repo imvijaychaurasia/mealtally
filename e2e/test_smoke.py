@@ -95,7 +95,7 @@ SPACE_WIDTH_JS = """(el) => {
 
 
 def test_heading_words_have_visible_spaces(page):
-    """Visual check: the display font's narrow space plus tight tracking once rendered "Staff login" as "Stafflogin"."""
+    """Visual check: the display font's narrow space plus tight tracking once rendered "Staff sign-in" as "Stafflogin"."""
     page.goto(f"/t/{SLUG}/login/staff")
     page.evaluate("document.fonts.ready")
     heading = page.locator("h1").first

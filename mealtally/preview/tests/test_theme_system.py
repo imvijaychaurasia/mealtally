@@ -548,7 +548,7 @@ def test_d038c_driver_numbering_list_and_summary_agree(demo, clients):  # noqa: 
 
 def test_d038c_wallet_rows_do_not_repeat_the_slot(demo, clients):  # noqa: F811
     html = clients["CUSTOMER"].get(f"/t/{SLUG}/me/wallet").content.decode()
-    assert "Home Tiffin · Lunch" in html and "Lunch · Home Tiffin" not in html
+    assert "Home tiffin · Lunch" in html and "Lunch · Home tiffin" not in html
 
 
 def test_d038c_seed_refuses_phones_that_belong_to_users_of_another_tenant(demo, tmp_path):  # noqa: F811

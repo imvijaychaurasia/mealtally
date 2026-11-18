@@ -126,7 +126,7 @@ def _detail_ctx(request, customer, **extra):
         pay.can_void, pay.void_reason_text = False, ""
         if pay.status == "RECORDED" and pass_ is not None:
             if ledger.pass_has_redemptions(pass_):
-                pay.void_reason_text = _("Meals already redeemed — use Adjust credits")
+                pay.void_reason_text = _("Meals already redeemed. Use Adjust meals.")
             elif pass_.status not in ("ACTIVE", "QUEUED", "SUSPENDED"):
                 pay.void_reason_text = _("This pass has already ended")
             else:
@@ -198,7 +198,7 @@ def customer_action(request, customer_id, action):
                 secret = customers.reset_pin(
                     actor=request.actor, customer=customer, pin=d.get("pin") if d.get("pin_choice") == "own" else None
                 )
-                notice = _("New PIN set. The customer must change it at next login.")
+                notice = _("New PIN set. The customer must change it the next time they sign in.")
             elif action == "adjust":
                 ledger.adjust(
                     actor=request.actor,
@@ -207,7 +207,7 @@ def customer_action(request, customer_id, action):
                     reason=reason,
                     idempotency_key=d.get("idempotency_key", ""),
                 )
-                notice = _("Credits adjusted.")
+                notice = _("Meals adjusted.")
             elif action in ("suspend", "resume", "cancel"):
                 fn = {"suspend": passes.suspend_pass, "resume": passes.resume_pass, "cancel": passes.cancel_pass}[
                     action
@@ -732,7 +732,7 @@ def report_monthly(request):
         request,
         _out(
             request,
-            _("Monthly subscriptions"),
+            _("Monthly pass sales"),
             [_("Plan"), _("Passes"), _("Revenue")],
             rows,
             extra=extra,
@@ -799,7 +799,7 @@ def report_statement(request, customer_id):
         _out(
             request,
             f"{_('Customer statement')}: {customer.customer_code} {customer.full_name}",
-            [_("Kind"), _("Item"), _("Status"), _("Date"), _("Detail"), _("Amount / balance")],
+            [_("Kind"), _("Item"), _("Status"), _("Date"), _("Detail"), _("Amount / meals left")],
             rows,
             filename=f"statement-{customer.customer_code}",
         ),

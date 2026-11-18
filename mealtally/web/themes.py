@@ -19,9 +19,9 @@ PLATFORM = "tally"
 
 # name -> (label, one-line description) shown in Business profile and the platform admin
 THEMES = {
-    "masala": (_("Masala kitchen"), _("Warm cream, curry-leaf green and saffron: a classic Indian kitchen.")),
-    "fresh": (_("Fresh market"), _("Cool whites, herb teal and tomato red: clean and modern.")),
-    "tally": (_("Mealtally"), _("The Mealtally look: curry-leaf green and saffron on cream.")),
+    "masala": (_("Masala kitchen"), _("Warm cream, curry-leaf green and saffron.")),
+    "fresh": (_("Fresh market"), _("Cool whites, herb teal and tomato red.")),
+    "tally": (_("Mealtally"), _("Curry-leaf green and saffron on cream.")),
 }
 CHOICES = [(k, v[0]) for k, v in THEMES.items()]
 

@@ -150,7 +150,7 @@ def test_void_is_disabled_with_a_reason_when_meals_were_redeemed(w, owner_c, u):
     with w.ctx():
         ledger.redeem(actor=w.staff, customer=w.customer, idempotency_key="v1", source="QR_SCAN")
     html = owner_c.get(f"{u}/admin/customers/{w.customer.public_id}").content.decode()
-    assert 'data-testid="void-blocked"' in html and "Meals already redeemed — use Adjust credits" in html
+    assert 'data-testid="void-blocked"' in html and "Meals already redeemed. Use Adjust meals." in html
     assert 'action="' + f"{u}/admin/customers/{w.customer.public_id}/void" not in html  # no void form offered
 
 
@@ -167,7 +167,7 @@ def test_passes_ordered_active_queued_past_with_queued_wording_and_ledger_eviden
     ledger_html = html.split('data-testid="ledger"')[1]
     for needle in (
         "Meal redeemed",
-        "Credits issued",
+        "Meals issued",
         "QR",
         "Counter search",
         "System",
@@ -202,16 +202,16 @@ def test_pluralisation_and_expiry_vs_low_messaging(w, cust_c, u):
     html = cust_c.get(u + "/me/").content.decode()
     assert re.search(r"\b1 day left", html) and "1 days" not in html  # singular
     assert 'data-testid="expiry-warning"' in html and re.search(
-        r"18 meals will expire on \d+ \w+ — renew at the counter", html
+        r"18 meals will expire on \d+ \w+\. Renew at the counter", html
     )
     assert "top up" not in html.lower() and "Running low" not in html
     with w.ctx():
         Pass.objects.filter(pk=w.pass_.pk).update(ends_at=timezone.now() + timedelta(days=20), meals_remaining=2)
     low = cust_c.get(u + "/me/").content.decode()
-    assert 'data-testid="low-warning"' in low and "Running low — 2 meals left" in low and "will expire" not in low
+    assert 'data-testid="low-warning"' in low and "Running low: 2 meals left" in low and "will expire" not in low
     with w.ctx():
         Pass.objects.filter(pk=w.pass_.pk).update(ends_at=timezone.now() + timedelta(days=20), meals_remaining=1)
-    assert "Running low — 1 meal left" in cust_c.get(u + "/me/").content.decode()
+    assert "Running low: 1 meal left" in cust_c.get(u + "/me/").content.decode()
 
 
 def test_qr_screen_shows_meals_and_validity(w, cust_c, u):
@@ -324,7 +324,7 @@ def test_platform_tenant_detail_has_no_customer_data_and_exports_fees(w):
     assert r.status_code == 200 and "Fee policy" in html and "Monthly fee statement" in html and "₹180.00" in html
     assert w.customer.full_name not in html and w.customer.phone_e164 not in html  # fees only
     csv = c.get(f"/platform/tenants/{w.tenant.slug}/fees", {"format": "csv"}).content.decode()
-    assert "R-000001" in csv and "TOTAL" in csv and w.customer.full_name not in csv
+    assert "R-000001" in csv and "Total" in csv and w.customer.full_name not in csv
     assert c.get(f"/platform/tenants/{w.tenant.slug}/fees", {"format": "pdf"}).content[:5] == b"%PDF-"
     assert c.get("/platform/tenants/nope").status_code == 404
     assert client_for(w.owner.user).get(f"/platform/tenants/{w.tenant.slug}").status_code == 404

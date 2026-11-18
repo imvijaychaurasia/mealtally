@@ -20,8 +20,8 @@
     </div>
     {% if rule_line %}<p class="mt-3 text-sm font-semibold text-ink" data-testid="pass-rule">{{ rule_line }}</p>{% endif %}
     <p class="mt-3 text-lg font-medium" data-testid="validity">{% blocktrans count counter=card.days_left with d=card.ends|date:"j M Y" %}Valid until {{ d }} · {{ counter }} day left{% plural %}Valid until {{ d }} · {{ counter }} days left{% endblocktrans %}</p>
-    {% if card.expiring %}<p class="mt-1 text-sm font-semibold text-warn-ink" data-testid="expiry-warning">{% blocktrans count counter=p.meals_remaining with d=card.ends|date:"j M" %}{{ counter }} meal will expire on {{ d }} — renew at the counter{% plural %}{{ counter }} meals will expire on {{ d }} — renew at the counter{% endblocktrans %}</p>
-    {% elif card.low %}<p class="mt-1 text-sm font-semibold text-warn-ink" data-testid="low-warning">{% blocktrans count counter=p.meals_remaining %}Running low — {{ counter }} meal left{% plural %}Running low — {{ counter }} meals left{% endblocktrans %}</p>{% endif %}
+    {% if card.expiring %}<p class="mt-1 text-sm font-semibold text-warn-ink" data-testid="expiry-warning">{% blocktrans count counter=p.meals_remaining with d=card.ends|date:"j M" %}{{ counter }} meal will expire on {{ d }}. Renew at the counter.{% plural %}{{ counter }} meals will expire on {{ d }}. Renew at the counter.{% endblocktrans %}</p>
+    {% elif card.low %}<p class="mt-1 text-sm font-semibold text-warn-ink" data-testid="low-warning">{% blocktrans count counter=p.meals_remaining %}Running low: {{ counter }} meal left{% plural %}Running low: {{ counter }} meals left{% endblocktrans %}</p>{% endif %}
     <p class="mt-1 text-ink-soft">{% blocktrans with n=meals_today %}Meals today: {{ n }}{% endblocktrans %}</p>
     {% if p.validity_mode == 'CALENDAR_MONTH' %}<p class="mt-1 text-sm text-ink-soft">{% trans "Valid until end of month · full meals" %}</p>{% endif %}
     {% if show_qr %}<a class="btn-primary mt-4 w-full lg:hidden" href="{% url 'web:me-qr' tenant.slug %}" data-testid="show-qr">{% include "web/_icon.html" with name="qr" %}{% trans "Show QR" %}</a>{% endif %}
@@ -29,7 +29,7 @@
   </div>
   {% endwith %}
   {% else %}
-  <div class="card text-center"><p class="text-xl font-semibold" data-testid="no-pass">{% trans "No active pass — pay at the counter to start" %}</p>
+  <div class="card text-center"><p class="text-xl font-semibold" data-testid="no-pass">{% trans "No active pass. Pay at the counter to start." %}</p>
     <p class="mt-3 border-t border-subtle pt-3 text-sm text-ink-soft">{% trans "No refund or carry-forward of unused meals." %}</p></div>
   {% endif %}
   {% for q in queued %}
@@ -38,15 +38,15 @@
     <p class="text-ink-soft">{% blocktrans with d=q.starts|date:"j M Y" t=q.obj.meals_total %}Starts {{ d }} · {{ t }} meals{% endblocktrans %}</p></div>
   {% endfor %}
   {% if s %}
-  {% if nxt %}<div class="card" data-testid="home-today"><div class="flex items-start justify-between gap-2"><div><p class="text-sm font-semibold text-muted">{{ nxt.label }} · {{ nxt.slot.name }}{% if pv_badge %} <span class="chip-preview ms-1 align-middle" data-testid="preview-badge" title="{% trans 'Rolling out next — shown with demo data' %}">{% trans "Preview" %}</span>{% endif %}</p>
+  {% if nxt %}<div class="card" data-testid="home-today"><div class="flex items-start justify-between gap-2"><div><p class="text-sm font-semibold text-muted">{{ nxt.label }} · {{ nxt.slot.name }}{% if pv_badge %} <span class="chip-preview ms-1 align-middle" data-testid="preview-badge" title="{% trans 'Coming soon. Shown with demo data.' %}">{% trans "Preview" %}</span>{% endif %}</p>
     <p class="mt-1 text-lg font-bold">{% for it in nxt.options.0 %}{{ it.name }}{% if it.qty > 1 %} ×{{ it.qty }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}</p>{% if nxt.options|length > 1 %}<p class="text-sm text-ink-soft">{% blocktrans with n=nxt.options|length %}{{ n }} options to choose from{% endblocktrans %}</p>{% endif %}</div>
     <span class="chip-green" data-countdown="{{ nxt.cutoff_iso }}">{% trans "Choose before cutoff" %}</span></div>
     <a class="btn-secondary mt-3 w-full" href="{% url 'preview:me-meals' tenant.slug %}">{% trans "Choose, skip or hold" %}</a></div>{% endif %}
-  <div class="card" data-testid="home-wallet"><div class="flex items-center justify-between gap-3"><div><p class="text-sm font-semibold text-muted">{% trans "Wallet" %}{% if pv_badge %} <span class="chip-preview ms-1 align-middle" data-testid="preview-badge" title="{% trans 'Rolling out next — shown with demo data' %}">{% trans "Preview" %}</span>{% endif %}</p>
+  <div class="card" data-testid="home-wallet"><div class="flex items-center justify-between gap-3"><div><p class="text-sm font-semibold text-muted">{% trans "Wallet" %}{% if pv_badge %} <span class="chip-preview ms-1 align-middle" data-testid="preview-badge" title="{% trans 'Coming soon. Shown with demo data.' %}">{% trans "Preview" %}</span>{% endif %}</p>
     <p class="text-4xl font-bold {{ s.balance_minor|money_class }}">{{ s.balance_minor|money_consumer }}</p>
     <p class="text-sm text-ink-soft">{% blocktrans with n=s.days_left %}About {{ n }} days of meals left{% endblocktrans %}</p></div>
     <a class="btn-primary" href="{% url 'preview:me-wallet' tenant.slug %}">{% trans "Top up" %}</a></div></div>
-  {% if upcoming %}<div class="card" data-testid="home-coming-up"><h2 class="font-semibold">{% trans "Coming up" %}{% if pv_badge %} <span class="chip-preview ms-1 align-middle" data-testid="preview-badge" title="{% trans 'Rolling out next — shown with demo data' %}">{% trans "Preview" %}</span>{% endif %}</h2><ul class="mt-1 divide-y divide-subtle">{% for o in upcoming %}<li class="flex items-center justify-between gap-2 py-3 text-sm"><span>{{ o.date|date:"D j M" }} · {{ D.slot|getitem:o.slot|getitem:"name" }}</span>{% chip o.status %}</li>{% endfor %}</ul></div>{% endif %}
+  {% if upcoming %}<div class="card" data-testid="home-coming-up"><h2 class="font-semibold">{% trans "Coming up" %}{% if pv_badge %} <span class="chip-preview ms-1 align-middle" data-testid="preview-badge" title="{% trans 'Coming soon. Shown with demo data.' %}">{% trans "Preview" %}</span>{% endif %}</h2><ul class="mt-1 divide-y divide-subtle">{% for o in upcoming %}<li class="flex items-center justify-between gap-2 py-3 text-sm"><span>{{ o.date|date:"D j M" }} · {{ D.slot|getitem:o.slot|getitem:"name" }}</span>{% chip o.status %}</li>{% endfor %}</ul></div>{% endif %}
   {% elif no_wallet %}
   <div class="card" data-testid="home-no-wallet"><p class="font-semibold">{% trans "Ask the restaurant about home delivery" %}</p>
     <p class="text-sm text-ink-soft">{% trans "Home-delivery customers get a wallet here: meals are paid from it and you can top up by UPI." %}</p></div>

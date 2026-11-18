@@ -82,7 +82,7 @@ def test_monthly_subscriptions_by_plan_and_voids():
             and r["voids"] == 1
             and r["void_amount_minor"] == 150000
         )
-        assert r["by_plan"] == [{"plan": "Monthly Meal Pass", "passes": 1, "revenue_minor": 150000}]
+        assert r["by_plan"] == [{"plan": "Monthly meal pass", "passes": 1, "revenue_minor": 150000}]
         with pytest.raises(ValidationFailed):
             reports.monthly_subscriptions(actor=w.owner, year=2026, month=13)
 

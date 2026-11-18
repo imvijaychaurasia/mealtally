@@ -12,12 +12,12 @@
       <div class="flex items-center justify-between gap-3">
         <div><p class="font-medium {% if r.reversed %}text-muted line-through{% endif %}">{{ r.e.customer.full_name }}</p>
           <p class="text-sm text-muted">{{ r.at|time:"g:i A" }} · {{ r.who }} · {{ r.e.source|source_label }}{% if r.reversed %} · {% trans "undone" %}{% endif %}</p></div>
-        {% if not r.reversed %}<button type="button" class="btn-secondary" @click="toggle">{% trans "Reverse" %}</button>{% endif %}
+        {% if not r.reversed %}<button type="button" class="btn-secondary" @click="toggle">{% trans "Undo" %}</button>{% endif %}
       </div>
       {% if not r.reversed %}<form x-show="open" x-cloak class="mt-2 flex gap-2" hx-post="{% url 'web:staff-reverse' tenant.slug %}" hx-target="#today" hx-swap="innerHTML">
         <input type="hidden" name="entry" value="{{ r.e.public_id }}"><label class="sr-only" for="why-{{ r.e.pk }}">{% trans "Reason" %}</label>
         <input class="input" id="why-{{ r.e.pk }}" name="reason" required placeholder="{% trans 'Reason (required)' %}"><button class="btn-danger shrink-0" type="submit">{% trans "Confirm" %}</button></form>{% endif %}
     </li>{% empty %}<li class="px-4 py-6 text-center text-muted">{% trans "No redemptions yet today." %}</li>{% endfor %}
   </ul>
-  {% if undone %}<p class="mt-2 text-center"><button type="button" class="btn-secondary min-h-11 px-3 text-sm" data-testid="toggle-reversals" aria-pressed="{% if show_undone %}true{% else %}false{% endif %}" hx-get="{% url 'web:staff-today' tenant.slug %}{% if not show_undone %}?undone=1{% endif %}" hx-target="#today" hx-swap="innerHTML">{% if show_undone %}{% trans "Hide reversals" %}{% else %}{% trans "Show reversals" %} ({{ undone }}){% endif %}</button></p>{% endif %}
+  {% if undone %}<p class="mt-2 text-center"><button type="button" class="btn-secondary min-h-11 px-3 text-sm" data-testid="toggle-reversals" aria-pressed="{% if show_undone %}true{% else %}false{% endif %}" hx-get="{% url 'web:staff-today' tenant.slug %}{% if not show_undone %}?undone=1{% endif %}" hx-target="#today" hx-swap="innerHTML">{% if show_undone %}{% trans "Hide undone meals" %}{% else %}{% trans "Show undone meals" %} ({{ undone }}){% endif %}</button></p>{% endif %}
 </div>

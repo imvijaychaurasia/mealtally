@@ -10,6 +10,6 @@
       <div class="text-end">{% if i.amount %}<p class="font-semibold">{{ i.amount|money_consumer }}</p>{% elif i.credits %}<p class="font-semibold">{{ i.credits|stringformat:"+d" }}</p>{% endif %}
         {% if i.chip == "void" %}<span class="chip-void">{{ i.chip_label|default:_("Void") }}</span>{% elif i.chip == "active" %}<span class="chip-active">{{ i.chip_label|default:_("Done") }}</span>{% endif %}
         {% if i.pdf %}<a class="link block text-sm" href="{{ i.pdf }}">PDF</a>{% endif %}</div></li>{% endfor %}</ul>
-  {% empty %}<div class="card mt-4 text-center text-ink-soft"><p>{% trans "Nothing here yet." %}</p><a class="btn-primary mt-3" href="{% url 'web:me-home' tenant.slug %}">{% trans "Back to Home" %}</a></div>{% endfor %}
+  {% empty %}<div class="card mt-4 text-center text-ink-soft"><p>{% trans "Nothing here yet." %}</p><a class="btn-primary mt-3" href="{% url 'web:me-home' tenant.slug %}">{% trans "Back to home" %}</a></div>{% endfor %}
 </section>
 {% endblock %}

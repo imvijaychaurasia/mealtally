@@ -10,6 +10,6 @@
       <span class="min-w-0 flex-1"><span class="block truncate font-medium">{{ s.name }}</span><span class="block truncate text-xs text-muted">{{ s.address }}</span></span>
       <span class="flex gap-1"><button type="button" class="btn-secondary px-2" data-move="up" aria-label="{% trans 'Move up' %}">↑</button><button type="button" class="btn-secondary px-2" data-move="down" aria-label="{% trans 'Move down' %}">↓</button></span></li>{% endfor %}</ol></section>{% endfor %}
 </div>
-<section class="card mt-4"><h2 class="font-semibold">{% trans "Pick-up customers" %}</h2><p class="text-sm text-ink-soft">{% trans "Collected at the kitchen or a pick-up point — no route needed." %}</p>
+<section class="card mt-4"><h2 class="font-semibold">{% trans "Pick-up customers" %}</h2><p class="text-sm text-ink-soft">{% trans "Collected at the kitchen or a pick-up point. No route needed." %}</p>
   <ul class="mt-2 flex flex-wrap gap-2">{% for s in pickup_subs %}<li class="chip-slate">{{ s.name }}</li>{% endfor %}</ul></section>
 {% endblock %}

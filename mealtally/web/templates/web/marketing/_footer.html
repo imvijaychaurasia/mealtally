@@ -1,10 +1,10 @@
 {% load i18n %}<footer class="border-t border-subtle bg-card">
   <div class="mk-wrap grid gap-8 py-10 sm:grid-cols-3">
-    <div><p class="text-lg font-extrabold text-primary">Mealtally</p><p class="mt-2 text-sm text-ink-soft">{% trans "Prepaid meal passes, wallets, kitchen and delivery for Indian tiffin and mess businesses." %}</p></div>
+    <div><p class="text-lg font-extrabold text-primary">Mealtally</p><p class="mt-2 text-sm text-ink-soft">{% trans "Prepaid meal passes for restaurants and tiffin services." %}</p></div>
     <nav aria-label="{% trans 'Footer' %}"><ul class="grid gap-1 text-sm">
       <li><a class="mk-flink" href="{% url 'web:landing' %}#features">{% trans "Features" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#how-it-works">{% trans "How it works" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#pricing">{% trans "Pricing" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#faq">{% trans "FAQ" %}</a></li></ul></nav>
     <nav aria-label="{% trans 'Account and legal' %}"><ul class="grid gap-1 text-sm">
-      <li><a class="mk-flink" href="{% url 'web:global-login' %}">{% trans "Log in" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#book-a-demo">{% trans "Book a demo" %}</a></li>{% if legal_live %}<li><a class="mk-flink" href="{% url 'web:privacy' %}">{% trans "Privacy notice" %}</a></li><li><a class="mk-flink" href="{% url 'web:terms' %}">{% trans "Terms" %}</a></li>{% endif %}</ul></nav>
+      <li><a class="mk-flink" href="{% url 'web:global-login' %}">{% trans "Sign in" %}</a></li><li><a class="mk-flink" href="{% url 'web:landing' %}#book-a-demo">{% trans "Book a demo" %}</a></li>{% if legal_live %}<li><a class="mk-flink" href="{% url 'web:privacy' %}">{% trans "Privacy notice" %}</a></li><li><a class="mk-flink" href="{% url 'web:terms' %}">{% trans "Terms" %}</a></li>{% endif %}</ul></nav>
   </div>
   <div class="border-t border-subtle py-4 text-center text-sm text-ink-soft">© 2026 Mealtally · {% trans "Made in India" %}</div>
 </footer>

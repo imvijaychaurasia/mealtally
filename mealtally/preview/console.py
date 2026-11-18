@@ -26,7 +26,7 @@ GROUPS = [
         None,
         [
             (gettext_noop("Dashboard"), "preview:today", OM, "grid", False, {"today", "admin-dashboard"}),
-            (gettext_noop("Business profile"), "web:admin-settings", (O,), "store", False, {"admin-settings"}),
+            (gettext_noop("Restaurant profile"), "web:admin-settings", (O,), "store", False, {"admin-settings"}),
             (
                 gettext_noop("Plan & platform fees"),
                 "web:report-fees",

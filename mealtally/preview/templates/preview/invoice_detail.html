@@ -1,6 +1,6 @@
 {% extends "preview/base.html" %}{% load i18n %}
 {% block pv_content %}
-<a class="link text-sm" href="{% url 'preview:invoices' tenant.slug %}">← {% trans "Invoices" %}</a>
+<a class="link text-sm" href="{% url 'preview:invoices' tenant.slug %}">{% trans "Back to invoices" %}</a>
 <div class="mt-1 flex flex-wrap items-center gap-2"><h1 class="text-2xl font-bold">{{ i.id }}</h1>{% chip i.status %}{% if pv_badge %}<span class="chip-preview">{% trans "Preview" %}</span>{% endif %}
   <div class="ms-auto flex gap-2"><button class="btn-secondary" type="button" data-copy="{{ share }}" data-testid="share">{% trans "Copy share link" %}</button><a class="btn-primary" href="{% url 'preview:invoices-pdf' tenant.slug i.id %}" data-testid="pdf">{% trans "Download PDF" %}</a></div></div>
 <p class="text-ink-soft">{{ i.customer }} · {{ i.period }}</p>

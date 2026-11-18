@@ -39,7 +39,7 @@
         {% endif %}
         {% include "web/_language_picker.html" with picker_class="no-print" picker_id="baseclassic1" %}
         {% if request.user.is_authenticated %}
-        <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug|default:'' }}"><button class="btn-secondary whitespace-nowrap px-2 sm:px-3" type="submit">{% trans "Log out" %}</button></form>
+        <form method="post" action="{% url 'web:logout' %}">{% csrf_token %}<input type="hidden" name="slug" value="{{ tenant.slug|default:'' }}"><button class="btn-secondary whitespace-nowrap px-2 sm:px-3" type="submit">{% trans "Sign out" %}</button></form>
         {% endif %}
       </div>
     </div>

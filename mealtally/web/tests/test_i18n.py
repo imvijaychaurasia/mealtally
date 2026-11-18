@@ -2,6 +2,7 @@
 """Languages: every visible template string is translatable, the picker sets the language (and remembers it for
 signed-in users), the restaurant's default applies otherwise, and right-to-left languages get dir="rtl"."""
 
+import re
 from pathlib import Path
 
 import pytest
@@ -135,3 +136,36 @@ def test_fuzzy_beta_drafts_are_compiled_and_shown(client, code, dashboard, sign_
     client.cookies[settings.LANGUAGE_COOKIE_NAME] = code
     page = client.get("/login").content.decode()
     assert f'lang="{code}"' in page and sign_in in page
+
+
+BANNED_COPY = {
+    "—": "em dash: use a full stop, comma or brackets (an en dash is fine in a number range)",
+    "←": "decorative arrow: write 'Back to ...'",
+    "→": "decorative arrow: write 'from X to Y' or name the menu",
+    "✓": "decorative tick: the words and colour already say it",
+    "!": "exclamation mark: state what happened",
+    "seamless": "promotional word",
+    "effortless": "promotional word",
+    "simplified": "promotional word",
+    "in one place": "promotional phrase",
+    "nice work": "cheerful filler",
+    "journey": "promotional word",
+    "unlock": "promotional word",
+    "powerful": "promotional word",
+    "delve": "promotional word",
+}
+
+
+def test_visible_strings_avoid_banned_copy():
+    """Plain wording rules from docs/glossary.md; each entry says why it is banned."""
+    import polib
+
+    catalog = polib.pofile(str(settings.BASE_DIR / "locale" / "hi" / "LC_MESSAGES" / "django.po"))
+    found = []
+    for entry in catalog:
+        if entry.obsolete:
+            continue
+        for msgid in filter(None, (entry.msgid, entry.msgid_plural)):
+            text = re.sub(r"(?<=\d)—(?=\d)", "", msgid).lower()
+            found += [f"{msgid!r}: {why}" for item, why in BANNED_COPY.items() if item in text]
+    assert found == []

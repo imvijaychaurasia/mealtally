@@ -44,8 +44,8 @@ OLD_ADDRESS = "Shop 4, Shivaji Society, Kothrud, Pune 411038"
 _STRINGS = {
     OLD_ADDRESS: GREEN_ADDRESS,
     "+91 20 4000 1101": GREEN_PHONE,
-    "Baner Pickup Point": "Aundh Pickup Point",
-    "Kothrud Kitchen": "Baner Kitchen",
+    "Baner pick-up point": "Aundh pick-up point",
+    "Kothrud kitchen": "Baner kitchen",
     "Karve Nagar": "Balewadi",
     "Erandwane": "Pashan",
     "Warje": "Sus",

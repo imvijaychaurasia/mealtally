@@ -22,7 +22,7 @@ _COPY = {
         "You can't open this page",
         "You don't have access. If you think that's a mistake, ask the restaurant.",
     ),
-    404: ("NOT_FOUND", "We couldn't find that page", "Check the link, or head back to the start."),
+    404: ("NOT_FOUND", "We couldn't find that page", "Check the link, or go back to the start."),
     500: ("SERVER_ERROR", "Something went wrong on our side", "We've been told. Please try again in a minute."),
 }
 

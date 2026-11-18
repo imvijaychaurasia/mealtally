@@ -3,7 +3,8 @@
 ## The usual upgrade
 
 1. Read the new version's section in [CHANGELOG.md](../CHANGELOG.md) and below.
-2. Point `.env` at the new image: `MEALTALLY_IMAGE=ghcr.io/<owner>/mealtally:0.2.0`.
+2. Point `.env` at the new images: `MEALTALLY_IMAGE=ghcr.io/<owner>/mealtally:0.2.0` (and
+   `MEALTALLY_POSTGRES_IMAGE`, when the version notes say so).
 3. Update the repository files to the same version (the Compose file and scripts can change too):
 
    ```bash
@@ -43,6 +44,13 @@ The database image (`MEALTALLY_POSTGRES_IMAGE`) changes only when the PostgreSQL
 a dump and restore. The notes for that version say so.
 
 ## Version notes
+
+### 0.1.1
+
+`compose.prod.yml` no longer builds the database image on the server: `MEALTALLY_POSTGRES_IMAGE` is required. If
+your `.env` doesn't set it yet, add `MEALTALLY_POSTGRES_IMAGE=ghcr.io/<owner>/mealtally-postgres:0.1.1` before
+`make upgrade`. It is the same PostgreSQL major version and role set-up as the image built before, so the existing
+data is used as it is.
 
 ### 0.1.0
 

@@ -110,7 +110,7 @@ Without email, new PINs and passwords are shown on screen once, and password res
 | Variable | Default | What it does |
 |---|---|---|
 | `MEALTALLY_IMAGE` | (required in `compose.prod.yml`) | The application image, for example `ghcr.io/<owner>/mealtally:0.1.0`. |
-| `MEALTALLY_POSTGRES_IMAGE` | built locally | The database image with the role setup, for example `ghcr.io/<owner>/mealtally-postgres:0.1.0`. |
+| `MEALTALLY_POSTGRES_IMAGE` | (required in `compose.prod.yml`) | The database image with the role setup, for example `ghcr.io/<owner>/mealtally-postgres:0.1.0`. |
 | `WEB_CONCURRENCY` | `3` | gunicorn worker processes. |
 
 ## Optional

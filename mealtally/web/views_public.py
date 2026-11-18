@@ -9,7 +9,6 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET
@@ -24,6 +23,7 @@ from mealtally.common.errors import DomainError
 from mealtally.customers import services as customers
 from mealtally.tenancy.context import platform_context
 from mealtally.tenancy.models import Tenant
+from mealtally.web.redirects import safe_next
 
 from .access import home_url
 from .access import tenant_view
@@ -34,8 +34,7 @@ CUSTOMER_SESSION_SECONDS = 30 * 24 * 3600
 
 
 def _safe_next(request, fallback):
-    nxt = request.POST.get("next") or request.GET.get("next") or ""
-    return nxt if nxt and url_has_allowed_host_and_scheme(nxt, allowed_hosts={request.get_host()}) else fallback
+    return safe_next(request, request.POST.get("next") or request.GET.get("next") or "", fallback)
 
 
 @require_GET
@@ -217,8 +216,7 @@ def manifest(request):
 def dismiss_http_notice(request):
     """Hide the plain-HTTP notice for the rest of this session."""
     request.session["http_notice_dismissed"] = True
-    nxt = request.POST.get("next", "/")
-    return redirect(nxt if nxt.startswith("/") and not nxt.startswith("//") else "/")
+    return redirect(safe_next(request, request.POST.get("next", "/"), "/"))
 
 
 @require_GET

@@ -48,8 +48,8 @@ backup: ## Write a database dump to ./backups
 restore: ## Restore a dump: make restore FILE=backups/mealtally-YYYYMMDDTHHMMSSZ.dump
 	@scripts/restore.sh "$(FILE)"
 
-upgrade: ## Production: pull the image in MEALTALLY_IMAGE, back up, then restart (migrations run on start)
-	$(PROD) pull web worker beat
+upgrade: ## Production: pull the images in .env (MEALTALLY_IMAGE, MEALTALLY_POSTGRES_IMAGE), back up, then restart (migrations run on start)
+	$(PROD) pull
 	@COMPOSE_FILE=compose.prod.yml scripts/backup.sh
 	$(PROD) up -d --wait
 

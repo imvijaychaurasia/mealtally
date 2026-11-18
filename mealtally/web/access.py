@@ -22,6 +22,7 @@ from mealtally.tenancy.context import TenancyState
 from mealtally.tenancy.context import begin
 from mealtally.tenancy.context import end
 from mealtally.tenancy.models import Tenant
+from mealtally.web.redirects import to_login
 from mealtally.web.views_language import activate_preferred
 
 ANY_MEMBER = (*STAFF_ROLES, Role.CUSTOMER)
@@ -79,7 +80,7 @@ def tenant_view(*, roles=ANY_MEMBER, public=False, allow_forced=False):
             request.role = role
             if not public:
                 if not request.user.is_authenticated:
-                    return redirect(f"{reverse('web:tenant-home', args=[slug])}?next={request.path}")
+                    return to_login(request, reverse("web:tenant-home", args=[slug]))
                 if role is None:
                     return render(request, "web/not_found.html", {"slug": slug}, status=404)  # non-member: 404
                 if role not in roles:

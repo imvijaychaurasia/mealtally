@@ -11,14 +11,13 @@ a step from you; [docs/upgrading.md](docs/upgrading.md) lists them.
 
 ### Security
 
-- **Redirect targets are checked in one place.** CodeQL (`py/url-redirection`) flagged four redirects that take
-  their target from the request. One check was wrong: dismissing the plain-HTTP notice accepted a `next` address
-  starting with `/\`, which browsers read as `//` (another site). That form is CSRF-protected, so it could not be
-  triggered from another site, but the check is fixed. The other three were safe. All four now use Django's
-  `url_has_allowed_host_and_scheme`.
+- Fixed a redirect target check that accepted `/\host` (low severity; the form is CSRF-protected). Users of 0.1.0
+  should upgrade.
 
 ### Fixed
 
+- Every redirect that takes its target from the request now uses Django's `url_has_allowed_host_and_scheme` (found by
+  CodeQL, `py/url-redirection`).
 - `compose.prod.yml` no longer builds the database image on the server; it runs the published
   `mealtally-postgres` image (`MEALTALLY_POSTGRES_IMAGE` is now required, see docs/upgrading.md). `make upgrade` pulls
   it too.

@@ -17,6 +17,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 from django.views.decorators.http import require_GET
@@ -40,7 +41,6 @@ from mealtally.plans.models import Plan
 from mealtally.reports import services as reports
 from mealtally.tenancy import services as tenancy
 from mealtally.tenancy.models import Tenant
-from mealtally.web.redirects import safe_next
 
 from . import features
 from .access import home_url
@@ -370,7 +370,10 @@ def meal_rules_banner(request):
     tenancy.update_settings(actor=request.actor, meal_rules_banner_dismissed=True)
     home = home_url(request.tenant.slug, "OWNER")
     nxt = request.POST.get("next", "")
-    return redirect(safe_next(request, nxt, home) if nxt.startswith(f"/t/{request.tenant.slug}/") else home)
+    on_site = nxt.startswith(f"/t/{request.tenant.slug}/") and url_has_allowed_host_and_scheme(
+        nxt, allowed_hosts={request.get_host()}, require_https=request.is_secure()
+    )
+    return redirect(nxt if on_site else home)
 
 
 @tenant_view(**ADMIN)

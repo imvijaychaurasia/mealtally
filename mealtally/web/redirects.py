@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-only
-"""Redirects that take a target from the request (``?next=``) go through here, so none can send people to another site.
+"""Sign-in redirects: send people to the sign-in page and back to where they were (``?next=``), never to another site.
+
+Views that redirect to a ``next`` from the request call ``url_has_allowed_host_and_scheme`` themselves, in the
+``if`` around the redirect, where code scanning recognises it as the guard; ``safe_next`` is the same check for code.
 
 Django's ``url_has_allowed_host_and_scheme`` is the check: it rejects other hosts, ``//host`` and ``/\\host`` (which
 browsers read as ``//host``), and ``javascript:`` URLs.

@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = "==3.14.*"
 
 [[package]]
@@ -841,7 +841,7 @@ requires-dist = [
     { name = "hiredis", specifier = "==3.5.0" },
     { name = "markdown", specifier = "==3.9" },
     { name = "packaging" },
-    { name = "phonenumbers", specifier = "==9.0.16" },
+    { name = "phonenumbers", specifier = "==9.0.44" },
     { name = "psycopg", extras = ["c"], specifier = "==3.3.9" },
     { name = "redis", specifier = "==8.1.0" },
     { name = "segno" },
@@ -885,11 +885,11 @@ wheels = [
 
 [[package]]
 name = "phonenumbers"
-version = "9.0.16"
+version = "9.0.44"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/3e/cd/b40e0fef007e969e72005fe38598f28fa9c8b3ab61515bac426d039a197d/phonenumbers-9.0.16.tar.gz", hash = "sha256:4002542d987c453b333b54450a9f60a280ed7ec932afd7d5fa8dbe6c2379f10a", size = 2298224, upload-time = "2025-10-10T12:04:24.498Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ca/8e/ba0442ff8d93cc667c971fb592f5414a562481ff9d86855802719cbe7c00/phonenumbers-9.0.44.tar.gz", hash = "sha256:91f44c4085afcb86418b6339502a0957cd643238fad23dee314ea2008c0eaaa4", size = 2314610, upload-time = "2026-11-20T14:25:04.818Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/52/99/506c181b050a7da77a0ee9558a66693f7c4c8efd13716468d6440fb04154/phonenumbers-9.0.16-py2.py3-none-any.whl", hash = "sha256:3c019f10305c311005672f3a0cea4139fef0b949319a60635ee803cfaef4a2e2", size = 2584075, upload-time = "2025-10-10T12:04:20.436Z" },
+    { url = "https://files.pythonhosted.org/packages/d2/90/84558cf9f1be59a04f3e76788d65e2c68c980ac0895ec9438fae2ebf2c6c/phonenumbers-9.0.44-py2.py3-none-any.whl", hash = "sha256:8fddbbf98e6b7c4be02f96c132df6b9b1ff6a6976e6a338155bc79c04e5a509e", size = 2596212, upload-time = "2026-11-20T14:24:55.296Z" },
 ]
 
 [[package]]
